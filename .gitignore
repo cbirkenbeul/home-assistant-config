@@ -8,3 +8,5 @@ known_devices.yaml
 .cloud
 *.bak
 __pycache__/
+.vscode/
+!.vscode/extensions.json
