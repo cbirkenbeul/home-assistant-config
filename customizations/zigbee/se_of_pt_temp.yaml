@@ -1,0 +1,16 @@
+---
+sensor.se_of_pt_temp_battery:
+  friendly_name: Umwelt Arbeitszimmer Petra Batterie
+
+sensor.se_of_pt_temp_humidity:
+  friendly_name: Arbeitszimmer Petra Luftfeuchtigkeit
+
+sensor.se_of_pt_temp_linkquality:
+  friendly_name: Umwelt Arbeitszimmer Petra Link Quality
+
+sensor.se_of_pt_temp_temperature:
+  friendly_name: Arbeitszimmer Petra Temperatur
+
+sensor.se_of_pt_temp_pressure:
+  friendly_name: Arbeitszimmer Petra Luftdruck
+  hidden: true

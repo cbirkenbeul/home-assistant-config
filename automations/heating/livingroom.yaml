@@ -1,0 +1,67 @@
+---
+# Adjust room temperature
+- alias: livingroom - Adjust temp above 25C
+  trigger:
+    platform: time_pattern
+    hours: "/1"
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id:
+          - input_select.home_mode
+        state: 'home'
+      - condition: numeric_state
+        entity_id: sensor.temperature_livingroom
+        above: '26'
+  action:
+    - service: climate.set_temperature
+      entity_id:
+        - climate.trv_livingroom
+        - climate.trv_diningroom
+      data:
+        temperature: 21
+
+- alias: livingroom - Adjust temp above 24C
+  trigger:
+    platform: time_pattern
+    hours: "/1"
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id:
+          - input_select.home_mode
+        state: 'home'
+      - condition: numeric_state
+        entity_id: sensor.temperature_livingroom
+        above: '25'
+  action:
+    - service: climate.set_temperature
+      entity_id:
+        - climate.trv_livingroom
+        - climate.trv_diningroom
+      data:
+        temperature: 22
+
+- alias: livingroom - Adjust temp below 22C
+  trigger:
+    platform: time_pattern
+    hours: "/1"
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id:
+          - input_select.home_mode
+        state: 'home'
+      - condition: numeric_state
+        entity_id: sensor.temperature_livingroom
+        below: '23'
+  action:
+    - service: climate.set_temperature
+      entity_id:
+        - climate.trv_livingroom
+        - climate.trv_diningroom
+      data:
+        temperature: 25

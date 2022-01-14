@@ -1,0 +1,125 @@
+---
+- alias: House - wakeup on workdays
+  trigger:
+    - platform: time
+      at: '07:00:00'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id:
+              - device_tracker.teqqphone
+            state: 'home'
+          - condition: state
+            entity_id:
+              - device_tracker.clios_iphone
+            state: 'home'
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.home_mode
+        option: wakeup
+
+- alias: House - wakeup mode on weekends
+  trigger:
+    - platform: time
+      at: '09:00:00'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'off'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id:
+              - device_tracker.teqqphone
+            state: 'home'
+          - condition: state
+            entity_id:
+              - device_tracker.clios_iphone
+            state: 'home'
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.home_mode
+        option: wakeup
+
+- alias: Home - Set house to away mode
+  trigger:
+    - platform: time
+      at: '07:00:00'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id:
+          - device_tracker.teqqphone
+        state: 'not_home'
+      - condition: state
+        entity_id:
+          - device_tracker.clios_iphone
+        state: 'not_home'
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.home_mode
+        option: away
+
+- alias: House - home mode on workdays
+  trigger:
+    - platform: time
+      at: '09:00:00'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id:
+              - device_tracker.teqqphone
+            state: 'home'
+          - condition: state
+            entity_id:
+              - device_tracker.clios_iphone
+            state: 'home'
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.home_mode
+        option: home
+
+- alias: House - home mode on weekends
+  trigger:
+    - platform: time
+      at: '12:00:00'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'off'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id:
+              - device_tracker.teqqphone
+            state: 'home'
+          - condition: state
+            entity_id:
+              - device_tracker.clios_iphone
+            state: 'home'
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.home_mode
+        option: home

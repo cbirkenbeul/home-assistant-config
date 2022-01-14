@@ -1,0 +1,19 @@
+---
+device_tracker.teqqphone:
+  friendly_name: Christian
+  icon: mdi:face-man-outline
+  entity_picture: "/local/lovelace/images/christian_home.png"
+
+device_tracker.clios_iphone:
+  friendly_name: Petra
+  icon: mdi:face-woman-outline
+  entity_picture: "/local/lovelace/images/petra_home.png"
+
+#binary_sensor.pet_lana:
+#  friendly_name: Lana
+#  icon: mdi:cat
+
+device_tracker.teqqcar_location_tracker:
+  friendly_name: Tesla Model 3
+  icon: mdi:car
+  entity_picture: "/local/lovelace/images/tesla.jpg"

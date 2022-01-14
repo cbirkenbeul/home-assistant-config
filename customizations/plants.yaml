@@ -1,0 +1,16 @@
+---
+plant.birkenfeige:
+  friendly_name: Birkenfeige
+  icon: mdi:tree
+
+plant.echeveria:
+  friendly_name: Echeveria
+  icon: mdi:spa
+
+plant.dracaenamarginata:
+  friendly_name: Dracaena Marginata (groß)
+  icon: mdi:palm-tree
+
+plant.oleaeuropea:
+  friendly_name: Olivenbaum
+  icon: mdi:tree

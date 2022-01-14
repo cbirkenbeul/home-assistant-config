@@ -1,0 +1,16 @@
+---
+sensor.se_br_temp_battery:
+  friendly_name: Umwelt Badezimmer Batterie
+
+sensor.se_br_temp_humidity:
+  friendly_name: Badezimmer Luftfeuchtigkeit
+
+sensor.se_br_temp_linkquality:
+  friendly_name: Umwelt Badezimmer Link Quality
+
+sensor.se_br_temp_temperature:
+  friendly_name: Badezimmer Temperatur
+
+sensor.se_br_temp_pressure:
+  friendly_name: Badezimmer Luftdruck
+  hidden: true

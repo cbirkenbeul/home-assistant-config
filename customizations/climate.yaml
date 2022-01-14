@@ -1,0 +1,26 @@
+---
+# Z-WAVE
+climate.trv_office_cb_thermostat:
+  friendly_name: Heizung Christian
+  icon: mdi:radiator
+
+climate.trv_office_pt_thermostat:
+  friendly_name: Heizung Petra
+  icon: mdi:radiator
+
+# ZIGBEE
+climate.trv_bathroom:
+  friendly_name: Heizung Badezimmer
+  icon: mdi:radiator
+
+climate.trv_diningroom:
+  friendly_name: Heizung Esszimmer
+  icon: mdi:radiator
+
+climate.trv_kitchen:
+  friendly_name: Heizung Küche
+  icon: mdi:radiator
+
+climate.trv_livingroom:
+  friendly_name: Heizung Wohnzimmer
+  icon: mdi:radiator

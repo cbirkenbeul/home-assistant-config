@@ -1,0 +1,59 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   14.01.2022
+#   @package        :   Plants
+#   @description    :   openblantbook and miflora sensors
+###############################################################################
+
+plant:
+  # Connection to openplantbook via custom component
+  openplantbook:
+    client_id: !env_var HASS_PLANTBOOK_ID
+    secret: !env_var HASS_PLANTBOOK_SECRET
+
+  # convert sensors to plants
+  birkenfeige:
+    species: ficus benjamina
+    sensors:
+      moisture: sensor.birkenfeige_moisture
+      battery: sensor.birkenfeige_battery
+      temperature: sensor.birkenfeige_temperature
+      conductivity: sensor.birkenfeige_conductivity
+      brightness: sensor.birkenfeige_light
+
+  codiaeum:
+    species: codiaeum variegatum
+    sensors:
+      moisture: sensor.codiaeum_moisture
+      battery: sensor.codiaeum_battery
+      temperature: sensor.codiaeum_temperature
+      conductivity: sensor.codiaeum_conductivity
+      brightness: sensor.codiaeum_light
+
+  echeveria:
+    species: echeveria agavoides
+    sensors:
+      moisture: sensor.echeveria_moisture
+      battery: sensor.echeveria_battery
+      temperature: sensor.echeveria_temperature
+      conductivity: sensor.echeveria_conductivity
+      brightness: sensor.echeveria_light
+
+  dracaenamarginata:
+    species: dracaena marginata
+    sensors:
+      moisture: sensor.dracaena_moisture
+      battery: sensor.dracaena_battery
+      temperature: sensor.dracaena_temperature
+      conductivity: sensor.dracaena_conductivity
+      brightness: sensor.dracaena_light
+
+  peperomia:
+    species: peperomia rotundifolia
+    sensors:
+      moisture: sensor.peperomia_moisture
+      battery: sensor.peperomia_battery
+      temperature: sensor.peperomia_temperature
+      conductivity: sensor.peperomia_conductivity
+      brightness: sensor.peperomia_light

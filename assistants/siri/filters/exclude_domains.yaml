@@ -1,0 +1,18 @@
+---
+exclude_domains:
+  - script
+  - scene
+  - automation
+  - vacuum
+  - person
+  - device_tracker
+  - lock
+  - light
+  - binary_sensor
+  - climate
+  - input_boolean
+  - switch
+  - sensor
+  - cover
+  - media_player
+  - input_select

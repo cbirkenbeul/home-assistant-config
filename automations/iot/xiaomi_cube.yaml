@@ -1,0 +1,13 @@
+---
+- alias: Rotate cube 90 degrees
+  trigger:
+    platform: mqtt
+    topic: 'zigbee2mqtt/aqara_cube'
+  condition:
+    condition: template
+    value_template: "{{ 'flip90' == trigger.payload_json.action }}"
+  action:
+    - service: switch.turn_on
+      entity_id: switch.sw_of_cb_deko
+    - service: light.turn_on
+      entity_id: light.bloom

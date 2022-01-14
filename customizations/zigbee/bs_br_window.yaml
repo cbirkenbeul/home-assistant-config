@@ -1,0 +1,10 @@
+---
+binary_sensor.bs_br_window_contact:
+  friendly_name: Fenster Badezimmer
+  icon: mdi:window-close
+
+sensor.bs_br_window_linkquality:
+  friendly_name: Kontakt Fenster Badezimmer
+
+sensor.bs_br_window_battery:
+  friendly_name: Fenster Badezimmer Batterie

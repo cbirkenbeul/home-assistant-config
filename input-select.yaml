@@ -1,0 +1,11 @@
+---
+home_mode:
+  name: Status Haus
+  options:
+    - away
+    - home
+    - vacation
+    - sleep
+    - wakeup
+  initial: home
+  icon: mdi:home

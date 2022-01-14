@@ -1,0 +1,19 @@
+---
+- name: Abendbeleuchtung
+  entities:
+    light.couch:
+      state: 'on'
+      brightness: 200
+      rgb_color: [255, 214, 170]
+    light.wz_decke:
+      state: 'off'
+    light.bodenlampe:
+      state: 'on'
+      brightness: 200
+      rgb_color: [255, 214, 170]
+    switch.sw_hw_og_deko:
+      state: 'on'
+    switch.sw_lr_deko:
+      state: 'on'
+    switch.sw_of_cb_deko:
+      state: 'on'

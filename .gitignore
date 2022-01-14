@@ -1,0 +1,10 @@
+# Ignore useless stuff
+deps/
+*.log*
+.HA_VERSION
+*.old
+known_devices.yaml
+.storage
+.cloud
+*.bak
+__pycache__/

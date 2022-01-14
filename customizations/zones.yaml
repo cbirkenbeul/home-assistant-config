@@ -1,0 +1,8 @@
+---
+zone.museum:
+  friendly_name: Museum am Strom
+  icon: mdi:bank
+
+zone.tim:
+  friendly_name: TIM AG
+  icon: mdi:office-building

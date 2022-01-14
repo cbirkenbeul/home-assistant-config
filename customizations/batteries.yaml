@@ -1,0 +1,27 @@
+---
+sensor.trv_office_cb_battery_level:
+  friendly_name: Heizung Arbeitszimmer Christian Batterie
+
+sensor.trv_office_pt_battery_level:
+  friendly_name: Heizung Arbeitszimmer Petra Batterie
+
+sensor.multisensor_cb_battery_level:
+  friendly_name: Multisensor Arbeitszimmer Christian Batterie
+
+sensor.multisensor_pt_battery_level:
+  friendly_name: Multisensor Arbeitszimmer Petra Batterie
+
+sensor.birkenfeige_battery:
+  friendly_name: Miflora Birkenfeige Batterie
+
+sensor.codiaeum_battery:
+  friendly_name: Miflora Codiaeum Variegatum Batterie
+
+sensor.dracaena_battery:
+  friendly_name: Miflora Dracaena Marginata Batterie
+
+sensor.echeveria_battery:
+  friendly_name: Miflora Echeveria Batterie
+
+sensor.peperomia_battery:
+  friendly_name: Miflora Peperomia Rotundifolia Batterie

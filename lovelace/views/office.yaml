@@ -1,0 +1,56 @@
+---
+title: Arbeitszimmer
+icon: mdi:office-building
+cards:
+  - type: custom:apexcharts-card
+    header:
+      show: true
+      show_states: true
+    apex_config:
+      legend:
+        show: false
+    yaxis:
+      - id: temperature
+        apex_config:
+          tickAmount: 4
+      - id: humidity
+        opposite: true
+        apex_config:
+          tickAmount: 4
+    all_series_config:
+      stroke_width: 2
+    series:
+      - entity: sensor.temperature_office
+        yaxis_id: temperature
+      - entity: sensor.humidity_office
+        yaxis_id: humidity
+  - type: 'custom:simple-thermostat'
+    entity: climate.trv_office_cb_thermostat
+    step_layout: row
+    show_header: false
+    control: false
+  - type: 'custom:simple-thermostat'
+    entity: climate.trv_office_pt_thermostat
+    step_layout: row
+    show_header: false
+    control: false
+  - type: entities
+    title: Licht
+    entities:
+      - light.az_cb_decke
+      - switch.sw_of_cb_deko
+      - light.az_bloom
+      - light.az_pt_decke
+      - light.leseecke
+  - type: custom:mini-humidifier
+    entity: humidifier.smartmi_evaporative_humidifier
+    model: 'zhimi.humidifier.cb1' 
+  - type: 'custom:flower-card'
+    entity: plant.echeveria
+    species: "pachyphytum oviferum"
+  - type: 'custom:flower-card'
+    entity: plant.dracaenamarginata
+    species: "dracaena marginata"
+  - type: 'custom:flower-card'
+    entity: plant.codiaeum
+    species: "codiaeum variegatum"

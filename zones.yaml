@@ -1,0 +1,23 @@
+---
+# Zones allow you to specify certain regions on earth (for now).
+# When a device tracker sees a device to be within a zone,
+# the state will take the name from the zone.
+# Zones can also be used as a trigger or condition inside automation setups.
+# https://www.home-assistant.io/components/zone/
+
+  - name: heating-zone
+    latitude: !env_var HASS_LATITUDE
+    longitude: !env_var HASS_LONGITUDE
+    radius: 50000
+    icon: mdi:thermostat
+    passive: true
+
+  - name: tim
+    latitude: !env_var HASS_WORK2_LATITUDE
+    longitude: !env_var HASS_WORK2_LONGITUDE
+    radius: 100
+
+  - name: museum
+    latitude: !env_var HASS_WORK1_LATITUDE
+    longitude: !env_var HASS_WORK1_LONGITUDE
+    radius: 100

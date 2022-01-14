@@ -1,0 +1,8 @@
+{
+    "git.enableSmartCommit": true,
+    "files.exclude": {
+        "**/.git": false
+    },
+    "git.autofetch": true,
+    "git.confirmSync": false
+}

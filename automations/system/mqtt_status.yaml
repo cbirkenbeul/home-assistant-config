@@ -1,0 +1,22 @@
+---
+- alias: "System - HA Birth MQTT Signal"
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    - service: mqtt.publish
+      data:
+        topic: "homeassistant/status"
+        payload: "online"
+
+- alias: "System - HA Will MQTT Signal"
+  trigger:
+    - platform: homeassistant
+      event: shutdown
+  action:
+    - service: mqtt.publish
+      data:
+        topic: "homeassistant/status"
+        payload: "offline"
+        qos: 0
+        retain: false

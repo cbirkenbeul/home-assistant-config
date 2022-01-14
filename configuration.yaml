@@ -1,0 +1,108 @@
+---
+homeassistant:
+  name: Casa Lani
+  latitude: !env_var HASS_LATITUDE
+  longitude: !env_var HASS_LONGITUDE
+  elevation: !env_var HASS_ELEVATION
+  unit_system: metric
+  time_zone: Europe/Berlin
+  # Customization file
+  customize: !include_dir_merge_named customizations/
+  # Load packages
+  legacy_templates: true
+  packages: !include_dir_named packages
+
+############################################################################
+# Configuration
+############################################################################
+
+automation: !include_dir_merge_list automations/
+alert: !include_dir_merge_named alerts/
+binary_sensor: !include_dir_merge_list binary_sensor/
+climate:
+config:
+cover: !include_dir_merge_list cover/
+discovery:
+  ignore:
+    - google_cast
+group: !include groups.yaml
+frontend:
+  themes: !include_dir_merge_named themes
+homekit: !include homekit.yaml
+http:
+  use_x_forwarded_for: true
+  trusted_proxies: 
+    - !env_var HASS_TRUSTED_NETWORK_1
+    - !env_var HASS_TRUSTED_NETWORK_2
+    - !env_var HASS_TRUSTED_NETWORK_3
+input_boolean: !include input-boolean.yaml
+input_number: !include input-number.yaml
+input_select: !include input-select.yaml
+ios:
+map:
+mobile_app:
+mqtt:
+  broker: !env_var HASS_MQTT_SERVER
+notify: !include notify.yaml
+# octoprint:
+#   host: !secret octoprint_host
+#   api_key: !secret octoprint_api
+# plant: !include plants.yaml
+#recorder: !include recorder.yaml
+script: !include scripts.yaml
+scene: !include_dir_merge_list scenes/
+sensor: !include_dir_merge_list sensor/
+sun:
+  elevation: !env_var HASS_ELEVATION
+switch: !include_dir_merge_list switches/
+system_health:
+utility_meter:
+  energy:
+    source: sensor.house_electric_consumed_kwh
+    cycle: monthly
+webhook:
+zone: !include zones.yaml
+
+############################################################################
+# Lovelace Configuration
+############################################################################
+
+lovelace:
+  mode: yaml
+  resources:
+    - url: /local/lovelace/cards/flower-card/flower-card.js
+      type: module
+    - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
+      type: module
+    - url: /hacsfiles/simple-thermostat/simple-thermostat.js
+      type: module
+    - url: /hacsfiles/lovelace-card-tools/card-tools.js
+      type: module
+    - url: /hacsfiles/lovelace-xiaomi-vacuum-card/xiaomi-vacuum-card.js
+      type: module
+    - url: /hacsfiles/button-card/button-card.js
+      type: module
+    - url: /hacsfiles/simple-weather-card/simple-weather-card-bundle.js
+      type: module
+    - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
+      type: module
+    - url: /hacsfiles/battery-state-card/battery-state-card.js
+      type: module
+    - url: /hacsfiles/bar-card/bar-card.js
+      type: module
+    - url: /hacsfiles/tesla-style-solar-power-card/tesla-style-solar-power-card.js
+      type: module
+    - url: /hacsfiles/home-assistant-sun-card/home-assistant-sun-card.js
+      type: module
+    - url: /hacsfiles/apexcharts-card/apexcharts-card.js
+      type: module
+    - url: /hacsfiles/mini-humidifier/mini-humidifier-bundle.js
+      type: module
+    - url: /hacsfiles/tesla-style-solar-power-card/tesla-style-solar-power-card.js
+      type: module
+    - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
+      type: module
+    - url: /local/banner-card.js?v=1
+      type: module
+    - url: /hacsfiles/vacuum-card/vacuum-card.js
+      type: module

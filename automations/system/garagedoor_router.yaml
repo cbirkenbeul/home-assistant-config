@@ -1,0 +1,9 @@
+---
+- alias: Start Garagedoor Router if Home Assistant restart
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    - delay: 00:01
+    - service: switch.turn_on
+      entity_id: switch.garage_router

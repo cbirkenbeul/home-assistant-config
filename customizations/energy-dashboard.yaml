@@ -1,0 +1,50 @@
+---
+sensor.house_electric_consumed_kwh:
+  friendly_name: Naturstrom
+  icon: mdi:factory
+  device_class: energy
+
+sensor.serverrack_electric_consumed_kwh:
+  friendly_name: Serverrack
+  icon: mdi:server
+  device_class: energy
+
+sensor.dryer_electric_consumed_kwh:
+  friendly_name: Trockner
+  icon: mdi:tumble-dryer
+  device_class: energy
+
+sensor.washer_electric_consumed_kwh:
+  friendly_name: Waschmaschine
+  icon: mdi:washing-machine
+  device_class: energy
+
+sensor.tesla_charing_at_home_kwh:
+  friendly_name: Tesla
+  icon: mdi:car
+  device_class: energy
+
+sensor.netzbezug_leistung_kmes:
+  friendly_name: Netzbezug
+  icon: mdi:transmission-tower-import
+  device_class: energy
+
+sensor.netzeinspeisung_leistung_kmes:
+  friendly_name: Netzeinspeisung
+  icon: mdi:transmission-tower-export
+  device_class: energy
+
+sensor.wr1_total_dc_power_via_modbus:
+  friendly_name: PV-Leistung Hauptdach
+  icon: mdi:solar-panel
+  device_class: energy
+
+sensor.pv_prod_ges:
+  friendly_name: PV-Produktion
+  icon: mdi:solar-panel
+
+sensor.pv_wr_pc_solar_w:
+  friendly_name: Hauptdach
+
+sensor.pv_wr_pi:
+  friendly_name: Loggia

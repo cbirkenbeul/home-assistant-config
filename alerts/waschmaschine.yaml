@@ -1,0 +1,11 @@
+---
+waschmaschine:
+  name: Waschmaschine ist fertig
+  done_message: Danke fürs ausschalten.
+  entity_id: input_boolean.washer_finish
+  state: "on"
+  repeat: 10
+  can_acknowledge: true
+  skip_first: true
+  notifiers:
+    - petra

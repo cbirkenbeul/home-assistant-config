@@ -1,0 +1,8 @@
+---
+- alias: Rolladen bei Sonnenaufgang
+  trigger:
+    platform: sun
+    event: sunrise
+  action:
+    - service: cover.open_cover
+      entity_id: cover.jalousie_kueche_position

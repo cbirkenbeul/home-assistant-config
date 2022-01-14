@@ -1,0 +1,5 @@
+---
+- platform: waqi
+  token: 35e6c6ee2180d304f8b25a480e646a4bb455fc49
+  locations:
+    - Mainz-Zitadelle, Germany

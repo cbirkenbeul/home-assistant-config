@@ -1,0 +1,145 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   14.01.2022
+#   @package        :   Appliances
+#   @description    :   Make dump dryer and washer smarter
+###############################################################################
+
+# Finish state
+input_boolean:
+  washer_finish:
+    name: Waschmaschine fertig
+    initial: off
+
+  dryer_finish:
+    name: Trocker fertig
+    initial: off
+
+# States of appliances
+input_select:
+  washer_mode:
+    name: Status Waschmaschine
+    options:
+      - idle
+      - running
+      - finish
+    initial: idle
+    icon: mdi:washing-machine
+
+  dryer_mode:
+    name: Status Trockner
+    options:
+      - idle
+      - running
+      - finish
+    initial: idle
+    icon: mdi:tumble-dryer
+
+# Automations
+automation:
+  - alias: Set dryer Status to running
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.trockner_electricity_power
+      value_template: '{{ states.sensor.trockner_electricity_power.state }}'
+      above: 5
+      for:
+        minutes: 1
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dryer_mode
+          option: running
+
+  - alias: Set dryer Status to finish
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.trockner_electricity_power
+      value_template: '{{ states.sensor.trockner_electricity_power.state }}'
+      below: 3
+      for:
+        minutes: 5
+    condition:
+      condition: state
+      entity_id: input_select.dryer_mode
+      state: running
+    action:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.dryer_finish
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dryer_mode
+          option: finish
+
+  - alias: Set dryer status to idle
+    trigger:
+      platform: state
+      entity_id: binary_sensor.bs_hw_bm_door_contact
+      to: 'on'
+    condition:
+      condition: state
+      entity_id: input_select.dryer_mode
+      state: finish
+    action:
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.dryer_finish
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dryer_mode
+          option: idle
+
+  - alias: Set washer Status to running
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.waschmaschine_electricity_power
+      value_template: '{{ states.sensor.waschmaschine_electricity_power.state }}'
+      above: 1
+      for:
+        minutes: 1
+    condition:
+      condition: state
+      entity_id: input_select.washer_mode
+      state: idle
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washer_mode
+          option: running
+
+  - alias: Set washer Status to finish
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.waschmaschine_electricity_power
+      value_template: '{{ states.sensor.waschmaschine_electricity_power.state }}'
+      below: 3
+      for:
+        minutes: 5
+    condition:
+      condition: state
+      entity_id: input_select.washer_mode
+      state: running
+    action:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.washer_finish
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washer_mode
+          option: finish
+
+  - alias: Set washer status to idle
+    trigger:
+      platform: state
+      entity_id: binary_sensor.bs_hw_bm_door_contact
+      to: 'on'
+    condition:
+      condition: state
+      entity_id: input_select.washer_mode
+      state: finish
+    action:
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.washer_finish
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washer_mode
+          option: idle

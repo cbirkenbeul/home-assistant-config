@@ -1,0 +1,24 @@
+---
+- alias: Start Vacuum if all alway
+  trigger:
+    - platform: state
+      entity_id:
+        - group.devices
+      to: "not_home"
+  action:
+    - service: vacuum.start
+      entity_id: vacuum.robi
+
+- alias: Start Vacuum if all alway
+  trigger:
+    - platform: state
+      entity_id:
+        - group.devices
+      to: "home"
+  action:
+    - service: vacuum.stop
+      entity_id: vacuum.robi_2
+    - delay:
+        seconds: 5
+    - service: vacuum.return_to_base
+      entity_id: vacuum.robi

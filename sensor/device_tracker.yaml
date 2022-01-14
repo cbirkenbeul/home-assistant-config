@@ -1,0 +1,42 @@
+---
+- platform: template
+  sensors:
+    teqqphone:
+      friendly_name: "Christian"
+      value_template: >-
+        {% if is_state('device_tracker.teqqphone', 'home') %}
+          Daheim
+        {% elif is_state('device_tracker.teqqphone', 'TIM') %}
+          TIM AG
+        {% else %}
+          Unterwegs
+        {% endif %}
+      icon_template: >-
+        {% if is_state('device_tracker.teqqphone','home') %}
+          mdi:home-heart
+        {% elif is_state('device_tracker.teqqphone', 'TIM') %}
+          mdi:office-building-marker
+        {% else %}
+          mdi:home-export-outline
+        {% endif %}
+
+- platform: template
+  sensors:
+    clios_iphone:
+      friendly_name: "Petra"
+      value_template: >-
+        {% if is_state('device_tracker.clios_iphone', 'home') %}
+          Daheim
+        {% elif is_state('device_tracker.clios_iphone', 'Museum am Strom') %}
+          Museum
+        {% else %}
+          Unterwegs
+        {% endif %}
+      icon_template: >-
+        {% if is_state('device_tracker.clios_iphone','home') %}
+          mdi:home-heart
+        {% elif is_state('device_tracker.clios_iphone', 'Museum am Strom') %}
+          mdi:bank
+        {% else %}
+          mdi:home-export-outline
+        {% endif %}

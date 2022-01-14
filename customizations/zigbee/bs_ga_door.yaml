@@ -1,0 +1,10 @@
+---
+binary_sensor.bs_ga_door:
+  friendly_name: Garagentor Sensor
+  icon: mdi:window-close
+
+sensor.bs_ga_door_linkquality:
+  friendly_name: Garagentor Sensor LQI
+
+sensor.bs_ga_door_battery:
+  friendly_name: Garagentor Sensor Batterie

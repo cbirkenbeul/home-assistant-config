@@ -1,0 +1,41 @@
+---
+- platform: min_max
+  entity_ids:
+    - sensor.se_dr_temp_humidity
+    - sensor.se_lr_temp_humidity
+  type: median
+  name: humidity_livingroom
+
+- platform: min_max
+  entity_ids:
+    - sensor.se_of_pt_temp_humidity
+  type: median
+  name: humidity_office
+
+- platform: min_max
+  entity_ids:
+    - sensor.se_hw_temp_humidity
+  type: median
+  name: humidity_hallway
+
+- platform: min_max
+  entity_ids:
+    - sensor.se_mbr_temp_humidity
+  type: median
+  name: humidity_bedroom
+
+- platform: min_max
+  entity_ids:
+    - sensor.se_br_temp_humidity
+  type: median
+  name: humidity_bathroom
+
+- platform: min_max
+  entity_ids:
+    - sensor.wz_hum_mean
+    - sensor.az_hum_mean
+    - sensor.humidity_hallway
+    - sensor.humidity_bedroom
+    - sensor.humidity_bathroom
+  type: median
+  name: humidity_house

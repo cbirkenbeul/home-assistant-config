@@ -1,0 +1,9 @@
+---
+sensor.aqara_cube_battery:
+  friendly_name: Aqara Cube Batterie
+
+sensor.aqara_cube_action:
+  friendly_name: Aqara Cube Action
+
+sensor.aqara_cube_linkquality:
+  friendly_name: Aqara Cube Link Quality

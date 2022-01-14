@@ -1,0 +1,57 @@
+---
+title: Wohnzimmer
+icon: mdi:sofa
+cards:
+  - type: entities
+    title: Licht
+    entities:
+      - switch.sw_lr_deko
+      - light.wz_decke
+      - light.couch
+      - light.bodenlampe
+  - type: entities
+    title: Szenen
+    entities:
+      - scene.abendbeleuchtung
+      - scene.movietime
+      - switch.flux
+  - type: 'custom:simple-thermostat'
+    entity: climate.trv_diningroom
+    step_layout: row
+    show_header: false
+    control: false
+  - type: 'custom:simple-thermostat'
+    entity: climate.trv_livingroom
+    step_layout: row
+    show_header: false
+    control: false
+
+  - type: custom:apexcharts-card
+    header:
+      show: true
+      show_states: true
+    apex_config:
+      legend:
+        show: false
+    yaxis:
+      - id: temperature
+        apex_config:
+          tickAmount: 4
+      - id: humidity
+        opposite: true
+        apex_config:
+          tickAmount: 4
+    all_series_config:
+      stroke_width: 2
+    series:
+      - entity: sensor.temperature_livingroom
+        yaxis_id: temperature
+      - entity: sensor.humidity_livingroom
+        yaxis_id: humidity
+
+  - type: 'custom:flower-card'
+    entity: plant.birkenfeige
+    species: 'lime ficus benjamina'
+  - type: 'custom:flower-card'
+    entity: plant.peperomia
+    species: 'peperomia rotundifolia'

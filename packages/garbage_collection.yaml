@@ -1,0 +1,43 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   14.01.2022
+#   @package        :   Garbage collection
+#   @description    :   Garbage collection sensors
+###############################################################################
+
+garbage_collection:
+  sensors:
+  - name: Restmüll
+    frequency: 'every-n-days'
+    period: 14
+    collection_days: wed
+    verbose_state: true
+    verbose_format: "in {days} Tagen"
+    first_date: '2022-01-05'
+  - name: Papier
+    frequency: 'every-n-days'
+    period: 14
+    collection_days: tue
+    verbose_state: true
+    verbose_format: "in {days} Tagen"
+    icon_normal: mdi:file
+    first_date: '2022-01-04'
+  - name: Plastik
+    frequency: 'every-n-days'
+    period: 14
+    collection_days: tue
+    verbose_state: true
+    verbose_format: "in {days} Tagen"
+    icon_normal: mdi:recycle
+    first_date: '2022-01-04'
+  - name: Bio
+    frequency: 'every-n-days'
+    period: 14
+    collection_days: wed
+    verbose_state: true
+    verbose_format: "in {days} Tagen"
+    icon_normal: mdi:bio
+    first_week: 2
+    first_date: '2022-01-12'
+

@@ -1,0 +1,46 @@
+---
+title: Flur
+icon: mdi:exit-run
+cards:
+  - type: custom:apexcharts-card
+    header:
+      show: true
+      show_states: true
+    apex_config:
+      legend:
+        show: false
+    yaxis:
+      - id: temperature
+        apex_config:
+          tickAmount: 4
+      - id: humidity
+        opposite: true
+        apex_config:
+          tickAmount: 4
+    all_series_config:
+      stroke_width: 2
+    series:
+      - entity: sensor.temperature_hallway
+        yaxis_id: temperature
+      - entity: sensor.humidity_hallway
+        yaxis_id: humidity
+
+  - type: custom:xiaomi-vacuum-card
+    entity: vacuum.hugo
+    name: false
+    buttons: false
+    image: /local/lovelace/images/iot/vacuum_card.jpg
+    labels:
+      status: Status
+      battery: Batterie
+      mode: Modus
+      main_brush: Hauptbürste
+      side_brush: Seitenbürste
+      filter: Filter
+      sensor: Sensoren
+
+
+  - type: entities
+    entities:
+      - switch.sw_hw_og_deko
+      - binary_sensor.bs_hw_bm_door_contact

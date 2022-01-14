@@ -1,0 +1,16 @@
+---
+sensor.se_dr_temp_battery:
+  friendly_name: Umwelt Esszimmer Batterie
+
+sensor.se_dr_temp_humidity:
+  friendly_name: Esszimmer Luftfeuchtigkeit
+
+sensor.se_dr_temp_linkquality:
+  friendly_name: Umwelt Esszimmer Link Quality
+
+sensor.se_dr_temp_temperature:
+  friendly_name: Esszimmer Temperatur
+
+sensor.se_dr_temp_pressure:
+  friendly_name: Esszimmer Luftdruck
+  hidden: true

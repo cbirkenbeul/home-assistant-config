@@ -1,0 +1,71 @@
+---
+title: Küche
+icon: mdi:fridge-outline
+cards:
+  - type: entities
+    entities:
+      - light.decke
+      - cover.jalousie_kueche_position
+      - binary_sensor.bs_ki_window_contact
+  - type: 'custom:simple-thermostat'
+    entity: climate.trv_kitchen
+    step_layout: row
+    show_header: false
+    control: false
+
+  - type: custom:apexcharts-card
+    header:
+      show: true
+      show_states: true
+    apex_config:
+      legend:
+        show: false
+    yaxis:
+      - id: temperature
+        apex_config:
+          tickAmount: 4
+      # - id: humidity
+      #   opposite: true
+      #   apex_config:
+      #     tickAmount: 4
+    all_series_config:
+      stroke_width: 2
+    series:
+      - entity: sensor.temperature_kitchen
+        yaxis_id: temperature
+      # - entity: sensor.humidity_kitchen
+      #   yaxis_id: humidity
+
+  - type: "custom:vacuum-card"
+    entity: vacuum.robi
+    image: default
+    compact_view: false
+    show_name: true
+    show_toolbar: true
+    show_status: true
+    stats:
+      default:
+        - entity_id: sensor.robi_sidebrush
+          unit: "%"
+          subtitle: Side Brush
+        - entity_id: sensor.robi_brush
+          unit: "%"
+          subtitle: Main Brush
+        - entity_id: sensor.robi_heap
+          unit: "%"
+          subtitle: Heap
+      cleaning:
+        - entity_id: sensor.robi_stats_area
+          unit: m2
+          subtitle: Area
+        - entity_id: sensor.robi_stats_time
+          unit: min
+          subtitle: Time
+    actions:
+      - service: script.CLEAN_LIVINGROOM
+        icon: "mdi:sofa"
+      - service: script.CLEAN_BEDROOM
+        icon: "mdi:bed-empty"
+      - service: script.CLEAN_ALL
+        icon: "mdi:robot-vacuum-variant"
+    map: camera.ROBOTNAME_liveMap

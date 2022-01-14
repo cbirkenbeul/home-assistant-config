@@ -1,0 +1,40 @@
+---
+light.az_cb_decke:
+  friendly_name: Licht Arbeitszimmer Christian
+  icon: mdi:ceiling-light
+
+light.az_pt_decke:
+  friendly_name: Licht Arbeitszimmer Petra
+  icon: mdi:ceiling-light
+
+light.leseecke:
+  friendly_name: Licht Leseecke Petra
+  icon: mdi:ceiling-light
+
+light.az_bloom:
+  friendly_name: Bloom
+  icon: mdi:car-light-dimmed
+
+light.bodenlampe:
+  friendly_name: Bodenlampe
+  icon: mdi:lamp
+
+light.couch:
+  friendly_name: Couch
+  icon: mdi:track-light
+
+light.ki_decke:
+  friendly_name: Licht Küche
+  icon: mdi:wall-sconce-flat
+
+light.wz_decke:
+  friendly_name: Licht Wohnzimmer
+  icon: mdi:ceiling-light
+
+light.li_bm_hw:
+  friendly_name: Licht Keller Flur
+  icon: mdi:lightbulb
+
+light.li_bm_stairs:
+  friendly_name: Light Kellertreppe
+  icon: mdi:lightbulb

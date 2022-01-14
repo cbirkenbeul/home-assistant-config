@@ -1,0 +1,11 @@
+'adjust_tesla_charging':
+  alias: Charge tesla
+  sequence:
+  - service: tesla_custom.api
+    data:
+      command: CHARGING_AMPS
+      parameters:
+        path_vars:
+          vehicle_id: '{{ state_attr("binary_sensor.teqqcar_online_sensor", "id") }}'
+        charging_amps: '{{ ((states("sensor.pv_wr_pc_grid_power")) | float *1.4 )| int }}'
+  mode: single

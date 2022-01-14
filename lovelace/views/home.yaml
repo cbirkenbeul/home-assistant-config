@@ -1,0 +1,160 @@
+---
+title: Home
+icon: mdi:home-assistant
+cards:
+  - type: vertical-stack
+    title: Wetter
+    cards:
+    - type: custom:simple-weather-card
+      entity: weather.openweathermap
+      name: " "
+      backdrop: true
+      primary_info:
+        - wind_speed
+        - humidity
+      secondary_info:
+        - precipitation
+        - precipitation_probability
+      custom:
+        - temp: sensor.weewx_outtemp
+        - wind_speed: sensor.weewx_wind
+        - humidity: sensor.weewx_outhumidity
+        - rain: sensor.weewx_rain
+    - type: horizontal-stack
+      cards:
+      - type: sensor
+        entity: sensor.weewx_outtemp
+        name: Temperatur
+        graph: line
+        detail: 2
+        hours_to_show: 4
+      - type: sensor
+        entity: sensor.weewx_drewpoint
+        name: Taupunkt
+        graph: line
+        detail: 2
+        hours_to_show: 4
+      - type: sensor
+        entity: sensor.weewx_wind
+        name: Wind
+        graph: line
+        detail: 2
+        hours_to_show: 4
+
+  - type: vertical-stack
+    title: Haus
+    cards:
+    - type: horizontal-stack
+      cards:
+      - type: sensor
+        entity: sensor.teqqphone
+      - type: sensor
+        entity: sensor.clios_iphone
+    - type: entities
+      entities:
+        - sensor.restmull
+        - sensor.papier
+        - sensor.plastik
+        - sensor.bio
+
+  - type: conditional
+    conditions:
+    - entity: binary_sensor.teqqcar_charger_sensor
+      state: "on"
+    card:
+      type: vertical-stack
+      title: Tesla Model 3
+      cards:
+      - type: horizontal-stack
+        cards:
+        - type: button
+          name: Voll
+          entity: switch.teqqcar_maxrange_switch
+        - type: button
+          name: Laden
+          entity: switch.teqqcar_charger_switch
+      - type: horizontal-stack
+        cards:
+        - type: sensor
+          entity: sensor.teqqcar_battery_sensor
+        - type: sensor
+          entity: sensor.teqqcar_charging_rate_sensor
+
+  - type: vertical-stack
+    title: Photovoltaik
+    cards:
+    - type: horizontal-stack
+      cards:
+      - type: sensor
+        entity: sensor.pv_wr_pc_battery_soc
+        graph: line
+        detail: 2
+        hours_to_show: 12
+      - type: sensor
+        entity: sensor.pv_prod_ges
+        graph: line
+        detail: 2
+        hours_to_show: 12
+  - type: vertical-stack
+    title: Temperaturen
+    cards:
+    - type: vertical-stack
+      cards:
+      - type: horizontal-stack
+        cards:
+        - type: sensor
+          entity: sensor.temperature_livingroom
+          name: Wohnzimmer
+          graph: line
+          detail: 1
+        - type: sensor
+          entity: sensor.temperature_kitchen
+          name: Küche
+          graph: line
+          detail: 1
+        - type: sensor
+          entity: sensor.temperature_office
+          name: Büro
+          graph: line
+          detail: 1
+      - type: horizontal-stack
+        cards:
+        - type: sensor
+          entity: sensor.temperature_bathroom
+          name: Bad
+          graph: line
+          detail: 1
+        - type: sensor
+          entity: sensor.temperature_bedroom
+          name: Schlafzimmer
+          graph: line
+          detail: 1
+        - type: sensor
+          entity: sensor.temperature_hallway
+          name: Flur
+          graph: line
+          detail: 1
+
+  - type: vertical-stack
+    title: Luftfeuchtigkeit
+    cards:
+    - type: vertical-stack
+      cards:
+      - type: horizontal-stack
+        cards:
+        - type: sensor
+          entity: sensor.humidity_livingroom
+          name: Wohnzimmer
+          graph: line
+          detail: 1
+        - type: sensor
+          entity: sensor.humidity_bathroom
+          name: Bad
+          graph: line
+          detail: 1
+        - type: sensor
+          entity: sensor.humidity_office
+          name: Büro
+          graph: line
+          detail: 1
+

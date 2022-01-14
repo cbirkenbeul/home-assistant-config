@@ -1,0 +1,24 @@
+---
+- alias: Set House to away mode
+  trigger:
+    - platform: state
+      entity_id:
+        - group.devices
+      to: "not_home"
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.home_mode
+        option: away
+
+- alias: Set House back to home mode
+  trigger:
+    - platform: state
+      entity_id:
+        - group.devices
+      to: "home"
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.home_mode
+        option: home

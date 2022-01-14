@@ -1,0 +1,26 @@
+---
+title: Arbeitszimmer
+icon: mdi:bed
+cards:
+  - type: custom:apexcharts-card
+    header:
+      show: true
+      show_states: true
+    apex_config:
+      legend:
+        show: false
+    yaxis:
+      - id: temperature
+        apex_config:
+          tickAmount: 4
+      - id: humidity
+        opposite: true
+        apex_config:
+          tickAmount: 4
+    all_series_config:
+      stroke_width: 2
+    series:
+      - entity: sensor.temperature_bedroom
+        yaxis_id: temperature
+      - entity: sensor.humidity_bedroom
+        yaxis_id: humidity

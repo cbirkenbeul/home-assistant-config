@@ -1,0 +1,16 @@
+---
+sensor.se_lr_temp_battery:
+  friendly_name: Umwelt Wohnzimmer Batterie
+
+sensor.se_lr_temp_humidity:
+  friendly_name: Wohnzimmer Luftfeuchtigkeit
+
+sensor.se_lr_temp_linkquality:
+  friendly_name: Umwelt Wohnzimmer Link Quality
+
+sensor.se_lr_temp_temperature:
+  friendly_name: Wohnzimmer Temperatur
+
+sensor.se_lr_temp_pressure:
+  friendly_name: Wohnzimmer Luftdruck
+  hidden: true

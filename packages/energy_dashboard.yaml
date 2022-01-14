@@ -1,0 +1,24 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   14.01.2022
+#   @package        :   Energy Dashboard
+#   @description    :   Complete configuration for energy dashboard
+###############################################################################
+
+# Enable energy dashboard
+energy:
+
+# Convert power sensors to dashboard usable sensors with integration platform
+sensor:
+  - platform: integration
+    source: sensor.trockner_electricity_power
+    name: dryer_electric_consumed_kwh
+    unit_prefix: k
+    round: 2
+
+  - platform: integration
+    source: sensor.waschmaschine_electricity_power
+    name: washer_electric_consumed_kwh
+    unit_prefix: k
+    round: 2

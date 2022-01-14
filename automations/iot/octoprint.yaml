@@ -1,0 +1,13 @@
+---
+# Notify if print finish
+- alias: Notify if Octoprint is finish
+  trigger:
+    - platform: state
+      entity_id: sensor.octoprint_current_state
+      from: 'Printing'
+      to: 'Operational'
+  action:
+    service: notify.mobile_app_teqqphone
+    data:
+      title: 'Octoprint fertig'
+      message: '3D Druck beendet'

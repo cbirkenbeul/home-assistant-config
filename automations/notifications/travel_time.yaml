@@ -1,0 +1,27 @@
+---
+- alias: Travel Time
+  trigger:
+    platform: time
+    at: '08:00:00'
+  condition:
+    condition: and
+    conditions:
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+      - condition: numeric_state
+        entity_id: sensor.christian_work
+        above: 30
+  action:
+    service: notify.mobile_app_teqqphone
+    data_template:
+      title: "Reisezeit"
+      message: >
+        "Geschätzte Fahrzeit beträgt ca.
+        {{ states.sensor.christian_work.state }} Minuten."
+      data:
+        push:
+          thread-id: "travel"

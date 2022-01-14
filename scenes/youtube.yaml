@@ -1,0 +1,11 @@
+---
+- name: youtube
+  entities:
+    light.az_cb_decke:
+      state: "on"
+      brightness: 255
+      kelvin: 5600
+    light.bloom:
+      state: "on"
+      brightness: 255
+      rgb_color: [255, 168, 1]
