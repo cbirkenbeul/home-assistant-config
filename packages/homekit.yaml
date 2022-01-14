@@ -25,6 +25,8 @@ homekit:
       - cover
       - media_player
       - input_select
+      - select
+      - button
 
     include_entities:
       # Climate
