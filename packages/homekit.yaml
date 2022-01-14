@@ -1,0 +1,72 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   14.01.2022
+#   @package        :   Homekit
+#   @description    :   Siri voice assistant
+###############################################################################
+homekit:
+  name: Home Assistant
+  filter: 
+    exclude_domains:
+      - script
+      - scene
+      - automation
+      - vacuum
+      - person
+      - device_tracker
+      - lock
+      - light
+      - binary_sensor
+      - climate
+      - input_boolean
+      - switch
+      - sensor
+      - cover
+      - media_player
+      - input_select
+
+    include_entities:
+      # Climate
+      - climate.trv_office_cb_thermostat
+      - climate.trv_office_pt_thermostat
+      - climate.trv_bathroom
+      - climate.trv_diningroom
+      - climate.trv_kitchen
+      - climate.trv_livingroom
+
+      # Cover
+      - cover.garage_door
+      - cover.jalousie_kueche_position
+
+      # Lights
+      - light.az_cb_decke
+      - light.az_pt_decke
+      - light.bloom
+      - light.bodenlampe
+      - light.couch
+      - light.decke
+      - light.leseecke
+      - light.wz_decke
+
+      # Input Boolean
+      - input_boolean.evening_lightning_default
+      - input_boolean.media
+      - input_boolean.nightmode
+
+      # Sensor
+      - sensor.humidity_bathroom
+      - sensor.humidity_bedroom
+      - sensor.humidity_hallway
+      - sensor.humidity_livingroom
+      - sensor.humidity_office
+      - sensor.temperature_bathroom
+      - sensor.temperature_bedroom
+      - sensor.temperature_hallway
+      - sensor.temperature_livingroom
+      - sensor.temperature_office
+
+      # Switch
+      - switch.sw_hw_og_deko
+      - switch.sw_lr_deko
+      - switch.sw_of_cb_deko

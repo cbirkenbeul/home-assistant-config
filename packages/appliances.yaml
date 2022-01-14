@@ -143,3 +143,27 @@ automation:
         data:
           entity_id: input_select.washer_mode
           option: idle
+
+# Notifications
+alert:
+  trockner:
+    name: Trockner ist fertig
+    done_message: Danke fürs ausschalten.
+    entity_id: input_boolean.dryer_finish
+    state: "on"
+    repeat: 10
+    can_acknowledge: true
+    skip_first: true
+    notifiers:
+      - petra
+
+  waschmaschine:
+    name: Waschmaschine ist fertig
+    done_message: Danke fürs ausschalten.
+    entity_id: input_boolean.washer_finish
+    state: "on"
+    repeat: 10
+    can_acknowledge: true
+    skip_first: true
+    notifiers:
+      - petra

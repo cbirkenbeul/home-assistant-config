@@ -28,7 +28,7 @@ discovery:
 group: !include groups.yaml
 frontend:
   themes: !include_dir_merge_named themes
-homekit: !include homekit.yaml
+#homekit: !include homekit.yaml
 http:
   use_x_forwarded_for: true
   trusted_proxies: 
