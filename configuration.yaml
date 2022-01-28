@@ -106,3 +106,5 @@ lovelace:
       type: module
     - url: /hacsfiles/vacuum-card/vacuum-card.js
       type: module
+    - url: /hacsfiles/better-thermostat-ui-card/better-thermostat-ui-card.js 
+      type: module
