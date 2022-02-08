@@ -90,21 +90,13 @@ lovelace:
       type: module
     - url: /hacsfiles/bar-card/bar-card.js
       type: module
-    - url: /hacsfiles/tesla-style-solar-power-card/tesla-style-solar-power-card.js
-      type: module
     - url: /hacsfiles/home-assistant-sun-card/home-assistant-sun-card.js
       type: module
-    - url: /hacsfiles/apexcharts-card/apexcharts-card.js
-      type: module
     - url: /hacsfiles/mini-humidifier/mini-humidifier-bundle.js
-      type: module
-    - url: /hacsfiles/tesla-style-solar-power-card/tesla-style-solar-power-card.js
       type: module
     - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
       type: module
     - url: /local/banner-card.js?v=1
       type: module
     - url: /hacsfiles/vacuum-card/vacuum-card.js
-      type: module
-    - url: /hacsfiles/better-thermostat-ui-card/better-thermostat-ui-card.js 
       type: module

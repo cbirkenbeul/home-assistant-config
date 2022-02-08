@@ -11,25 +11,15 @@ cards:
     show_header: false
     control: false
 
-  - type: custom:apexcharts-card
-    header:
-      show: true
-      show_states: true
-    apex_config:
-      legend:
-        show: false
-    yaxis:
-      - id: temperature
-        apex_config:
-          tickAmount: 4
-      - id: humidity
-        opposite: true
-        apex_config:
-          tickAmount: 4
-    all_series_config:
-      stroke_width: 2
-    series:
-      - entity: sensor.temperature_bathroom
-        yaxis_id: temperature
-      - entity: sensor.humidity_bathroom
-        yaxis_id: humidity
+  - type: horizontal-stack
+    cards:
+      - type: sensor
+        entity: sensor.temperature_bathroom
+        graph: line
+        detail: 2
+        hours_to_show: 12
+      - type: sensor
+        entity: sensor.humidity_bathroom
+        graph: line
+        detail: 2
+        hours_to_show: 12
