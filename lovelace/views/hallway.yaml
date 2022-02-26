@@ -15,21 +15,6 @@ cards:
         detail: 2
         hours_to_show: 12
 
-  - type: custom:xiaomi-vacuum-card
-    entity: vacuum.hugo
-    name: false
-    buttons: false
-    image: /local/lovelace/images/iot/vacuum_card.jpg
-    labels:
-      status: Status
-      battery: Batterie
-      mode: Modus
-      main_brush: Hauptbürste
-      side_brush: Seitenbürste
-      filter: Filter
-      sensor: Sensoren
-
-
   - type: entities
     entities:
       - switch.sw_hw_og_deko

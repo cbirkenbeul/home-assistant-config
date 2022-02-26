@@ -49,7 +49,7 @@ notify: !include notify.yaml
 #   api_key: !secret octoprint_api
 # plant: !include plants.yaml
 #recorder: !include recorder.yaml
-script: !include scripts.yaml
+#script: !include scripts.yaml
 scene: !include_dir_merge_list scenes/
 sensor: !include_dir_merge_list sensor/
 sun:
@@ -78,8 +78,6 @@ lovelace:
       type: module
     - url: /hacsfiles/lovelace-card-tools/card-tools.js
       type: module
-    - url: /hacsfiles/lovelace-xiaomi-vacuum-card/xiaomi-vacuum-card.js
-      type: module
     - url: /hacsfiles/button-card/button-card.js
       type: module
     - url: /hacsfiles/simple-weather-card/simple-weather-card-bundle.js
@@ -97,6 +95,8 @@ lovelace:
     - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
       type: module
     - url: /local/banner-card.js?v=1
+      type: module
+    - url: /hacsfiles/lovelace-xiaomi-vacuum-card/xiaomi-vacuum-card.js 
       type: module
     - url: /hacsfiles/vacuum-card/vacuum-card.js
       type: module

@@ -41,44 +41,6 @@ cards:
         detail: 2
         hours_to_show: 4
 
-  - type: vertical-stack
-    title: Haus
-    cards:
-    - type: horizontal-stack
-      cards:
-      - type: sensor
-        entity: sensor.teqqphone
-      - type: sensor
-        entity: sensor.clios_iphone
-    - type: entities
-      entities:
-        - sensor.restmull
-        - sensor.papier
-        - sensor.plastik
-        - sensor.bio
-
-  - type: conditional
-    conditions:
-    - entity: binary_sensor.teqqcar_charger_sensor
-      state: "on"
-    card:
-      type: vertical-stack
-      title: Tesla Model 3
-      cards:
-      - type: horizontal-stack
-        cards:
-        - type: button
-          name: Voll
-          entity: switch.teqqcar_maxrange_switch
-        - type: button
-          name: Laden
-          entity: switch.teqqcar_charger_switch
-      - type: horizontal-stack
-        cards:
-        - type: sensor
-          entity: sensor.teqqcar_battery_sensor
-        - type: sensor
-          entity: sensor.teqqcar_charging_rate_sensor
 
   - type: vertical-stack
     title: Photovoltaik
@@ -158,3 +120,27 @@ cards:
           graph: line
           detail: 1
 
+  - type: conditional
+    conditions:
+    - entity: binary_sensor.teqqcar_charger_sensor
+      state: "on"
+    card:
+      type: vertical-stack
+      title: Tesla Model 3
+      cards:
+      - type: horizontal-stack
+        cards:
+        - type: button
+          name: Voll
+          entity: switch.teqqcar_maxrange_switch
+        - type: button
+          name: Laden
+          entity: switch.teqqcar_charger_switch
+      - type: horizontal-stack
+        cards:
+        - type: sensor
+          entity: sensor.teqqcar_battery_sensor
+        - type: sensor
+          entity: sensor.teqqcar_charging_rate_sensor
+        - type: sensor
+          entity: sensor.tesla_max_charge

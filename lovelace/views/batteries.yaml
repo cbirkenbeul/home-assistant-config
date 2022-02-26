@@ -14,8 +14,6 @@ cards:
       - sensor.se_of_pt_temp_battery
       - sensor.trv_office_cb_battery_level
       - sensor.trv_office_pt_battery_level
-      - sensor.multisensor_cb_battery_level
-      - sensor.multisensor_pt_battery_level
       - sensor.echeveria_battery
       - sensor.dracaena_battery
       - sensor.peperomia_battery

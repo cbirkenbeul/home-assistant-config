@@ -74,3 +74,7 @@ sensor.trees_needed_current_month:
 sensor.trees_needed_last_month:
   friendly_name: "Bäume benötigt (diesen Monat)"
   icon: mdi:tree
+
+sensor.tesla_max_charge:
+  friendly_name: Tesla Ladestrom
+  icon: mdi:ev-station

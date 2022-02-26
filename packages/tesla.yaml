@@ -1,0 +1,129 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   13.02.2022
+#   @package        :   Tesla
+#   @description    :   Tesla Solar Charging
+###############################################################################
+
+sensor:
+  - platform: template
+    sensors:
+      tesla_max_charge:
+        unit_of_measurement: A
+        value_template: >-
+          {{ ((states('sensor.pv_prod_ges') | float(0)) - 500) * 0.0014 }}
+
+automation:
+  - id: 'Tesla001'
+    alias: Tesla - Start charging above 2 kW power to grid
+    trigger:
+    - platform: numeric_state
+      entity_id: sensor.pv_wr_pc_grid_power
+      below: '-2000'
+      for: 00:00:20
+    condition:
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: device_tracker.teqqcar_location_tracker
+            state: home
+          - condition: state
+            entity_id: binary_sensor.teqqcar_charger_sensor
+            state: 'on'
+          - condition: state
+            entity_id: switch.teqqcar_charger_switch
+            state: 'off'
+          - condition: numeric_state
+            entity_id: sensor.pv_wr_pc_battery_soc
+            above: 95
+    action:
+    - service: switch.turn_on
+      target:
+        entity_id: switch.teqqcar_charger_switch
+    mode: single
+
+  - alias: Adjust charging speed
+    trigger:
+    - platform: time_pattern
+      minutes: '/1'
+      seconds: 00
+    condition:
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: switch.teqqcar_charger_switch
+            state: 'on'
+          - condition: state
+            entity_id: device_tracker.teqqcar_location_tracker
+            state: home
+          - condition: state
+            entity_id: switch.teqqcar_maxrange_switch
+            state: 'off'
+    action:
+      service: script.adjust_tesla_charging
+
+  - id: 'Tesla002'
+    alias: Tesla - Stop charging if solar generation is below 1 kW
+    description: ''
+    trigger:
+    - platform: numeric_state
+      entity_id: sensor.pv_prod_ges
+      below: '1000'
+      for: 00:01:00
+    condition:
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: device_tracker.teqqcar_location_tracker
+            state: home
+          - condition: numeric_state
+            entity_id: sensor.teqqcar_charging_rate_sensor
+            above: '2'
+          - condition: not
+            conditions:
+            - condition: state
+              entity_id: switch.teqqcar_maxrange_switch
+              state: 'on'
+    action:
+    - service: switch.turn_off
+      target:
+        entity_id: switch.teqqcar_charger_switch
+    mode: single
+
+  - id: 'Tesla003'
+    alias: Tesla - Stop charging if solar battery is under 90 %
+    description: ''
+    trigger:
+    - platform: numeric_state
+      entity_id: sensor.pv_wr_pc_battery_soc
+      below: '90'
+    condition:
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: device_tracker.teqqcar_location_tracker
+            state: home
+          - condition: not
+            conditions:
+            - condition: state
+              entity_id: switch.teqqcar_maxrange_switch
+              state: 'on'
+    action:
+    - service: switch.turn_off
+      target:
+        entity_id: switch.teqqcar_charger_switch
+    mode: single
+
+script:
+  'adjust_tesla_charging':
+    alias: Charge tesla
+    sequence:
+    - service: tesla_custom.api
+      data:
+        command: CHARGING_AMPS
+        parameters:
+          path_vars:
+            vehicle_id: '{{ state_attr("binary_sensor.teqqcar_online_sensor", "id") }}'
+          charging_amps: '{{ (states("sensor.tesla_max_charge"))| int }}'
+    mode: single
