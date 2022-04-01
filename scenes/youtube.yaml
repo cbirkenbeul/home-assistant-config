@@ -3,9 +3,11 @@
   entities:
     light.az_cb_decke:
       state: "on"
-      brightness: 255
+      brightness: 127
       kelvin: 5600
-    light.bloom:
+    light.az_bloom:
       state: "on"
       brightness: 255
       rgb_color: [255, 168, 1]
+    switch.sw_of_cb_deko:
+      state: "on"

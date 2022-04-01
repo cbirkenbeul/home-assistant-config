@@ -1,5 +1,5 @@
 """Const file for Tesla cars."""
-VERSION = "1.6.0"
+VERSION = "2.0.0"
 CONF_WAKE_ON_START = "enable_wake_on_start"
 CONF_EXPIRATION = "expiration"
 CONF_POLLING_POLICY = "polling_policy"
@@ -35,6 +35,7 @@ ICONS = {
     "sentry mode switch": "mdi:shield-car",
     "horn": "mdi:bullhorn",
     "flash lights": "mdi:car-light-high",
+    "trigger homelink": "mdi:garage",
     "solar panel": "mdi:solar-panel",
 }
 AUTH_CALLBACK_PATH = "/auth/tesla/callback"

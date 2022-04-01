@@ -1,5 +1,19 @@
 """Const module."""
-from deebotozmo.models import VacuumState
+from typing import Mapping
+
+from deebot_client.events import (
+    BatteryEvent,
+    CleanLogEvent,
+    ErrorEvent,
+    Event,
+    FanSpeedEvent,
+    LifeSpanEvent,
+    RoomsEvent,
+    StatsEvent,
+    StatusEvent,
+    WaterInfoEvent,
+)
+from deebot_client.models import VacuumState
 from homeassistant.components.vacuum import (
     STATE_CLEANING,
     STATE_DOCKED,
@@ -12,13 +26,13 @@ from homeassistant.const import CONF_PASSWORD, CONF_USERNAME, CONF_VERIFY_SSL
 
 ################################
 # Do not change! Will be set by release workflow
-INTEGRATION_VERSION = "3.2.1"
-MIN_REQUIRED_HA_VERSION = "2021.9.0b0"
+INTEGRATION_VERSION = "1.2.0"
+MIN_REQUIRED_HA_VERSION = "2021.12.0b0"
 ################################
 
 # Values below can be changed
 DOMAIN = "deebot"
-ISSUE_URL = "https://github.com/And3rsL/Deebot-for-Home-Assistant/issues"
+ISSUE_URL = "https://github.com/DeebotUniverse/Deebot-4-Home-Assistant/issues"
 
 STARTUP_MESSAGE = f"""
 -------------------------------------------------------------------
@@ -59,15 +73,19 @@ VACUUMSTATE_TO_STATE = {
 
 LAST_ERROR = "last_error"
 
-EVENT_STATUS = "Status"
-EVENT_ERROR = "Error"
-EVENT_FAN_SPEED = "Fan speed"
-EVENT_CLEAN_LOGS = "Clean logs"
-EVENT_WATER = "Water"
-EVENT_BATTERY = "Battery"
-EVENT_STATS = "Stats"
-EVENT_LIFE_SPAN = "Life spans"
-EVENT_ROOMS = "Rooms"
-EVENT_MAP = "Map"
 
+REFRESH_STR_TO_EVENT_DTO: Mapping[str, type[Event]] = {
+    "Battery": BatteryEvent,
+    "Clean logs": CleanLogEvent,
+    "Error": ErrorEvent,
+    "Fan speed": FanSpeedEvent,
+    "Life spans": LifeSpanEvent,
+    "Rooms": RoomsEvent,
+    "Stats": StatsEvent,
+    "Status": StatusEvent,
+    "Water": WaterInfoEvent,
+}
+REFRESH_MAP = "Map"
+
+EVENT_CLEANING_JOB = "deebot_cleaning_job"
 EVENT_CUSTOM_COMMAND = "deebot_custom_command"

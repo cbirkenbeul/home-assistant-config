@@ -12,15 +12,15 @@ sensor:
       tesla_max_charge:
         unit_of_measurement: A
         value_template: >-
-          {{ ((states('sensor.pv_prod_ges') | float(0)) - 500) * 0.0014 }}
+          {{ (states('sensor.pv_prod_ges') | float(0) - states('sensor.pv_wr_pc_pv_to_battery_power') | float(0) - 500) * 0.0014 }}
 
 automation:
   - id: 'Tesla001'
     alias: Tesla - Start charging above 2 kW power to grid
     trigger:
     - platform: numeric_state
-      entity_id: sensor.pv_wr_pc_grid_power
-      below: '-2000'
+      entity_id: sensor.pv_wr_pc_battery_soc
+      above: '90'
       for: 00:00:20
     condition:
       - condition: and
@@ -34,9 +34,6 @@ automation:
           - condition: state
             entity_id: switch.teqqcar_charger_switch
             state: 'off'
-          - condition: numeric_state
-            entity_id: sensor.pv_wr_pc_battery_soc
-            above: 95
     action:
     - service: switch.turn_on
       target:
