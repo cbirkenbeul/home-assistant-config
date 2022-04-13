@@ -10,3 +10,4 @@ known_devices.yaml
 __pycache__/
 .vscode/
 !.vscode/extensions.json
+backups/

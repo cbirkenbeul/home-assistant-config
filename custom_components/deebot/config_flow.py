@@ -8,9 +8,10 @@ import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
 from aiohttp import ClientError
 from deebot_client import create_instances
+from deebot_client.exceptions import InvalidAuthenticationError
 from deebot_client.models import Configuration, DeviceInfo
 from deebot_client.util import md5
-from homeassistant import config_entries
+from homeassistant.config_entries import ConfigEntry, ConfigFlow
 from homeassistant.const import (
     CONF_DEVICES,
     CONF_MODE,
@@ -19,7 +20,7 @@ from homeassistant.const import (
     CONF_VERIFY_SSL,
 )
 from homeassistant.data_entry_flow import FlowResult
-from homeassistant.helpers import aiohttp_client
+from homeassistant.helpers import aiohttp_client, selector
 
 from . import get_bumper_device_id
 from .const import (
@@ -39,26 +40,17 @@ DEEBOT_API_DEVICEID = "".join(
     random.choice(string.ascii_uppercase + string.digits) for _ in range(8)
 )
 
-USER_DATA_SCHEMA = vol.Schema(
-    {
-        vol.Required(CONF_USERNAME): str,
-        vol.Required(CONF_PASSWORD): str,
-        vol.Required(CONF_COUNTRY): str,
-        vol.Required(CONF_CONTINENT): str,
-    }
-)
 
-
-class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):  # type: ignore
+class DeebotConfigFlow(ConfigFlow, domain=DOMAIN):  # type: ignore
     """Handle a config flow for Deebot."""
 
     VERSION = 3
-    CONNECTION_CLASS = config_entries.CONN_CLASS_CLOUD_POLL
 
     def __init__(self) -> None:
         self._data: dict[str, Any] = {}
         self._robot_list: list[DeviceInfo] = []
         self._mode: Optional[str] = None
+        self._entry: Optional[ConfigEntry] = None
 
     async def _async_retrieve_bots(
         self, domain_config: dict[str, Any]
@@ -85,35 +77,74 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):  # type: ignore
     ) -> FlowResult:
         """Handle the initial step."""
         errors = {}
+        data = {}
+
         if user_input is not None:
-            if len(user_input[CONF_COUNTRY]) != 2:
+            data.update(user_input)
+            if len(data[CONF_COUNTRY]) != 2:
                 errors[CONF_COUNTRY] = "invalid_country"
 
-            if len(user_input[CONF_CONTINENT]) != 2:
+            if len(data[CONF_CONTINENT]) != 2:
                 errors[CONF_CONTINENT] = "invalid_continent"
 
-            try:
-                info = await self._async_retrieve_bots(user_input)
-                self._robot_list = info
-            except ClientError:
-                _LOGGER.debug("Cannot connect", exc_info=True)
-                errors["base"] = "cannot_connect"
-            except ValueError:
-                _LOGGER.debug("Invalid auth", exc_info=True)
-                errors["base"] = "invalid_auth"
-            except Exception:  # pylint: disable=broad-except
-                _LOGGER.error("Unexcdepted exception", exc_info=True)
-                errors["base"] = "unknown"
+            if not errors:
+                try:
+                    self._robot_list = await self._async_retrieve_bots(data)
+                except ClientError:
+                    _LOGGER.debug("Cannot connect", exc_info=True)
+                    errors["base"] = "cannot_connect"
+                except InvalidAuthenticationError:
+                    errors["base"] = "invalid_auth"
+                except Exception:  # pylint: disable=broad-except
+                    _LOGGER.error("Unexpected exception", exc_info=True)
+                    errors["base"] = "unknown"
 
             if not errors:
-                self._data.update(user_input)
+                if self._entry:
+                    # reauthentication
+                    self.hass.config_entries.async_update_entry(self._entry, data=data)
+                    self.hass.async_create_task(
+                        self.hass.config_entries.async_reload(self._entry.entry_id)
+                    )
+                    return self.async_abort(reason="reauth_successful")
+
+                self._async_abort_entries_match(
+                    {CONF_USERNAME: user_input[CONF_USERNAME]}
+                )
+
+                if len(self._robot_list) == 0:
+                    return self.async_abort(reason="no_supported_devices_found")
+
+                self._data.update(data)
                 return await self.async_step_robots()
 
-        if self.show_advanced_options and self._mode is None:
+        if self._entry:
+            data.update(self._entry.data)
+        elif self.show_advanced_options and self._mode is None:
             return await self.async_step_user_advanced()
 
         return self.async_show_form(
-            step_id="user", data_schema=USER_DATA_SCHEMA, errors=errors
+            step_id="user",
+            data_schema=vol.Schema(
+                {
+                    vol.Required(
+                        CONF_USERNAME,
+                        default=data.get(CONF_USERNAME, vol.UNDEFINED),
+                    ): selector.selector({"text": {}}),
+                    vol.Required(CONF_PASSWORD): selector.selector(
+                        {"text": {"type": "password"}}
+                    ),
+                    vol.Required(
+                        CONF_COUNTRY,
+                        default=data.get(CONF_COUNTRY, vol.UNDEFINED),
+                    ): selector.selector({"text": {}}),
+                    vol.Required(
+                        CONF_CONTINENT,
+                        default=data.get(CONF_CONTINENT, vol.UNDEFINED),
+                    ): selector.selector({"text": {}}),
+                }
+            ),
+            errors=errors,
         )
 
     async def async_step_user_advanced(
@@ -175,3 +206,8 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):  # type: ignore
         return self.async_show_form(
             step_id="robots", data_schema=options_schema, errors=errors
         )
+
+    async def async_step_reauth(self, data: dict[str, Any]) -> FlowResult:
+        """Handle initiation of re-authentication."""
+        self._entry = self.hass.config_entries.async_get_entry(self.context["entry_id"])
+        return await self.async_step_user(data)

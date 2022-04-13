@@ -34,6 +34,9 @@ automation:
           - condition: state
             entity_id: switch.teqqcar_charger_switch
             state: 'off'
+          - condition: numeric_state
+            entity_id: sensor.pv_prod_ges
+            above: '1000'
     action:
     - service: switch.turn_on
       target:

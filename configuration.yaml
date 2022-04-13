@@ -18,6 +18,7 @@ homeassistant:
 
 automation: !include_dir_merge_list automations/
 alert: !include_dir_merge_named alerts/
+backup:
 binary_sensor: !include_dir_merge_list binary_sensor/
 climate:
 config:
@@ -99,4 +100,6 @@ lovelace:
     - url: /hacsfiles/lovelace-xiaomi-vacuum-card/xiaomi-vacuum-card.js 
       type: module
     - url: /hacsfiles/vacuum-card/vacuum-card.js
+      type: module
+    - url: /hacsfiles/lovelace-mushroom/mushroom.js 
       type: module
