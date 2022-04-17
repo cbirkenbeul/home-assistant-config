@@ -2,145 +2,124 @@
 title: Home
 icon: mdi:home-assistant
 cards:
-  - type: vertical-stack
-    title: Wetter
-    cards:
-    - type: custom:simple-weather-card
-      entity: weather.openweathermap
-      name: " "
-      backdrop: true
-      primary_info:
-        - wind_speed
-        - humidity
-      secondary_info:
-        - precipitation
-        - precipitation_probability
-      custom:
-        - temp: sensor.weewx_outtemp
-        - wind_speed: sensor.weewx_wind
-        - humidity: sensor.weewx_outhumidity
-        - rain: sensor.weewx_rain
-    - type: horizontal-stack
-      cards:
-      - type: sensor
+
+  - type: custom:mushroom-chips-card
+    chips:
+      - type: entity
+        entity: sensor.nextsunrise
+      - type: entity
+        entity: sensor.nextsunset
+      - type: entity
         entity: sensor.weewx_outtemp
-        name: Temperatur
-        graph: line
-        detail: 2
-        hours_to_show: 4
-      - type: sensor
-        entity: sensor.weewx_drewpoint
-        name: Taupunkt
-        graph: line
-        detail: 2
-        hours_to_show: 4
-      - type: sensor
+      - type: entity
         entity: sensor.weewx_wind
-        name: Wind
-        graph: line
-        detail: 2
-        hours_to_show: 4
+      - type: entity
+        entity: sensor.weewx_rain
 
+  - type: horizontal-stack
+    cards:
+    - type: custom:mushroom-person-card
+      entity: device_tracker.teqqphone
+      use_entity_picture: true
+    - type: custom:mushroom-person-card
+      entity: device_tracker.clios_iphone
+      use_entity_picture: true
 
   - type: vertical-stack
-    title: Photovoltaik
+    cards:
+    - type: custom:mushroom-title-card
+      title: Photovoltaik
+    - type: horizontal-stack
+      cards:
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: entity
+            entity: sensor.pv_wr_pc_pv_to_battery_power
+            icon: mdi:battery-arrow-up-outline
+          - type: entity
+            entity: sensor.pv_wr_pc_home_power_from_battery
+            icon: mdi:battery-arrow-down-outline
+          - type: entity
+            entity: sensor.pv_wr_pc_home_power_from_grid
+            icon: mdi:transmission-tower-import
+          - type: entity
+            entity: sensor.pv_wr_pc_autarky_day
+            icon: mdi:transmission-tower-off
+
+    - type: horizontal-stack
+      cards:
+      - type: vertical-stack
+        cards:
+        - type: custom:mushroom-entity-card
+          entity: sensor.pv_wr_pc_solar_w
+          icon: mdi:home
+          layout: horizontal
+        - type: custom:mushroom-entity-card
+          entity: sensor.pv_wr_pi
+          icon: mdi:greenhouse
+          layout: horizontal  
+      - type: custom:mushroom-entity-card
+        entity: sensor.pv_wr_pc_battery_soc
+        icon: mdi:home-battery
+        layout: vertical
+
+  - type: vertical-stack
+    cards:
+    - type: custom:mushroom-title-card
+      title: Szenen
+    - type: horizontal-stack
+      cards:
+      - type: custom:mushroom-entity-card
+        entity: scene.abendbeleuchtung
+        icon: mdi:television-ambient-light
+      - type: custom:mushroom-entity-card
+        entity: scene.movietime
+        icon: mdi:movie
+      - type: custom:mushroom-entity-card
+        entity: input_boolean.nightmode
+        icon: mdi:weather-night
+
+  - type: vertical-stack
+    cards:
+    - type: custom:mushroom-title-card
+      title: Geräte
+    - type: horizontal-stack
+      cards:
+      - type: custom:mushroom-entity-card
+        entity: input_select.washer_mode
+      - type: custom:mushroom-entity-card
+        entity: input_select.dryer_mode
+  
+  - type: vertical-stack
+    title: Tesla Model 3
     cards:
     - type: horizontal-stack
       cards:
-      - type: sensor
-        entity: sensor.pv_wr_pc_battery_soc
-        graph: line
-        detail: 2
-        hours_to_show: 12
-      - type: sensor
-        entity: sensor.pv_prod_ges
-        graph: line
-        detail: 2
-        hours_to_show: 12
-  - type: vertical-stack
-    title: Temperaturen
-    cards:
-    - type: vertical-stack
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: entity
+            entity: sensor.teqqcar_range_sensor
+          - type: entity
+            entity: sensor.teqqcar_temperature_sensor_inside
+          - type: entity
+            entity: device_tracker.teqqcar_location_tracker
+            icon: mdi:map-marker
+          - type: entity
+            entity: switch.teqqcar_charger_switch
+    - type: horizontal-stack
       cards:
-      - type: horizontal-stack
+      - type: vertical-stack
         cards:
-        - type: sensor
-          entity: sensor.temperature_livingroom
-          name: Wohnzimmer
-          graph: line
-          detail: 1
-        - type: sensor
-          entity: sensor.temperature_kitchen
-          name: Küche
-          graph: line
-          detail: 1
-        - type: sensor
-          entity: sensor.temperature_office
-          name: Büro
-          graph: line
-          detail: 1
-      - type: horizontal-stack
-        cards:
-        - type: sensor
-          entity: sensor.temperature_bathroom
-          name: Bad
-          graph: line
-          detail: 1
-        - type: sensor
-          entity: sensor.temperature_bedroom
-          name: Schlafzimmer
-          graph: line
-          detail: 1
-        - type: sensor
-          entity: sensor.temperature_hallway
-          name: Flur
-          graph: line
-          detail: 1
-
-  - type: vertical-stack
-    title: Luftfeuchtigkeit
-    cards:
-    - type: vertical-stack
-      cards:
-      - type: horizontal-stack
-        cards:
-        - type: sensor
-          entity: sensor.humidity_livingroom
-          name: Wohnzimmer
-          graph: line
-          detail: 1
-        - type: sensor
-          entity: sensor.humidity_bathroom
-          name: Bad
-          graph: line
-          detail: 1
-        - type: sensor
-          entity: sensor.humidity_office
-          name: Büro
-          graph: line
-          detail: 1
-
-  - type: conditional
-    conditions:
-    - entity: binary_sensor.teqqcar_charger_sensor
-      state: "on"
-    card:
-      type: vertical-stack
-      title: Tesla Model 3
-      cards:
-      - type: horizontal-stack
-        cards:
-        - type: button
-          name: Voll
-          entity: switch.teqqcar_maxrange_switch
-        - type: button
-          name: Laden
-          entity: switch.teqqcar_charger_switch
-      - type: horizontal-stack
-        cards:
-        - type: sensor
-          entity: sensor.teqqcar_battery_sensor
-        - type: sensor
+        - type: custom:mushroom-entity-card
           entity: sensor.teqqcar_charging_rate_sensor
-        - type: sensor
-          entity: sensor.tesla_max_charge
+          icon: mdi:ev-station
+          layout: horizontal
+        - type: custom:mushroom-entity-card
+          entity: sensor.teqqcar_charging_time
+          icon: mdi:timer-sync-outline
+          layout: horizontal  
+      - type: custom:mushroom-entity-card
+        entity: sensor.teqqcar_battery_sensor
+        icon: mdi:car-battery
+        layout: vertical
+

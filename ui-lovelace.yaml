@@ -10,15 +10,8 @@
 title: Casa Lani
 views:
   - !include lovelace/views/home.yaml
-  - !include lovelace/views/livingroom.yaml
-  - !include lovelace/views/office.yaml
-  - !include lovelace/views/kitchen.yaml
-  - !include lovelace/views/bathroom.yaml
-  - !include lovelace/views/bedroom.yaml
-  - !include lovelace/views/hallway.yaml
-  - !include lovelace/views/cellar.yaml
-  - !include lovelace/views/batteries.yaml
-  - !include lovelace/views/weather.yaml
+  - !include lovelace/views/lights.yaml
+  - !include lovelace/views/temp-hum.yaml
   - !include lovelace/views/energy.yaml
 
 button_card_templates:

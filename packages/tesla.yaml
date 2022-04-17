@@ -14,6 +14,16 @@ sensor:
         value_template: >-
           {{ (states('sensor.pv_prod_ges') | float(0) - states('sensor.pv_wr_pc_pv_to_battery_power') | float(0) - 500) * 0.0014 }}
 
+  - platform: template
+    sensors:
+      teqqcar_charging_time:
+        entity_id: sensor.teqqcar_charging_rate_sensor
+        friendly_name: 'Dauer bis voll'
+        value_template: >
+          {{ (states.sensor.teqqcar_charging_rate_sensor.attributes.time_left) }}
+        icon_template: mdi:timer-sync-outline
+
+
 automation:
   - id: 'Tesla001'
     alias: Tesla - Start charging above 2 kW power to grid

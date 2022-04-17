@@ -1,0 +1,110 @@
+---
+title: Licht
+icon: mdi:home-thermometer-outline
+cards:
+  - type: vertical-stack
+    cards:
+    - type: custom:mushroom-title-card
+      title: Bad
+    - type: horizontal-stack
+      cards:
+      - type: custom:mushroom-entity-card
+        entity: sensor.temperature_bathroom
+      - type: custom:mushroom-entity-card
+        entity: sensor.humidity_bathroom
+    - type: 'custom:simple-thermostat'
+      entity: climate.trv_bathroom
+      layout:
+        step: row
+      header: false
+      control: false
+
+
+
+  - type: vertical-stack
+    cards:
+    - type: custom:mushroom-title-card
+      title: Büro
+    - type: horizontal-stack
+      cards:
+      - type: custom:mushroom-entity-card
+        entity: sensor.temperature_office
+      - type: custom:mushroom-entity-card
+        entity: sensor.humidity_office
+    - type: 'custom:simple-thermostat'
+      entity: climate.trv_office_pt_thermostat
+      layout:
+        step: row
+      header: true
+      control: false
+
+    - type: 'custom:simple-thermostat'
+      entity: climate.trv_office_cb_thermostat
+      layout:
+        step: row
+      header: true
+      control: false
+
+
+
+  - type: vertical-stack
+    cards:
+    - type: custom:mushroom-title-card
+      title: Flur
+    - type: horizontal-stack
+      cards:
+      - type: custom:mushroom-entity-card
+        entity: sensor.temperature_hallway
+      - type: custom:mushroom-entity-card
+        entity: sensor.humidity_hallway
+
+  - type: vertical-stack
+    cards:
+    - type: custom:mushroom-title-card
+      title: Küche
+    - type: horizontal-stack
+      cards:
+      - type: custom:mushroom-entity-card
+        entity: sensor.temperature_kitchen
+    - type: 'custom:simple-thermostat'
+      entity: climate.trv_kitchen
+      layout:
+        step: row
+      header: false
+      control: false
+
+
+  - type: vertical-stack
+    cards:
+    - type: custom:mushroom-title-card
+      title: Schlafzimmer
+    - type: horizontal-stack
+      cards:
+      - type: custom:mushroom-entity-card
+        entity: sensor.temperature_bedroom
+      - type: custom:mushroom-entity-card
+        entity: sensor.humidity_bedroom
+
+  - type: vertical-stack
+    cards:
+    - type: custom:mushroom-title-card
+      title: Wohnzimmer
+    - type: horizontal-stack
+      cards:
+      - type: custom:mushroom-entity-card
+        entity: sensor.temperature_livingroom
+      - type: custom:mushroom-entity-card
+        entity: sensor.humidity_livingroom
+    - type: 'custom:simple-thermostat'
+      entity: climate.trv_diningroom
+      layout:
+        step: row
+      header: true
+      control: false
+    - type: 'custom:simple-thermostat'
+      entity: climate.trv_livingroom
+      layout:
+        step: row
+      header: true
+      control: false
+

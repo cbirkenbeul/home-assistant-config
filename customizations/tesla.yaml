@@ -6,3 +6,9 @@ sensor.tesla_battery_level:
 sensor.tesla_power:
   friendly_name: Ladung
   icon: mdi:ev-station
+
+sensor.teqqcar_charging_rate_sensor:
+  friendly_name: Ladegeschwindigkeit
+
+sensor.teqqcar_battery_sensor:
+  friendly_name: Tesla SoC

@@ -85,6 +85,12 @@ sensor:
     device_class: power
 
   - platform: integration
+    source: sensor.pv_wr_pi
+    name: pv_wr_pi_kwh
+    unit_prefix: k
+    round: 2
+
+  - platform: integration
     source: sensor.pv_wr_pc_pv_to_battery_power
     name: Battarieladung
     unit_prefix: k

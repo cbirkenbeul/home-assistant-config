@@ -43,8 +43,17 @@ sensor.pv_prod_ges:
   friendly_name: PV-Produktion
   icon: mdi:solar-panel
 
+sensor.pv_wr_pc_solar_kwh:
+  friendly_name: PV Hauptdach
+
+sensor.pv_wr_pi_kwh:
+  friendly_name: PV Loggia
+
+sensor.pv_wr_pc_battery_soc:
+  friendly_name: Hausbatterie SoC
+
 sensor.pv_wr_pc_solar_w:
-  friendly_name: Hauptdach
+  friendly_name: PV Leistung Haus
 
 sensor.pv_wr_pi:
-  friendly_name: Loggia
+  friendly_name: PV Leistung Loggia
