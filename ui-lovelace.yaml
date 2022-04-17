@@ -12,6 +12,8 @@ views:
   - !include lovelace/views/home.yaml
   - !include lovelace/views/lights.yaml
   - !include lovelace/views/temp-hum.yaml
+  - !include lovelace/views/vacuum.yaml
+  - !include lovelace/views/plants.yaml
   - !include lovelace/views/energy.yaml
 
 button_card_templates:

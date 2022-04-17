@@ -1,0 +1,27 @@
+---
+title: Pflanzen
+icon: mdi:sprout
+cards:
+  - type: vertical-stack
+    title: Büro
+    cards:
+    - type: 'custom:flower-card'
+      entity: plant.echeveria
+      species: "pachyphytum oviferum"
+    - type: 'custom:flower-card'
+      entity: plant.codiaeum
+      species: "codiaeum variegatum"
+
+  - type: vertical-stack
+    title: Wohnzimmer
+    cards:
+    - type: 'custom:flower-card'
+      entity: plant.birkenfeige
+      species: 'lime ficus benjamina'
+    - type: 'custom:flower-card'
+      entity: plant.dracaenamarginata
+      species: "dracaena marginata"
+
+    # - type: 'custom:flower-card'
+    #   entity: plant.peperomia
+    #   species: 'peperomia rotundifolia'

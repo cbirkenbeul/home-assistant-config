@@ -78,3 +78,11 @@ sensor.trees_needed_last_month:
 sensor.tesla_max_charge:
   friendly_name: Tesla Ladestrom
   icon: mdi:ev-station
+
+sensor.waschmaschine_electric_w_value:
+  friendly_name: Waschmaschine
+  icon: mdi:washing-machine
+
+sensor.trockner_electric_w_value:
+  friendly_name: Trockner
+  icon: mdi:tumble-dryer

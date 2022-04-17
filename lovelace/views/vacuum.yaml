@@ -1,0 +1,80 @@
+---
+title: Staubsauger
+icon: mdi:robot-vacuum
+cards:
+  - type: vertical-stack
+    cards:
+    - type: custom:mushroom-vacuum-card
+      entity: vacuum.robi
+      commands:
+        - start_pause
+        - stop
+        - return_home
+        - locate
+    - type: horizontal-stack
+      cards:
+        - type: custom:mushroom-entity-card
+          entity: input_boolean.robi_clean_kitchen
+          layout: vertical
+          secondary_info: name
+          tap_action:
+            action: toggle
+          icon_color: light-green
+          primary_info: none
+        - type: custom:mushroom-entity-card
+          entity: input_boolean.robi_clean_livingroom
+          layout: vertical
+          secondary_info: name
+          tap_action:
+            action: toggle
+          icon_color: light-green
+          primary_info: none
+        - type: custom:mushroom-entity-card
+          entity: input_boolean.robi_clean_office
+          layout: vertical
+          secondary_info: name
+          tap_action:
+            action: toggle
+          icon_color: light-green
+          primary_info: none
+        - type: custom:mushroom-entity-card
+          entity: input_boolean.robi_clean_hallway
+          layout: vertical
+          secondary_info: name
+          tap_action:
+            action: toggle
+          icon_color: light-green
+          primary_info: none
+        - type: custom:mushroom-entity-card
+          entity: input_boolean.robi_clean_bathroom
+          layout: vertical
+          secondary_info: name
+          tap_action:
+            action: toggle
+          icon_color: light-green
+          primary_info: none
+    - type: custom:mushroom-entity-card
+      entity: input_boolean.robi_cleanday
+      layout: vertical
+      secondary_info: name
+      tap_action:
+        action: toggle
+      icon_color: light-green
+      primary_info: none
+    - type: picture-entity
+      entity: camera.robi_live_map # change me
+      tap_action:
+        action: none
+      hold_action:
+        action: none
+      show_state: false
+      show_name: false
+
+  - type: custom:mushroom-vacuum-card
+    entity: vacuum.hugo
+    commands:
+      - start_pause
+      - stop
+      - return_home
+      - clean_spot
+      - locate

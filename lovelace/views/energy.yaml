@@ -4,77 +4,60 @@ icon: mdi:lightning-bolt
 cards:
   - type: vertical-stack
     cards:
-    - type: entities
-      title: Aktuelle Zahlen
-      entities:
-        - entity: sensor.pv_prod_ges
-          type: custom:multiple-entity-row
-          name: PV Produktion
-          entities:
-            - entity: sensor.pv_wr_pc_solar_w
-              name: Haus
-            - entity: sensor.pv_wr_pi
-              name: Loggia
-        - entity: sensor.pv_wr_pc_battery_soc
-          type: custom:multiple-entity-row
-          name: Batterie SoC
-          entities:
-            - entity: sensor.pv_wr_pc_home_power_from_battery
-              name: Entladen
-            - entity: sensor.pv_wr_pc_pv_to_battery_power
-              name: Aufladen
-
-  - type: sensor
-    entity: sensor.pv_wr_pc_battery_soc
-    graph: line
-    detail: 2
-  - type: vertical-stack
-    title: PV Produktion
-    cards:
-    - type: sensor
+    - type: custom:mushroom-title-card
+      title: Aktuelle Werte
+    - type: custom:mushroom-entity-card
       entity: sensor.pv_prod_ges
-      graph: line
-      detail: 2
     - type: horizontal-stack
       cards:
-      - type: sensor
+      - type: custom:mushroom-entity-card
         entity: sensor.pv_wr_pc_solar_w
-        graph: line
-        detail: 2
-      - type: sensor
+      - type: custom:mushroom-entity-card
         entity: sensor.pv_wr_pi
-        graph: line
-        detail: 2    
-
-  - type: entities
-    title: Statistik heutiger Tag
-    entities:
-      # - entity: sensor.costs_for_energy
-      #  type: custom:multiple-entity-row
-      #  name: Gewinn / Verlust
-      #  entities:
-      #    - entity: sensor.costs_bought_energy
-      #      name: Einkauf
-      #    - entity: sensor.earn_sell_energy
-      #      name: Verkauf
-
-      - entity: sensor.pv_wr_pc_home_consumption_day
-        type: custom:multiple-entity-row
-        name: Verbrauch aus
-        entities:
-          - entity: sensor.pv_wr_pc_home_consumption_from_battery_day
-            name: Batterie
-          - entity: sensor.pv_wr_pc_home_consumption_from_pv_day
-            name: PV
-          - entity: sensor.pv_wr_pc_home_consumption_from_grid_day
-            name: Netz
-
-  - type: energy-distribution
+    - type: custom:mushroom-entity-card
+      entity: sensor.pv_wr_pc_battery_soc
+    - type: horizontal-stack
+      cards:
+      - type: custom:mushroom-entity-card
+        entity: sensor.pv_wr_pc_home_power_from_battery
+        icon_color: red
+      - type: custom:mushroom-entity-card
+        entity: sensor.pv_wr_pc_pv_to_battery_power
+        icon_color: green
 
   - type: vertical-stack
-    title: Verbraucher
     cards:
-    - type: sensor
-      entity: sensor.shelly_shplg_s_fdd88a_current_consumption
-      graph: line
-      detail: 2
+    - type: custom:mushroom-title-card
+      title: Statistik heute
+    - type: custom:mushroom-entity-card
+      entity: sensor.pv_wr_pc_home_consumption_day
+    - type: horizontal-stack
+      cards:
+      - type: custom:mushroom-entity-card
+        entity: sensor.pv_wr_pc_home_consumption_from_battery_day
+        icon_color: yellow
+      - type: custom:mushroom-entity-card
+        entity: sensor.pv_wr_pc_home_consumption_from_pv_day
+        icon_color: green
+      - type: custom:mushroom-entity-card
+        entity: sensor.pv_wr_pc_home_consumption_from_grid_day
+        icon_color: red
+
+  - type: vertical-stack
+    cards:
+    - type: custom:mushroom-title-card
+      title: Verbraucher
+    - type: horizontal-stack
+      cards:
+      - type: custom:mushroom-entity-card
+        entity: sensor.shelly_shplg_s_fdd88a_current_consumption
+      - type: custom:mushroom-entity-card
+        entity: sensor.shelly_shplg_s_c5080f_current_consumption
+    - type: horizontal-stack
+      cards:
+      - type: custom:mushroom-entity-card
+        entity: sensor.waschmaschine_electric_w_value
+      - type: custom:mushroom-entity-card
+        entity: sensor.trockner_electric_w_value
+
+  - type: energy-distribution

@@ -108,3 +108,17 @@ sensor:
         unit_of_measurement: W
         value_template: >-
           {{ (states('sensor.pv_wr_pc_solar_w') | float(0)) +  (states('sensor.pv_wr_pi') | float(0)) }}
+
+  - platform: template
+    sensors:
+      power_earnings:
+        unit_of_measurement: €
+        value_template: >-
+          {{ (states('sensor.netzeinspeisung') | float(0)) * 0.072 }}
+
+  - platform: template
+    sensors:
+      power_costs:
+        unit_of_measurement: €
+        value_template: >-
+          {{ (states('sensor.netzbezug') | float(0)) * 0.34 }}

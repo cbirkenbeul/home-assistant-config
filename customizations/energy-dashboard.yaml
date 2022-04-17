@@ -54,6 +54,32 @@ sensor.pv_wr_pc_battery_soc:
 
 sensor.pv_wr_pc_solar_w:
   friendly_name: PV Leistung Haus
+  icon: mdi:home
 
 sensor.pv_wr_pi:
   friendly_name: PV Leistung Loggia
+  icon: mdi:greenhouse
+
+sensor.pv_wr_pc_home_power_from_battery:
+  friendly_name: Strom aus Batterie
+  icon: mdi:battery-arrow-down-outline
+
+sensor.pv_wr_pc_pv_to_battery_power:
+  friendly_name: Strom zu Batterie
+  icon: mdi:battery-arrow-up-outline
+
+sensor.pv_wr_pc_home_consumption_day:
+  friendly_name: Hausverbrauch heute
+  icon: mdi:home-lightning-bolt
+
+sensor.pv_wr_pc_home_consumption_from_battery_day:
+  friendly_name: Batterie
+  icon: mdi:battery-arrow-up-outline
+
+sensor.pv_wr_pc_home_consumption_from_pv_day:
+  friendly_name: PV
+  icon: mdi:solar-power
+
+sensor.pv_wr_pc_home_consumption_from_grid_day:
+  friendly_name: Netz
+  icon: mdi:transmission-tower-export

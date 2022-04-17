@@ -18,15 +18,9 @@
       entity_id: input_boolean.evening_lightning_default
     - service: input_boolean.turn_off
       entity_id: input_boolean.media
-
-- alias: turn off nightmode
-  trigger:
-    - platform: sun
-      event: sunrise
-  action:
+    - delay: '00:00:30'
     - service: input_boolean.turn_off
-      data:
-        entity_id: input_boolean.nightmode
+      entity_id: input_boolean.nightmode
 
 - alias: turn off lights
   trigger:

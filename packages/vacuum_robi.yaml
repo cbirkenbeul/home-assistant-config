@@ -1,0 +1,185 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   17.04.2022
+#   @package        :   Vacuum
+#   @description    :   Vaccum services for room cleaning
+###############################################################################
+
+input_boolean:
+  robi_clean_kitchen:
+    name: Küche
+    initial: off
+    icon: mdi:fridge
+  robi_clean_livingroom:
+    name: Wohnzimmer
+    initial: off
+    icon: mdi:sofa
+  robi_clean_hallway:
+    name: Flur
+    initial: off
+    icon: mdi:coat-rack
+  robi_clean_bathroom:
+    name: Bad
+    initial: off
+    icon: mdi:shower
+  robi_clean_office:
+    name: Büro
+    initial: off
+    icon: mdi:chair-rolling
+  robi_cleanday:
+    name: Putztag
+    initial: off
+    icon: mdi:vacuum
+
+
+automation:
+- id: 'robi clean kitchen'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.robi_clean_kitchen
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: vacuum.robi
+      state: 'docked'
+  action:
+    - service: vacuum.send_command
+      target:
+        entity_id: vacuum.robi
+      data:
+        command: spot_area
+        params:
+          rooms: 0
+          cleanings: 1
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.robi_clean_kitchen
+
+- id: 'robi clean livingroom'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.robi_clean_livingroom
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: vacuum.robi
+      state: 'docked'
+  action:
+    - service: vacuum.send_command
+      target:
+        entity_id: vacuum.robi
+      data:
+        command: spot_area
+        params:
+          rooms: 2
+          cleanings: 1
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.robi_clean_livingroom
+
+- id: 'robi clean hallway'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.robi_clean_hallway
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: vacuum.robi
+      state: 'docked'
+  action:
+    - service: vacuum.send_command
+      target:
+        entity_id: vacuum.robi
+      data:
+        command: spot_area
+        params:
+          rooms: 3
+          cleanings: 1
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.robi_clean_hallway
+
+- id: 'robi clean bathroom'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.robi_clean_bathroom
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: vacuum.robi
+      state: 'docked'
+  action:
+    - service: vacuum.send_command
+      target:
+        entity_id: vacuum.robi
+      data:
+        command: spot_area
+        params:
+          rooms: 5
+          cleanings: 1
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.robi_clean_bathroom
+
+- id: 'robi clean office'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.robi_clean_office
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: vacuum.robi
+      state: 'docked'
+  action:
+    - service: vacuum.send_command
+      target:
+        entity_id: vacuum.robi
+      data:
+        command: spot_area
+        params:
+          rooms: 6
+          cleanings: 1
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.robi_clean_office
+
+- id: 'robi cleanday'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.robi_cleanday
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: vacuum.robi
+      state: 'docked'
+  action:
+    - service: vacuum.send_command
+      target:
+        entity_id: vacuum.robi
+      data:
+        command: spot_area
+        params:
+          rooms: 0,2,3,5
+          cleanings: 1
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.robi_cleanday
+
+- id: 'start robi if all away'
+  trigger:
+    - platform: state
+      entity_id:
+        - group.devices
+      to: "not_home"
+  action:
+    - service: vacuum.start
+      entity_id: vacuum.robi
+
+- id: 'return robi to dock if ppl home'
+  trigger:
+    - platform: state
+      entity_id:
+        - group.devices
+      to: "home"
+  action:
+    - service: vacuum.stop
+      entity_id: vacuum.robi
+    - delay:
+        seconds: 5
+    - service: vacuum.return_to_base
+      entity_id: vacuum.robi

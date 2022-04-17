@@ -7,12 +7,13 @@
     to: 'not_home'
   action:
     - service: light.turn_off
-      entity_id: group.all_lights
+      entity_id: all
     - service: switch.turn_off
       entity_id:
         - switch.sw_hw_og_deko
         - switch.sw_lr_deko
         - switch.sw_of_cb_deko
+        - switch.flux
     - service: input_boolean.turn_off
       entity_id: input_boolean.evening_lightning_default
 

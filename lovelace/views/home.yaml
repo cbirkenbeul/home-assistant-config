@@ -3,27 +3,28 @@ title: Home
 icon: mdi:home-assistant
 cards:
 
-  - type: custom:mushroom-chips-card
-    chips:
-      - type: entity
-        entity: sensor.nextsunrise
-      - type: entity
-        entity: sensor.nextsunset
-      - type: entity
-        entity: sensor.weewx_outtemp
-      - type: entity
-        entity: sensor.weewx_wind
-      - type: entity
-        entity: sensor.weewx_rain
-
-  - type: horizontal-stack
+  - type: vertical-stack
     cards:
-    - type: custom:mushroom-person-card
-      entity: device_tracker.teqqphone
-      use_entity_picture: true
-    - type: custom:mushroom-person-card
-      entity: device_tracker.clios_iphone
-      use_entity_picture: true
+    - type: custom:mushroom-chips-card
+      chips:
+        - type: entity
+          entity: sensor.nextsunrise
+        - type: entity
+          entity: sensor.nextsunset
+        - type: entity
+          entity: sensor.weewx_outtemp
+        - type: entity
+          entity: sensor.weewx_wind
+        - type: entity
+          entity: sensor.weewx_rain
+    - type: horizontal-stack
+      cards:
+      - type: custom:mushroom-person-card
+        entity: device_tracker.teqqphone
+        use_entity_picture: true
+      - type: custom:mushroom-person-card
+        entity: device_tracker.clios_iphone
+        use_entity_picture: true
 
   - type: vertical-stack
     cards:
