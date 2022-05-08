@@ -6,6 +6,16 @@
 #   @description    :   Make dump dryer and washer smarter
 ###############################################################################
 
+# Sensors
+sensor:
+  - platform: mqtt
+    name: "Washer Status"
+    state_topic: "house/washer/status"
+  - platform: mqtt
+    name: "Dryer Status"
+    state_topic: "house/dryer/status"
+
+
 # Finish state
 input_boolean:
   washer_finish:
@@ -47,10 +57,11 @@ automation:
       for:
         minutes: 1
     action:
-      - service: input_select.select_option
+      - service: mqtt.publish
         data:
-          entity_id: input_select.dryer_mode
-          option: running
+          topic: house/dryer/status
+          payload: running
+          retain: true
 
   - alias: Set dryer Status to finish
     trigger:
@@ -102,10 +113,11 @@ automation:
       entity_id: input_select.washer_mode
       state: idle
     action:
-      - service: input_select.select_option
+      - service: mqtt.publish
         data:
-          entity_id: input_select.washer_mode
-          option: running
+          topic: house/washer/status
+          payload: running
+          retain: true
 
   - alias: Set washer Status to finish
     trigger:
@@ -116,16 +128,19 @@ automation:
       for:
         minutes: 5
     condition:
-      condition: state
-      entity_id: input_select.washer_mode
-      state: running
+      - condition: state
+        entity_id: sensor.washer_status
+        state: running
     action:
-      - service: input_boolean.turn_on
-        entity_id: input_boolean.washer_finish
-      - service: input_select.select_option
+      #- service: input_boolean.turn_on
+      #  entity_id: input_boolean.washer_finish
+      - service: mqtt.publish
         data:
-          entity_id: input_select.washer_mode
-          option: finish
+          topic: house/washer/status
+          payload: finnish
+          retain: true
+      - service: script.turn_on
+        entity_id: script.washer_finished_notification_push
 
   - alias: Set washer status to idle
     trigger:
@@ -133,16 +148,17 @@ automation:
       entity_id: binary_sensor.bs_hw_bm_door_contact
       to: 'on'
     condition:
-      condition: state
-      entity_id: input_select.washer_mode
-      state: finish
+      - condition: state
+        entity_id: sensor.washer_status
+        state: finish
     action:
       - service: input_boolean.turn_off
         entity_id: input_boolean.washer_finish
-      - service: input_select.select_option
+      - service: mqtt.publish
         data:
-          entity_id: input_select.washer_mode
-          option: idle
+          topic: house/washer/status
+          payload: idle
+          retain: true
 
 # Notifications
 alert:
@@ -167,3 +183,38 @@ alert:
     skip_first: true
     notifiers:
       - petra
+
+# Power Cicle
+utility_meter:
+  washer_energy_daily:
+    source: sensor.waschmaschine_electric_kwh_value
+    cycle: daily
+
+  dryer_energy_daily:
+    source: sensor.trockner_electric_kwh_value
+    cycle: daily
+
+script:
+  washer_finished_notification_push:
+    sequence:
+    - repeat:
+        while:
+          - condition: state
+            entity_id: sensor.washer_status
+            state: 'finish'
+        sequence:
+        - delay:
+            minutes: 10
+        - service: script.simplified_washer_push
+
+  simplified_washer_push:
+    sequence:
+    - condition: state
+      entity_id: group.family
+      state: 'home'
+    - condition: state
+      entity_id: sensor.washer_status
+      state: finish
+    - service: notify.mobile_app_cliosiphone
+      data:
+        message: "Test!"

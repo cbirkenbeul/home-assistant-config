@@ -11,6 +11,8 @@ homeassistant:
   # Load packages
   legacy_templates: true
   packages: !include_dir_named packages
+  external_url: "https://home.casalani.de"
+  internal_url: "https://home.casalani.de"
 
 ############################################################################
 # Configuration
@@ -19,7 +21,7 @@ homeassistant:
 automation: !include_dir_merge_list automations/
 alert: !include_dir_merge_named alerts/
 backup:
-binary_sensor: !include_dir_merge_list binary_sensor/
+#binary_sensor: !include_dir_merge_list binary_sensor/
 climate:
 config:
 cover: !include_dir_merge_list cover/
@@ -29,7 +31,6 @@ discovery:
 group: !include groups.yaml
 frontend:
   themes: !include_dir_merge_named themes
-#homekit: !include homekit.yaml
 http:
   use_x_forwarded_for: true
   trusted_proxies: 
@@ -42,25 +43,13 @@ input_select: !include input-select.yaml
 ios:
 map:
 mobile_app:
-mqtt:
-  broker: !env_var HASS_MQTT_SERVER
 notify: !include notify.yaml
 # octoprint:
 #   host: !secret octoprint_host
 #   api_key: !secret octoprint_api
-# plant: !include plants.yaml
-#recorder: !include recorder.yaml
-#script: !include scripts.yaml
-scene: !include_dir_merge_list scenes/
+scene: !include scenes.yaml
 sensor: !include_dir_merge_list sensor/
-sun:
-  elevation: !env_var HASS_ELEVATION
-switch: !include_dir_merge_list switches/
 system_health:
-utility_meter:
-  energy:
-    source: sensor.house_electric_consumed_kwh
-    cycle: monthly
 webhook:
 zone: !include zones.yaml
 
@@ -83,13 +72,7 @@ lovelace:
       type: module
     - url: /hacsfiles/simple-weather-card/simple-weather-card-bundle.js
       type: module
-    - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
-      type: module
     - url: /hacsfiles/battery-state-card/battery-state-card.js
-      type: module
-    - url: /hacsfiles/bar-card/bar-card.js
-      type: module
-    - url: /hacsfiles/home-assistant-sun-card/home-assistant-sun-card.js
       type: module
     - url: /hacsfiles/mini-humidifier/mini-humidifier-bundle.js
       type: module
@@ -102,4 +85,6 @@ lovelace:
     - url: /hacsfiles/vacuum-card/vacuum-card.js
       type: module
     - url: /hacsfiles/lovelace-mushroom/mushroom.js 
+      type: module
+    - url: /hacsfiles/apexcharts-card/apexcharts-card.js 
       type: module

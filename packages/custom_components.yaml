@@ -1,0 +1,23 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   23.04.2022
+#   @package        :   Integrations
+#   @description    :   Combine Integrations to one file
+###############################################################################
+
+# Binary Sensors
+binary_sensor:
+  - platform: workday
+    country: DE
+
+# Switches
+switch:
+  - platform: flux
+    lights:
+      - light.bodenlampe
+      - light.couch
+    start_time: '21:00'
+    stop_time: '01:00'
+    brightness: 200
+    disable_brightness_adjust: true

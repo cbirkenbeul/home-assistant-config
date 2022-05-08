@@ -1,0 +1,30 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   28.04.2022
+#   @package        :   Power Calc
+#   @description    :   Combine Integrations to one file
+###############################################################################
+
+
+powercalc:
+
+# Light configuration
+sensor:
+  - platform: powercalc
+    entity_id: light.bodenlampe
+
+  - platform: template
+    sensors:
+      energy_all_lights:
+        unit_of_measurement: kW
+        value_template: >-
+          {{ (states('sensor.bodenlampe_energy') | float(0)) +  
+             (states('sensor.az_bloom_energy') | float(0)) +
+             (states('sensor.az_cb_decke_energy') | float(0)) +
+             (states('sensor.bad_energy') | float(0)) +
+             (states('sensor.couch_energy') | float(0)) +
+             (states('sensor.leseecke_energy') | float(0)) +
+             (states('sensor.medizinschrank_energy') | float(0)) +
+             (states('sensor.wz_decke_energy') | float(0)) }}
+

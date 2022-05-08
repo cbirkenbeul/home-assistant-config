@@ -16,8 +16,14 @@ sensor:
 
   - platform: template
     sensors:
+      tesla_charge_kw:
+        unit_of_measurement: kWh
+        value_template: >-
+          {{ (states('sensor.tesla_max_charge') | float(0) * 240 / 1000 * 3) | round(1)}}
+
+  - platform: template
+    sensors:
       teqqcar_charging_time:
-        entity_id: sensor.teqqcar_charging_rate_sensor
         friendly_name: 'Dauer bis voll'
         value_template: >
           {{ (states.sensor.teqqcar_charging_rate_sensor.attributes.time_left) }}
@@ -87,9 +93,6 @@ automation:
           - condition: state
             entity_id: device_tracker.teqqcar_location_tracker
             state: home
-          - condition: numeric_state
-            entity_id: sensor.teqqcar_charging_rate_sensor
-            above: '2'
           - condition: not
             conditions:
             - condition: state

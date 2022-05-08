@@ -60,4 +60,20 @@ cards:
       - type: custom:mushroom-entity-card
         entity: sensor.trockner_electric_w_value
 
+  - type: custom:apexcharts-card
+    chart_type: donut
+    layout: minimal
+    update_interval: 5sec
+    series:
+      - entity: sensor.energy_all_lights_daily_energy
+        name: Light
+      - entity: sensor.washer_energy_daily
+        name: Waschmaschine
+      - entity: sensor.dryer_energy_daily
+        name: Trockner
+      - entity: sensor.energy_serverrack_daily_energy
+        name: Serverrack
+      - entity: sensor.energy_dishwasher_daily_energy
+        name: Spülmaschine
+
   - type: energy-distribution

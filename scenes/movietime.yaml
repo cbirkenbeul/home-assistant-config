@@ -1,9 +1,0 @@
----
-- name: Movietime
-  entities:
-    light.couch: off
-    light.wz_decke: off
-    light.bodenlampe:
-      state: on
-      brightness: 80
-      rgb_color: [0, 255, 0]

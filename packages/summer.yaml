@@ -1,0 +1,54 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   08.05.2022
+#   @package        :   summer
+#   @description    :   Stuff just for warmer days
+###############################################################################
+
+# Sensors
+sensor:
+  - platform: mqtt
+    name: "Weather day"
+    state_topic: "house/weather/daycondition"
+
+automation:
+  - id: "rsNaMsyzufuCNPPTdFyH3AtBDPVRp7xf5HqMhQt7fjBUSZBUynSrL7zKeWzMXvBd"
+    alias: "Weather - Set summer day sensor"
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.weewx_outtemp
+      above: 24
+    action:
+    - service: mqtt.publish
+      data:
+        topic: house/weather/daycondition
+        payload: summerday
+        retain: true
+
+  - id: "ChkGBnrdFhyanrBWf2QfkKW9nuS6qQ2vMusBbL6g3rQEBUhtWnXF4KEqVNLJ5qNa"
+    alias: "Weather - Set hot day sensor"
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.weewx_outtemp
+      above: 30
+    action:
+    - service: mqtt.publish
+      data:
+        topic: house/weather/daycondition
+        payload: hotday
+        retain: true
+
+  - id: "gzvPHFcFf8Xq7Lvdu554RVGjEEuSruTdZ7dTKEafcPeY3uHkUKpcVqVeBVRjPUBA"
+    alias: "Notify to open windows"
+    trigger:
+      platform: sun
+      event: sunset
+    condition:
+      condition: state
+      entity_id: sensor.weather_day
+      state: summerday
+    action:
+      - service: notify.mobile_app_teqqphone
+        data:
+          message: "Fenster öffnen zum Lüften!"

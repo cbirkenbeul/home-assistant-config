@@ -79,6 +79,7 @@ cards:
       - type: custom:mushroom-entity-card
         entity: input_boolean.nightmode
         icon: mdi:weather-night
+        tap_action: toggle
 
   - type: vertical-stack
     cards:
@@ -87,7 +88,7 @@ cards:
     - type: horizontal-stack
       cards:
       - type: custom:mushroom-entity-card
-        entity: input_select.washer_mode
+        entity: sensor.washer_status
       - type: custom:mushroom-entity-card
         entity: input_select.dryer_mode
   
@@ -112,7 +113,7 @@ cards:
       - type: vertical-stack
         cards:
         - type: custom:mushroom-entity-card
-          entity: sensor.teqqcar_charging_rate_sensor
+          entity: sensor.tesla_charge_kw
           icon: mdi:ev-station
           layout: horizontal
         - type: custom:mushroom-entity-card

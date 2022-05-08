@@ -12,3 +12,7 @@ sensor.teqqcar_charging_rate_sensor:
 
 sensor.teqqcar_battery_sensor:
   friendly_name: Tesla SoC
+
+sensor.tesla_charge_kw:
+  friendly_name: Ladegeschwindigkeit in kW
+  icon: mdi:battery-charging
