@@ -90,7 +90,7 @@ cards:
       - type: custom:mushroom-entity-card
         entity: sensor.washer_status
       - type: custom:mushroom-entity-card
-        entity: input_select.dryer_mode
+        entity: sensor.dryer_status
   
   - type: vertical-stack
     title: Tesla Model 3
