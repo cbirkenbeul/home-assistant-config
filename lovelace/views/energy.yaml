@@ -75,5 +75,7 @@ cards:
         name: Serverrack
       - entity: sensor.energy_dishwasher_daily_energy
         name: Spülmaschine
+      - entity: sensor.energy_winecooler_energy
+        name: Weinkühlschrank
 
   - type: energy-distribution

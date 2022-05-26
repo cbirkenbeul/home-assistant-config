@@ -34,3 +34,9 @@ sensor:
     name: energy_dishwasher_energy
     unit_prefix: k
     round: 2
+
+  - platform: integration
+    source: sensor.shelly_shplg_s_436c49_total_consumption
+    name: energy_winecooler_energy
+    unit_prefix: k
+    round: 2

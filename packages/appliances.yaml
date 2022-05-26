@@ -157,7 +157,7 @@ script:
       state: complete
     - service: notify.mobile_app_clios_iphone
       data:
-        message: "Test!"
+        message: "Der Trockner ist bereit zum Ausräumen."
 
   washer_finished_notification_push:
     sequence:
@@ -181,4 +181,4 @@ script:
       state: complete
     - service: notify.mobile_app_clios_iphone
       data:
-        message: "Test!"
+        message: "Die Waschmaschine ist fertig. Bitte zeitnah ausräumen."

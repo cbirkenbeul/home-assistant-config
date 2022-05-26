@@ -4,6 +4,8 @@ from datetime import timedelta
 
 from homeassistant.components.utility_meter.const import DAILY, MONTHLY, WEEKLY
 
+MIN_HA_VERSION = "2021.11"
+
 DOMAIN = "powercalc"
 DOMAIN_CONFIG = "config"
 
@@ -187,6 +189,7 @@ MODEL_DIRECTORY_MAPPING = {
         "3418931P6": "LTC012",
         "3417711P6": "LTW017",
         "8718699673147": "LWA001",
+        "433714": "LWB004",    
         "8718696449691": "LWB010",
         "9290024406": "LWU001",
         "9290011370B": "LWF001",
