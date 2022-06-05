@@ -1,15 +1,14 @@
 ---
 # Project information
-site_name: teqqy | K8S Home-Cluster
+site_name: Home Assistant Config
 site_description: >-
-  This repo is my homelab, declared in yaml and applied to my
-  Kurbenetes cluster in a declarative gitOps fashion via flux.
-site_author: Nat Allan
-site_url: https://cbirkenbeul.github.io/k3s-gitops/
+  This repo is the current state of my home-assistant configuration
+site_author: Christian Birkenbeul
+site_url: https://cbirkenbeul.github.io/home-assistant-config/
 
 # https://squidfunk.github.io/mkdocs-material/setup/adding-a-git-repository/#repository-name
-repo_name: christianb/k3s-gitops
-repo_url: https://github.com/christianb/k3s-gitops
+repo_name: christianb/home-assistant-config
+repo_url: https://github.com/christianb/home-assistant-config
 
 # https://squidfunk.github.io/mkdocs-material/setup/adding-a-git-repository/#edit-button
 edit_uri: "edit/main/docs/src/"
@@ -71,16 +70,16 @@ extra:
   # https://squidfunk.github.io/mkdocs-material/setup/setting-up-the-footer/#social-links
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/Truxnell
+      link: https://github.com/cbirkenbeul
     - icon: fontawesome/brands/linkedin
       link: https://au.linkedin.com/in/nathannial-allan-60a418104
     - icon: fontawesome/solid/sitemap
-      link: https://voltaicforge.com
+      link: https://www.teqqy.de
   # https://squidfunk.github.io/mkdocs-material/setup/setting-up-the-footer/#remove-generator
   generator: false
 
 # https://squidfunk.github.io/mkdocs-material/setup/setting-up-the-footer/#copyright-notice
-copyright: Copyright &copy; 2022 Nat Allan
+copyright: Copyright &copy; 2022 Christian Birkenbeul
 
 extra_css:
   - _static/custom.css
