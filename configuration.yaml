@@ -58,8 +58,6 @@ zone: !include zones.yaml
 lovelace:
   mode: yaml
   resources:
-    - url: /local/lovelace/cards/flower-card/flower-card.js
-      type: module
     - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
       type: module
     - url: /hacsfiles/simple-thermostat/simple-thermostat.js
@@ -70,13 +68,7 @@ lovelace:
       type: module
     - url: /hacsfiles/simple-weather-card/simple-weather-card-bundle.js
       type: module
-    - url: /hacsfiles/battery-state-card/battery-state-card.js
-      type: module
-    - url: /hacsfiles/mini-humidifier/mini-humidifier-bundle.js
-      type: module
     - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
-      type: module
-    - url: /local/banner-card.js?v=1
       type: module
     - url: /hacsfiles/lovelace-xiaomi-vacuum-card/xiaomi-vacuum-card.js 
       type: module
