@@ -136,33 +136,7 @@ nav:
   - General:
       - Software: general/software.md
       - Hardware: general/hardware.md
-  # - Repository:
-  #     - Semantic Commits: repository/semantic-git-messages.md
-  #     - Folder Structure: repository/folder-structure.md
-  # - Sidero & Talos:
-  #     - Introduction: sidero/sidero-intro.md
-  #     - Installation: sidero/sidero-install.md
-  #     - Retrieve talosconfig: sidero/retrieve_talosconfig.md
-  # - Diagrams:
-  #     - Network Map: diagrams/network-map.md
-  #     - Cluster Map: diagrams/cluster-map.md
-  # - Cluster:
-  #     - Bootstrap Workflow: cluster/bootstrap-workflow.md
-  # - Applications:
-  #     - k10: apps/k10.md
-      # - Get Started: get-started/index.md
-      # - Guides:
-      #     - Installation: guides/installation.md
-      #     - Sealed Secrets: guides/sealed-secrets.md
-      #     - Mozilla SOPS: guides/mozilla-sops.md
-      #     - Repository Structure: guides/repo-structure.md
-      # - Designs:
-      #     - Secret Management: designs/secret-management.md
-      # - Hardware:
-      #     - RockPis: hardware/pre-rockpi4c.md
-      # - Network:
-      #     - IP Allocation: network/ip-allocation.md
-      #     - Certificates: network/certificates.md
-      # - Contributing: contributing/index.md
-      # - Sponsor: sponsor/index.md
-      # - FAQ: faq/index.md
+  - Integrations:
+      - Offical: integrations/official.md
+      - HACS: integrations/hacs.md
+
