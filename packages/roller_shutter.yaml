@@ -1,0 +1,55 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   05.06.2022
+#   @package        :   Roller Shutter
+#   @description    :   Roller Shutter automations
+###############################################################################
+
+automation:
+# General - Sunset and Sunrise
+  - id: "XGNJ72jbiDJofWQrhaN8XCHDDMyjR3JvMJ74HzXeWdYFgBDDxh42FzCLWBXJpg8X"
+    alias: Roller Shutter - Open RS on sunrise
+    trigger:
+      platform: sun
+      event: sunrise
+    action:
+      - service: cover.open_cover
+        entity_id: cover.jalousie_kueche_position
+
+  - id: "Voj8X3oVhyucQvmmPusxTTTMAkt2tdBg7eMGNth93kodUFYtRYKgFh6pYMEqR8Kj"
+    alias: Roller Shutter - Close RS on sunset
+    trigger:
+      platform: sun
+      event: sunset
+    action:
+      - service: cover.close_cover
+        entity_id: cover.jalousie_kueche_position
+
+# Kitchen - Window Condition
+  - id: "xzQaaQNMiCi8fPmrzXQZkq7TJfFKop9GwZjTsMnpu9NduzZgRFEzbgH8Ld8b3Eys"
+    alias: Roller Shutter - Open RS if kitchen window opens
+    trigger:
+      platform: state
+      entity_id: binary_sensor.bs_ki_window_contact
+      to: 'on'
+    condition:
+      - condition: state
+        entity_id: cover.jalousie_kueche_position
+        state: 'closed'
+    action:
+      - service: cover.open_cover
+        entity_id: cover.jalousie_kueche_position
+
+  - id: "Nwqe8MEYabWmXujBRKJf6hoyWMMhYyCaYBqdXQJxYg8bx43VKrhpfcVsdgZN4hkU"
+    alias: Roller Shutter - Close RS if kitchen window is closed
+    trigger:
+      platform: state
+      entity_id: binary_sensor.bs_ki_window_contact
+      to: 'off'
+    condition:
+      - condition: sun
+        after: sunset
+    action:
+      - service: cover.close_cover
+        entity_id: cover.jalousie_kueche_position

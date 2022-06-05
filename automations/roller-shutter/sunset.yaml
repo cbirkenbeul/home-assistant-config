@@ -1,8 +1,0 @@
----
-- alias: Rolladen bei Sonnenuntergang
-  trigger:
-    platform: sun
-    event: sunset
-  action:
-    - service: cover.close_cover
-      entity_id: cover.jalousie_kueche_position
