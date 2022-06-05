@@ -8,13 +8,14 @@
 
 # Sensors
 sensor:
-  - platform: mqtt
-    name: "Washer Status"
-    state_topic: "house/washer/status"
 
-  - platform: mqtt
-    name: "Dryer Status"
-    state_topic: "house/dryer/status"
+mqtt:
+  sensor:
+    - state_topic: "house/washer/status"
+      name: "Washer Status"
+
+    - state_topic: "house/dryer/status"
+      name: "Dryer Status"
 
 # Automations
 automation:

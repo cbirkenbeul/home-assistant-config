@@ -7,31 +7,27 @@
 ###############################################################################
 
 # weewx local weather station
-sensor:
-  - platform: mqtt
-    state_topic: "homeassistant/sensor/weewx/outTemp_C"
-    name: weewx_outtemp
-    value_template: '{{ value |  default(0) | round(1) }}'
-    unit_of_measurement: °C
+mqtt:
+  sensor:
+    - state_topic: "homeassistant/sensor/weewx/outTemp_C"
+      name: weewx_outtemp
+      value_template: '{{ value |  default(0) | round(1) }}'
+      unit_of_measurement: °C
 
-  - platform: mqtt
-    state_topic: "homeassistant/sensor/weewx/dewpoint_C"
-    name: weewx_drewpoint
-    value_template: '{{ value | default(0) | round(1) }}'
-    unit_of_measurement: °C
+    - state_topic: "homeassistant/sensor/weewx/dewpoint_C"
+      name: weewx_drewpoint
+      value_template: '{{ value | default(0) | round(1) }}'
+      unit_of_measurement: °C
 
-  - platform: mqtt
-    state_topic: "homeassistant/sensor/weewx/windSpeed_kph"
-    name: weewx_wind
-    value_template: '{{ value | default(0) | round(1) }}'
-    unit_of_measurement: 'kmh'
+    - state_topic: "homeassistant/sensor/weewx/windSpeed_kph"
+      name: weewx_wind
+      value_template: '{{ value | default(0) | round(1) }}'
+      unit_of_measurement: 'kmh'
 
-  - platform: mqtt
-    state_topic: "homeassistant/sensor/weewx/rain_cm"
-    name: weewx_rain
-    unit_of_measurement: 'mm'
+    - state_topic: "homeassistant/sensor/weewx/rain_cm"
+      name: weewx_rain
+      unit_of_measurement: 'mm'
 
-  - platform: mqtt
-    state_topic: "homeassistant/sensor/weewx/outHumidity"
-    name: weewx_outhumidity
-    unit_of_measurement: '%'
+    - state_topic: "homeassistant/sensor/weewx/outHumidity"
+      name: weewx_outhumidity
+      unit_of_measurement: '%'

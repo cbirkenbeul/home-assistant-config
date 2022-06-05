@@ -6,11 +6,11 @@
 #   @description    :   Sensor for current Status of the House
 ###############################################################################
 
-# Sensors
-sensor:
-  - platform: mqtt
-    name: "House Status"
-    state_topic: "house/house/status"
+# MQTT Sensors
+mqtt:
+  sensor:
+    - state_topic: "house/house/status"
+      name: "House Status"
 
 # Automations
 automation:

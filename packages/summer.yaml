@@ -8,16 +8,18 @@
 
 # Sensors
 sensor:
-  - platform: mqtt
-    name: "Weather day"
-    state_topic: "house/weather/daycondition"
-
   - platform: template
     sensors:
       housetempdiff:
         unit_of_measurement: C
         value_template: >-
           {{ (states('sensor.temperature_house') | float(0) - states('sensor.weewx_outtemp') | float(0)) | round(2) }}
+
+# MQTT Sensor
+mqtt:
+  sensor:
+    - state_topic: "house/weather/daycondition"
+      name: "Weather Day"
 
 automation:
   - id: "rsNaMsyzufuCNPPTdFyH3AtBDPVRp7xf5HqMhQt7fjBUSZBUynSrL7zKeWzMXvBd"
