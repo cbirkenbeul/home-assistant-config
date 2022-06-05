@@ -1,13 +1,23 @@
-# Ignore useless stuff
-deps/
-*.log*
+# Ignore Home Assistant files
 .HA_VERSION
-*.old
 known_devices.yaml
-.storage
-.cloud
-*.bak
+secrets.yaml
+
+# Ignore Home Assistant folder
+blueprints/
+deps/
+.storage/
+.cloud/
+backups/
+tts/
 __pycache__/
+
+# vscode
 .vscode/
 !.vscode/extensions.json
-backups/
+
+# Ignore useless stuff
+*.db
+*.log*
+*.old
+*.bak
