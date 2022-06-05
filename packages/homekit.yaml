@@ -27,6 +27,7 @@ homekit:
       - input_select
       - select
       - button
+      - camera
 
     include_entities:
       # Climate
