@@ -19,7 +19,6 @@ homeassistant:
 ############################################################################
 
 automation: !include_dir_merge_list automations/
-alert: !include_dir_merge_named alerts/
 backup:
 #binary_sensor: !include_dir_merge_list binary_sensor/
 climate:

@@ -1,0 +1,19 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   06.06.2022
+#   @package        :   Alert
+#   @description    :   Combine Integrations to one file
+###############################################################################
+
+alert:
+  window_bathroom:
+    name: Fenster Badezimmer offen!
+    done_message: Fenster geschlossen.
+    entity_id: binary_sensor.bs_br_window_contact
+    state: "on"
+    repeat: 10
+    can_acknowledge: true
+    skip_first: true
+    notifiers:
+      - ALL_DEVICES
