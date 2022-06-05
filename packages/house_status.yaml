@@ -110,7 +110,7 @@ automation:
           payload: home
           retain: wakeup
 
-  - id: "ZZ2N42NvuegdVo9jZwn4uyC4CXrpadnmDQ9z2sKXULREr2aVeeJpBm233iFVc47x"
+  - id: "FNImHC8uGkwyJ0jtsBLjM_IwyfmzMdI9yVJb4hVGAz1TsWN6U1DK9Tbz_PzKaO7z"
     alias: Home - Set house to away mode
     trigger:
       - platform: time
@@ -133,7 +133,7 @@ automation:
           payload: home
           retain: away
 
-  - id: "ZZ2N42NvuegdVo9jZwn4uyC4CXrpadnmDQ9z2sKXULREr2aVeeJpBm233iFVc47x"
+  - id: "ECLwhNT_NV61UqhFP58gE4E5HNbX0QdpJDUCqJ4mNT9xrw0of43FegBdqsgYtP94"
     alias: House - home mode on workdays
     trigger:
       - platform: time
@@ -161,7 +161,7 @@ automation:
           payload: home
           retain: home
 
-  - id: "ZZ2N42NvuegdVo9jZwn4uyC4CXrpadnmDQ9z2sKXULREr2aVeeJpBm233iFVc47x"
+  - id: "pJ8q_ehxcJfHNTy663ioGLWe5nxGmcAPbIxYfXaBSACbjQFWq5l_3eQcrNRbU0el"
     alias: House - home mode on weekends
     trigger:
       - platform: time

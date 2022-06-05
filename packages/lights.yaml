@@ -84,7 +84,7 @@ automation:
       - service: input_boolean.turn_off
         entity_id: input_boolean.evening_lightning_default
 
-  - id: "LNb9FtPZEdtFzLxz8XEY8yri6PEGFBktBvCbpbJ72DiVciPQK7rp2P2XDrbnktYp"
+  - id: "xAVMZyFE45rS9Wc9LGEKpR5xMB7PPK7U7_pSMEvK8hQng3l6ir6biXCo_UmofqXX"
     alias: Light - Turn on lights after sunset
     trigger:
       platform: state
