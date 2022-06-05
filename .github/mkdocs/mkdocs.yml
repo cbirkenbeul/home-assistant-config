@@ -134,6 +134,7 @@ markdown_extensions:
 nav:
   - Introduction: index.md
   - General:
+      - Software: general/software.md
       - Hardware: general/hardware.md
   # - Repository:
   #     - Semantic Commits: repository/semantic-git-messages.md
