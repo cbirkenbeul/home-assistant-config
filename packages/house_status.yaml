@@ -1,0 +1,190 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   05.06.2022
+#   @package        :   House Status
+#   @description    :   Sensor for current Status of the House
+###############################################################################
+
+# Sensors
+sensor:
+  - platform: mqtt
+    name: "House Status"
+    state_topic: "house/house/status"
+
+# Automations
+automation:
+  - id: "VWbwfvEtpemmeniMqzXabYVYWEJ3MjCMVCYWa3pfzuWF7NMzDr6qD92YQ8iiRkhc"
+    alias: Set House to away mode
+    trigger:
+      - platform: state
+        entity_id:
+          - group.devices
+        to: "not_home"
+    action:
+      - service: mqtt.publish
+        data:
+          topic: house/house/status
+          payload: away
+          retain: true
+
+  - id: "j2GQV6Df9LCPuqqsaGYNCgVwkeX6Zi2hUhGZx72KbtJZjj7q8Y9aEsfxfWxxoNr6"
+    alias: Set House back to home mode
+    trigger:
+      - platform: state
+        entity_id:
+          - group.devices
+        to: "home"
+    action:
+      - service: mqtt.publish
+        data:
+          topic: house/house/status
+          payload: home
+          retain: true
+
+  - id: "v78cwXom3vhFJRWcLapGjnjNaav8fQviEdkzTjrysJgLvz9BTv84EEcbUHMNLLWB"
+    alias: Set House to sleep mode
+    trigger:
+      - platform: time
+        at: '01:00:00'
+    action:
+      - service: mqtt.publish
+        data:
+          topic: house/house/status
+          payload: home
+          retain: sleep
+
+  - id: "AHLJo4tXkYt3kCxGR9jTGh7GYu96Q6MMZrYHiM4Hr3medfePK2TPTBA77ukPumu8"
+    alias: House - wakeup on workdays
+    trigger:
+      - platform: time
+        at: '07:00:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.workday_sensor
+          state: 'on'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id:
+                - device_tracker.teqqphone
+              state: 'home'
+            - condition: state
+              entity_id:
+                - device_tracker.clios_iphone
+              state: 'home'
+    action:
+      - service: mqtt.publish
+        data:
+          topic: house/house/status
+          payload: home
+          retain: wakeup
+
+  - id: "ZZ2N42NvuegdVo9jZwn4uyC4CXrpadnmDQ9z2sKXULREr2aVeeJpBm233iFVc47x"
+    alias: House - wakeup mode on weekends
+    trigger:
+      - platform: time
+        at: '09:00:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.workday_sensor
+          state: 'off'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id:
+                - device_tracker.teqqphone
+              state: 'home'
+            - condition: state
+              entity_id:
+                - device_tracker.clios_iphone
+              state: 'home'
+    action:
+      - service: mqtt.publish
+        data:
+          topic: house/house/status
+          payload: home
+          retain: wakeup
+
+  - id: "ZZ2N42NvuegdVo9jZwn4uyC4CXrpadnmDQ9z2sKXULREr2aVeeJpBm233iFVc47x"
+    alias: Home - Set house to away mode
+    trigger:
+      - platform: time
+        at: '07:00:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id:
+            - device_tracker.teqqphone
+          state: 'not_home'
+        - condition: state
+          entity_id:
+            - device_tracker.clios_iphone
+          state: 'not_home'
+    action:
+      - service: mqtt.publish
+        data:
+          topic: house/house/status
+          payload: home
+          retain: away
+
+  - id: "ZZ2N42NvuegdVo9jZwn4uyC4CXrpadnmDQ9z2sKXULREr2aVeeJpBm233iFVc47x"
+    alias: House - home mode on workdays
+    trigger:
+      - platform: time
+        at: '09:00:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.workday_sensor
+          state: 'on'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id:
+                - device_tracker.teqqphone
+              state: 'home'
+            - condition: state
+              entity_id:
+                - device_tracker.clios_iphone
+              state: 'home'
+    action:
+      - service: mqtt.publish
+        data:
+          topic: house/house/status
+          payload: home
+          retain: home
+
+  - id: "ZZ2N42NvuegdVo9jZwn4uyC4CXrpadnmDQ9z2sKXULREr2aVeeJpBm233iFVc47x"
+    alias: House - home mode on weekends
+    trigger:
+      - platform: time
+        at: '12:00:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.workday_sensor
+          state: 'off'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id:
+                - device_tracker.teqqphone
+              state: 'home'
+            - condition: state
+              entity_id:
+                - device_tracker.clios_iphone
+              state: 'home'
+    action:
+      - service: mqtt.publish
+        data:
+          topic: house/house/status
+          payload: home
+          retain: home

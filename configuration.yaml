@@ -38,8 +38,6 @@ http:
     - !env_var HASS_TRUSTED_NETWORK_2
     - !env_var HASS_TRUSTED_NETWORK_3
 input_boolean: !include input-boolean.yaml
-input_number: !include input-number.yaml
-input_select: !include input-select.yaml
 ios:
 map:
 mobile_app:
