@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://cbirkenbeul.github.io/home-assistant-config/</loc>
+         <lastmod>2022-06-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cbirkenbeul.github.io/home-assistant-config/general/hardware/</loc>
+         <lastmod>2022-06-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cbirkenbeul.github.io/home-assistant-config/general/screenshots/</loc>
+         <lastmod>2022-06-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cbirkenbeul.github.io/home-assistant-config/general/software/</loc>
+         <lastmod>2022-06-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cbirkenbeul.github.io/home-assistant-config/integrations/hacs/</loc>
+         <lastmod>2022-06-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cbirkenbeul.github.io/home-assistant-config/integrations/official/</loc>
+         <lastmod>2022-06-05</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+</urlset>
