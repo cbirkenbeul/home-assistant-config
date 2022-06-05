@@ -1,7 +1,10 @@
 ---
-name: 'Yamllint GitHub Actions'
+name: 'Yamllint'
 on:
-  - pull_request
+  push:
+    branches:
+      - master
+
 jobs:
   yamllint:
     name: 'Yamllint'
