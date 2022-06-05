@@ -11,7 +11,7 @@ binary_sensor:
   - platform: workday
     country: DE
 
-# Switches
+# Flux Light Component and Automation
 switch:
   - platform: flux
     lights:
@@ -21,3 +21,18 @@ switch:
     stop_time: '01:00'
     brightness: 200
     disable_brightness_adjust: true
+
+automation:
+  - id: "AUs7qvfFUApLhFCzAkwdVQ9JzUMfn4tFQfiHcX9kyoeXVasyi3tkdnqJ3VtK4E2b"
+    alias: Light - Turn on flux custom component
+    trigger:
+      - platform: time
+        at: '23:00:00'
+    condition:
+      condition: state
+      entity_id:
+        - input_select.home_mode
+      state: 'home'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.flux

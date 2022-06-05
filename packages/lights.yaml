@@ -1,0 +1,65 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   05.06.2022
+#   @package        :   Light
+#   @description    :   All lights automation
+###############################################################################
+
+automation:
+# Automations for basement
+  - id: "We9s3rderooyvehppbfHhpZ2DKpGq7vUNgnngdtNQsNuLeXuNDEWYNzNorACeaj7"
+    alias: Light - Basement on
+    trigger:
+      platform: state
+      entity_id: binary_sensor.bs_hw_bm_door_contact
+      to: 'on'
+    action:
+      service: light.turn_on
+      entity_id:
+        - light.li_bm_stairs
+        - light.li_bm_hw
+
+  - id: "cFPAsWaQ8bcAvPrP8Agm7BfA6Lxi8bHuR7eRhMhHvmhvKLkr6JNCBPVERDG44PU2"
+    alias: Light - Basement off
+    trigger:
+      platform: state
+      entity_id: binary_sensor.bs_hw_bm_door_contact
+      to: 'off'
+    action:
+      service: light.turn_off
+      entity_id:
+        - light.li_bm_stairs
+        - light.li_bm_hw
+
+# Automations based on sun
+  - id: "DE3BCwN9ArLNbHRggfoDg223FnMApomF7pVtP6pBPWTfXw3fGv3fCfZpEPsjNWMh"
+    alias: Light - Turn on some light before sunset
+    trigger:
+      platform: sun
+      event: sunset
+      offset: "-01:00:00"
+    condition:
+      condition: state
+      entity_id: sensor.house_status
+      state: home
+    action:
+      service: switch.turn_on
+      entity_id: switch.sw_lr_deko
+
+  - id: "fLeoPM2GZVCbsTeVpGenmbhowfsNmjYxEVbt6tBpzTpbqukpzxHd36JGNFT8cQK6"
+    alias: Light - Sunset
+    trigger:
+      platform: sun
+      event: sunset
+    condition:
+      condition: state
+      entity_id: sensor.house_status
+      state: home
+    action:
+      - service: homeassistant.turn_on
+        entity_id: input_boolean.evening_lightning_default
+      - service: switch.turn_on
+        entity_id: switch.sw_hw_og_deko
+      - service: switch.turn_on
+        entity_id: switch.sw_of_cb_deko
