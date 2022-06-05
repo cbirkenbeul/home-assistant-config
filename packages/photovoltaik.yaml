@@ -122,3 +122,11 @@ sensor:
         unit_of_measurement: €
         value_template: >-
           {{ (states('sensor.netzbezug') | float(0)) * 0.34 }}
+
+  - platform: template
+    sensors:
+      energy_house:
+        unit_of_measurement: W
+        value_template: >-
+          {{ (states('sensor.pv_wr_pc_solar_w') | float(0)) +  (states('sensor.pv_wr_pi') | float(0)) + (states('sensor.pv_wr_pc_grid_power') | float(0)) + (states('sensor.pv_wr_pc_home_power_from_battery') | float(0)) - (states('sensor.pv_wr_pc_pv_to_battery_power') | float(0)) }}
+

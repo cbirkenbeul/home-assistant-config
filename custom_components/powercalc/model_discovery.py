@@ -11,12 +11,8 @@ import homeassistant.helpers.device_registry as dr
 import homeassistant.helpers.entity_registry as er
 from homeassistant.helpers.typing import HomeAssistantType
 
-from .const import (
-    CONF_CUSTOM_MODEL_DIRECTORY,
-    CONF_MANUFACTURER,
-    CONF_MODEL,
-    MANUFACTURER_ALIASES,
-)
+from .aliases import MANUFACTURER_ALIASES
+from .const import CONF_CUSTOM_MODEL_DIRECTORY, CONF_MANUFACTURER, CONF_MODEL
 from .errors import ModelNotSupported
 from .light_model import LightModel
 

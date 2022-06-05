@@ -35,6 +35,8 @@ cards:
       - type: custom:mushroom-chips-card
         chips:
           - type: entity
+            entity: sensor.energy_house
+          - type: entity
             entity: sensor.pv_wr_pc_pv_to_battery_power
             icon: mdi:battery-arrow-up-outline
           - type: entity
