@@ -1,10 +1,12 @@
 ---
-# Zones allow you to specify certain regions on earth (for now).
-# When a device tracker sees a device to be within a zone,
-# the state will take the name from the zone.
-# Zones can also be used as a trigger or condition inside automation setups.
-# https://www.home-assistant.io/components/zone/
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   06.06.2022
+#   @package        :   Zone
+#   @description    :   Zones
+###############################################################################
 
+zone:
   - name: heating-zone
     latitude: !env_var HASS_LATITUDE
     longitude: !env_var HASS_LONGITUDE

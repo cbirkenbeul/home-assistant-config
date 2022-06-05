@@ -27,7 +27,6 @@ config:
 discovery:
   ignore:
     - google_cast
-group: !include groups.yaml
 frontend:
   themes: !include_dir_merge_named themes
 http:
@@ -36,17 +35,14 @@ http:
     - !env_var HASS_TRUSTED_NETWORK_1
     - !env_var HASS_TRUSTED_NETWORK_2
     - !env_var HASS_TRUSTED_NETWORK_3
-input_boolean: !include input-boolean.yaml
 ios:
 map:
 mobile_app:
 # octoprint:
 #   host: !secret octoprint_host
 #   api_key: !secret octoprint_api
-scene: !include scenes.yaml
 system_health:
 webhook:
-zone: !include zones.yaml
 
 ############################################################################
 # Lovelace Configuration

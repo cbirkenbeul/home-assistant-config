@@ -1,10 +1,4 @@
 ---
-devices:
-  name: devices
-  entities:
-    - device_tracker.clios_iphone
-    - device_tracker.teqqphone
-
 climate:
   name: climate
   entities:

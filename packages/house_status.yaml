@@ -12,6 +12,14 @@ mqtt:
     - state_topic: "house/house/status"
       name: "House Status"
 
+# Groups:
+group:
+  devices:
+    name: devices
+    entities:
+      - device_tracker.clios_iphone
+      - device_tracker.teqqphone
+
 # Automations
 automation:
   - id: "VWbwfvEtpemmeniMqzXabYVYWEJ3MjCMVCYWa3pfzuWF7NMzDr6qD92YQ8iiRkhc"
