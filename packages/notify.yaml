@@ -1,4 +1,12 @@
 ---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   06.06.2022
+#   @package        :   Notification
+#   @description    :   Combine Integrations to one file
+###############################################################################
+
+notify:
   - name: ALL_DEVICES
     platform: group
     services:

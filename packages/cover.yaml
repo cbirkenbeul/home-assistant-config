@@ -1,0 +1,28 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   06.06.2022
+#   @package        :   Cover
+#   @description    :   Combine Integrations to one file
+###############################################################################
+
+cover:
+  - platform: template
+    covers:
+      garage_door:
+        friendly_name: "Garagentor"
+        value_template: "{{ is_state('binary_sensor.bs_ga_door', 'on') }}"
+        open_cover:
+          service: switch.toggle
+          data:
+            entity_id: switch.garagentor_switch_6
+        close_cover:
+          service: switch.toggle
+          data:
+            entity_id: switch.garagentor_switch_6
+        icon_template: >-
+          {% if states('binary_sensor.bs_ga_door') == "on" %}
+            mdi:garage-open
+          {% else %}
+            mdi:garage
+          {% endif %}
