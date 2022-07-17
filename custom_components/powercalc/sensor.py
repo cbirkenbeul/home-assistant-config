@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import logging
 import uuid
-from datetime import timedelta
 from typing import Final, cast
 
 import homeassistant.helpers.config_validation as cv
@@ -40,14 +39,16 @@ from homeassistant.const import (
     CONF_ENTITY_ID,
     CONF_NAME,
     CONF_UNIQUE_ID,
-    CONF_UNIT_OF_MEASUREMENT,
-    ENERGY_KILO_WATT_HOUR,
     EVENT_HOMEASSISTANT_STARTED,
-    POWER_WATT,
 )
 from homeassistant.const import __version__ as HA_VERSION
 from homeassistant.core import callback
-from homeassistant.helpers import area_registry, device_registry, entity_registry
+from homeassistant.helpers import (
+    area_registry,
+    device_registry,
+    entity_platform,
+    entity_registry,
+)
 from homeassistant.helpers.entity_component import EntityComponent
 from homeassistant.helpers.entity_platform import AddEntitiesCallback, split_entity_id
 from homeassistant.helpers.template import Template
@@ -61,6 +62,7 @@ from .common import create_source_entity, validate_name_pattern
 from .const import (
     CALCULATION_MODES,
     CONF_AREA,
+    CONF_CALCULATION_ENABLED_CONDITION,
     CONF_CREATE_ENERGY_SENSOR,
     CONF_CREATE_ENERGY_SENSORS,
     CONF_CREATE_GROUP,
@@ -82,17 +84,14 @@ from .const import (
     CONF_MODEL,
     CONF_MULTIPLY_FACTOR,
     CONF_MULTIPLY_FACTOR_STANDBY,
-    CONF_ON_TIME,
     CONF_POWER_SENSOR_CATEGORY,
     CONF_POWER_SENSOR_ID,
     CONF_POWER_SENSOR_NAMING,
     CONF_STANDBY_POWER,
     CONF_TEMPLATE,
-    CONF_UPDATE_FREQUENCY,
     CONF_UTILITY_METER_OFFSET,
     CONF_UTILITY_METER_TARIFFS,
     CONF_UTILITY_METER_TYPES,
-    CONF_VALUE,
     CONF_WLED,
     DATA_CONFIGURED_ENTITIES,
     DATA_DISCOVERED_ENTITIES,
@@ -103,14 +102,20 @@ from .const import (
     DUMMY_ENTITY_ID,
     ENERGY_INTEGRATION_METHODS,
     ENTITY_CATEGORIES,
+    SERVICE_RESET_ENERGY,
 )
 from .errors import (
     PowercalcSetupError,
     SensorAlreadyConfiguredError,
     SensorConfigurationError,
 )
-from .model_discovery import is_supported_model
-from .sensors.energy import create_daily_fixed_energy_sensor, create_energy_sensor
+from .model_discovery import is_autoconfigurable
+from .sensors.daily_energy import (
+    DAILY_FIXED_ENERGY_SCHEMA,
+    create_daily_fixed_energy_power_sensor,
+    create_daily_fixed_energy_sensor,
+)
+from .sensors.energy import create_energy_sensor
 from .sensors.group import create_group_sensors
 from .sensors.power import RealPowerSensor, create_power_sensor
 from .sensors.utility_meter import create_utility_meters
@@ -138,21 +143,7 @@ SUPPORTED_ENTITY_DOMAINS = (
     water_heater.DOMAIN,
 )
 
-DEFAULT_DAILY_UPDATE_FREQUENCY = 1800
 MAX_GROUP_NESTING_LEVEL = 5
-
-DAILY_FIXED_ENERGY_SCHEMA = vol.Schema(
-    {
-        vol.Required(CONF_VALUE): vol.Any(vol.Coerce(float), cv.template),
-        vol.Optional(CONF_UNIT_OF_MEASUREMENT, default=ENERGY_KILO_WATT_HOUR): vol.In(
-            [ENERGY_KILO_WATT_HOUR, POWER_WATT]
-        ),
-        vol.Optional(CONF_ON_TIME, default=timedelta(days=1)): cv.time_period,
-        vol.Optional(
-            CONF_UPDATE_FREQUENCY, default=DEFAULT_DAILY_UPDATE_FREQUENCY
-        ): vol.Coerce(int),
-    }
-)
 
 SENSOR_CONFIG = {
     vol.Optional(CONF_NAME): cv.string,
@@ -196,6 +187,7 @@ SENSOR_CONFIG = {
         }
     ),
     vol.Optional(CONF_IGNORE_UNAVAILABLE_STATE, default=False): cv.boolean,
+    vol.Optional(CONF_CALCULATION_ENABLED_CONDITION): cv.template,
 }
 
 
@@ -233,6 +225,13 @@ async def async_setup_platform(
     discovery_info: DiscoveryInfoType | None = None,
 ):
     """Set up the virtual power sensors."""
+
+    platform = entity_platform.async_get_current_platform()
+    platform.async_register_entity_service(
+        SERVICE_RESET_ENERGY,
+        {},
+        "async_reset_energy",
+    )
 
     try:
         entities = await create_sensors(hass, config, discovery_info)
@@ -334,7 +333,7 @@ async def create_sensors(
         sensor_configs = {
             entity.entity_id: {CONF_ENTITY_ID: entity.entity_id}
             for entity in entities
-            if entity and await is_supported_model(hass, entity)
+            if entity and await is_autoconfigurable(hass, entity)
         } | sensor_configs
 
     # Create sensors for each entity
@@ -411,6 +410,11 @@ async def create_individual_sensors(
     if CONF_DAILY_FIXED_ENERGY in sensor_config:
         energy_sensor = await create_daily_fixed_energy_sensor(hass, sensor_config)
         entities_to_add.append(energy_sensor)
+        power_sensor = await create_daily_fixed_energy_power_sensor(
+            hass, sensor_config, source_entity
+        )
+        if power_sensor:
+            entities_to_add.append(power_sensor)
 
     else:
         try:

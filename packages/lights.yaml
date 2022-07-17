@@ -66,7 +66,7 @@ automation:
 
 # Automations based on presence
   - id: "LNb9FtPZEdtFzLxz8XEY8yri6PEGFBktBvCbpbJ72DiVciPQK7rp2P2XDrbnktYp"
-    alias: Light - Turn of lights if all away
+    alias: Light - Turn off lights if all away
     trigger:
       platform: state
       entity_id: group.devices

@@ -62,3 +62,5 @@ automation:
         data:
           title: "Lüften!"
           message: "Unterschied: {{ states.sensor.housetempdiff.state }} C"
+
+  

@@ -3,8 +3,14 @@
 from datetime import timedelta
 
 from homeassistant.components.utility_meter.const import DAILY, MONTHLY, WEEKLY
+from homeassistant.const import (
+    STATE_NOT_HOME,
+    STATE_OFF,
+    STATE_STANDBY,
+    STATE_UNAVAILABLE,
+)
 
-MIN_HA_VERSION = "2021.11"
+MIN_HA_VERSION = "2021.12"
 
 DOMAIN = "powercalc"
 DOMAIN_CONFIG = "config"
@@ -14,7 +20,7 @@ DATA_CONFIGURED_ENTITIES = "configured_entities"
 DATA_DISCOVERED_ENTITIES = "discovered_entities"
 DATA_DOMAIN_ENTITIES = "domain_entities"
 
-DUMMY_ENTITY_ID = "dummy"
+DUMMY_ENTITY_ID = "sensor.dummy"
 
 CONF_AREA = "area"
 CONF_CALIBRATE = "calibrate"
@@ -58,7 +64,9 @@ CONF_VALUE = "value"
 CONF_VOLTAGE = "voltage"
 CONF_WLED = "wled"
 CONF_STATES_POWER = "states_power"
+CONF_START_TIME = "start_time"
 CONF_STANDBY_POWER = "standby_power"
+CONF_CALCULATION_ENABLED_CONDITION = "calculation_enabled_condition"
 CONF_DISABLE_STANDBY_POWER = "disable_standby_power"
 CONF_CUSTOM_MODEL_DIRECTORY = "custom_model_directory"
 CONF_UTILITY_METER_OFFSET = "utility_meter_offset"
@@ -106,6 +114,8 @@ ATTR_IS_GROUP = "is_group"
 ATTR_SOURCE_ENTITY = "source_entity"
 ATTR_SOURCE_DOMAIN = "source_domain"
 
+SERVICE_RESET_ENERGY = "reset_energy"
+
 MODE_DAILY_FIXED_ENERGY = "daily_fixed_energy"
 MODE_LUT = "lut"
 MODE_LINEAR = "linear"
@@ -118,3 +128,5 @@ CALCULATION_MODES = [
     MODE_LUT,
     MODE_WLED,
 ]
+
+OFF_STATES = (STATE_OFF, STATE_NOT_HOME, STATE_STANDBY, STATE_UNAVAILABLE)

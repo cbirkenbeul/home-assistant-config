@@ -145,3 +145,10 @@ sensor:
       - sensor.humidity_bathroom
     type: median
     name: humidity_house
+
+  - platform: mold_indicator
+    name: drewpoint_house
+    indoor_temp_sensor: sensor.temperature_house
+    indoor_humidity_sensor: sensor.humidity_house
+    outdoor_temp_sensor: sensor.weewx_outhumidity
+    calibration_factor: 2.0
