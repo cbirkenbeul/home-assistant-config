@@ -13,6 +13,7 @@ mqtt:
       name: weewx_outtemp
       value_template: '{{ value |  default(0) | round(1) }}'
       unit_of_measurement: °C
+      device_class: temperature
 
     - state_topic: "homeassistant/sensor/weewx/dewpoint_C"
       name: weewx_drewpoint
@@ -23,10 +24,18 @@ mqtt:
       name: weewx_wind
       value_template: '{{ value | default(0) | round(1) }}'
       unit_of_measurement: 'kmh'
+      icon: mdi:weather-windy
+
+    - state_topic: "homeassistant/sensor/weewx/windGust_kph"
+      name: weewx_windgust
+      value_template: '{{ value | default(0) | round(1) }}'
+      unit_of_measurement: 'kmh'
+      icon: mdi:weather-dust
 
     - state_topic: "homeassistant/sensor/weewx/rain_cm"
       name: weewx_rain
       unit_of_measurement: 'mm'
+      icon: mdi:weather-pouring
 
     - state_topic: "homeassistant/sensor/weewx/outHumidity"
       name: weewx_outhumidity

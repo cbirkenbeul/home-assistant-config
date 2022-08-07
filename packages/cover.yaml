@@ -7,6 +7,11 @@
 ###############################################################################
 
 cover:
+  - platform: group
+    name: cover_group
+    entities:
+      - cover.jalousie_kueche_position
+
   - platform: template
     covers:
       garage_door:
@@ -26,3 +31,4 @@ cover:
           {% else %}
             mdi:garage
           {% endif %}
+

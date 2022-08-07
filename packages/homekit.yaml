@@ -28,6 +28,7 @@ homekit:
       - select
       - button
       - camera
+      - remote
 
     include_entities:
       # Climate
@@ -68,6 +69,7 @@ homekit:
       - sensor.temperature_hallway
       - sensor.temperature_livingroom
       - sensor.temperature_office
+      - sensor.weewx_outtemp
 
       # Switch
       - switch.sw_hw_og_deko

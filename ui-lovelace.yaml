@@ -6,12 +6,13 @@
 #
 # Views are actually include one by one, this to guarentee the order of
 # the tabs of the view in the UI.
+# kiosk_mode:
+#   hide_header: true
 
 title: Casa Lani
 views:
   - !include lovelace/views/home.yaml
-  - !include lovelace/views/lights.yaml
-  - !include lovelace/views/temp-hum.yaml
+  - !include lovelace/views/rooms.yaml
   - !include lovelace/views/vacuum.yaml
-  - !include lovelace/views/energy.yaml
+  - !include lovelace/views/car.yaml
 

@@ -16,6 +16,10 @@ cards:
             entity: light.az_cb_decke
           - type: custom:mushroom-light-card
             entity: switch.sw_of_cb_deko
+        - type: custom:mushroom-light-card
+          entity: light.keylight
+          show_brightness_control: true
+          show_color_temp_control: true
         - type: horizontal-stack
           cards:
           - type: custom:mushroom-light-card
@@ -52,6 +56,8 @@ cards:
             entity: light.couch
           - type: custom:mushroom-light-card
             entity: light.bodenlampe
+          - type: custom:mushroom-light-card
+            entity: switch.sw_dr_deko
 
   - type: vertical-stack
     cards:

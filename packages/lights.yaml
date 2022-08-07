@@ -101,6 +101,7 @@ automation:
 # Scenes
 scene:
   - name: Movietime
+    icon: mdi:movie
     entities:
       light.couch: 
         state: 'off'
@@ -112,6 +113,7 @@ scene:
         rgb_color: [0, 255, 0]
 
   - name: Abendbeleuchtung
+    icon: mdi:television-ambient-light
     entities:
       light.couch:
         state: 'on'
@@ -129,8 +131,11 @@ scene:
         state: 'on'
       switch.sw_of_cb_deko:
         state: 'on'
+      switch.sw_dr_deko:
+        state: 'on'
 
   - name: youtube
+    icon: mdi:youtube
     entities:
       light.az_cb_decke:
         state: 'on'
@@ -140,7 +145,7 @@ scene:
         state: 'on'
         brightness: 255
         rgb_color: [255, 168, 1]
-      switch.sw_of_cb_deko:
+      light.keylight:
         state: 'on'
 
 # Input Booleans

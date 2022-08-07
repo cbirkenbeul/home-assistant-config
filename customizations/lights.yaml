@@ -1,15 +1,15 @@
 ---
 light.az_cb_decke:
   friendly_name: Licht Arbeitszimmer Christian
-  icon: mdi:ceiling-light
+  icon: mdi:desk
 
 light.az_pt_decke:
   friendly_name: Licht Arbeitszimmer Petra
-  icon: mdi:ceiling-light
+  icon: mdi:desk
 
 light.leseecke:
   friendly_name: Licht Leseecke Petra
-  icon: mdi:ceiling-light
+  icon: mdi:bookshelf
 
 light.az_bloom:
   friendly_name: Bloom
@@ -21,9 +21,9 @@ light.bodenlampe:
 
 light.couch:
   friendly_name: Couch
-  icon: mdi:track-light
+  icon: mdi:sofa
 
-light.ki_decke:
+light.kuche:
   friendly_name: Licht Küche
   icon: mdi:wall-sconce-flat
 
@@ -38,3 +38,5 @@ light.li_bm_hw:
 light.li_bm_stairs:
   friendly_name: Light Kellertreppe
   icon: mdi:lightbulb
+
+

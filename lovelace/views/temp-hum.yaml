@@ -5,6 +5,17 @@ cards:
   - type: vertical-stack
     cards:
     - type: custom:mushroom-title-card
+      title: Überblick
+    - type: horizontal-stack
+      cards:
+      - type: custom:mushroom-entity-card
+        entity: sensor.temperature_house
+      - type: custom:mushroom-entity-card
+        entity: sensor.weewx_outtemp
+
+  - type: vertical-stack
+    cards:
+    - type: custom:mushroom-title-card
       title: Bad
     - type: horizontal-stack
       cards:
@@ -12,14 +23,9 @@ cards:
         entity: sensor.temperature_bathroom
       - type: custom:mushroom-entity-card
         entity: sensor.humidity_bathroom
-    - type: 'custom:simple-thermostat'
+    - type: custom:mushroom-climate-card
       entity: climate.trv_bathroom
-      layout:
-        step: row
-      header: false
-      control: false
-
-
+      collapsible_controls: true
 
   - type: vertical-stack
     cards:
@@ -31,21 +37,12 @@ cards:
         entity: sensor.temperature_office
       - type: custom:mushroom-entity-card
         entity: sensor.humidity_office
-    - type: 'custom:simple-thermostat'
+    - type: custom:mushroom-climate-card
       entity: climate.trv_office_pt_thermostat
-      layout:
-        step: row
-      header: true
-      control: false
 
-    - type: 'custom:simple-thermostat'
+
+    - type: custom:mushroom-climate-card
       entity: climate.trv_office_cb_thermostat
-      layout:
-        step: row
-      header: true
-      control: false
-
-
 
   - type: vertical-stack
     cards:
@@ -66,13 +63,8 @@ cards:
       cards:
       - type: custom:mushroom-entity-card
         entity: sensor.temperature_kitchen
-    - type: 'custom:simple-thermostat'
+    - type: custom:mushroom-climate-card
       entity: climate.trv_kitchen
-      layout:
-        step: row
-      header: false
-      control: false
-
 
   - type: vertical-stack
     cards:
@@ -95,16 +87,13 @@ cards:
         entity: sensor.temperature_livingroom
       - type: custom:mushroom-entity-card
         entity: sensor.humidity_livingroom
-    - type: 'custom:simple-thermostat'
+    - type: custom:mushroom-climate-card
       entity: climate.trv_diningroom
       layout:
         step: row
       header: true
       control: false
-    - type: 'custom:simple-thermostat'
+    - type: custom:mushroom-climate-card
       entity: climate.trv_livingroom
-      layout:
-        step: row
-      header: true
-      control: false
+
 

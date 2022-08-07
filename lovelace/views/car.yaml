@@ -1,0 +1,34 @@
+---
+title: car
+icon: mdi:car-sports
+cards:
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: sensor.teqqcar_range_sensor
+          - type: custom:mushroom-entity-card
+            entity: sensor.teqqcar_battery_sensor
+            icon: mdi:car-battery
+      - type: custom:mushroom-climate-card
+        entity: climate.teqqcar_hvac_climate_system
+        collapsible_controls: true
+      - type: custom:mushroom-entity-card
+        entity: switch.teqqcar_charger_switch
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: sensor.tesla_charge_kw
+            icon: mdi:ev-station
+            layout: horizontal
+          - type: custom:mushroom-entity-card
+            entity: sensor.teqqcar_charging_time
+            icon: mdi:timer-sync-outline
+            layout: horizontal
+
+  - type: map
+    aspect_ratio: 16:9
+    auto_fit: true
+    entities:
+      - device_tracker.teqqcar_location_tracker

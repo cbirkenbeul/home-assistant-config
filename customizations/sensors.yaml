@@ -10,70 +10,80 @@ sensor.rack_power_consumption:
 sensor.temperature_office:
   friendly_name: Temperatur Arbeitszimmer
   icon: mdi:thermometer
+  device_class: temperature
+  unit_of_measurement: "°C"
 
 sensor.humidity_office:
   friendly_name: Luftfeuchtigkeit Arbeitszimmer
   icon: mdi:water-percent
+  device_class: humidity
+  unit_of_measurement: "%"
 
 sensor.temperature_house:
   friendly_name: Temperatur Haus
   icon: mdi:thermometer
+  device_class: temperature
+  unit_of_measurement: "°C"
 
 sensor.humidity_house:
   friendly_name: Luftfeuchtigkeit Haus
   icon: mdi:water-percent
+  device_class: humidity
+  unit_of_measurement: "%"
 
 sensor.temperature_kitchen:
   friendly_name: Temperatur Küche
   icon: mdi:thermometer
+  device_class: temperature
+  unit_of_measurement: "°C"
 
 sensor.temperature_livingroom:
   friendly_name: Temperatur Wohnzimmer
   icon: mdi:thermometer
+  device_class: temperature
+  unit_of_measurement: "°C"
 
 sensor.humidity_livingroom:
   friendly_name: Luftfeuchtigkeit Wohnzimmer
   icon: mdi:water-percent
+  device_class: humidity
+  unit_of_measurement: "%"
 
 sensor.temperature_bathroom:
   friendly_name: Temperatur Badezimmer
   icon: mdi:thermometer
+  device_class: temperature
+  unit_of_measurement: "°C"
 
 sensor.humidity_bathroom:
   friendly_name: Luftfeuchtigkeit Badezimmer
   icon: mdi:water-percent
+  device_class: humidity
+  unit_of_measurement: "%"
 
 sensor.temperature_bedroom:
   friendly_name: Temperatur Schlafzimmer
   icon: mdi:thermometer
+  device_class: temperature
+  unit_of_measurement: "°C"
 
 sensor.humidity_bedroom:
   friendly_name: Luftfeuchtigkeit Schlafzimmer
   icon: mdi:water-percent
+  device_class: humidity
+  unit_of_measurement: "%"
 
 sensor.temperature_hallway:
   friendly_name: Temperatur Flur
   icon: mdi:thermometer
+  device_class: temperature
+  unit_of_measurement: "°C"
 
 sensor.humidity_hallway:
   friendly_name: Luftfeuchtigkeit Flur
   icon: mdi:water-percent
-
-sensor.house_co2_consumed_current_month:
-  friendly_name: "CO2 produziert (diesen Monat)"
-  icon: mdi:molecule-co2
-
-sensor.house_co2_consumed_last_month:
-  friendly_name: "CO2 produziert (letzten Monat)"
-  icon: mdi:molecule-co2
-
-sensor.trees_needed_current_month:
-  friendly_name: "Bäume benötigt (diesen Monat)"
-  icon: mdi:tree
-
-sensor.trees_needed_last_month:
-  friendly_name: "Bäume benötigt (diesen Monat)"
-  icon: mdi:tree
+  device_class: humidity
+  unit_of_measurement: "%"
 
 sensor.tesla_max_charge:
   friendly_name: Tesla Ladestrom
@@ -86,3 +96,9 @@ sensor.waschmaschine_electric_w_value:
 sensor.trockner_electric_w_value:
   friendly_name: Trockner
   icon: mdi:tumble-dryer
+
+sensor.weewx_outtemp:
+  friendly_name: Außentemperatur
+  icon: mdi:thermometer
+  device_class: temperature
+  unit_of_measurement: "°C"

@@ -2,128 +2,101 @@
 title: Home
 icon: mdi:home-assistant
 cards:
-
   - type: vertical-stack
     cards:
-    - type: custom:mushroom-chips-card
-      chips:
-        - type: entity
-          entity: sensor.nextsunrise
-        - type: entity
-          entity: sensor.nextsunset
-        - type: entity
-          entity: sensor.weewx_outtemp
-        - type: entity
-          entity: sensor.weewx_wind
-        - type: entity
-          entity: sensor.weewx_rain
-    - type: horizontal-stack
-      cards:
-      - type: custom:mushroom-person-card
-        entity: device_tracker.teqqphone
-        use_entity_picture: true
-      - type: custom:mushroom-person-card
-        entity: device_tracker.clios_iphone
-        use_entity_picture: true
-
-  - type: vertical-stack
-    cards:
-    - type: custom:mushroom-title-card
-      title: Photovoltaik
-    - type: horizontal-stack
-      cards:
       - type: custom:mushroom-chips-card
         chips:
           - type: entity
-            entity: sensor.energy_house
+            entity: sensor.temperature_house
           - type: entity
-            entity: sensor.pv_wr_pc_pv_to_battery_power
-            icon: mdi:battery-arrow-up-outline
-          - type: entity
-            entity: sensor.pv_wr_pc_home_power_from_battery
-            icon: mdi:battery-arrow-down-outline
-          - type: entity
-            entity: sensor.pv_wr_pc_home_power_from_grid
-            icon: mdi:transmission-tower-import
-          - type: entity
-            entity: sensor.pv_wr_pc_autarky_day
-            icon: mdi:transmission-tower-off
-
-    - type: horizontal-stack
-      cards:
-      - type: vertical-stack
+            entity: sensor.humidity_house
+      - type: custom:mushroom-title-card
+        title: Hello, {{ user }} !
+      - type: horizontal-stack
         cards:
-        - type: custom:mushroom-entity-card
-          entity: sensor.pv_wr_pc_solar_w
-          icon: mdi:home
-          layout: horizontal
-        - type: custom:mushroom-entity-card
-          entity: sensor.pv_wr_pi
-          icon: mdi:greenhouse
-          layout: horizontal  
-      - type: custom:mushroom-entity-card
-        entity: sensor.pv_wr_pc_battery_soc
-        icon: mdi:home-battery
-        layout: vertical
+          - type: custom:mushroom-entity-card
+            entity: sensor.pv_wr_pc_battery_soc
+            icon: mdi:home-battery
+          - type: custom:mushroom-entity-card
+            entity: sensor.pv_prod_ges
+            icon: mdi:solar-power-variant
+            icon_color: yellow
+      - type: weather-forecast
+        entity: weather.casa_lani
 
   - type: vertical-stack
     cards:
-    - type: custom:mushroom-title-card
-      title: Szenen
-    - type: horizontal-stack
-      cards:
-      - type: custom:mushroom-entity-card
-        entity: scene.abendbeleuchtung
-        icon: mdi:television-ambient-light
-      - type: custom:mushroom-entity-card
-        entity: scene.movietime
-        icon: mdi:movie
-      - type: custom:mushroom-entity-card
-        entity: input_boolean.nightmode
-        icon: mdi:weather-night
-        tap_action: toggle
-
-  - type: vertical-stack
-    cards:
-    - type: custom:mushroom-title-card
-      title: Geräte
-    - type: horizontal-stack
-      cards:
-      - type: custom:mushroom-entity-card
-        entity: sensor.washer_status
-      - type: custom:mushroom-entity-card
-        entity: sensor.dryer_status
-  
-  - type: vertical-stack
-    title: Tesla Model 3
-    cards:
-    - type: horizontal-stack
-      cards:
       - type: custom:mushroom-chips-card
+        alignment: center
+        chips:
+          - type: weather
+            entity: weather.casa_lani
+            show_conditions: true
+            show_temperature: true
+      - type: custom:mushroom-title-card
+        title: Räume
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: sensor.temperature_office
+            icon: mdi:chair-rolling
+            name: Büro
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: sensor.temperature_livingroom
+            icon: mdi:sofa
+            name: Wohnzimmer
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: sensor.temperature_kitchen
+            icon: mdi:countertop
+            name: Küche
+          - type: custom:mushroom-cover-card
+            entity: cover.jalousie_kueche_position
+            show_buttons_control: true
+            icon_type: none
+            primary_info: none
+            secondary_info: none
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: sensor.temperature_bedroom
+            icon: mdi:bed
+            name: Schlafzimmer
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: sensor.temperature_bathroom
+            icon: mdi:shower
+            name: Bad
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: sensor.temperature_hallway
+            icon: mdi:stairs
+            name: Flur
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-chips-card
+        alignment: end
         chips:
           - type: entity
-            entity: sensor.teqqcar_range_sensor
+            entity: device_tracker.teqqphone
           - type: entity
-            entity: sensor.teqqcar_temperature_sensor_inside
-          - type: entity
-            entity: device_tracker.teqqcar_location_tracker
-            icon: mdi:map-marker
-          - type: entity
-            entity: switch.teqqcar_charger_switch
-    - type: horizontal-stack
-      cards:
-      - type: vertical-stack
-        cards:
-        - type: custom:mushroom-entity-card
-          entity: sensor.tesla_charge_kw
-          icon: mdi:ev-station
-          layout: horizontal
-        - type: custom:mushroom-entity-card
-          entity: sensor.teqqcar_charging_time
-          icon: mdi:timer-sync-outline
-          layout: horizontal  
-      - type: custom:mushroom-entity-card
-        entity: sensor.teqqcar_battery_sensor
-        icon: mdi:car-battery
-        layout: vertical
-
+            entity: device_tracker.clios_iphone
+      - type: custom:mushroom-title-card
+        title: Rolläden
+      - type: custom:mushroom-cover-card
+        entity: cover.cover_group
+        layout: horizontal
+        secondary_info: false
+        show_buttons_control: true
+      - type: custom:mushroom-title-card
+        title: Szenen
+      - type: entities
+        entities:
+          - scene.abendbeleuchtung
+          - scene.movietime

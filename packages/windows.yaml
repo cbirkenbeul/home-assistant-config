@@ -1,0 +1,48 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   17.07.2022
+#   @package        :   Windows
+#   @description    :   Window alerts
+###############################################################################
+
+# Sensors
+automation:
+  - id: "yhe3ux5QGuhJ5PX4s5wdAdS7BXZwJw8PFjwwtqRAtsPcwFH6WF2uevG8MPKz2kya"
+    alias: Set bathroom window to open
+    trigger:
+      platform: state
+      entity_id: binary_sensor.bs_br_window_contact
+      to: "on"
+    condition:
+      - condition: state
+        entity_id: sensor.weather_day
+        state: normalday
+    action:
+      - service: script.turn_on
+        entity_id: script.bathroom_window_notification_push
+
+script:
+  bathroom_window_notification_push:
+    sequence:
+    - repeat:
+        while:
+          - condition: state
+            entity_id: binary_sensor.bs_br_window_contact
+            state: 'on'
+        sequence:
+        - delay:
+            minutes: 10
+        - service: script.simplified_bathroom_window_push
+
+  simplified_bathroom_window_push:
+    sequence:
+    - condition: state
+      entity_id: group.devices
+      state: 'home'
+    - condition: state
+      entity_id: sensor.dryer_status
+      state: complete
+    - service: notify.ALL_DEVICES
+      data:
+        message: "Badfenster bitte schließen."

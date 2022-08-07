@@ -10,3 +10,7 @@ switch.sw_hw_og_deko:
 switch.sw_lr_deko:
   friendly_name: Lichterkette
   icon: mdi:led-strip-variant
+
+switch.sw_dr_deko:
+  friendly_name: Deko Sekretär
+  icon: mdi:desk-lamp

@@ -111,20 +111,6 @@ sensor:
 
   - platform: template
     sensors:
-      power_earnings:
-        unit_of_measurement: €
-        value_template: >-
-          {{ (states('sensor.netzeinspeisung') | float(0)) * 0.072 }}
-
-  - platform: template
-    sensors:
-      power_costs:
-        unit_of_measurement: €
-        value_template: >-
-          {{ (states('sensor.netzbezug') | float(0)) * 0.34 }}
-
-  - platform: template
-    sensors:
       energy_house:
         unit_of_measurement: W
         value_template: >-
