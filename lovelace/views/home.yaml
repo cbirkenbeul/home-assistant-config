@@ -20,7 +20,28 @@ cards:
           - type: custom:mushroom-entity-card
             entity: sensor.pv_prod_ges
             icon: mdi:solar-power-variant
-            icon_color: yellow
+            icon_color: green
+      - type: conditional
+        conditions:
+          - entity: sensor.teqqcar_charging_rate_sensor
+            state_not: "0.0"
+        card:
+          type: horizontal-stack
+          cards:
+            - type: custom:mushroom-entity-card
+              entity: sensor.teqqcar_battery_sensor
+              name: Battarie
+              icon: mdi:battery-charging-high
+            - type: custom:mushroom-entity-card
+              entity: sensor.tesla_charge_kw
+              name: Rate
+              icon: mdi:ev-station
+              icon_color: green
+            - type: custom:mushroom-entity-card
+              entity: sensor.teqqcar_charging_time
+              name: Restzeit
+              icon: mdi:timer-play-outline
+              icon_color: red
       - type: weather-forecast
         entity: weather.casa_lani
 

@@ -54,21 +54,11 @@ lovelace:
       type: module
     - url: /hacsfiles/simple-thermostat/simple-thermostat.js
       type: module
-    - url: /hacsfiles/lovelace-card-tools/card-tools.js
-      type: module
-    - url: /hacsfiles/button-card/button-card.js
-      type: module
     - url: /hacsfiles/simple-weather-card/simple-weather-card-bundle.js
-      type: module
-    - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
-      type: module
-    - url: /hacsfiles/lovelace-xiaomi-vacuum-card/xiaomi-vacuum-card.js 
       type: module
     - url: /hacsfiles/vacuum-card/vacuum-card.js
       type: module
     - url: /hacsfiles/lovelace-mushroom/mushroom.js 
-      type: module
-    - url: /hacsfiles/apexcharts-card/apexcharts-card.js 
       type: module
     - url: /hacsfiles/kiosk-mode/kiosk-mode.js
       type: module
