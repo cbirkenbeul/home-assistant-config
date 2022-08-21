@@ -30,7 +30,7 @@ cards:
           cards:
             - type: custom:mushroom-entity-card
               entity: sensor.teqqcar_battery_sensor
-              name: Battarie
+              name: Batterie
               icon: mdi:battery-charging-high
             - type: custom:mushroom-entity-card
               entity: sensor.tesla_charge_kw
@@ -42,8 +42,40 @@ cards:
               name: Restzeit
               icon: mdi:timer-play-outline
               icon_color: red
-      - type: weather-forecast
-        entity: weather.casa_lani
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: sensor.weewx_outtemp
+            icon: mdi:temperature-celsius
+            primary_info: none
+            icon_color: orange
+          - type: custom:mushroom-entity-card
+            entity: sensor.weewx_drewpoint
+            icon: mdi:thermometer-lines
+            icon_color: blue
+            primary_info: none
+          - type: custom:mushroom-entity-card
+            entity: sensor.weewx_outhumidity
+            icon: mdi:water-percent
+            icon_color: blue
+            primary_info: none
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: sensor.weewx_wind
+            icon: mdi:weather-windy
+            icon_color: red
+            primary_info: none
+          - type: custom:mushroom-entity-card
+            entity: sensor.weewx_windgust
+            icon: mdi:weather-dust
+            icon_color: red
+            primary_info: none
+          - type: custom:mushroom-entity-card
+            entity: sensor.weewx_rain
+            icon: mdi:weather-pouring
+            icon_color: green
+            primary_info: none
 
   - type: vertical-stack
     cards:
@@ -121,3 +153,4 @@ cards:
         entities:
           - scene.abendbeleuchtung
           - scene.movietime
+          - scene.youtube

@@ -139,13 +139,15 @@ scene:
     entities:
       light.az_cb_decke:
         state: 'on'
-        brightness: 127
+        brightness: 255
         kelvin: 5600
       light.az_bloom:
         state: 'on'
         brightness: 255
-        rgb_color: [255, 168, 1]
+        rgb_color: [255,255,255]
       light.keylight:
+        state: 'on'
+      switch.sw_of_cb_deko:
         state: 'on'
 
 # Input Booleans

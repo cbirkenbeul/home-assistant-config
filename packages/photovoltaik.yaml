@@ -92,13 +92,13 @@ sensor:
 
   - platform: integration
     source: sensor.pv_wr_pc_pv_to_battery_power
-    name: Battarieladung
+    name: Batterieladung
     unit_prefix: k
     round: 2
 
   - platform: integration
     source: sensor.pv_wr_pc_home_power_from_battery
-    name: Battarieentladung
+    name: Batterieentladung
     unit_prefix: k
     round: 2
 

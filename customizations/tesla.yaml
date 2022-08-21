@@ -1,6 +1,6 @@
 ---
 sensor.tesla_battery_level:
-  friendly_name: Battarie
+  friendly_name: Batterie
   icon: mdi:battery-charging
 
 sensor.tesla_power:

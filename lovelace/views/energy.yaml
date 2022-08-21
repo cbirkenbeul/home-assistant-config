@@ -5,77 +5,86 @@ cards:
   - type: vertical-stack
     cards:
     - type: custom:mushroom-title-card
-      title: Aktuelle Werte
-    - type: custom:mushroom-entity-card
-      entity: sensor.pv_prod_ges
-    - type: horizontal-stack
-      cards:
-      - type: custom:mushroom-entity-card
-        entity: sensor.pv_wr_pc_solar_w
-      - type: custom:mushroom-entity-card
-        entity: sensor.pv_wr_pi
-    - type: custom:mushroom-entity-card
-      entity: sensor.pv_wr_pc_battery_soc
-    - type: horizontal-stack
-      cards:
-      - type: custom:mushroom-entity-card
-        entity: sensor.pv_wr_pc_home_power_from_battery
-        icon_color: red
-      - type: custom:mushroom-entity-card
-        entity: sensor.pv_wr_pc_pv_to_battery_power
-        icon_color: green
+      title: Photovoltaik
+    - type: custom:mini-graph-card
+      name: Photovoltaik
+      icon: mdi:solar-power-variant-outline
+      entities:
+        - entity: sensor.pv_prod_ges
+          name: Gesamt
+          color: black
+        - entity: sensor.pv_wr_pc_solar_w
+          name: Haus
+          color: blue
+        - entity: sensor.pv_wr_pi
+          name: Loggia
+          color: green
+      hours_to_show: 24
+      points_per_hour: 0.25
+      line_width: 2
+      show:
+        extrema: true
+    - type: custom:mini-graph-card
+      name: Batterie
+      icon: mdi:home-battery
+      entities:
+        - entity: sensor.pv_wr_pc_battery_soc
+          name: Gesamt
+          color: black
+      hours_to_show: 12
+      points_per_hour: 4
+      line_width: 2
+      show:
+        extrema: true
+      height: 100
 
   - type: vertical-stack
     cards:
     - type: custom:mushroom-title-card
-      title: Statistik heute
-    - type: custom:mushroom-entity-card
-      entity: sensor.pv_wr_pc_home_consumption_day
-    - type: horizontal-stack
-      cards:
-      - type: custom:mushroom-entity-card
-        entity: sensor.pv_wr_pc_home_consumption_from_battery_day
-        icon_color: yellow
-      - type: custom:mushroom-entity-card
-        entity: sensor.pv_wr_pc_home_consumption_from_pv_day
-        icon_color: green
-      - type: custom:mushroom-entity-card
-        entity: sensor.pv_wr_pc_home_consumption_from_grid_day
-        icon_color: red
+      title: Haus
+    - type: custom:mini-graph-card
+      entities:
+        - sensor.energy_house
+      show:
+        graph: bar
+        extrema: true
+      hours_to_show: 24
+      points_per_hour: 1
 
   - type: vertical-stack
     cards:
     - type: custom:mushroom-title-card
       title: Verbraucher
+    - type: custom:mini-graph-card
+      entities:
+        - sensor.shelly_shplg_s_fdd88a_current_consumption
+      show:
+        graph: bar
+        extrema: true
+      hours_to_show: 24
+      points_per_hour: 1
     - type: horizontal-stack
       cards:
-      - type: custom:mushroom-entity-card
-        entity: sensor.shelly_shplg_s_fdd88a_current_consumption
       - type: custom:mushroom-entity-card
         entity: sensor.shelly_shplg_s_c5080f_current_consumption
-    - type: horizontal-stack
-      cards:
+        primary_info: none
+        icon: mdi:dishwasher
       - type: custom:mushroom-entity-card
         entity: sensor.waschmaschine_electric_w_value
+        primary_info: none
       - type: custom:mushroom-entity-card
         entity: sensor.trockner_electric_w_value
+        primary_info: none
 
-  - type: custom:apexcharts-card
-    chart_type: donut
-    layout: minimal
-    update_interval: 5sec
-    series:
-      - entity: sensor.energy_all_lights_daily_energy
-        name: Light
-      - entity: sensor.washer_energy_daily
-        name: Waschmaschine
-      - entity: sensor.dryer_energy_daily
-        name: Trockner
-      - entity: sensor.energy_serverrack_daily_energy
-        name: Serverrack
-      - entity: sensor.energy_dishwasher_daily_energy
-        name: Spülmaschine
-      - entity: sensor.energy_winecooler_energy
-        name: Weinkühlschrank
-
-  - type: energy-distribution
+  - type: vertical-stack
+    cards:
+    - type: custom:mushroom-title-card
+      title: Tesla Model 3
+    - type: custom:mini-graph-card
+      entities:
+        - sensor.tesla_charge_kw
+      show:
+        graph: bar
+        extrema: true
+      hours_to_show: 6
+      points_per_hour: 12

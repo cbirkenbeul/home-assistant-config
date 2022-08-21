@@ -18,6 +18,23 @@ cards:
             primary_info: none
             secondary_info: none
             layout: horizontal
+          - type: custom:mushroom-light-card
+            entity: light.az_bloom
+            icon: mdi:wall-sconce-flat-variant
+            primary_info: none
+            secondary_info: none
+            layout: horizontal
+          - type: custom:mushroom-light-card
+            icon: mdi:spotlight-beam
+            entity: light.keylight
+            primary_info: none
+            secondary_info: none
+            layout: horizontal
+      - type: custom:mushroom-climate-card
+        entity: climate.trv_office_cb_thermostat
+        show_temperature_control: true
+        collapsible_controls: true
+        secondary_info: none
 
   - type: vertical-stack
     cards:
@@ -35,6 +52,12 @@ cards:
             primary_info: none
             secondary_info: none
             layout: horizontal
+      - type: custom:mushroom-climate-card
+        entity: climate.trv_office_pt_thermostat
+        show_temperature_control: true
+        collapsible_controls: true
+        secondary_info: none
+
 
   - type: vertical-stack
     cards:
@@ -67,6 +90,19 @@ cards:
             primary_info: none
             secondary_info: none
             layout: horizontal
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-climate-card
+            entity: climate.trv_livingroom
+            show_temperature_control: true
+            collapsible_controls: true
+            secondary_info: none
+          - type: custom:mushroom-climate-card
+            entity: climate.trv_diningroom
+            show_temperature_control: true
+            collapsible_controls: true
+            secondary_info: none
+
 
   - type: vertical-stack
     cards:
@@ -79,11 +115,27 @@ cards:
             primary_info: none
             secondary_info: none
             layout: horizontal
+      - type: custom:mushroom-climate-card
+        entity: climate.trv_kitchen
+        show_temperature_control: true
+        collapsible_controls: true
+        secondary_info: none
+
       - type: custom:mushroom-cover-card
         entity: cover.jalousie_kueche_position
         show_buttons_control: true
         icon_type: none
         primary_info: none
+        secondary_info: none
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        title: Bad
+      - type: custom:mushroom-climate-card
+        entity: climate.trv_bathroom
+        show_temperature_control: true
+        collapsible_controls: true
         secondary_info: none
 
   - type: vertical-stack

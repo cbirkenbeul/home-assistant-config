@@ -75,3 +75,6 @@ homekit:
       - switch.sw_hw_og_deko
       - switch.sw_lr_deko
       - switch.sw_of_cb_deko
+
+      # Scenen
+      - scene.youtube

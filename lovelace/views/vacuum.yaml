@@ -71,7 +71,7 @@ cards:
       show_name: false
 
   - type: custom:mushroom-vacuum-card
-    entity: vacuum.hugo
+    entity: vacuum.s5_cloud_494783
     commands:
       - start_pause
       - stop

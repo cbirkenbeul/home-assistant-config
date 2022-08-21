@@ -40,9 +40,6 @@ script:
     - condition: state
       entity_id: group.devices
       state: 'home'
-    - condition: state
-      entity_id: sensor.dryer_status
-      state: complete
     - service: notify.ALL_DEVICES
       data:
         message: "Badfenster bitte schließen."

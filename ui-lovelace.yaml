@@ -15,4 +15,4 @@ views:
   - !include lovelace/views/rooms.yaml
   - !include lovelace/views/vacuum.yaml
   - !include lovelace/views/car.yaml
-
+  - !include lovelace/views/energy.yaml

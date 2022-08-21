@@ -50,7 +50,7 @@ sensor.pv_wr_pi_kwh:
   friendly_name: PV Loggia
 
 sensor.pv_wr_pc_battery_soc:
-  friendly_name: Battarie
+  friendly_name: Batterie
   device_class: battery
 
 sensor.pv_wr_pc_solar_w:

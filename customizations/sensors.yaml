@@ -102,3 +102,29 @@ sensor.weewx_outtemp:
   icon: mdi:thermometer
   device_class: temperature
   unit_of_measurement: "°C"
+
+sensor.weewx_drewpoint:
+  friendly_name: Taupunkt
+  icon: mdi:thermometer-lines
+  device_class: temperature
+  unit_of_measurement: "°C"
+
+sensor.weewx_wind:
+  friendly_name: Wind
+  unit_of_measurement: 'kmh'
+  icon: mdi:weather-windy
+
+sensor.weewx_windgust:
+  friendly_name: Windböen
+  unit_of_measurement: 'kmh'
+  icon: mdi:weather-dust
+
+sensor.weewx_rain:
+  friendly_name: Regen
+  unit_of_measurement: 'mm'
+  icon: mdi:weather-pouring
+
+sensor.weewx_outhumidity:
+  friendly_name: Luftfeuchtigkeit
+  unit_of_measurement: '%'
+  icon: mdi:water-percent
