@@ -40,6 +40,6 @@ script:
     - condition: state
       entity_id: group.devices
       state: 'home'
-    - service: notify.ALL_DEVICES
+    - service: notify.telegram_group
       data:
         message: "Badfenster bitte schließen."

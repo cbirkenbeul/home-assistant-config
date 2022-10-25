@@ -89,11 +89,11 @@ sensor.tesla_max_charge:
   friendly_name: Tesla Ladestrom
   icon: mdi:ev-station
 
-sensor.waschmaschine_electric_w_value:
+sensor.waschmaschine_electricity_power:
   friendly_name: Waschmaschine
   icon: mdi:washing-machine
 
-sensor.trockner_electric_w_value:
+sensor.trockner_electricity_power:
   friendly_name: Trockner
   icon: mdi:tumble-dryer
 

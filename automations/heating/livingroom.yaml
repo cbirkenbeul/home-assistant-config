@@ -9,7 +9,7 @@
     conditions:
       - condition: state
         entity_id:
-          - input_select.home_mode
+          - sensor.house_status
         state: 'home'
       - condition: numeric_state
         entity_id: sensor.temperature_livingroom
@@ -31,7 +31,7 @@
     conditions:
       - condition: state
         entity_id:
-          - input_select.home_mode
+          - sensor.house_status
         state: 'home'
       - condition: numeric_state
         entity_id: sensor.temperature_livingroom
@@ -53,7 +53,7 @@
     conditions:
       - condition: state
         entity_id:
-          - input_select.home_mode
+          - sensor.house_status
         state: 'home'
       - condition: numeric_state
         entity_id: sensor.temperature_livingroom

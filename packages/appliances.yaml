@@ -41,9 +41,14 @@ automation:
       for:
         minutes: 5
     condition:
-      - condition: state
-        entity_id: sensor.dryer_status
-        state: running
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: sensor.dryer_status
+          state: idle
+        - condition: state
+          entity_id: sensor.dryer_status
+          state: unknown
     action:
       - service: mqtt.publish
         data:
@@ -58,7 +63,7 @@ automation:
     trigger:
       platform: state
       entity_id: binary_sensor.bs_hw_bm_door_contact
-      to: 'on'
+      to: "on"
     condition:
       condition: state
       entity_id: sensor.dryer_status
@@ -77,9 +82,14 @@ automation:
       entity_id: sensor.waschmaschine_electricity_power
       above: 5
     condition:
-      condition: state
-      entity_id: sensor.washer_status
-      state: idle
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: sensor.washer_status
+          state: idle
+        - condition: state
+          entity_id: sensor.washer_status
+          state: unknown
     action:
       - service: mqtt.publish
         data:
@@ -113,7 +123,7 @@ automation:
     trigger:
       platform: state
       entity_id: binary_sensor.bs_hw_bm_door_contact
-      to: 'on'
+      to: "on"
     condition:
       - condition: state
         entity_id: sensor.washer_status
@@ -142,7 +152,7 @@ script:
         while:
           - condition: state
             entity_id: sensor.dryer_status
-            state: 'complete'
+            state: "complete"
         sequence:
         - delay:
             minutes: 10
@@ -152,11 +162,11 @@ script:
     sequence:
     - condition: state
       entity_id: group.devices
-      state: 'home'
+      state: "home"
     - condition: state
       entity_id: sensor.dryer_status
-      state: complete
-    - service: notify.mobile_app_clios_iphone
+      state: "complete"
+    - service: notify.telegram_group
       data:
         message: "Der Trockner ist bereit zum Ausräumen."
 
@@ -166,7 +176,7 @@ script:
         while:
           - condition: state
             entity_id: sensor.washer_status
-            state: 'complete'
+            state: "complete"
         sequence:
         - delay:
             minutes: 10
@@ -176,10 +186,10 @@ script:
     sequence:
     - condition: state
       entity_id: group.devices
-      state: 'home'
+      state: "home"
     - condition: state
       entity_id: sensor.washer_status
-      state: complete
-    - service: notify.mobile_app_clios_iphone
+      state: "complete"
+    - service: notify.telegram_group
       data:
         message: "Die Waschmaschine ist fertig. Bitte zeitnah ausräumen."

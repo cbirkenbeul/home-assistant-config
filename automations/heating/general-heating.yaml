@@ -2,7 +2,7 @@
 - alias: Climate - Heat at morning
   trigger:
     platform: state
-    entity_id: input_select.home_mode
+    entity_id: sensor.house_status
     to: 'wakeup'
   action:
     service: climate.set_temperature
@@ -13,7 +13,7 @@
 - alias: Climate - Turn down on leaving home
   trigger:
     platform: state
-    entity_id: input_select.home_mode
+    entity_id: sensor.house_status
     to: 'away'
   action:
     service: climate.set_temperature
@@ -24,7 +24,7 @@
 - alias: Climate - Turn up on ariving home
   trigger:
     platform: state
-    entity_id: input_select.home_mode
+    entity_id: sensor.house_status
     to: 'home'
   action:
     service: climate.set_temperature
@@ -35,7 +35,7 @@
 - alias: Climate - Turn down for sleeping
   trigger:
     platform: state
-    entity_id: input_select.home_mode
+    entity_id: sensor.house_status
     to: 'sleep'
   action:
     service: climate.set_temperature

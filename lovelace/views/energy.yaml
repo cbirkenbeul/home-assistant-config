@@ -24,6 +24,14 @@ cards:
       line_width: 2
       show:
         extrema: true
+    - type: horizontal-stack
+      cards:
+      - type: custom:mushroom-entity-card
+        entity: sensor.pv_wr_pc_home_power_from_battery
+        primary_info: none
+      - type: custom:mushroom-entity-card
+        entity: sensor.pv_wr_pc_pv_to_battery_power
+        primary_info: none
     - type: custom:mini-graph-card
       name: Batterie
       icon: mdi:home-battery
@@ -70,10 +78,10 @@ cards:
         primary_info: none
         icon: mdi:dishwasher
       - type: custom:mushroom-entity-card
-        entity: sensor.waschmaschine_electric_w_value
+        entity: sensor.waschmaschine_electricity_power
         primary_info: none
       - type: custom:mushroom-entity-card
-        entity: sensor.trockner_electric_w_value
+        entity: sensor.trockner_electricity_power
         primary_info: none
 
   - type: vertical-stack
