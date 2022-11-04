@@ -6,6 +6,14 @@ cards:
     cards:
     - type: custom:mushroom-title-card
       title: Photovoltaik
+    - type: statistics-graph
+      chart_type: bar
+      stat_types: mean
+      days_to_show: 7
+      entities:
+        - sensor.pv_prod_ges
+        - sensor.pv_wr_pc_solar_w
+        - ensor.pv_wr_pi
     - type: custom:mini-graph-card
       name: Photovoltaik
       icon: mdi:solar-power-variant-outline
@@ -50,14 +58,12 @@ cards:
     cards:
     - type: custom:mushroom-title-card
       title: Haus
-    - type: custom:mini-graph-card
+    - type: statistics-graph
+      chart_type: bar
+      stat_types: mean
+      days_to_show: 7
       entities:
         - sensor.energy_house
-      show:
-        graph: bar
-        extrema: true
-      hours_to_show: 24
-      points_per_hour: 1
 
   - type: vertical-stack
     cards:

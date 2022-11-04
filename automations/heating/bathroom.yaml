@@ -26,7 +26,7 @@
 - alias: Bathroom - preheat
   trigger:
     platform: state
-    entity_id: input_select.home_mode
+    entity_id: sensor.house_status
     to: 'wakeup'
   action:
     service: climate.set_temperature
@@ -37,7 +37,7 @@
 - alias: Bathroom - preheat finish
   trigger:
     platform: state
-    entity_id: input_select.home_mode
+    entity_id: sensor.house_status
     from: 'wakeup'
     to: 'home'
   action:
@@ -49,7 +49,7 @@
 - alias: Bathroom - away
   trigger:
     platform: state
-    entity_id: input_select.home_mode
+    entity_id: sensor.house_status
     from: 'wakeup'
     to: 'away'
   action:
@@ -68,7 +68,7 @@
     conditions:
       - condition: state
         entity_id:
-          - input_select.home_mode
+          - sensor.house_status
         state: 'home'
       - condition: numeric_state
         entity_id: sensor.temperature_bathroom
@@ -89,7 +89,7 @@
     conditions:
       - condition: state
         entity_id:
-          - input_select.home_mode
+          - sensor.house_status
         state: 'home'
       - condition: numeric_state
         entity_id: sensor.temperature_bathroom
@@ -110,7 +110,7 @@
     conditions:
       - condition: state
         entity_id:
-          - input_select.home_mode
+          - sensor.house_status
         state: 'home'
       - condition: numeric_state
         entity_id: sensor.temperature_bathroom

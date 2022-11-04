@@ -8,10 +8,15 @@
   "domain": "deebot",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/DeebotUniverse/Deebot-4-Home-Assistant/issues",
+  "loggers": [
+    "custom_components.deebot",
+    "deebot_client",
+    "gmqtt"
+  ],
   "name": "Deebot 4 Home Assistant",
   "requirements": [
-    "deebot-client==1.5.1",
+    "deebot-client==1.6.0",
     "numpy>=1.21.2"
   ],
-  "version": "1.4.1"
+  "version": "1.5.0"
 }

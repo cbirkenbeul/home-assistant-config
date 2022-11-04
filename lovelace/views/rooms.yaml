@@ -149,3 +149,8 @@ cards:
             primary_info: none
             secondary_info: none
             layout: horizontal
+      - type: custom:mushroom-climate-card
+        entity: climate.trv_eg_hallway_climate
+        show_temperature_control: true
+        collapsible_controls: true
+        secondary_info: none

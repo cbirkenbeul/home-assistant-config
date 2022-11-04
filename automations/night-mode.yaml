@@ -6,14 +6,6 @@
   action:
     - service: input_boolean.turn_on
       entity_id: input_boolean.nightmode
-    - service: climate.set_temperature
-      entity_id:
-        - climate.trv_office_cb_thermostat
-        - climate.trv_office_pt_thermostat
-        - climate.trv_bathroom
-        - climate.trv_kitchen
-      data:
-        temperature: 21
     - service: input_boolean.turn_off
       entity_id: input_boolean.evening_lightning_default
     - service: input_boolean.turn_off
@@ -25,6 +17,11 @@
       data:
         topic: house/weather/daycondition
         payload: normalday
+        retain: true
+    - service: mqtt.publish
+      data:
+        topic: house/house/status
+        payload: sleep
         retain: true
 
 - alias: turn off lights

@@ -87,7 +87,7 @@ automation:
       - service: mqtt.publish
         data:
           topic: house/house/status
-          payload: home
+          payload: wakeup
           retain: true
 
   - id: "ZZ2N42NvuegdVo9jZwn4uyC4CXrpadnmDQ9z2sKXULREr2aVeeJpBm233iFVc47x"
@@ -115,7 +115,7 @@ automation:
       - service: mqtt.publish
         data:
           topic: house/house/status
-          payload: home
+          payload: wakeup
           retain: true
 
   - id: "FNImHC8uGkwyJ0jtsBLjM_IwyfmzMdI9yVJb4hVGAz1TsWN6U1DK9Tbz_PzKaO7z"
@@ -138,7 +138,7 @@ automation:
       - service: mqtt.publish
         data:
           topic: house/house/status
-          payload: home
+          payload: away
           retain: true
 
   - id: "ECLwhNT_NV61UqhFP58gE4E5HNbX0QdpJDUCqJ4mNT9xrw0of43FegBdqsgYtP94"
