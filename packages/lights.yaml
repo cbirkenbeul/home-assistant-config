@@ -111,6 +111,8 @@ scene:
         state: 'on'
         brightness: 80
         rgb_color: [0, 255, 0]
+      light.az_bloom:
+        state: 'on'
 
   - name: Abendbeleuchtung
     icon: mdi:television-ambient-light
