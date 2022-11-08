@@ -8,7 +8,7 @@ jobs:
   deploy_config:
     runs-on: ubuntu-latest
     steps:
-      - uses: joelwmale/webhook-action@2.1.0
+      - uses: joelwmale/webhook-action@2.2.0
         with:
           url: ${{ secrets.HASS_WEBHOOK_URL }}/update_config
           body: '{}'
