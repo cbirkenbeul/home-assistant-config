@@ -1,0 +1,14 @@
+name: Deploy Config
+
+on:
+  push:
+    branches: [ '*' ]
+
+jobs:
+  deploy_config:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: joelwmale/webhook-action@2.1.0
+        with:
+          url: ${{ secrets.HASS_WEBHOOK_URL }}/update_config
+          body: '{}'
