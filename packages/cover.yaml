@@ -8,7 +8,7 @@
 
 cover:
   - platform: group
-    name: cover_group
+    name: Rolladen
     entities:
       - cover.jalousie_kueche_position
 

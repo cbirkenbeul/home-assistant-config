@@ -24,3 +24,11 @@ climate.trv_kitchen:
 climate.trv_livingroom:
   friendly_name: Heizung Wohnzimmer
   icon: mdi:radiator
+
+climate.trv_bedroom:
+  friendly_name: Heizung Schlafzimmer
+  icon: mdi:radiator
+
+climate.trv_guestroom:
+  friendly_name: Heizung Gästezimmer
+  icon: mdi:radiator

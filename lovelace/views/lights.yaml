@@ -71,6 +71,24 @@ cards:
   - type: vertical-stack
     cards:
     - type: custom:mushroom-title-card
+      title: Schlafzimmer
+    - type: horizontal-stack
+      cards:
+      - type: custom:mushroom-light-card
+        entity: light.decke
+
+  - type: vertical-stack
+    cards:
+    - type: custom:mushroom-title-card
+      title: Gästezimmer
+    - type: horizontal-stack
+      cards:
+      - type: custom:mushroom-light-card
+        entity: light.decke
+
+  - type: vertical-stack
+    cards:
+    - type: custom:mushroom-title-card
       title: Flur
     - type: horizontal-stack
       cards:

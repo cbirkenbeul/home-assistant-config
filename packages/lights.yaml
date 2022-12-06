@@ -81,6 +81,7 @@ automation:
           - switch.sw_lr_deko
           - switch.sw_of_cb_deko
           - switch.flux
+          - switch.plug_lichterkette
       - service: input_boolean.turn_off
         entity_id: input_boolean.evening_lightning_default
 
@@ -111,8 +112,6 @@ scene:
         state: 'on'
         brightness: 80
         rgb_color: [0, 255, 0]
-      light.az_bloom:
-        state: 'on'
 
   - name: Abendbeleuchtung
     icon: mdi:television-ambient-light
@@ -127,9 +126,13 @@ scene:
         state: 'on'
         brightness: 200
         rgb_color: [255, 214, 170]
+      light.az_bloom:
+        state: 'on'
+        brightness: 200
+        rgb_color: [255, 214, 170]
       switch.sw_hw_og_deko:
         state: 'on'
-      switch.sw_lr_deko:
+      switch.plug_lichterkette:
         state: 'on'
       switch.sw_of_cb_deko:
         state: 'on'
@@ -151,6 +154,14 @@ scene:
         state: 'on'
       switch.sw_of_cb_deko:
         state: 'on'
+
+  - name: office_winter
+    icon: mdi:snow
+    entities:
+      light.az_bloom:
+        state: 'on'
+        brightness: 255
+        kelvin: 4400
 
 # Input Booleans
 input_boolean:

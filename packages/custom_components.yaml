@@ -17,6 +17,7 @@ switch:
     lights:
       - light.bodenlampe
       - light.couch
+      - light.az_bloom
     start_time: '21:00'
     stop_time: '01:00'
     brightness: 200

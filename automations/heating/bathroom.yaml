@@ -3,7 +3,7 @@
 - alias: Heizung aus bei offenem Fenster
   trigger:
     platform: state
-    entity_id: binary_sensor.bs_br_window
+    entity_id: binary_sensor.bs_br_window_contact
     to: 'on'
   action:
     service: climate.set_temperature
@@ -14,7 +14,7 @@
 - alias: Heizung an bei geschlossenem Fenster
   trigger:
     platform: state
-    entity_id: binary_sensor.bs_br_window
+    entity_id: binary_sensor.bs_br_window_contact
     to: 'off'
   action:
     service: climate.set_temperature
@@ -58,8 +58,9 @@
       entity_id: climate.trv_bathroom
       temperature: 18
 
-# General Bathroom Heating
-- alias: Bathroom - Adjust temp above 25C
+# Adjusting temperature
+
+- alias: bathroom - Adjust temp above 22C
   trigger:
     platform: time_pattern
     hours: "/1"
@@ -72,36 +73,19 @@
         state: 'home'
       - condition: numeric_state
         entity_id: sensor.temperature_bathroom
-        above: '25'
-  action:
-    - service: climate.set_temperature
-      entity_id:
-        - climate.trv_bathroom
-      data:
-        temperature: 21
-
-- alias: Bathroom - Adjust temp above 23C
-  trigger:
-    platform: time_pattern
-    hours: "/1"
-  condition:
-    condition: and
-    conditions:
+        above: '22'
       - condition: state
-        entity_id:
-          - sensor.house_status
-        state: 'home'
-      - condition: numeric_state
-        entity_id: sensor.temperature_bathroom
-        above: '25'
+        entity_id: 
+          - binary_sensor.bs_br_window_contact
+        state: 'off'
   action:
     - service: climate.set_temperature
       entity_id:
         - climate.trv_bathroom
       data:
-        temperature: 22
+        temperature: 20
 
-- alias: Bathroom - Adjust temp below 20C
+- alias: bathroom - Adjust temp below 20C
   trigger:
     platform: time_pattern
     hours: "/1"
@@ -115,9 +99,13 @@
       - condition: numeric_state
         entity_id: sensor.temperature_bathroom
         below: '20'
+      - condition: state
+        entity_id: 
+          - binary_sensor.bs_br_window_contact
+        state: 'off'
   action:
     - service: climate.set_temperature
       entity_id:
         - climate.trv_bathroom
       data:
-        temperature: 23
+        temperature: 22

@@ -12,21 +12,21 @@ sensor:
       tesla_max_charge:
         unit_of_measurement: A
         value_template: >-
-          {{ (states('sensor.pv_prod_ges') | float(0) - states('sensor.pv_wr_pc_pv_to_battery_power') | float(0) - 500) * 0.0014 }}
+          {{ (states('sensor.pv_prod_ges') | float(0) - states('sensor.pv_wr_pc_pv_to_battery_power') | float(0) - 650) * 0.0014 }}
 
   - platform: template
     sensors:
       tesla_charge_kw:
         unit_of_measurement: kWh
         value_template: >-
-          {{ (states('sensor.tesla_max_charge') | float(0) * 240 / 1000 * 3) | round(1)}}
+          {{ (states('snumber.teqqcar_charge_limit') | float(0) * 240 / 1000 * 3) | round(1)}}
 
   - platform: template
     sensors:
       teqqcar_charging_time:
         friendly_name: 'Dauer bis voll'
         value_template: >
-          {{ (states.sensor.teqqcar_charging_rate_sensor.attributes.time_left) }}
+          {{ (states.sensor.teqqcar_charging_rate.attributes.time_left) }}
         icon_template: mdi:timer-sync-outline
 
 
@@ -45,10 +45,10 @@ automation:
             entity_id: device_tracker.teqqcar_location_tracker
             state: home
           - condition: state
-            entity_id: binary_sensor.teqqcar_charger_sensor
+            entity_id: binary_sensor.teqqcar_charging
             state: 'on'
           - condition: state
-            entity_id: switch.teqqcar_charger_switch
+            entity_id: switch.teqqcar_charger
             state: 'off'
           - condition: numeric_state
             entity_id: sensor.pv_prod_ges
@@ -56,7 +56,7 @@ automation:
     action:
     - service: switch.turn_on
       target:
-        entity_id: switch.teqqcar_charger_switch
+        entity_id: switch.teqqcar_charger
     mode: single
 
   - alias: Adjust charging speed
@@ -68,14 +68,11 @@ automation:
       - condition: and
         conditions:
           - condition: state
-            entity_id: switch.teqqcar_charger_switch
+            entity_id: switch.teqqcar_charger
             state: 'on'
           - condition: state
             entity_id: device_tracker.teqqcar_location_tracker
             state: home
-          - condition: state
-            entity_id: switch.teqqcar_maxrange_switch
-            state: 'off'
     action:
       service: script.adjust_tesla_charging
 
@@ -88,20 +85,13 @@ automation:
       below: '1000'
       for: 00:01:00
     condition:
-      - condition: and
-        conditions:
-          - condition: state
-            entity_id: device_tracker.teqqcar_location_tracker
-            state: home
-          - condition: not
-            conditions:
-            - condition: state
-              entity_id: switch.teqqcar_maxrange_switch
-              state: 'on'
+      - condition: state
+        entity_id: device_tracker.teqqcar_location_tracker
+        state: home
     action:
     - service: switch.turn_off
       target:
-        entity_id: switch.teqqcar_charger_switch
+        entity_id: switch.teqqcar_charger
     mode: single
 
   - id: 'Tesla003'
@@ -112,31 +102,23 @@ automation:
       entity_id: sensor.pv_wr_pc_battery_soc
       below: '90'
     condition:
-      - condition: and
-        conditions:
-          - condition: state
-            entity_id: device_tracker.teqqcar_location_tracker
-            state: home
-          - condition: not
-            conditions:
-            - condition: state
-              entity_id: switch.teqqcar_maxrange_switch
-              state: 'on'
+      - condition: state
+        entity_id: device_tracker.teqqcar_location_tracker
+        state: home
     action:
     - service: switch.turn_off
       target:
-        entity_id: switch.teqqcar_charger_switch
+        entity_id: switch.teqqcar_charger
     mode: single
 
 script:
   'adjust_tesla_charging':
     alias: Charge tesla
     sequence:
-    - service: tesla_custom.api
+    - service: number.set_value
       data:
-        command: CHARGING_AMPS
-        parameters:
-          path_vars:
-            vehicle_id: '{{ state_attr("binary_sensor.teqqcar_online_sensor", "id") }}'
-          charging_amps: '{{ (states("sensor.tesla_max_charge"))| int }}'
+        value: >-
+          {{ (states('sensor.tesla_max_charge') | float(0) | round(0)) }}
+      target:
+        entity_id: number.teqqcar_charging_amps
     mode: single

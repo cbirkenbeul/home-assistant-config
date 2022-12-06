@@ -29,11 +29,11 @@ cards:
           type: horizontal-stack
           cards:
             - type: custom:mushroom-entity-card
-              entity: sensor.teqqcar_battery_sensor
+              entity: sensor.teqqcar_battery
               name: Batterie
               icon: mdi:battery-charging-high
             - type: custom:mushroom-entity-card
-              entity: sensor.tesla_charge_kw
+              entity: sensor.teqqcar_charger_power
               name: Rate
               icon: mdi:ev-station
               icon_color: green
@@ -143,7 +143,7 @@ cards:
       - type: custom:mushroom-title-card
         title: Rolläden
       - type: custom:mushroom-cover-card
-        entity: cover.cover_group
+        entity: cover.rolladen
         layout: horizontal
         secondary_info: false
         show_buttons_control: true
@@ -151,6 +151,7 @@ cards:
         title: Szenen
       - type: entities
         entities:
+          - scene.office_winter
           - scene.abendbeleuchtung
           - scene.movietime
           - scene.youtube

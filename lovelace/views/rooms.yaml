@@ -141,6 +141,40 @@ cards:
   - type: vertical-stack
     cards:
       - type: custom:mushroom-title-card
+        title: Schlafzimmer
+      # - type: horizontal-stack
+      #   cards:
+      #     - type: custom:mushroom-light-card
+      #       entity: switch.sw_hw_og_deko
+      #       primary_info: none
+      #       secondary_info: none
+      #       layout: horizontal
+      - type: custom:mushroom-climate-card
+        entity: climate.trv_bedroom
+        show_temperature_control: true
+        collapsible_controls: true
+        secondary_info: none
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        title: Gästezimmer
+      # - type: horizontal-stack
+      #   cards:
+      #     - type: custom:mushroom-light-card
+      #       entity: switch.sw_hw_og_deko
+      #       primary_info: none
+      #       secondary_info: none
+      #       layout: horizontal
+      - type: custom:mushroom-climate-card
+        entity: climate.trv_guestroom
+        show_temperature_control: true
+        collapsible_controls: true
+        secondary_info: none
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
         title: Flur
       - type: horizontal-stack
         cards:
@@ -149,8 +183,8 @@ cards:
             primary_info: none
             secondary_info: none
             layout: horizontal
-      - type: custom:mushroom-climate-card
-        entity: climate.trv_eg_hallway_climate
-        show_temperature_control: true
-        collapsible_controls: true
-        secondary_info: none
+          - type: custom:mushroom-light-card
+            entity: light.flur
+            primary_info: none
+            secondary_info: none
+            layout: horizontal

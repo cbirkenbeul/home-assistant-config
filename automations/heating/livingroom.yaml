@@ -1,27 +1,58 @@
 ---
 # Adjust room temperature
-- alias: livingroom - Adjust temp above 25C
-  trigger:
-    platform: time_pattern
-    hours: "/1"
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id:
-          - sensor.house_status
-        state: 'home'
-      - condition: numeric_state
-        entity_id: sensor.temperature_livingroom
-        above: '26'
-  action:
-    - service: climate.set_temperature
-      entity_id:
-        - climate.trv_livingroom
-        - climate.trv_diningroom
-      data:
-        temperature: 21
 
+- alias: livingroom - set temperature
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.temperature_livingroom
+  condition: []
+  action:
+    - device_id: 5aaa671b66121939a0ba6687a8a76875
+      domain: select
+      entity_id: select.trv_livingroom_sensor
+      type: select_option
+      option: external
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 10
+        milliseconds: 0
+    - service: mqtt.publish
+      data:
+        topic: zigbee2mqtt/trv_livingroom/set/sensor_temp
+        payload_template: >-
+          {{ (states('sensor.temperature_livingroom')|float(0)|round(1))
+          }}
+
+- alias: diningroom - set temperature
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.temperature_livingroom
+  condition: []
+  action:
+    - device_id: 5aaa671b66121939a0ba6687a8a76876
+      domain: select
+      entity_id: select.trv_diningroom_sensor
+      type: select_option
+      option: external
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 10
+        milliseconds: 0
+    - service: mqtt.publish
+      data:
+        topic: zigbee2mqtt/trv_diningroom/set/sensor_temp
+        payload_template: >-
+          {{ (states('sensor.temperature_livingroom')|float(0)|round(1))
+          }}
+
+
+# Adjust room temperature
 - alias: livingroom - Adjust temp above 24C
   trigger:
     platform: time_pattern
@@ -35,7 +66,7 @@
         state: 'home'
       - condition: numeric_state
         entity_id: sensor.temperature_livingroom
-        above: '25'
+        above: '24'
   action:
     - service: climate.set_temperature
       entity_id:
@@ -57,7 +88,7 @@
         state: 'home'
       - condition: numeric_state
         entity_id: sensor.temperature_livingroom
-        below: '23'
+        below: '22'
   action:
     - service: climate.set_temperature
       entity_id:

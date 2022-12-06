@@ -7,15 +7,15 @@ cards:
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-entity-card
-            entity: sensor.teqqcar_range_sensor
+            entity: sensor.teqqcar_charger_power
           - type: custom:mushroom-entity-card
-            entity: sensor.teqqcar_battery_sensor
+            entity: sensor.teqqcar_battery
             icon: mdi:car-battery
       - type: custom:mushroom-climate-card
         entity: climate.teqqcar_hvac_climate_system
         collapsible_controls: true
       - type: custom:mushroom-entity-card
-        entity: switch.teqqcar_charger_switch
+        entity: switch.teqqcar_charger
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-entity-card

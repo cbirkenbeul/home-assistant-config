@@ -53,7 +53,7 @@ sensor:
 # Combind temperature sensors
   - platform: min_max
     entity_ids:
-      - sensor.wohnzimmer_multisensor_temperature_air
+      - sensor.bs_li_terrasse_device_temperature
       - sensor.se_dr_temp_temperature
       - sensor.se_lr_temp_temperature
     type: median
@@ -75,8 +75,8 @@ sensor:
   - platform: min_max
     entity_ids:
       - sensor.bs_hw_bm_door_temperature
-      - sensor.flur_sensor_temperature
-      - sensor.se_hw_temp_temperature
+      - sensor.hue_motion_sensor_1_temperature_2
+      - sensor.hue_motion_sensor_1_temperature
     type: median
     name: temperature_hallway
 

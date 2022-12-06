@@ -10,10 +10,9 @@ group:
   climate:
     name: climate
     entities:
-      - climate.trv_bathroom
       - climate.trv_diningroom
-      - climate.trv_eg_hallway_climate
       - climate.trv_kitchen
       - climate.trv_livingroom
+      - climate.trv_bathroom
       - climate.trv_office_cb_thermostat
       - climate.trv_office_pt_thermostat

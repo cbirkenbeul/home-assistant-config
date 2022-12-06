@@ -62,3 +62,5 @@ lovelace:
       type: module
     - url: /hacsfiles/kiosk-mode/kiosk-mode.js
       type: module
+    - url: /hacsfiles/ha-sankey-chart/ha-sankey-chart.js
+      type: module

@@ -6,32 +6,19 @@ cards:
     cards:
     - type: custom:mushroom-title-card
       title: Photovoltaik
-    - type: statistics-graph
-      chart_type: bar
-      stat_types: mean
-      days_to_show: 7
-      entities:
-        - sensor.pv_prod_ges
-        - sensor.pv_wr_pc_solar_w
-        - ensor.pv_wr_pi
     - type: custom:mini-graph-card
-      name: Photovoltaik
-      icon: mdi:solar-power-variant-outline
+      name: PV-Leistung
+      icon: mdi:home-battery
       entities:
         - entity: sensor.pv_prod_ges
           name: Gesamt
-          color: black
-        - entity: sensor.pv_wr_pc_solar_w
-          name: Haus
-          color: blue
-        - entity: sensor.pv_wr_pi
-          name: Loggia
-          color: green
-      hours_to_show: 24
-      points_per_hour: 0.25
+          color: Green
+      hours_to_show: 12
+      points_per_hour: 4
       line_width: 2
       show:
         extrema: true
+      height: 100
     - type: horizontal-stack
       cards:
       - type: custom:mushroom-entity-card
@@ -57,38 +44,56 @@ cards:
   - type: vertical-stack
     cards:
     - type: custom:mushroom-title-card
-      title: Haus
-    - type: statistics-graph
-      chart_type: bar
-      stat_types: mean
-      days_to_show: 7
+      title: Haus  
+    - type: custom:mini-graph-card
+      name: Verbrauch
+      icon: mdi:home
       entities:
-        - sensor.energy_house
+        - entity: sensor.energy_house
+          name: Stromverbrauch
+          color: red
+      hours_to_show: 24
+      points_per_hour: 4
+      line_width: 2
+      show:
+        extrema: true
+      height: 100
 
   - type: vertical-stack
     cards:
     - type: custom:mushroom-title-card
       title: Verbraucher
     - type: custom:mini-graph-card
+      name: Serverrack
       entities:
-        - sensor.shelly_shplg_s_fdd88a_current_consumption
+        - sensor.serverrack_power
+      hours_to_show: 12
+      points_per_hour: 4
+      line_width: 2
       show:
-        graph: bar
         extrema: true
-      hours_to_show: 24
-      points_per_hour: 1
     - type: horizontal-stack
       cards:
       - type: custom:mushroom-entity-card
         entity: sensor.shelly_shplg_s_c5080f_current_consumption
         primary_info: none
         icon: mdi:dishwasher
-      - type: custom:mushroom-entity-card
-        entity: sensor.waschmaschine_electricity_power
-        primary_info: none
-      - type: custom:mushroom-entity-card
-        entity: sensor.trockner_electricity_power
-        primary_info: none
+      - type: vertical-stack
+        cards:
+        - type: custom:mushroom-entity-card
+          entity: sensor.waschmaschine_electricity_power
+          primary_info: none
+        - type: custom:mushroom-entity-card
+          entity: sensor.washer_status
+          primary_info: none
+      - type: vertical-stack
+        cards:
+        - type: custom:mushroom-entity-card
+          entity: sensor.trockner_electricity_power
+          primary_info: none
+        - type: custom:mushroom-entity-card
+          entity: sensor.dryer_status
+          primary_info: none
 
   - type: vertical-stack
     cards:
@@ -96,9 +101,28 @@ cards:
       title: Tesla Model 3
     - type: custom:mini-graph-card
       entities:
-        - sensor.tesla_charge_kw
+        - sensor.teqqcar_charger_power
       show:
         graph: bar
         extrema: true
       hours_to_show: 6
       points_per_hour: 12
+
+  - type: custom:sankey-chart
+    show_names: true
+    unit_prefix: k
+    round: 1
+    wide: true
+    sections:
+      - entities:
+          - entity_id: sensor.pv_prod_ges
+            color: var(--warning-color)
+            children:
+              - sensor.energy_house
+          # - entity_id: sensor.grid
+          #   children:
+          #     - sensor.daily_energy
+          # - entity_id: sensor.battery
+          #   color: var(--success-color)
+          #   children:
+          #     - sensor.daily_energy
