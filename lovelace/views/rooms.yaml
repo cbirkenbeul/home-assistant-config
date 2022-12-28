@@ -14,10 +14,11 @@ cards:
             secondary_info: none
             layout: horizontal
           - type: custom:mushroom-light-card
-            entity: switch.sw_of_cb_deko
+            entity: light.rgbicww_floor_lamp
             primary_info: none
             secondary_info: none
             layout: horizontal
+            icon: mdi:sign-pole
           - type: custom:mushroom-light-card
             entity: light.az_bloom
             icon: mdi:wall-sconce-flat-variant
@@ -66,10 +67,11 @@ cards:
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-light-card
-            entity: switch.sw_lr_deko
+            entity: switch.plug_lichterkette
             primary_info: none
             secondary_info: none
             layout: horizontal
+            icon: mdi:string-lights
           - type: custom:mushroom-light-card
             entity: light.wz_decke
             primary_info: none

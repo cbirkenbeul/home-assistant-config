@@ -24,12 +24,6 @@ sensor:
     round: 2
 
   - platform: integration
-    source: sensor.shelly_shplg_s_fdd88a_current_consumption
-    name: energy_serverrack_energy
-    unit_prefix: k
-    round: 2
-
-  - platform: integration
     source: sensor.shelly_shplg_s_c5080f_current_consumption
     name: energy_dishwasher_energy
     unit_prefix: k

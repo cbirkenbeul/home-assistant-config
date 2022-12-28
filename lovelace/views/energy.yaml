@@ -107,22 +107,3 @@ cards:
         extrema: true
       hours_to_show: 6
       points_per_hour: 12
-
-  - type: custom:sankey-chart
-    show_names: true
-    unit_prefix: k
-    round: 1
-    wide: true
-    sections:
-      - entities:
-          - entity_id: sensor.pv_prod_ges
-            color: var(--warning-color)
-            children:
-              - sensor.energy_house
-          # - entity_id: sensor.grid
-          #   children:
-          #     - sensor.daily_energy
-          # - entity_id: sensor.battery
-          #   color: var(--success-color)
-          #   children:
-          #     - sensor.daily_energy

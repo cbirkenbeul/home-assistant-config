@@ -93,13 +93,21 @@ cards:
           - type: custom:mushroom-entity-card
             entity: sensor.temperature_office
             icon: mdi:chair-rolling
-            name: Büro
+            name: Büro Temperatur
+          - type: custom:mushroom-entity-card
+            entity: sensor.humidity_office
+            icon: mdi:chair-rolling
+            name: Büro Luftfeuchtigkeit
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-entity-card
             entity: sensor.temperature_livingroom
             icon: mdi:sofa
-            name: Wohnzimmer
+            name: Wohnzimmer Temperatur
+          - type: custom:mushroom-entity-card
+            entity: sensor.humidity_livingroom
+            icon: mdi:sofa
+            name: Wohnzimmer Luftfeuchtigkeit
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-entity-card
@@ -117,13 +125,21 @@ cards:
           - type: custom:mushroom-entity-card
             entity: sensor.temperature_bedroom
             icon: mdi:bed
-            name: Schlafzimmer
+            name: Schlafzimmer Temperatur
+          - type: custom:mushroom-entity-card
+            entity: sensor.humidity_bedroom
+            icon: mdi:bed
+            name: Schlafzimmer Luftfeuchtigkeit
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-entity-card
             entity: sensor.temperature_bathroom
             icon: mdi:shower
-            name: Bad
+            name: Bad Temperatur
+          - type: custom:mushroom-entity-card
+            entity: sensor.humidity_bathroom
+            icon: mdi:shower
+            name: Bad Luftfeuchtigkeit
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-entity-card
