@@ -13,8 +13,6 @@ cards:
         - type: horizontal-stack
           cards:
           - type: custom:mushroom-light-card
-            entity: light.az_cb_decke
-          - type: custom:mushroom-light-card
             entity: switch.sw_of_cb_deko
         - type: custom:mushroom-light-card
           entity: light.keylight

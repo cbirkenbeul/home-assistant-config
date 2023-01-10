@@ -128,3 +128,27 @@ sensor.weewx_outhumidity:
   friendly_name: Luftfeuchtigkeit
   unit_of_measurement: '%'
   icon: mdi:water-percent
+
+sensor.all_lights_energy_daily:
+  friendly_name: Licht
+  icon: mdi:lightbulb
+
+sensor.ap_christian_energy_daily:
+  friendly_name: AP Christian
+  icon: mdi:desk
+
+sensor.ap_christian_power:
+  friendly_name: AP Christian
+  icon: mdi:desk
+
+sensor.serverrack_power:
+  friendly_name: Serverrack
+  icon: mdi:server
+
+sensor.all_lights_power:
+  friendly_name: Licht
+  icon: mdi:lightbulb-group-outline
+
+sensor.other_devices_power:
+  friendly_name: Sonstiges
+  icon: mdi:power-plug-battery-outline

@@ -3,7 +3,7 @@ sensor.tesla_battery_level:
   friendly_name: Batterie
   icon: mdi:battery-charging
 
-sensor.tesla_power:
+sensor.teqqcar_charger_power:
   friendly_name: Ladung
   icon: mdi:ev-station
 

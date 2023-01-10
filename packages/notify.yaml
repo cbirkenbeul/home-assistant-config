@@ -10,15 +10,15 @@ notify:
   - name: ALL_DEVICES
     platform: group
     services:
-      - service: !env_var HASS_NOTIFY_IPHONE1
-      - service: !env_var HASS_NOTIFY_IPHONE2
+      - service: !secret HASS_NOTIFY_IPHONE1
+      - service: !secret HASS_NOTIFY_IPHONE2
 
   - name: christian
     platform: group
     services:
-      - service: !env_var HASS_NOTIFY_IPHONE1
+      - service: !secret HASS_NOTIFY_IPHONE1
 
   - name: petra
     platform: group
     services:
-      - service: !env_var HASS_NOTIFY_IPHONE2
+      - service: !secret HASS_NOTIFY_IPHONE2

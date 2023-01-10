@@ -1,12 +1,12 @@
 ---
 telegram_bot:
   - platform: polling
-    api_key: !env_var HASS_TELEGRAM_BOT_API
+    api_key: !secret HASS_TELEGRAM_BOT_API
     allowed_chat_ids:
-      - !env_var HASS_TELEGRAM_BOT_CHATID
+      - !secret HASS_TELEGRAM_BOT_CHATID
 
 # Example configuration.yaml entry for the notifier
 notify:
   - platform: telegram
     name: telegram_group
-    chat_id: !env_var HASS_TELEGRAM_BOT_CHATID
+    chat_id: !secret HASS_TELEGRAM_BOT_CHATID

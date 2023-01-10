@@ -8,4 +8,4 @@
 
 # Integration
 sun:
-  elevation: !env_var HASS_ELEVATION
+  elevation: !secret HASS_ELEVATION

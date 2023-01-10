@@ -16,3 +16,4 @@ views:
   - !include lovelace/views/vacuum.yaml
   - !include lovelace/views/car.yaml
   - !include lovelace/views/energy.yaml
+  - !include lovelace/views/sankey.yaml

@@ -22,24 +22,14 @@ cards:
     - type: horizontal-stack
       cards:
       - type: custom:mushroom-entity-card
+        entity: sensor.pv_wr_pc_battery_soc
+        primary_info: none
+      - type: custom:mushroom-entity-card
         entity: sensor.pv_wr_pc_home_power_from_battery
         primary_info: none
       - type: custom:mushroom-entity-card
         entity: sensor.pv_wr_pc_pv_to_battery_power
         primary_info: none
-    - type: custom:mini-graph-card
-      name: Batterie
-      icon: mdi:home-battery
-      entities:
-        - entity: sensor.pv_wr_pc_battery_soc
-          name: Gesamt
-          color: black
-      hours_to_show: 12
-      points_per_hour: 4
-      line_width: 2
-      show:
-        extrema: true
-      height: 100
 
   - type: vertical-stack
     cards:
@@ -58,52 +48,89 @@ cards:
       show:
         extrema: true
       height: 100
+    - type: horizontal-stack
+      cards:
+      - type: custom:mushroom-entity-card
+        entity: sensor.pv_wr_pc_home_consumption_from_grid_day
+        primary_info: none
+        icon_color: red
+      - type: custom:mushroom-entity-card
+        entity: sensor.pv_wr_pc_home_consumption_from_battery_day
+        primary_info: none
+      - type: custom:mushroom-entity-card
+        entity: sensor.pv_wr_pc_home_consumption_from_pv_day
+        primary_info: none
+        icon_color: green
 
   - type: vertical-stack
     cards:
     - type: custom:mushroom-title-card
       title: Verbraucher
-    - type: custom:mini-graph-card
-      name: Serverrack
-      entities:
-        - sensor.serverrack_power
-      hours_to_show: 12
-      points_per_hour: 4
-      line_width: 2
-      show:
-        extrema: true
-    - type: horizontal-stack
+    - type: vertical-stack
       cards:
-      - type: custom:mushroom-entity-card
-        entity: sensor.shelly_shplg_s_c5080f_current_consumption
-        primary_info: none
-        icon: mdi:dishwasher
-      - type: vertical-stack
+      - type: horizontal-stack
         cards:
         - type: custom:mushroom-entity-card
           entity: sensor.waschmaschine_electricity_power
           primary_info: none
         - type: custom:mushroom-entity-card
-          entity: sensor.washer_status
-          primary_info: none
-      - type: vertical-stack
-        cards:
-        - type: custom:mushroom-entity-card
           entity: sensor.trockner_electricity_power
           primary_info: none
         - type: custom:mushroom-entity-card
-          entity: sensor.dryer_status
+          entity: sensor.serverrack_power
+          primary_info: none
+      - type: horizontal-stack
+        cards:
+        - type: custom:mushroom-entity-card
+          entity: sensor.all_lights_power
+          primary_info: none
+        - type: custom:mushroom-entity-card
+          entity: sensor.ap_christian_power
+          primary_info: none
+        - type: custom:mushroom-entity-card
+          entity: sensor.teqqcar_charger_power
           primary_info: none
 
-  - type: vertical-stack
-    cards:
-    - type: custom:mushroom-title-card
-      title: Tesla Model 3
-    - type: custom:mini-graph-card
-      entities:
-        - sensor.teqqcar_charger_power
-      show:
-        graph: bar
-        extrema: true
-      hours_to_show: 6
-      points_per_hour: 12
+    - type: custom:sankey-chart
+      show_names: true
+      unit_prefix: k
+      round: 1
+      wide: true
+      sections:
+        - entities:
+            - entity_id: sensor.pv_ges_energy_daily
+              color: green
+              children: 
+                - sensor.pv_wr_pc_battery_charge_from_pv_day
+                - sensor.pv_wr_pc_home_consumption_day
+            - entity_id: sensor.pv_wr_pc_home_consumption_from_grid_day
+              color: red
+              children: 
+                - sensor.pv_wr_pc_home_consumption_day
+            - entity_id: sensor.pv_wr_pc_home_consumption_from_battery_day
+              children: 
+                - sensor.pv_wr_pc_home_consumption_day
+        - entities:
+            - entity_id: sensor.pv_wr_pc_battery_charge_from_pv_day
+              color: orange
+            - entity_id: sensor.pv_wr_pc_energy_discharge_to_grid_day
+              color: orange
+            - entity_id: sensor.pv_wr_pc_home_consumption_day
+              color: red
+              children:
+                - sensor.serverrack_energy_daily
+                - sensor.all_lights_energy_daily
+                - sensor.ap_christian_energy_daily
+                - sensor.dryer_energy_daily
+                - sensor.washer_energy_daily
+                - sensor.other_devices_power
+        - entities:
+            - entity_id: sensor.serverrack_energy_daily
+              color: grey
+            - entity_id: sensor.all_lights_energy_daily
+              color: brown
+            - entity_id: sensor.ap_christian_energy_daily
+            - entity_id: sensor.dryer_energy_daily
+            - entity_id: sensor.washer_energy_daily
+            - entity_id: sensor.other_devices_power
+              color: black

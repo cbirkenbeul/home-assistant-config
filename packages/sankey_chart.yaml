@@ -1,0 +1,36 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   08.01.2023
+#   @package        :   Sankey Chart
+#   @description    :   Entities using for the sankey chart card
+###############################################################################
+
+# kWh Sensors
+sensor:
+  - platform: integration
+    source: sensor.pv_prod_ges
+    name: pv_prod_ges_kwh
+    unit_prefix: k
+    round: 2
+
+  - platform: template
+    sensors:
+      other_devices_power:
+        unit_of_measurement: kWh
+        value_template: >-
+          {{ (states('sensor.pv_wr_pc_home_consumption_day') | float(0)) - (states('sensor.serverrack_energy_daily') | float(0)) - (states('sensor.all_lights_energy') | float(0)) - (states('sensor.ap_christian_energy') | float(0)) - (states('sensor.dryer_energy_daily') | float(0)) }}  
+
+# Daily energy use sensors
+utility_meter:
+  pv_ges_energy_daily:
+    source: sensor.pv_prod_ges_kwh
+    cycle: daily
+
+  all_lights_energy_daily:
+    source: sensor.all_lights_energy
+    cycle: daily
+
+  ap_christian_energy_daily:
+    source: sensor.ap_christian_energy
+    cycle: daily

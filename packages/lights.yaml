@@ -139,24 +139,22 @@ scene:
       switch.sw_dr_deko:
         state: 'on'
 
-  - name: youtube
+  - name: Youtube
     icon: mdi:youtube
     entities:
-      light.az_cb_decke:
-        state: 'on'
-        brightness: 255
-        kelvin: 5600
       light.az_bloom:
         state: 'on'
         brightness: 255
-        rgb_color: [255,255,255]
+        rgb_color: [67,134,150]
       light.keylight:
         state: 'on'
-      switch.sw_of_cb_deko:
+      light.rgbicww_floor_lamp:
         state: 'on'
+        brightness: 255
+        rgb_color: [222,107,40]
 
-  - name: office_winter
-    icon: mdi:snow
+  - name: Büro
+    icon: mdi:office-building
     entities:
       light.az_bloom:
         state: 'on'

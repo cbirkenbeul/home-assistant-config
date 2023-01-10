@@ -1,0 +1,46 @@
+---
+title: Sankey
+icon: mdi:chart-sankey-variant
+panel: true
+cards:
+  - type: custom:sankey-chart
+    show_names: true
+    unit_prefix: k
+    round: 1
+    wide: true
+    height: 600
+    sections:
+      - entities:
+          - entity_id: sensor.pv_prod_ges_kwh
+            color: green
+            children: 
+              - sensor.pv_wr_pc_battery_charge_from_pv_day
+              - sensor.pv_wr_pc_home_consumption_day
+          - entity_id: sensor.pv_wr_pc_home_consumption_from_grid_day
+            color: red
+            children: 
+              - sensor.pv_wr_pc_home_consumption_day
+          - entity_id: sensor.pv_wr_pc_home_consumption_from_battery_day
+            children: 
+              - sensor.pv_wr_pc_home_consumption_day
+      - entities:
+          - entity_id: sensor.pv_wr_pc_battery_charge_from_pv_day
+            color: orange
+          - entity_id: sensor.pv_wr_pc_energy_discharge_to_grid_day
+            color: orange
+          - entity_id: sensor.pv_wr_pc_home_consumption_day
+            color: red
+            children:
+              - sensor.serverrack_energy_daily
+              - sensor.all_lights_energy
+              - sensor.ap_christian_energy
+              - sensor.dryer_energy_daily
+              - sensor.washer_energy_daily
+              - sensor.other_devices_power
+      - entities:
+          - entity_id: sensor.serverrack_energy_daily
+          - entity_id: sensor.all_lights_energy
+          - entity_id: sensor.ap_christian_energy
+          - entity_id: sensor.dryer_energy_daily
+          - entity_id: sensor.washer_energy_daily
+          - entity_id: sensor.other_devices_power

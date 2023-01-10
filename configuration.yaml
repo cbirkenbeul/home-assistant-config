@@ -1,11 +1,13 @@
 ---
 homeassistant:
   name: Casa Lani
-  latitude: !env_var HASS_LATITUDE
-  longitude: !env_var HASS_LONGITUDE
-  elevation: !env_var HASS_ELEVATION
+  latitude: !secret HASS_LATITUDE
+  longitude: !secret HASS_LONGITUDE
+  elevation: !secret HASS_ELEVATION
   unit_system: metric
+  currency: EUR
   time_zone: Europe/Berlin
+  country: DE
   # Customization file
   customize: !include_dir_merge_named customizations/
   # Load packages
@@ -19,7 +21,6 @@ homeassistant:
 ############################################################################
 
 automation: !include_dir_merge_list automations/
-backup:
 #binary_sensor: !include_dir_merge_list binary_sensor/
 climate:
 config:
@@ -31,9 +32,7 @@ frontend:
 http:
   use_x_forwarded_for: true
   trusted_proxies: 
-    - !env_var HASS_TRUSTED_NETWORK_1
-    - !env_var HASS_TRUSTED_NETWORK_2
-    - !env_var HASS_TRUSTED_NETWORK_3
+    - 192.168.10.0/24
 ios:
 map:
 mobile_app:
@@ -63,4 +62,6 @@ lovelace:
     - url: /hacsfiles/kiosk-mode/kiosk-mode.js
       type: module
     - url: /hacsfiles/ha-sankey-chart/ha-sankey-chart.js
+      type: module
+    - url: /hacsfiles/mini-humidifier/mini-humidifier-bundle.js
       type: module

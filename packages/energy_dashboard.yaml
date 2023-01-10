@@ -34,3 +34,9 @@ sensor:
     name: energy_winecooler_energy
     unit_prefix: k
     round: 2
+
+# Power Cicle
+utility_meter:
+  serverrack_energy_daily:
+    source: sensor.serverrack_energy
+    cycle: daily

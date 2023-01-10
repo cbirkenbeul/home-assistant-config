@@ -9,6 +9,10 @@ sensor.serverrack_electric_consumed_kwh:
   icon: mdi:server
   device_class: energy
 
+sensor.serverrack_energy:
+  friendly_name: Serverrack
+  icon: mdi:server
+
 sensor.dryer_electric_consumed_kwh:
   friendly_name: Trockner
   icon: mdi:tumble-dryer
@@ -70,11 +74,11 @@ sensor.pv_wr_pc_pv_to_battery_power:
   icon: mdi:battery-arrow-up-outline
 
 sensor.pv_wr_pc_home_consumption_day:
-  friendly_name: Hausverbrauch heute
+  friendly_name: Hausverbrauch
   icon: mdi:home-lightning-bolt
 
 sensor.pv_wr_pc_home_consumption_from_battery_day:
-  friendly_name: Batterie
+  friendly_name: Batterieentladung
   icon: mdi:battery-arrow-up-outline
 
 sensor.pv_wr_pc_home_consumption_from_pv_day:
@@ -84,3 +88,15 @@ sensor.pv_wr_pc_home_consumption_from_pv_day:
 sensor.pv_wr_pc_home_consumption_from_grid_day:
   friendly_name: Netz
   icon: mdi:transmission-tower-export
+
+sensor.pv_wr_pc_battery_charge_from_pv_day:
+  friendly_name: Batterieladung
+  icon: mdi:battery-arrow-down-outline
+
+sensor.pv_prod_ges_kwh:
+  friendly_name: PV Produktion
+  icon: mdi:solar-panel
+
+sensor.serverrack_energy_daily:
+  friendly_name: Serverrack
+  icon: mdi:server

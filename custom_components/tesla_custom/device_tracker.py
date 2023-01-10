@@ -1,11 +1,10 @@
 """Support for Tesla device tracker."""
 import logging
 
-from teslajsonpy.car import TeslaCar
-
 from homeassistant.components.device_tracker import SOURCE_TYPE_GPS
 from homeassistant.components.device_tracker.config_entry import TrackerEntity
 from homeassistant.core import HomeAssistant
+from teslajsonpy.car import TeslaCar
 
 from . import TeslaDataUpdateCoordinator
 from .base import TeslaCarEntity
@@ -90,11 +89,15 @@ class TeslaCarDestinationLocation(TeslaCarEntity, TrackerEntity):
     @property
     def longitude(self):
         """Return destination longitude."""
+        if self._car.active_route_miles_to_arrival is None:
+            return None
         return self._car.active_route_longitude
 
     @property
     def latitude(self):
         """Return destination latitude."""
+        if self._car.active_route_miles_to_arrival is None:
+            return None
         return self._car.active_route_latitude
 
     @property

@@ -1,0 +1,28 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   07.01.2023
+#   @package        :   powercalc
+#   @description    :   powerconsumption from different appliances
+###############################################################################
+
+# Integration
+powercalc:
+
+# Template Sensor
+sensor:
+    - platform: powercalc
+      create_group: All Lights
+      entities:
+        - entity_id: light.az_bloom
+        - entity_id: light.az_pt_decke
+        - entity_id: light.bad
+        - entity_id: light.bodenlampe
+        - entity_id: light.couch
+        - entity_id: light.keylight
+        - entity_id: light.leseecke
+        - entity_id: light.medizinschrank
+        - entity_id: light.plug_lichterkette_device
+        - entity_id: light.rgbicww_floor_lamp
+        - entity_id: light.sw_hw_og_deko
+        - entity_id: light.wz_decke

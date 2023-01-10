@@ -167,7 +167,7 @@ cards:
         title: Szenen
       - type: entities
         entities:
-          - scene.office_winter
           - scene.abendbeleuchtung
           - scene.movietime
           - scene.youtube
+          - scene.buro

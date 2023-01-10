@@ -9,13 +9,24 @@
 # Sensors
 sensor:
 
-mqtt:
-  sensor:
-    - state_topic: "house/washer/status"
-      name: "Washer Status"
+input_select:
+  washer:
+    name: Status Waschmaschine
+    options:
+      - idle
+      - running
+      - complete
+    initial: idle
+    icon: mdi:washing-machine
 
-    - state_topic: "house/dryer/status"
-      name: "Dryer Status"
+  dryer:
+    name: Status Trockner
+    options:
+      - idle
+      - running
+      - complete
+    initial: idle
+    icon: mdi:tumble-dryer
 
 # Automations
 automation:
@@ -26,11 +37,11 @@ automation:
       entity_id: sensor.trockner_electricity_power
       above: 5
     action:
-      - service: mqtt.publish
+      - service: input_select.select_option
+        target:
+          entity_id: input_select.dryer
         data:
-          topic: house/dryer/status
-          payload: running
-          retain: true
+          option: running
 
   - id: "yhe3ux5QGuhJ5PX4s5wdAdS7BXZwJw8PFjwwsqRAtsPcwFH6WF2uevG8MPKz2kya"
     alias: Set dryer Status to finish
@@ -41,20 +52,15 @@ automation:
       for:
         minutes: 5
     condition:
-      condition: or
-      conditions:
-        - condition: state
-          entity_id: sensor.dryer_status
-          state: idle
-        - condition: state
-          entity_id: sensor.dryer_status
-          state: unknown
+      - condition: state
+        entity_id: input_select.dryer
+        state: running
     action:
-      - service: mqtt.publish
+      - service: input_select.select_option
+        target:
+          entity_id: input_select.dryer
         data:
-          topic: house/dryer/status
-          payload: complete
-          retain: true
+          option: complete
       - service: script.turn_on
         entity_id: script.dryer_finished_notification_push
 
@@ -66,14 +72,14 @@ automation:
       to: "on"
     condition:
       condition: state
-      entity_id: sensor.dryer_status
+      entity_id: input_select.dryer
       state: complete
     action:
-      - service: mqtt.publish
+      - service: input_select.select_option
+        target:
+          entity_id: input_select.dryer
         data:
-          topic: house/dryer/status
-          payload: idle
-          retain: true
+          option: idle
 
   - id: "m66g2sKT5AA8LabCRb92hdAxDxMWR2yWMGSJfDMB8XWhWCyjhhBM38ZThMtwk7FL"
     alias: Set washer Status to running
@@ -85,17 +91,14 @@ automation:
       condition: or
       conditions:
         - condition: state
-          entity_id: sensor.washer_status
+          entity_id: input_select.washer
           state: idle
-        - condition: state
-          entity_id: sensor.washer_status
-          state: unknown
     action:
-      - service: mqtt.publish
+      - service: input_select.select_option
+        target:
+          entity_id: input_select.washer
         data:
-          topic: house/washer/status
-          payload: running
-          retain: true
+          option: running
 
   - id: "JegBfnJsYFyw4DWEaChdRd3BQwBJVb65sMLQXPWbHVAndETWnwxNynz9CEKxBVMS"
     alias: Set washer Status to finish
@@ -107,14 +110,14 @@ automation:
         minutes: 5
     condition:
       - condition: state
-        entity_id: sensor.washer_status
+        entity_id: input_select.washer
         state: running
     action:
-      - service: mqtt.publish
+      - service: input_select.select_option
+        target:
+          entity_id: input_select.washer
         data:
-          topic: house/washer/status
-          payload: complete
-          retain: true
+          option: complete
       - service: script.turn_on
         entity_id: script.washer_finished_notification_push
 
@@ -126,14 +129,14 @@ automation:
       to: "on"
     condition:
       - condition: state
-        entity_id: sensor.washer_status
+        entity_id: input_select.washer
         state: complete
     action:
-      - service: mqtt.publish
+      - service: input_select.select_option
+        target:
+          entity_id: input_select.washer
         data:
-          topic: house/washer/status
-          payload: idle
-          retain: true
+          option: idle
 
 # Power Cicle
 utility_meter:
@@ -151,7 +154,7 @@ script:
     - repeat:
         while:
           - condition: state
-            entity_id: sensor.dryer_status
+            entity_id: input_select.dryer
             state: "complete"
         sequence:
         - delay:
@@ -164,7 +167,7 @@ script:
       entity_id: group.devices
       state: "home"
     - condition: state
-      entity_id: sensor.dryer_status
+      entity_id: input_select.dryer
       state: "complete"
     - service: notify.telegram_group
       data:
@@ -175,7 +178,7 @@ script:
     - repeat:
         while:
           - condition: state
-            entity_id: sensor.washer_status
+            entity_id: input_select.dryer
             state: "complete"
         sequence:
         - delay:
@@ -188,7 +191,7 @@ script:
       entity_id: group.devices
       state: "home"
     - condition: state
-      entity_id: sensor.washer_status
+      entity_id: input_select.dryer
       state: "complete"
     - service: notify.telegram_group
       data:
