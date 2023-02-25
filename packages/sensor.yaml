@@ -62,6 +62,7 @@ sensor:
   - platform: min_max
     entity_ids:
       - sensor.se_of_pt_temp_temperature
+      - sensor.se_of_cb_temp_temperature
     type: median
     name: temperature_office
 
@@ -115,6 +116,7 @@ sensor:
   - platform: min_max
     entity_ids:
       - sensor.se_of_pt_temp_humidity
+      - sensor.se_of_cb_temp_humidity
     type: median
     name: humidity_office
 

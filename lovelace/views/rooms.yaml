@@ -32,9 +32,15 @@ cards:
             secondary_info: none
             layout: horizontal
       - type: custom:mushroom-climate-card
-        entity: climate.trv_office_cb_thermostat
+        entity: climate.trv_cb_office
         show_temperature_control: true
         collapsible_controls: true
+        secondary_info: none
+      - type: custom:mushroom-cover-card
+        entity: cover.cover_cb_office_position_1
+        show_buttons_control: true
+        icon_type: none
+        primary_info: none
         secondary_info: none
 
   - type: vertical-stack
@@ -54,11 +60,16 @@ cards:
             secondary_info: none
             layout: horizontal
       - type: custom:mushroom-climate-card
-        entity: climate.trv_office_pt_thermostat
+        entity: climate.trv_pt_office
         show_temperature_control: true
         collapsible_controls: true
         secondary_info: none
-
+      - type: custom:mushroom-cover-card
+        entity: cover.cover_pt_office_position_1
+        show_buttons_control: true
+        icon_type: none
+        primary_info: none
+        secondary_info: none
 
   - type: vertical-stack
     cards:

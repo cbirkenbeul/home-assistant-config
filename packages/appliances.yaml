@@ -178,7 +178,7 @@ script:
     - repeat:
         while:
           - condition: state
-            entity_id: input_select.dryer
+            entity_id: input_select.washer
             state: "complete"
         sequence:
         - delay:
@@ -191,7 +191,7 @@ script:
       entity_id: group.devices
       state: "home"
     - condition: state
-      entity_id: input_select.dryer
+      entity_id: input_select.washer
       state: "complete"
     - service: notify.telegram_group
       data:

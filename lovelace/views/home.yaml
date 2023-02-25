@@ -2,172 +2,235 @@
 title: Home
 icon: mdi:home-assistant
 cards:
-  - type: vertical-stack
+  - type: custom:simple-weather-card
+    entity: weather.casa_lani
+    backdrop: true
+    custom:
+      - temp: sensor.weewx_outtemp
+      - precipitation: sensor.weewx_rain
+      - humidity: sensor.weewx_outhumidity
+      - wind_speed: sensor.weewx_wind
+
+  - type: horizontal-stack
     cards:
-      - type: custom:mushroom-chips-card
-        chips:
-          - type: entity
-            entity: sensor.temperature_house
-          - type: entity
-            entity: sensor.humidity_house
-      - type: custom:mushroom-title-card
-        title: Hello, {{ user }} !
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: sensor.pv_wr_pc_battery_soc
-            icon: mdi:home-battery
-          - type: custom:mushroom-entity-card
-            entity: sensor.pv_prod_ges
-            icon: mdi:solar-power-variant
-            icon_color: green
-      - type: conditional
-        conditions:
-          - entity: sensor.teqqcar_charging_rate_sensor
-            state_not: "0.0"
-        card:
-          type: horizontal-stack
-          cards:
-            - type: custom:mushroom-entity-card
-              entity: sensor.teqqcar_battery
-              name: Batterie
-              icon: mdi:battery-charging-high
-            - type: custom:mushroom-entity-card
-              entity: sensor.teqqcar_charger_power
-              name: Rate
-              icon: mdi:ev-station
-              icon_color: green
-            - type: custom:mushroom-entity-card
-              entity: sensor.teqqcar_charging_time
-              name: Restzeit
-              icon: mdi:timer-play-outline
-              icon_color: red
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: sensor.weewx_outtemp
-            icon: mdi:temperature-celsius
-            primary_info: none
-            icon_color: orange
-          - type: custom:mushroom-entity-card
-            entity: sensor.weewx_drewpoint
-            icon: mdi:thermometer-lines
-            icon_color: blue
-            primary_info: none
-          - type: custom:mushroom-entity-card
-            entity: sensor.weewx_outhumidity
-            icon: mdi:water-percent
-            icon_color: blue
-            primary_info: none
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: sensor.weewx_wind
-            icon: mdi:weather-windy
-            icon_color: red
-            primary_info: none
-          - type: custom:mushroom-entity-card
-            entity: sensor.weewx_windgust
-            icon: mdi:weather-dust
-            icon_color: red
-            primary_info: none
-          - type: custom:mushroom-entity-card
-            entity: sensor.weewx_rain
-            icon: mdi:weather-pouring
-            icon_color: green
-            primary_info: none
+      - type: custom:mushroom-person-card
+        entity: person.teqqy
+        icon_type: entity-picture
+      - type: custom:mushroom-person-card
+        entity: person.petra
+        icon_type: entity-picture
 
   - type: vertical-stack
     cards:
-      - type: custom:mushroom-chips-card
-        alignment: center
-        chips:
-          - type: weather
-            entity: weather.casa_lani
-            show_conditions: true
-            show_temperature: true
-      - type: custom:mushroom-title-card
-        title: Räume
-      - type: horizontal-stack
+    - type: conditional
+      conditions:
+        - entity: binary_sensor.teqqcar_charger
+          state: 'on'
+      card:
+        type: custom:stack-in-card
         cards:
-          - type: custom:mushroom-entity-card
-            entity: sensor.temperature_office
-            icon: mdi:chair-rolling
-            name: Büro Temperatur
-          - type: custom:mushroom-entity-card
-            entity: sensor.humidity_office
-            icon: mdi:chair-rolling
-            name: Büro Luftfeuchtigkeit
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: sensor.temperature_livingroom
-            icon: mdi:sofa
-            name: Wohnzimmer Temperatur
-          - type: custom:mushroom-entity-card
-            entity: sensor.humidity_livingroom
-            icon: mdi:sofa
-            name: Wohnzimmer Luftfeuchtigkeit
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: sensor.temperature_kitchen
-            icon: mdi:countertop
-            name: Küche
-          - type: custom:mushroom-cover-card
-            entity: cover.jalousie_kueche_position
-            show_buttons_control: true
-            icon_type: none
-            primary_info: none
-            secondary_info: none
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: sensor.temperature_bedroom
-            icon: mdi:bed
-            name: Schlafzimmer Temperatur
-          - type: custom:mushroom-entity-card
-            entity: sensor.humidity_bedroom
-            icon: mdi:bed
-            name: Schlafzimmer Luftfeuchtigkeit
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: sensor.temperature_bathroom
-            icon: mdi:shower
-            name: Bad Temperatur
-          - type: custom:mushroom-entity-card
-            entity: sensor.humidity_bathroom
-            icon: mdi:shower
-            name: Bad Luftfeuchtigkeit
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: sensor.temperature_hallway
-            icon: mdi:stairs
-            name: Flur
+          - type: picture-elements
+            entity: binary_sensor.teqqcar_charging
+            image: /local/lovelace/tesla_pluggedin.PNG
+            elements:
+              - type: state-label
+                entity: sensor.teqqcar_range
+                style:
+                  top: 77%
+                  left: 81%
+                  transform: none
+                  color: white
+              - type: state-label
+                entity: sensor.teqqcar_battery
+                style:
+                  top: 70%
+                  left: 88%
+                  transform: none
+                  color: white
+              - type: conditional
+                conditions:
+                  - entity: binary_sensor.teqqcar_charging
+                    state: 'on'
+                elements:
+                  - type: state-label
+                    entity: sensor.teqqcar_charger_power
+                    style:
+                      top: 70%
+                      left: 1%
+                      transform: none
+                      color: green
+                  - type: state-label
+                    entity: sensor.teqqcar_charging_time
+                    style:
+                      top: 77%
+                      left: 1%
+                      transform: none
+                      color: green
 
-  - type: vertical-stack
+              - type: conditional
+                conditions:
+                  - entity: device_tracker.teqqcar_location_tracker
+                    state: not_home
+                elements:
+                  - type: state-icon
+                    entity: device_tracker.teqqcar_location_tracker
+                    icon: mdi:home-export-outline
+                    style:
+                      top: 1%
+                      left: 91%
+                      transform: none
+              - type: conditional
+                conditions:
+                  - entity: device_tracker.teqqcar_location_tracker
+                    state: home
+                elements:
+                  - type: state-icon
+                    entity: device_tracker.teqqcar_location_tracker
+                    icon: mdi:home
+                    style:
+                      top: 1%
+                      left: 91%
+                      transform: none
+            state_image:
+              'off': /local/lovelace/tesla_pluggedin.PNG
+              'on': /local/lovelace/tesla_charging.PNG
+
+  - type: custom:stack-in-card
     cards:
-      - type: custom:mushroom-chips-card
-        alignment: end
-        chips:
-          - type: entity
-            entity: device_tracker.teqqphone
-          - type: entity
-            entity: device_tracker.clios_iphone
-      - type: custom:mushroom-title-card
-        title: Rolläden
-      - type: custom:mushroom-cover-card
-        entity: cover.rolladen
-        layout: horizontal
-        secondary_info: false
-        show_buttons_control: true
-      - type: custom:mushroom-title-card
-        title: Szenen
-      - type: entities
-        entities:
-          - scene.abendbeleuchtung
-          - scene.movietime
-          - scene.youtube
-          - scene.buro
+    - type: custom:mushroom-template-card
+      primary: Wohnzimmer
+      secondary: '{{ states(''sensor.temperature_livingroom'') | round(0) }} °C | {{ states(''sensor.humidity_livingroom'') | round(0) }} %'
+      icon: mdi:sofa
+      entity: group.livingroom_lights
+      tap_action:
+        action: navigate
+        navigation_path: livingroom
+      hold_action:
+        action: toggle
+      icon_color: '{{ ''orange'' if is_state(entity, ''on'') else ''disabled'' }}'
+      fill_container: true
+      layout: horizontal
+      multiline_secondary: false
+      card_mod:
+        style: |
+          :host([dark-mode]) {
+            background: rgba(var(--rgb-primary-background-color), 0.2);
+          } 
+          :host {
+            background: rgba(var(--rgb-primary-text-color), 0.025);
+            --mush-icon-size: 76px;
+            height: 66px;
+            margin-left: -18px !important;
+          }
+    - type: custom:mushroom-chips-card
+      chips:
+        - type: conditional
+          conditions:
+            - entity: binary_sensor.bs_li_terrasse_contact
+              state: 'on'
+          chip:
+            type: template
+            icon_color: disabled
+            icon: mdi:window-open
+        - type: conditional
+          conditions:
+            - entity: light.couch
+              state: 'on'
+          chip:
+            type: template
+            icon_color: disabled
+            icon: mdi:sofa
+        - type: conditional
+          conditions:
+            - entity: light.bodenlampe
+              state: 'on'
+          chip:
+            type: template
+            icon_color: disabled
+            icon: mdi:lamp
+        - type: conditional
+          conditions:
+            - entity: switch.plug_lichterkette
+              state: 'on'
+          chip:
+            type: template
+            icon_color: disabled
+            icon: mdi:led-strip-variant
+        - type: conditional
+          conditions:
+            - entity: light.wz_decke
+              state: 'on'
+          chip:
+            type: template
+            icon_color: disabled
+            icon: mdi:ceiling-light
+      alignment: end
+      card_mod:
+        style: |
+          ha-card {
+            --chip-box-shadow: none;
+            --chip-background: none;
+            --chip-spacing: 0;
+          } 
+    card_mod:
+      style: |
+        ha-card {
+          height: 102px;
+          {% if is_state('light.couch', 'on') %}
+            background: rgba(255, 152, 0, 0.1);
+          {% endif %}
+        }
+
+  - type: custom:stack-in-card
+    cards:
+    - type: custom:mushroom-template-card
+      primary: Küche
+      secondary: '{{ states(''sensor.temperature_kitchen'') | round(0) }} °C'
+      icon: mdi:countertop
+      entity: light.decke
+      tap_action:
+        action: navigate
+        navigation_path: kitchen
+      hold_action:
+        action: toggle
+      icon_color: '{{ ''orange'' if is_state(entity, ''on'') else ''disabled'' }}'
+      fill_container: true
+      layout: horizontal
+      multiline_secondary: false
+      card_mod:
+        style: |
+          :host([dark-mode]) {
+            background: rgba(var(--rgb-primary-background-color), 0.2);
+          } 
+          :host {
+            background: rgba(var(--rgb-primary-text-color), 0.025);
+            --mush-icon-size: 76px;
+            height: 66px;
+            margin-left: -18px !important;
+          }
+    - type: custom:mushroom-chips-card
+      chips:
+        - type: conditional
+          conditions:
+            - entity: binary_sensor.bs_ki_window_contact
+              state: 'on'
+          chip:
+            type: template
+            icon_color: disabled
+            icon: mdi:window-open
+      alignment: end
+      card_mod:
+        style: |
+          ha-card {
+            --chip-box-shadow: none;
+            --chip-background: none;
+            --chip-spacing: 0;
+          } 
+    card_mod:
+      style: |
+        ha-card {
+          height: 102px;
+          {% if is_state('light.decke', 'on') %}
+            background: rgba(255, 152, 0, 0.1);
+          {% endif %}
+        }

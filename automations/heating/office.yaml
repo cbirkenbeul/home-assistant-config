@@ -1,0 +1,52 @@
+---
+# Adjust room temperature
+
+- alias: office cb - set temperature
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.temperature_office
+  condition: []
+  action:
+    - device_id: 905b144d25c65bd220d06cfad1ae2846
+      domain: select
+      entity_id: select.trv_cb_office_sensor
+      type: select_option
+      option: external
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 10
+        milliseconds: 0
+    - service: mqtt.publish
+      data:
+        topic: zigbee2mqtt/trv_cb_office/set/sensor_temp
+        payload_template: >-
+          {{ (states('sensor.temperature_office')|float(0)|round(1))
+          }}
+
+- alias: office pt - set temperature
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.temperature_office
+  condition: []
+  action:
+    - device_id: 6e6e99fca4e45938abc89f24bc547a97
+      domain: select
+      entity_id: select.trv_pt_office_sensor
+      type: select_option
+      option: external
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 10
+        milliseconds: 0
+    - service: mqtt.publish
+      data:
+        topic: zigbee2mqtt/trv_pt_office/set/sensor_temp
+        payload_template: >-
+          {{ (states('sensor.temperature_office')|float(0)|round(1))
+          }}

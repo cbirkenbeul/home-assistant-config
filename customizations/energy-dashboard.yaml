@@ -87,16 +87,25 @@ sensor.pv_wr_pc_home_consumption_from_pv_day:
 
 sensor.pv_wr_pc_home_consumption_from_grid_day:
   friendly_name: Netz
-  icon: mdi:transmission-tower-export
+  icon: mdi:transmission-tower-import
 
 sensor.pv_wr_pc_battery_charge_from_pv_day:
   friendly_name: Batterieladung
   icon: mdi:battery-arrow-down-outline
 
-sensor.pv_prod_ges_kwh:
-  friendly_name: PV Produktion
+sensor.pv_prod_ges_kwh_daily:
+  friendly_name: Photovoltaik
   icon: mdi:solar-panel
 
 sensor.serverrack_energy_daily:
   friendly_name: Serverrack
   icon: mdi:server
+
+sensor.pv_wr_pc_energy_discharge_to_grid_day:
+  friendly_name: Strom VK heute
+  icon: mdi:transmission-tower-export
+
+sensor.pv_ges_energy_daily:
+  friendly_name: PV prod heute
+  icon: mdi:solar-panel
+  

@@ -1,16 +1,16 @@
 ---
 cover.jalousie_kueche_position:
-  friendly_name: Jalousie Küche
+  friendly_name: Rolladen Küche
   icon: mdi:window-shutter
 
-climate.trv_office_cb_thermostat:
-  friendly_name: Heizung Büro Christian
-  icon: mdi:radiator
+cover.cover_cb_office_position_1:
+  friendly_name: Rolladen Büro Christian
+  icon: mdi:window-shutter
 
-climate.trv_office_pt_thermostat:
-  friendly_name: Heizung Büro Petra
-  icon: mdi:radiator
+cover.cover_diningroom_position_1:
+  friendly_name: Rolladen Esszimmer
+  icon: mdi:window-shutter
 
-climate.trv_eg_hallway_climate:
-  friendly_name: Heizung Flur Haustür
-  icon: mdi:radiator
+cover.cover_pt_office_position_1:
+  friendly_name: Rolladen Büro Petra
+  icon: mdi:window-shutter

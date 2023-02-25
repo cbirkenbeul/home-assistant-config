@@ -29,10 +29,12 @@
     entity_id: sensor.house_status
     to: 'wakeup'
   action:
-    service: climate.set_temperature
-    entity_id: climate.trv_bathroom
-    data:
-      temperature: 28
+    - delay:
+        minutes: 1
+    - service: climate.set_temperature
+      entity_id: climate.trv_bathroom
+      data:
+        temperature: 28
 
 - alias: Bathroom - preheat finish
   trigger:
@@ -45,67 +47,3 @@
     data:
       entity_id: climate.trv_bathroom
       temperature: 21
-
-- alias: Bathroom - away
-  trigger:
-    platform: state
-    entity_id: sensor.house_status
-    from: 'wakeup'
-    to: 'away'
-  action:
-    service: climate.set_temperature
-    data:
-      entity_id: climate.trv_bathroom
-      temperature: 18
-
-# Adjusting temperature
-
-- alias: bathroom - Adjust temp above 22C
-  trigger:
-    platform: time_pattern
-    hours: "/1"
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id:
-          - sensor.house_status
-        state: 'home'
-      - condition: numeric_state
-        entity_id: sensor.temperature_bathroom
-        above: '22'
-      - condition: state
-        entity_id: 
-          - binary_sensor.bs_br_window_contact
-        state: 'off'
-  action:
-    - service: climate.set_temperature
-      entity_id:
-        - climate.trv_bathroom
-      data:
-        temperature: 20
-
-- alias: bathroom - Adjust temp below 20C
-  trigger:
-    platform: time_pattern
-    hours: "/1"
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id:
-          - sensor.house_status
-        state: 'home'
-      - condition: numeric_state
-        entity_id: sensor.temperature_bathroom
-        below: '20'
-      - condition: state
-        entity_id: 
-          - binary_sensor.bs_br_window_contact
-        state: 'off'
-  action:
-    - service: climate.set_temperature
-      entity_id:
-        - climate.trv_bathroom
-      data:
-        temperature: 22

@@ -19,7 +19,7 @@ sensor:
       tesla_charge_kw:
         unit_of_measurement: kWh
         value_template: >-
-          {{ (states('snumber.teqqcar_charge_limit') | float(0) * 240 / 1000 * 3) | round(1)}}
+          {{ (states('number.teqqcar_charge_limit') | float(0) * 240 / 1000 * 3) | round(1)}}
 
   - platform: template
     sensors:
@@ -36,7 +36,7 @@ automation:
     trigger:
     - platform: numeric_state
       entity_id: sensor.pv_wr_pc_battery_soc
-      above: '90'
+      above: '95'
       for: 00:00:20
     condition:
       - condition: and
@@ -46,7 +46,7 @@ automation:
             state: home
           - condition: state
             entity_id: binary_sensor.teqqcar_charging
-            state: 'on'
+            state: 'off'
           - condition: state
             entity_id: switch.teqqcar_charger
             state: 'off'

@@ -9,7 +9,7 @@
         - sensor.temperature_livingroom
   condition: []
   action:
-    - device_id: 5aaa671b66121939a0ba6687a8a76875
+    - device_id: f7ea977ee2aff2edb1e2096e2704fd2a
       domain: select
       entity_id: select.trv_livingroom_sensor
       type: select_option
@@ -34,7 +34,7 @@
         - sensor.temperature_livingroom
   condition: []
   action:
-    - device_id: 5aaa671b66121939a0ba6687a8a76876
+    - device_id: 4d9ecf46e96ead153e15b7fbb6c61d37
       domain: select
       entity_id: select.trv_diningroom_sensor
       type: select_option
@@ -50,49 +50,3 @@
         payload_template: >-
           {{ (states('sensor.temperature_livingroom')|float(0)|round(1))
           }}
-
-
-# Adjust room temperature
-- alias: livingroom - Adjust temp above 24C
-  trigger:
-    platform: time_pattern
-    hours: "/1"
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id:
-          - sensor.house_status
-        state: 'home'
-      - condition: numeric_state
-        entity_id: sensor.temperature_livingroom
-        above: '24'
-  action:
-    - service: climate.set_temperature
-      entity_id:
-        - climate.trv_livingroom
-        - climate.trv_diningroom
-      data:
-        temperature: 22
-
-- alias: livingroom - Adjust temp below 22C
-  trigger:
-    platform: time_pattern
-    hours: "/1"
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id:
-          - sensor.house_status
-        state: 'home'
-      - condition: numeric_state
-        entity_id: sensor.temperature_livingroom
-        below: '22'
-  action:
-    - service: climate.set_temperature
-      entity_id:
-        - climate.trv_livingroom
-        - climate.trv_diningroom
-      data:
-        temperature: 25

@@ -418,7 +418,7 @@
     },
     "node-red-contrib-bigtimer": {
         "name": "node-red-contrib-bigtimer",
-        "version": "2.8.3",
+        "version": "2.8.5",
         "local": false,
         "user": false,
         "nodes": {
@@ -475,7 +475,7 @@
     },
     "node-red-contrib-home-assistant-websocket": {
         "name": "node-red-contrib-home-assistant-websocket",
-        "version": "0.48.0",
+        "version": "0.48.1",
         "local": false,
         "user": false,
         "nodes": {
@@ -772,7 +772,7 @@
     },
     "node-red-contrib-sunevents": {
         "name": "node-red-contrib-sunevents",
-        "version": "3.0.3",
+        "version": "3.1.1",
         "local": false,
         "user": false,
         "nodes": {
@@ -810,7 +810,7 @@
     },
     "node-red-dashboard": {
         "name": "node-red-dashboard",
-        "version": "3.3.0",
+        "version": "3.3.1",
         "local": false,
         "user": false,
         "nodes": {
@@ -1146,7 +1146,7 @@
     },
     "node-red-node-serialport": {
         "name": "node-red-node-serialport",
-        "version": "1.0.1",
+        "version": "1.0.3",
         "local": false,
         "user": false,
         "nodes": {

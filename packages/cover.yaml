@@ -11,6 +11,9 @@ cover:
     name: Rolladen
     entities:
       - cover.jalousie_kueche_position
+      - cover.cover_cb_office_position_1
+      - cover.cover_diningroom_position_1
+      - cover.cover_pt_office_position_1
 
   - platform: template
     covers:
@@ -31,4 +34,3 @@ cover:
           {% else %}
             mdi:garage
           {% endif %}
-

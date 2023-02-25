@@ -42,6 +42,9 @@ homekit:
       # Cover
       - cover.garage_door
       - cover.jalousie_kueche_position
+      - cover.cover_cb_office_position_1
+      - cover.cover_diningroom_position_1
+      - cover.cover_pt_office_position_1
 
       # Lights
       - light.az_cb_decke
@@ -57,19 +60,6 @@ homekit:
       - input_boolean.evening_lightning_default
       - input_boolean.media
       - input_boolean.nightmode
-
-      # Sensor
-      - sensor.humidity_bathroom
-      - sensor.humidity_bedroom
-      - sensor.humidity_hallway
-      - sensor.humidity_livingroom
-      - sensor.humidity_office
-      - sensor.temperature_bathroom
-      - sensor.temperature_bedroom
-      - sensor.temperature_hallway
-      - sensor.temperature_livingroom
-      - sensor.temperature_office
-      - sensor.weewx_outtemp
 
       # Switch
       - switch.sw_hw_og_deko

@@ -65,3 +65,11 @@ lovelace:
       type: module
     - url: /hacsfiles/mini-humidifier/mini-humidifier-bundle.js
       type: module
+    - url: /hacsfiles/room-card/room-card.js
+      type: module
+    - url: /hacsfiles/stack-in-card/stack-in-card.js 
+      type: module
+    - url: /hacsfiles/bar-card/bar-card.js 
+      type: module
+    - url: /hacsfiles/lovelace-card-mod/card-mod.js 
+      type: module

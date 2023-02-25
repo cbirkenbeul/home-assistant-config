@@ -7,11 +7,13 @@ cards:
       - entity: switch.teqqcar_charger
         state: "on"
     card:
-      - type: custom:mushroom-entity-card
-        entity: sensor.teqqcar_charger_power
-      - type: custom:mushroom-entity-card
-        entity: sensor.teqqcar_battery
-        icon: mdi:car-battery
+      type: horizontal-stack
+      cards:
+        - type: custom:mushroom-entity-card
+          entity: sensor.teqqcar_charger_power
+        - type: custom:mushroom-entity-card
+          entity: sensor.teqqcar_battery
+          icon: mdi:car-battery
 
   - type: map
     aspect_ratio: 16:9

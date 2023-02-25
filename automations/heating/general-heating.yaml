@@ -8,7 +8,7 @@
     service: climate.set_temperature
     entity_id: group.climate
     data:
-      temperature: 24
+      temperature: 23
 
 - alias: Climate - Turn down on leaving home
   trigger:
@@ -30,7 +30,7 @@
     service: climate.set_temperature
     entity_id: group.climate
     data:
-      temperature: 24
+      temperature: 23
 
 - alias: Climate - Turn down for sleeping
   trigger:
