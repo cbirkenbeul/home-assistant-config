@@ -1,7 +1,7 @@
 ---
 binary_sensor.bs_br_window_contact:
   friendly_name: Fenster Badezimmer
-  icon: mdi:window-close
+  icon: mdi:window-closed
 
 sensor.bs_br_window_linkquality:
   friendly_name: Kontakt Fenster Badezimmer

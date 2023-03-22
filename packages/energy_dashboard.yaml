@@ -35,8 +35,20 @@ sensor:
     unit_prefix: k
     round: 2
 
+  - platform: template
+    sensors:
+      office_power:
+        friendly_name: Strom Büro
+        unit_of_measurement: W
+        value_template: >
+          {{ states('sensor.az_bloom_power')|float(0) + states('sensor.az_pt_decke_power')|float(0)}}
+
 # Power Cicle
 utility_meter:
   serverrack_energy_daily:
     source: sensor.serverrack_energy
+    cycle: daily
+
+  energy_export_daily:
+    source: sensor.netzeinspeisung
     cycle: daily

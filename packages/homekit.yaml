@@ -37,7 +37,6 @@ homekit:
       - climate.trv_bathroom
       - climate.trv_diningroom
       - climate.trv_kitchen
-      - climate.trv_livingroom
 
       # Cover
       - cover.garage_door
@@ -47,7 +46,6 @@ homekit:
       - cover.cover_pt_office_position_1
 
       # Lights
-      - light.az_cb_decke
       - light.az_pt_decke
       - light.bloom
       - light.bodenlampe

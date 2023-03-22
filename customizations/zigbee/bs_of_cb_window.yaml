@@ -1,0 +1,10 @@
+---
+binary_sensor.bs_of_cb_window_contact:
+  friendly_name: Fenster Büro Christian
+  icon: mdi:window-closed-variant
+
+sensor.bs_of_cb_window_linkquality:
+  friendly_name: Kontakt Fenster Büro Christian
+
+sensor.bs_of_cb_window_battery:
+  friendly_name: Fenster Büro Christian Batterie

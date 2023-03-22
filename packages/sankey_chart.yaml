@@ -34,3 +34,7 @@ utility_meter:
   ap_christian_energy_daily:
     source: sensor.ap_christian_energy
     cycle: daily
+
+  teqqcar_charing_daily:
+    source: sensor.tesla_charge_energy_added
+    cycle: daily

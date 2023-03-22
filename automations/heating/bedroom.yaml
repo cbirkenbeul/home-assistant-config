@@ -1,0 +1,21 @@
+---
+# Control TRV
+- id: "hltCpkaKdJl8LUgQYwa7oisHWQOC9vS01ybuoII71RjhPztN6Qy0xuvSg0D8mbRF"
+  alias: Bedroom - Turn off TRV over 20
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.temperature_bedroom
+    above: 20
+  action:
+    service: climate.turn_off
+    entity_id: climate.trv_bedroom
+      
+- id: "aMJbnJ3MwSouNnvKXcj6ReyAcNKQd2PfNNbMooN52ZCjsC23nuVoAvmYeTcAO1sA"
+  alias: Bedroom - Turn on TRV und 18
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.temperature_bedroom
+    below: 18
+  action:
+    service: climate.turn_on
+    entity_id: climate.trv_bedroom

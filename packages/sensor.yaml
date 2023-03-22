@@ -63,6 +63,8 @@ sensor:
     entity_ids:
       - sensor.se_of_pt_temp_temperature
       - sensor.se_of_cb_temp_temperature
+      - sensor.bs_of_cb_window_device_temperature
+      - sensor.bs_of_pt_window_device_temperature
     type: median
     name: temperature_office
 

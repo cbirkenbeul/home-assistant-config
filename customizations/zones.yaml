@@ -6,3 +6,7 @@ zone.museum:
 zone.tim:
   friendly_name: TIM AG
   icon: mdi:office-building
+
+zone.stadtarchiv:
+  friendly_name: Stadtarchiv
+  icon: mdi:archive-check-outline

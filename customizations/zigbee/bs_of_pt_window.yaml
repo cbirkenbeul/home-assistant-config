@@ -1,0 +1,10 @@
+---
+binary_sensor.bs_of_pt_window_contact:
+  friendly_name: Fenster Büro Petra
+  icon: mdi:window-closed-variant
+
+sensor.bs_of_pt_window_linkquality:
+  friendly_name: Kontakt Fenster Büro Petra
+
+sensor.bs_of_pt_window_battery:
+  friendly_name: Fenster Büro Petra Batterie

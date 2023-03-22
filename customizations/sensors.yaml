@@ -137,13 +137,34 @@ sensor.ap_christian_energy_daily:
   friendly_name: AP Christian
   icon: mdi:desk
 
+sensor.shelly_ap_petra_device_energy_daily:
+  friendly_name: AP Petra
+  icon: mdi:desk
+
 sensor.ap_christian_power:
   friendly_name: AP Christian
+  icon: mdi:desk
+
+sensor.shelly_ap_petra_power:
+  friendly_name: AP Petra
+  icon: mdi:desk
+
+sensor.ap_christian_energy:
+  friendly_name: AP Christian
+  icon: mdi:desk
+
+sensor.shelly_ap_petra_energy:
+  friendly_name: AP Petra
   icon: mdi:desk
 
 sensor.serverrack_power:
   friendly_name: Serverrack
   icon: mdi:server
+
+
+sensor.all_lights_energy:
+  friendly_name: Licht
+  icon: mdi:lightbulb-group-outline
 
 sensor.all_lights_power:
   friendly_name: Licht

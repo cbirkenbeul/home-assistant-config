@@ -1,0 +1,68 @@
+---
+type: custom:stack-in-card
+title: Energy Distribution
+icon: mdi:chart-sankey
+cards:
+  - type: custom:sankey-chart
+    show_names: true
+    unit_prefix: k
+    round: 1
+    wide: true
+    height: 500
+    sections:
+      - entities:
+          - entity_id: sensor.pv_ges_energy_daily
+            color: green
+            name: Photovoltaik
+            children: 
+              - sensor.pv_wr_pc_battery_charge_from_pv_day
+              - power_consumption_today_total
+              - sensor.energy_export_daily
+          - entity_id: sensor.pv_wr_pc_home_consumption_from_battery_day
+            name: Batterie
+            children: 
+              - power_consumption_today_total
+          - entity_id: sensor.pv_wr_pc_home_consumption_from_grid_day
+            color: red
+            children: 
+              - power_consumption_today_total
+      - entities:
+          - entity_id: sensor.pv_wr_pc_battery_charge_from_pv_day
+            color: orange
+          - entity_id: sensor.energy_export_daily
+            color: orange
+            name: Stromverkauf
+          - entity_id: power_consumption_today_total
+            type: remaining_parent_state
+            name: Verbrauch
+            color: red
+            children:
+              - sensor.serverrack_energy_daily
+              - sensor.all_lights_energy_daily
+              - sensor.ap_christian_energy_daily
+              - sensor.shelly_ap_petra_device_energy_daily
+              - sensor.dryer_energy_daily
+              - sensor.washer_energy_daily
+              - sensor.other_devices_power
+              - sensor.teqqcar_charing_daily
+              - al_het_andere
+      - entities:
+          - entity_id: sensor.serverrack_energy_daily
+            color: grey
+          - entity_id: sensor.all_lights_energy_daily
+            color: brown
+          - entity_id: sensor.ap_christian_energy_daily
+            color: blue
+          - entity_id: sensor.shelly_ap_petra_device_energy_daily
+            color: blue
+          - entity_id: sensor.dryer_energy_daily
+            name: Trockner
+          - entity_id: sensor.washer_energy_daily
+            name: Waschmaschine
+          - entity_id: sensor.other_devices_power
+            color: black
+          - entity_id: sensor.teqqcar_charing_daily
+            color: yellow
+          - entity_id: al_het_andere
+            type: remaining_parent_state
+            name: Alle andere

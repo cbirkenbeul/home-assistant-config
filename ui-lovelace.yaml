@@ -11,9 +11,14 @@
 
 title: Casa Lani
 views:
-  - !include lovelace/views/home.yaml
-  - !include lovelace/views/rooms.yaml
-  - !include lovelace/views/vacuum.yaml
-  - !include lovelace/views/car.yaml
-  - !include lovelace/views/energy.yaml
-  - !include lovelace/views/sankey.yaml
+  - !include lovelace/home.yaml
+  - !include lovelace/livingroom.yaml
+  - !include lovelace/office.yaml
+  - !include lovelace/bathroom.yaml
+  - !include lovelace/kitchen.yaml
+  - !include lovelace/hallway.yaml
+  - !include lovelace/bedroom.yaml
+  - !include lovelace/vacuum.yaml
+  - !include lovelace/car.yaml
+  - !include lovelace/energy.yaml
+  - !include lovelace/sankey.yaml

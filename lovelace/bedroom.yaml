@@ -1,0 +1,124 @@
+---
+title: Schlafzimmer
+icon: mdi:bed
+cards:
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        title: Umwelt
+      - type: custom:stack-in-card
+        mode: horizontal
+        cards:
+          - type: custom:mushroom-template-card
+            entity: sensor.temperature_bedroom
+            primary: Temperatur
+            secondary: |
+              {{ states('sensor.temperature_bedroom')}} °C
+            icon: mdi:thermometer
+            icon_color: |
+              {% if states('sensor.temperature_bedroom') | float > 21 %}
+                  #c0392b
+              {% elif states('sensor.temperature_bedroom') | float > 29 %}
+                  #f1c40f
+              {% elif states('sensor.temperature_bedroom') | float > 19 %}
+                  #2ecc71
+              {% elif states('sensor.temperature_bedroom') | float > 18 %}
+                  #f1c40f
+              {% elif states('sensor.temperature_bedroom') | float > 17 %}
+                  #e67e22
+              {% else %}
+                  #c0392b
+              {% endif %}
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.temperature_bedroom
+            hours_to_show: 8
+            points_per_hour: 4
+            line_width: 2
+            animate: true
+            show:
+              name: false
+              icon: false
+              state: false
+              legend: false
+              fill: fade
+            color_thresholds:
+              - value: 17
+                color: "#c0392b"
+              - value: 18
+                color: "#f1c40f"
+              - value: 19
+                color: "#2ecc71"
+              - value: 20
+                color: "#f1c40f"
+              - value: 21
+                color: "#c0392b"
+            card_mod:
+              style: |
+                ha-card {
+                  border-radius: 8px;
+                  background: none;
+                  box-shadow: none;
+                  --ha-card-border-width: 0;
+                }
+      - type: custom:stack-in-card
+        mode: horizontal
+        cards:
+          - type: custom:mushroom-template-card
+            entity: sensor.humidity_bedroom
+            primary: Luftfeuchtigkeit
+            secondary: |
+              {{ states('sensor.humidity_bedroom')}} %
+            icon: mdi:water-percent
+            icon_color: |
+              {% if states('sensor.humidity_bedroom') | float > 60 %}
+                  #e74c3c
+              {% elif states('sensor.humidity_bedroom') | float > 40 %}
+                  #2ecc71
+              {% elif states('sensor.humidity_bedroom') | float > 0 %}
+                  #e74c3c
+              {% else %}
+                  #2c3e50
+              {% endif %}
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.humidity_bedroom
+            hours_to_show: 8
+            points_per_hour: 4
+            line_width: 2
+            animate: true
+            show:
+              name: false
+              icon: false
+              state: false
+              legend: false
+              fill: fade
+            color_thresholds:
+              - value: 30
+                color: "#c0392b"
+              - value: 40
+                color: "#f1c40f"
+              - value: 50
+                color: "#2ecc71"
+              - value: 60
+                color: "#f1c40f"
+              - value: 70
+                color: "#c0392b"
+            card_mod:
+              style: |
+                ha-card {
+                  border-radius: 8px;
+                  background: none;
+                  box-shadow: none;
+                  --ha-card-border-width: 0;
+                }
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        title: Heizung
+      - type: custom:mushroom-climate-card
+        entity: climate.trv_bedroom
+        layout: horizontal
+        icon_type: entity_icon
+        show_temperature_control: true

@@ -7,6 +7,8 @@
 ###############################################################################
 
 group:
+
+  # Climate Groups
   climate:
     name: climate
     entities:
@@ -17,6 +19,7 @@ group:
       - climate.trv_cb_office
       - climate.trv_pt_office
 
+  # Light Groups
   livingroom_lights:
     name: Livingroom Lights
     entities:
@@ -25,3 +28,46 @@ group:
       - light.wz_decke
       - switch.sw_dr_deko
       - switch.plug_lichterkette
+
+  office_lights:
+    name: Office Lights
+    entities:
+      - light.az_bloom
+      - light.az_pt_decke
+      - light.leseecke
+
+  hallway_lights:
+    name: Hallway Lights
+    entities:
+      - switch.sw_hw_og_deko
+      - light.bad
+      - light.hue_filament_bulb_1
+      - light.hue_filament_bulb_2
+      - light.medizinschrank
+
+  # Window / Door Sensor Groups
+  livingroom_windows:
+    name: Livingroom doors and windows
+    entities:
+      - binary_sensor.bs_li_terrasse_contact
+
+  office_windows:
+    name: Office doors and windows
+    entities:
+      - binary_sensor.bs_of_cb_window_contact
+      - binary_sensor.bs_of_pt_window_contact
+
+  hallway_windows:
+    name: Hallway doors and windows
+    entities:
+      - binary_sensor.bs_hw_bm_door_contact
+
+  bathroom_windows:
+    name: Bathroom doors and windows
+    entities:
+      - binary_sensor.bs_br_window_contact
+
+  kitchen_windows:
+    name: Kitchen doors and windows
+    entities:
+      - binary_sensor.bs_ki_window_contact

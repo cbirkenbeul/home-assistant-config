@@ -23,3 +23,7 @@ zone:
     latitude: !secret HASS_WORK1_LATITUDE
     longitude: !secret HASS_WORK1_LONGITUDE
     radius: 100
+
+  - name: stadtarchiv
+    latitude: !secret HASS_WORK3_LATITUDE
+    longitude: !secret HASS_WORK3_LONGITUDE

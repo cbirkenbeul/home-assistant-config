@@ -29,15 +29,21 @@ sensor:
           {{ (states.sensor.teqqcar_charging_rate.attributes.time_left) }}
         icon_template: mdi:timer-sync-outline
 
+mqtt:
+  sensor:
+    - name: tesla_charge_energy_added
+      state_topic: "teslamate/cars/1/charge_energy_added"
+      device_class: energy
+      unit_of_measurement: kWh
+      icon: mdi:battery-charging
 
 automation:
-  - id: 'Tesla001'
-    alias: Tesla - Start charging above 2 kW power to grid
+  - id: TAXsk8rAemJQ45aVaIuCfU7qwE70hSAen6xA9wNbstXnw00nytstkDORma02mrzi
+    alias: Tesla - Start charging if pv production over 1500
     trigger:
-    - platform: numeric_state
-      entity_id: sensor.pv_wr_pc_battery_soc
-      above: '95'
-      for: 00:00:20
+    - platform: time_pattern
+      minutes: '/10'
+      seconds: 00
     condition:
       - condition: and
         conditions:
@@ -51,13 +57,17 @@ automation:
             entity_id: switch.teqqcar_charger
             state: 'off'
           - condition: numeric_state
+            entity_id: sensor.pv_wr_pc_battery_soc
+            above: '90'
+          - condition: numeric_state
             entity_id: sensor.pv_prod_ges
-            above: '1000'
+            above: '1500'
     action:
     - service: switch.turn_on
       target:
         entity_id: switch.teqqcar_charger
     mode: single
+
 
   - alias: Adjust charging speed
     trigger:
@@ -76,7 +86,7 @@ automation:
     action:
       service: script.adjust_tesla_charging
 
-  - id: 'Tesla002'
+  - id: rWAmk5RZbNron9gsZN3GcOXnsr0EppOny5aJQJB0UNgGDN7lSSUvtqqBwLgdGCKP
     alias: Tesla - Stop charging if solar generation is below 1 kW
     description: ''
     trigger:
@@ -94,7 +104,7 @@ automation:
         entity_id: switch.teqqcar_charger
     mode: single
 
-  - id: 'Tesla003'
+  - id: p86ivzlxVwSfyWxjnHEPkvKpTuqbw9yPdF7x7aaGFGUhm1uVdG8rjaDa8SpmMEcp
     alias: Tesla - Stop charging if solar battery is under 90 %
     description: ''
     trigger:

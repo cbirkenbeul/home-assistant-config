@@ -1,0 +1,101 @@
+---
+title: Küche
+icon: mdi:countertop
+cards:
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        title: Umwelt
+      - type: custom:stack-in-card
+        mode: horizontal
+        cards:
+          - type: custom:mushroom-template-card
+            entity: sensor.temperature_kitchen
+            primary: Temperatur
+            secondary: |
+              {{ states('sensor.temperature_kitchen')}} °C
+            icon: mdi:thermometer
+            icon_color: |
+              {% if states('sensor.temperature_kitchen') | float > 26 %}
+                  #c0392b
+              {% elif states('sensor.temperature_kitchen') | float > 24 %}
+                  #f1c40f
+              {% elif states('sensor.temperature_kitchen') | float > 22 %}
+                  #2ecc71
+              {% elif states('sensor.temperature_kitchen') | float > 21 %}
+                  #f1c40f
+              {% elif states('sensor.temperature_kitchen') | float > 20 %}
+                  #e67e22
+              {% else %}
+                  #c0392b
+              {% endif %}
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.temperature_kitchen
+            hours_to_show: 8
+            points_per_hour: 4
+            line_width: 2
+            animate: true
+            show:
+              name: false
+              icon: false
+              state: false
+              legend: false
+              fill: fade
+            color_thresholds:
+              - value: 19
+                color: "#c0392b"
+              - value: 21
+                color: "#f1c40f"
+              - value: 22
+                color: "#2ecc71"
+              - value: 24
+                color: "#f1c40f"
+              - value: 26
+                color: "#c0392b"
+            card_mod:
+              style: |
+                ha-card {
+                  border-radius: 8px;
+                  background: none;
+                  box-shadow: none;
+                  --ha-card-border-width: 0;
+                } 
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.bs_ki_window_contact
+            secondary_info: last-changed
+            name: Fenster
+
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        title: Licht
+      - type: custom:mushroom-light-card
+        entity: light.kuche
+        layout: horizontal
+        icon_type: entity_icon
+        show_brightness_control: true
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        title: Rolladen
+      - type: custom:mushroom-cover-card
+        entity: cover.jalousie_kueche_position
+        layout: horizontal
+        icon_type: entity_icon
+        show_position_control: true
+
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        title: Heizung
+      - type: custom:mushroom-climate-card
+        entity: climate.trv_kitchen
+        layout: horizontal
+        icon_type: entity_icon
+        show_temperature_control: true
