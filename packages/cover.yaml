@@ -15,6 +15,14 @@ cover:
       - cover.cover_diningroom_position_1
       - cover.cover_pt_office_position_1
 
+  - platform: group
+    name: Rolladen Osten
+    entities:
+      - cover.cover_cb_office_position_1
+      - cover.cover_pt_office_position_1
+      - cover.cover_guestroom_position_1
+      - cover.cover_livingroom_position_1
+
   - platform: template
     covers:
       garage_door:

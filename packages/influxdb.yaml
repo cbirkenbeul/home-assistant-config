@@ -1,0 +1,14 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   18.05.2023
+#   @package        :   InfluxDB
+#   @description    :   Recorder for sensor values
+###############################################################################
+
+influxdb:
+  host: a0d7b954-influxdb
+  port: 8086
+  database: homeassistant
+  max_retries: 3
+  default_measurement: state

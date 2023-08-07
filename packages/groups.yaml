@@ -14,7 +14,6 @@ group:
     entities:
       - climate.trv_diningroom
       - climate.trv_kitchen
-      - climate.trv_livingroom
       - climate.trv_bathroom
       - climate.trv_cb_office
       - climate.trv_pt_office
@@ -27,7 +26,6 @@ group:
       - light.bodenlampe
       - light.wz_decke
       - switch.sw_dr_deko
-      - switch.plug_lichterkette
 
   office_lights:
     name: Office Lights

@@ -81,7 +81,6 @@ automation:
           - switch.sw_lr_deko
           - switch.sw_of_cb_deko
           - switch.flux
-          - switch.plug_lichterkette
       - service: input_boolean.turn_off
         entity_id: input_boolean.evening_lightning_default
 
@@ -104,7 +103,7 @@ scene:
   - name: Movietime
     icon: mdi:movie
     entities:
-      light.couch: 
+      light.li_wz_lightstrip: 
         state: 'off'
       light.wz_decke: 
         state: 'off'
@@ -116,7 +115,7 @@ scene:
   - name: Abendbeleuchtung
     icon: mdi:television-ambient-light
     entities:
-      light.couch:
+      light.li_wz_lightstrip:
         state: 'on'
         brightness: 200
         rgb_color: [255, 214, 170]
@@ -131,12 +130,6 @@ scene:
         brightness: 200
         rgb_color: [255, 214, 170]
       switch.sw_hw_og_deko:
-        state: 'on'
-      switch.plug_lichterkette:
-        state: 'on'
-      switch.sw_of_cb_deko:
-        state: 'on'
-      switch.sw_dr_deko:
         state: 'on'
 
   - name: Youtube

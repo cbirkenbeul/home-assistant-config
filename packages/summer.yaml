@@ -29,24 +29,24 @@ automation:
       entity_id: sensor.weewx_outtemp
       above: 24
     action:
-    - service: mqtt.publish
-      data:
-        topic: house/weather/daycondition
-        payload: summerday
-        retain: true
+      - service: mqtt.publish
+        data:
+          topic: house/weather/daycondition
+          payload: summerday
+          retain: true
 
   - id: "ChkGBnrdFhyanrBWf2QfkKW9nuS6qQ2vMusBbL6g3rQEBUhtWnXF4KEqVNLJ5qNa"
     alias: "Weather - Set hot day sensor"
     trigger:
       platform: numeric_state
       entity_id: sensor.weewx_outtemp
-      above: 30
+      above: 28
     action:
-    - service: mqtt.publish
-      data:
-        topic: house/weather/daycondition
-        payload: hotday
-        retain: true
+      - service: mqtt.publish
+        data:
+          topic: house/weather/daycondition
+          payload: hotday
+          retain: true
 
   - id: "gzvPHFcFf8Xq7Lvdu554RVGjEEuSruTdZ7dTKEafcPeY3uHkUKpcVqVeBVRjPUBA"
     alias: "Notify to open windows"
@@ -63,4 +63,12 @@ automation:
           title: "Lüften!"
           message: "Unterschied: {{ states.sensor.housetempdiff.state }} C"
 
-  
+  - id: "b9bI0KURXNBk1vKqRRscAgjEMSG3vTcEZ3HGUvtgjU6k7T8g9oFWcWIchArrJEaH"
+    alias: "Climate - Turn off on summerday"
+    trigger:
+      platform: state
+      entity_id: sensor.weather_day
+      to: "summerday"
+    action:
+      - service: climate.turn_off
+        entity_id: group.climate

@@ -11,6 +11,9 @@ deps/
 backups/
 tts/
 __pycache__/
+custom_components/
+lost+found
+node-red/
 
 # vscode
 .vscode/
@@ -21,3 +24,4 @@ __pycache__/
 *.log*
 *.old
 *.bak
+*.txt

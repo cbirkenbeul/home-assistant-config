@@ -161,8 +161,27 @@ sensor.serverrack_power:
   friendly_name: Serverrack
   icon: mdi:server
 
+sensor.plug_fridge_energy:
+  friendly_name: Kühlschrank
+  icon: mdi:fridge
 
 sensor.all_lights_energy:
+  friendly_name: Licht
+  icon: mdi:lightbulb-group-outline
+
+sensor.hallway_lights_energy_daily:
+  friendly_name: Licht
+  icon: mdi:lightbulb-group-outline
+
+sensor.office_lights_energy_daily:
+  friendly_name: Licht
+  icon: mdi:lightbulb-group-outline
+
+sensor.livingroom_lights_energy_daily:
+  friendly_name: Licht
+  icon: mdi:lightbulb-group-outline
+
+sensor.kitchen_lights_energy_daily:
   friendly_name: Licht
   icon: mdi:lightbulb-group-outline
 

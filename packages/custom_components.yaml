@@ -16,7 +16,7 @@ switch:
   - platform: flux
     lights:
       - light.bodenlampe
-      - light.couch
+      - light.li_wz_lightstrip
       - light.az_bloom
     start_time: '21:00'
     stop_time: '01:00'

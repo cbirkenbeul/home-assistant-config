@@ -34,7 +34,6 @@
     - service: switch.turn_off
       entity_id:
         - switch.sw_hw_og_deko
-        - switch.plug_lichterkette
         - switch.sw_of_cb_deko
         - switch.flux
         - switch.sw_dr_deko

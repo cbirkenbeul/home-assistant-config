@@ -16,6 +16,9 @@ cards:
         entity: sensor.teqqcar_temperature_outside
         icon: mdi:sun-thermometer-outline
 
+  - type: custom:mushroom-entity-card
+    entity: update.teqqcar_software_update
+
   - type: custom:mushroom-climate-card
     entity: climate.teqqcar_hvac_climate_system
     show_temperature_control: true
@@ -63,30 +66,30 @@ cards:
         mode: horizontal
         cards:
           - type: custom:mushroom-template-card
-            entity: sensor.teqqcar_charger_power
+            entity: sensor.tesla_charger_power
             primary: Ladung
             secondary: |
-              {{ states('sensor.teqqcar_charger_power')}} kW
+              {{ states('sensor.tesla_charger_power')}} kW
             icon: mdi:ev-station
             icon_color: |
-              {% if states('sensor.teqqcar_charger_power') | float > 13 %}
+              {% if states('sensor.tesla_charger_power') | float > 13 %}
                   #2ecc71
-              {% elif states('sensor.teqqcar_charger_power') | float > 9 %}
+              {% elif states('sensor.tesla_charger_power') | float > 9 %}
                   #f1c40f
-              {% elif states('sensor.teqqcar_charger_power') | float > 5 %}
+              {% elif states('sensor.tesla_charger_power') | float > 5 %}
                   #e67e22
-              {% elif states('sensor.teqqcar_charger_power') | float > 1 %}
+              {% elif states('sensor.tesla_charger_power') | float > 1 %}
                   #e74c3c
-              {% elif states('sensor.teqqcar_charger_power') | float > 0 %}
+              {% elif states('sensor.tesla_charger_power') | float > 0 %}
                   #2c3e50
               {% else %}
                   #c0392b
               {% endif %}          
           - type: custom:mini-graph-card
             entities:
-              - entity: sensor.teqqcar_charger_power
+              - entity: sensor.tesla_charger_power
             hours_to_show: 6
-            points_per_hour: 12
+            points_per_hour: 24
             line_width: 2
             animate: true
             show:

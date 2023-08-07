@@ -21,6 +21,47 @@ sensor:
         value_template: >-
           {{ (states('sensor.pv_wr_pc_home_consumption_day') | float(0)) - (states('sensor.serverrack_energy_daily') | float(0)) - (states('sensor.all_lights_energy') | float(0)) - (states('sensor.ap_christian_energy') | float(0)) - (states('sensor.dryer_energy_daily') | float(0)) }}  
 
+  - platform: template
+    sensors:
+      office_energy:
+        friendly_name: Büro
+        unit_of_measurement: kWh
+        value_template: >
+          {{ states('sensor.ap_christian_energy_daily')|float(0) + states('sensor.shelly_ap_petra_device_energy_daily')|float(0) + states('sensor.office_lights_energy_daily')|float(0)}}
+
+  - platform: template
+    sensors:
+      basement_energy:
+        friendly_name: Keller
+        unit_of_measurement: kWh
+        value_template: >
+          {{ states('sensor.dryer_energy_daily')|float(0) + states('sensor.washer_energy_daily')|float(0) + states('sensor.serverrack_energy_daily')|float(0)}}
+
+  - platform: template
+    sensors:
+      livingroom_energy:
+        friendly_name: Wohnzimmer
+        unit_of_measurement: kWh
+        value_template: >
+          {{ states('sensor.livingroom_lights_energy_daily')|float(0)}}
+
+  - platform: template
+    sensors:
+      hallway_energy:
+        friendly_name: Flur
+        unit_of_measurement: kWh
+        value_template: >
+          {{ states('sensor.hallway_lights_energy_daily')|float(0)}}
+
+  - platform: template
+    sensors:
+      kitchen_energy:
+        friendly_name: Küche
+        unit_of_measurement: kWh
+        value_template: >
+          {{ states('sensor.kitchen_lights_energy_daily')|float(0) + states('sensor.fridge_energy_daily')|float(0)}}
+
+
 # Daily energy use sensors
 utility_meter:
   pv_ges_energy_daily:
@@ -33,6 +74,10 @@ utility_meter:
 
   ap_christian_energy_daily:
     source: sensor.ap_christian_energy
+    cycle: daily
+
+  fridge_energy_daily:
+    source: sensor.plug_fridge_energy
     cycle: daily
 
   teqqcar_charing_daily:

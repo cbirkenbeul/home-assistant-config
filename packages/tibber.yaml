@@ -1,0 +1,61 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   02.08.2023
+#   @package        :   Tibber
+#   @description    :   Tibber
+###############################################################################
+
+input_number:
+  byd_charge_power:
+    name: byd_charge_power
+    initial: -1500
+    max: 0
+    min: -5000
+
+automation:
+  - id: '7KgOhZggjiOuMin4yykFK8jo2rW4PqfdfIQ2we4Glht12VeUsCNTVmiDp5JcN9I4'
+    alias: 'Start House Battery charing if Tibber price below 18 cent'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.electricity_price_helmerichstr_3
+        below: 0.18
+    condition:
+      condition: and
+      conditions:
+        - condition: numeric_state
+          entity_id: sensor.pv_prod_ges
+          below: 2000
+        - condition: numeric_state
+          entity_id: sensor.pv_wr_pc_battery_soc
+          below: 50
+    action:
+      - service: number.set_value
+        entity_id: number.pv_wr_pc_battery_min_soc
+        data:
+          value: 75
+      - service: modbus.write_register
+        data:
+          address: 1034
+          slave: 71
+          hub: WR1_Modbus
+          value: [0xe000, 0xc53b]
+      - service: notify.telegram_group
+        data:
+          message: "Aufladen der Hausbatterie über Netzstrom gestartet."
+
+
+  - id: 'nAC7KY7Yin4zxxWGHOvmCzk2trSQgqqVkbSdcgSeK838otTAKJdbsfik5UouQ5Iy'
+    alias: 'Stop House Battery charing if Tibber price above 17 cent'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.electricity_price_helmerichstr_3
+        above: 0.17
+    action:
+      - service: number.set_value
+        entity_id: number.pv_wr_pc_battery_min_soc
+        data:
+          value: 10
+      - service: notify.telegram_group
+        data:
+          message: 'Aufladen der Hausbatterie über Netzstrom beendet. Batterieladestatus bei {{ states("sensor.pv_wr_pc_battery_soc") }} Prozent.'

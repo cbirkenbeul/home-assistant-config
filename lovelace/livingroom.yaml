@@ -32,7 +32,7 @@ cards:
           - type: custom:mini-graph-card
             entities:
               - entity: sensor.temperature_livingroom
-            hours_to_show: 8
+            hours_to_show: 24
             points_per_hour: 4
             line_width: 2
             animate: true
@@ -83,7 +83,7 @@ cards:
           - type: custom:mini-graph-card
             entities:
               - entity: sensor.humidity_livingroom
-            hours_to_show: 8
+            hours_to_show: 24
             points_per_hour: 4
             line_width: 2
             animate: true
@@ -129,19 +129,15 @@ cards:
         icon_type: entity_icon
         show_brightness_control: true
       - type: custom:mushroom-light-card
-        entity: light.couch
-        layout: horizontal
-        icon_type: entity_icon
-        show_brightness_control: true
-      - type: custom:mushroom-light-card
         entity: light.bodenlampe
         layout: horizontal
         icon_type: entity_icon
         show_brightness_control: true
       - type: custom:mushroom-light-card
-        entity: switch.sw_dr_deko
+        entity: light.li_wz_lightstrip
         layout: horizontal
         icon_type: entity_icon
+        show_brightness_control: true
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-chips-card
@@ -159,6 +155,11 @@ cards:
         title: Rolladen
       - type: custom:mushroom-cover-card
         entity: cover.cover_diningroom_position_1
+        layout: horizontal
+        icon_type: entity_icon
+        show_position_control: true
+      - type: custom:mushroom-cover-card
+        entity: cover.cover_livingroom_position_1
         layout: horizontal
         icon_type: entity_icon
         show_position_control: true

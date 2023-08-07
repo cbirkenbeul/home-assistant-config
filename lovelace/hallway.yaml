@@ -32,7 +32,7 @@ cards:
           - type: custom:mini-graph-card
             entities:
               - entity: sensor.temperature_hallway
-            hours_to_show: 8
+            hours_to_show: 24
             points_per_hour: 4
             line_width: 2
             animate: true

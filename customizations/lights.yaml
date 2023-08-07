@@ -42,3 +42,7 @@ light.li_bm_stairs:
 light.rgbicww_floor_lamp:
   friendly_name: Stehlampe Christian
   icon: mdi:floor-lamp
+
+light.li_wz_lightstrip:
+  friendly_name: LED Streifen
+  icon: mdi:led-strip-variant

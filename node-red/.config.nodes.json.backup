@@ -475,7 +475,7 @@
     },
     "node-red-contrib-home-assistant-websocket": {
         "name": "node-red-contrib-home-assistant-websocket",
-        "version": "0.48.1",
+        "version": "0.50.0",
         "local": false,
         "user": false,
         "nodes": {
@@ -498,11 +498,13 @@
                     "ha-fire-event",
                     "ha-get-entities",
                     "api-get-history",
+                    "ha-number",
                     "poll-state",
                     "api-render-template",
                     "ha-sensor",
                     "ha-switch",
                     "ha-tag",
+                    "ha-text",
                     "ha-time",
                     "trigger-state",
                     "ha-update-config",
@@ -561,7 +563,7 @@
     },
     "node-red-contrib-modbus": {
         "name": "node-red-contrib-modbus",
-        "version": "5.25.0",
+        "version": "5.26.0",
         "local": false,
         "user": false,
         "nodes": {
@@ -810,7 +812,7 @@
     },
     "node-red-dashboard": {
         "name": "node-red-dashboard",
-        "version": "3.3.1",
+        "version": "3.5.0",
         "local": false,
         "user": false,
         "nodes": {
@@ -1068,7 +1070,7 @@
     },
     "node-red-node-email": {
         "name": "node-red-node-email",
-        "version": "1.18.4",
+        "version": "2.0.1",
         "local": false,
         "user": false,
         "nodes": {
@@ -1146,7 +1148,7 @@
     },
     "node-red-node-serialport": {
         "name": "node-red-node-serialport",
-        "version": "1.0.3",
+        "version": "1.0.4",
         "local": false,
         "user": false,
         "nodes": {
@@ -1187,7 +1189,7 @@
     },
     "node-red-node-suncalc": {
         "name": "node-red-node-suncalc",
-        "version": "1.0.1",
+        "version": "1.1.0",
         "local": false,
         "user": false,
         "nodes": {

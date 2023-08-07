@@ -83,6 +83,10 @@ mqtt:
       value_template: '{{ value | default(0) | round(1) }}'
       unit_of_measurement: W
       device_class: power
+    - state_topic: "power/production/yesterday"
+      name: pv_prod_yesterday
+      unit_of_measurement: W
+      device_class: power
 
 # Sensors
 sensor:
@@ -108,7 +112,25 @@ sensor:
   - platform: template
     sensors:
       energy_house:
-        unit_of_measurement: W
+        unit_of_measurement: kWh
         value_template: >-
           {{ (states('sensor.pv_wr_pc_solar_w') | float(0)) +  (states('sensor.pv_wr_pi') | float(0)) + (states('sensor.pv_wr_pc_grid_power') | float(0)) + (states('sensor.pv_wr_pc_home_power_from_battery') | float(0)) - (states('sensor.pv_wr_pc_pv_to_battery_power') | float(0)) }}
 
+  - platform: rest
+    resource: http://192.168.50.11/measurements.xml
+    name: "Piko MP AC Power"
+    value_template: "{{ value_json.root.Device.Measurements.Measurement[2]['_Value']}}"
+    device_class: power
+    unit_of_measurement: W
+
+automation:
+  - id: "XL7Ai2PQLcpF0O3xwFQRipTy0ERozuc6u4kkwLgK2WajDZ281LN3BPiiawAO4q67"
+    alias: "Solar - MQTT - Publish yesterdays production value"
+    trigger:
+      platform: time
+      at: "22:30:00"
+    action:
+      service: mqtt.publish
+      data:
+        topic: "power/production/yesterday"
+        payload: "{{ states('sensor.pv_ges_energy_daily') }}"

@@ -147,7 +147,7 @@ cards:
       cards:
         - type: custom:mushroom-template-card
           entity: sensor.energy_house
-          primary: Verbrauch
+          primary: Verbrauch (KSEM)
           secondary: |
             {{ states('sensor.energy_house')}} Wh
           icon: mdi:home-lightning-bolt
@@ -155,6 +155,46 @@ cards:
         - type: custom:mini-graph-card
           entities:
             - entity: sensor.energy_house
+          hours_to_show: 8
+          points_per_hour: 4
+          line_width: 2
+          animate: true
+          show:
+            name: false
+            icon: false
+            state: false
+            legend: false
+            fill: fade
+          color_thresholds:
+            - value: 0
+              color: "#27ae60"
+            - value: 500
+              color: "#f1c40f"
+            - value: 1000
+              color: "#e67e22"
+            - value: 1500
+              color: "#e74c3c"
+          card_mod:
+            style: |
+              ha-card {
+                border-radius: 8px;
+                background: none;
+                box-shadow: none;
+                --ha-card-border-width: 0;
+              }
+    - type: custom:stack-in-card
+      mode: horizontal
+      cards:
+        - type: custom:mushroom-template-card
+          entity: sensor.metered_energy
+          primary: Verbrauch (Bekannte Geräte)
+          secondary: |
+            {{ states('sensor.metered_energy')}} Wh
+          icon: mdi:home-lightning-bolt
+          icon_color: red
+        - type: custom:mini-graph-card
+          entities:
+            - entity: sensor.metered_energy
           hours_to_show: 8
           points_per_hour: 4
           line_width: 2
@@ -378,3 +418,19 @@ cards:
                 --ha-card-border-width: 0;
               } 
 
+  - type: vertical-stack
+    cards:
+    - type: custom:mushroom-title-card
+      title: Tibber
+    - type: custom:mushroom-entity-card
+      entity: sensor.electricity_price_helmerichstr_3
+      name: Strompreis
+      primary_info: name
+      icon_color: blue
+      icon: mdi:currency-eur
+    - type: custom:mushroom-entity-card
+      entity: sensor.monthly_cost_helmerichstr_3
+      name: Stromkosten
+      primary_info: name
+      icon_color: blue
+      icon: mdi:currency-eur

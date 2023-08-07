@@ -1,54 +1,74 @@
 -== Watchman Report ==- 
 
--== Congratulations, all 26 services from your config are available!
+-== Congratulations, all 25 services from your config are available!
 
--== Missing 76 entity(ies) from 235 found in your config:
+-== Missing 96 entity(ies) from 275 found in your config:
 +--------------------------------+---------+--------------------------------------------------------------+
 | Entity ID                      | State   | Location                                                     |
 +--------------------------------+---------+--------------------------------------------------------------+
-| sensor.teqqcar_charging_rate_s | missing | lovelace/views/home.yaml:26                                  |
-| ensor                          |         |                                                              |
-| sensor.teqqcar_battery         | unknown | lovelace/views/home.yaml:32                                  |
-| sensor.teqqcar_charger_power   | unknown | lovelace/views/home.yaml:36                                  |
-| scene.buro                     | unknown | lovelace/views/home.yaml:173                                 |
-| vacuum.s5_cloud_494783         | missing | lovelace/views/vacuum.yaml:74                                |
-| device_tracker.teqqcar_locatio | unknown | lovelace/views/car.yaml:19                                   |
+| sensor.teqqcar_range           | unknown | lovelace/home.yaml:144                                       |
+| sensor.teqqcar_battery         | unknown | lovelace/home.yaml:151                                       |
+| sensor.teqqcar_charger_power   | unknown | lovelace/home.yaml:163                                       |
+| device_tracker.teqqcar_locatio | unknown | lovelace/home.yaml:179,183,191,195                           |
 | n_tracker                      |         |                                                              |
-| sensor.teqqcar_temperature_ins | unknown | lovelace/views/car.yaml:24                                   |
+| light.couch                    | unavail | lovelace/home.yaml:246                                       |
+| switch.sw_dr_deko              | missing | lovelace/home.yaml:262                                       |
+| group.bathroom_lights          | missing | lovelace/home.yaml:385                                       |
+| group.hallways_windows         | missing | lovelace/home.yaml:568                                       |
+| group.bedroom_lights           | missing | lovelace/home.yaml:579                                       |
+| vacuum.robi                    | missing | lovelace/vacuum.yaml:8                                       |
+| input_boolean.robi_clean_kitch | missing | lovelace/vacuum.yaml:17                                      |
+| en                             |         |                                                              |
+| input_boolean.robi_clean_livin | missing | lovelace/vacuum.yaml:25                                      |
+| groom                          |         |                                                              |
+| input_boolean.robi_clean_offic | missing | lovelace/vacuum.yaml:33                                      |
+| e                              |         |                                                              |
+| input_boolean.robi_clean_hallw | missing | lovelace/vacuum.yaml:41                                      |
+| ay                             |         |                                                              |
+| input_boolean.robi_clean_bathr | missing | lovelace/vacuum.yaml:49                                      |
+| oom                            |         |                                                              |
+| input_boolean.robi_cleanday    | missing | lovelace/vacuum.yaml:57                                      |
+| camera.robi_live_map           | missing | lovelace/vacuum.yaml:65                                      |
+| vacuum.s5_cloud_494783         | missing | lovelace/vacuum.yaml:74                                      |
+| sensor.teqqcar_temperature_ins | unknown | lovelace/car.yaml:13                                         |
 | ide                            |         |                                                              |
-| sensor.teqqcar_temperature_out | unknown | lovelace/views/car.yaml:27                                   |
+| sensor.teqqcar_temperature_out | unknown | lovelace/car.yaml:16                                         |
 | side                           |         |                                                              |
-| sensor.teqqcar_range           | unknown | lovelace/views/car.yaml:37                                   |
-| switch.plug_lichterkette       | unavail | lovelace/views/rooms.yaml:70                                 |
-| switch.sw_lr_deko              | missing | lovelace/views/lights.yaml:48                                |
-| sensor.robi_sidebrush          | missing | lovelace/views/kitchen.yaml:33                               |
-| sensor.robi_brush              | missing | lovelace/views/kitchen.yaml:36                               |
-| sensor.robi_heap               | missing | lovelace/views/kitchen.yaml:39                               |
-| sensor.robi_stats_area         | missing | lovelace/views/kitchen.yaml:43                               |
-| sensor.robi_stats_time         | missing | lovelace/views/kitchen.yaml:46                               |
-| sensor.ap_christian_energy_dai | unknown | lovelace/views/energy.yaml:123,132                           |
-| ly                             |         |                                                              |
-| sensor.pv_wr_pi                | unknown | packages/photovoltaik.yaml:90,106,113                        |
-| sensor.bs_ki_window_temperatur | unavail | packages/sensor.yaml:71                                      |
+| sensor.teqqcar_tpms_front_left | unknown | lovelace/car.yaml:34                                         |
+| sensor.teqqcar_tpms_front_righ | unknown | lovelace/car.yaml:40                                         |
+| t                              |         |                                                              |
+| sensor.teqqcar_tpms_rear_left  | unknown | lovelace/car.yaml:48                                         |
+| sensor.teqqcar_tpms_rear_right | unknown | lovelace/car.yaml:54                                         |
+| sensor.pv_wr_pi                | unknown | lovelace/energy.yaml:53,56,61                                |
+| light.hue_filament_bulb_1      | unavail | packages/groups.yaml:42                                      |
+| light.hue_filament_bulb_2      | unavail | packages/groups.yaml:43                                      |
+| sensor.bs_ki_window_temperatur | missing | packages/sensor.yaml:74                                      |
 | e                              |         |                                                              |
-| sensor.bs_hw_bm_door_temperatu | unavail | packages/sensor.yaml:77                                      |
+| sensor.bs_hw_bm_door_temperatu | unavail | packages/sensor.yaml:80                                      |
 | re                             |         |                                                              |
-| sensor.bs_br_window_temperatur | unavail | packages/sensor.yaml:86                                      |
+| sensor.bs_br_window_temperatur | missing | packages/sensor.yaml:89                                      |
 | e                              |         |                                                              |
-| sensor.temperature_wohnzimmer  | missing | packages/sensor.yaml:98                                      |
-| sensor.temperature_arbeitszimm | missing | packages/sensor.yaml:99                                      |
+| sensor.temperature_wohnzimmer  | missing | packages/sensor.yaml:101                                     |
+| sensor.temperature_arbeitszimm | missing | packages/sensor.yaml:102                                     |
 | er                             |         |                                                              |
-| sensor.wz_hum_mean             | missing | packages/sensor.yaml:141                                     |
-| sensor.az_hum_mean             | missing | packages/sensor.yaml:142                                     |
+| sensor.wz_hum_mean             | missing | packages/sensor.yaml:145                                     |
+| sensor.az_hum_mean             | missing | packages/sensor.yaml:146                                     |
 | sensor.shelly_shplg_s_c5080f_c | missing | packages/energy_dashboard.yaml:27                            |
 | urrent_consumption             |         |                                                              |
 | sensor.shelly_shplg_s_436c49_t | missing | packages/energy_dashboard.yaml:33                            |
 | otal_consumption               |         |                                                              |
-| light.plug_lichterkette_device | missing | packages/powercalc.yaml:25                                   |
-| light.sw_hw_og_deko            | missing | packages/powercalc.yaml:27                                   |
-| number.teqqcar_charging_amps   | unknown | packages/tesla.yaml:123                                      |
-| light.bloom                    | missing | packages/homekit.yaml:49                                     |
-| binary_sensor.bs_ga_door       | missing | packages/cover.yaml:19,29                                    |
+| switch.sw_lr_deko              | missing | packages/lights.yaml:48,81                                   |
+| switch.sw_of_cb_deko           | missing | packages/lights.yaml:65,82,134                               |
+| light.keylight                 | missing | packages/lights.yaml:146                                     |
+| light.sw_hw_og_deko            | missing | packages/powercalc.yaml:26                                   |
+| number.teqqcar_charge_limit    | unknown | packages/tesla.yaml:22                                       |
+| number.teqqcar_charging_amps   | unknown | packages/tesla.yaml:137                                      |
+| climate.trv_office_cb_thermost | missing | packages/homekit.yaml:35                                     |
+| at                             |         |                                                              |
+| climate.trv_office_pt_thermost | missing | packages/homekit.yaml:36                                     |
+| at                             |         |                                                              |
+| light.bloom                    | missing | packages/homekit.yaml:50                                     |
+| binary_sensor.bs_ga_door       | missing | packages/cover.yaml:22,32                                    |
 | sensor.house_electric_consumed | missing | customizations/energy-dashboard.yaml:2                       |
 | _kwh                           |         |                                                              |
 | sensor.serverrack_electric_con | missing | customizations/energy-dashboard.yaml:7                       |
@@ -60,27 +80,39 @@
 | g_kmes                         |         |                                                              |
 | sensor.wr1_total_dc_power_via_ | missing | customizations/energy-dashboard.yaml:41                      |
 | modbus                         |         |                                                              |
+| sensor.pv_prod_ges_kwh_daily   | missing | customizations/energy-dashboard.yaml:96                      |
+| sensor.trv_office_cb_battery_l | missing | customizations/batteries.yaml:2                              |
+| evel                           |         |                                                              |
+| sensor.trv_office_pt_battery_l | missing | customizations/batteries.yaml:5                              |
+| evel                           |         |                                                              |
 | sensor.multisensor_cb_battery_ | missing | customizations/batteries.yaml:8                              |
 | level                          |         |                                                              |
 | sensor.multisensor_pt_battery_ | missing | customizations/batteries.yaml:11                             |
 | level                          |         |                                                              |
-| sensor.birkenfeige_battery     | unavail | customizations/batteries.yaml:14                             |
+| sensor.birkenfeige_battery     | missing | customizations/batteries.yaml:14                             |
 | sensor.codiaeum_battery        | missing | customizations/batteries.yaml:17                             |
 | sensor.dracaena_battery        | missing | customizations/batteries.yaml:20                             |
 | sensor.echeveria_battery       | missing | customizations/batteries.yaml:23                             |
-| sensor.peperomia_battery       | unavail | customizations/batteries.yaml:26                             |
+| sensor.peperomia_battery       | missing | customizations/batteries.yaml:26                             |
+| climate.trv_livingroom         | missing | customizations/climate.yaml:22                               |
 | sensor.power_consumption       | missing | customizations/sensors.yaml:2                                |
 | sensor.rack_power_consumption  | missing | customizations/sensors.yaml:6                                |
+| light.az_cb_decke              | missing | customizations/lights.yaml:2                                 |
 | sensor.tesla_battery_level     | missing | customizations/tesla.yaml:2                                  |
+| sensor.teqqcar_charging_rate_s | missing | customizations/tesla.yaml:10                                 |
+| ensor                          |         |                                                              |
 | sensor.teqqcar_battery_sensor  | missing | customizations/tesla.yaml:13                                 |
-| climate.trv_eg_hallway_climate | unavail | customizations/zwave.yaml:14                                 |
 | sensor.aqara_cube_battery      | missing | customizations/aqara_cube.yaml:2                             |
 | sensor.aqara_cube_action       | missing | customizations/aqara_cube.yaml:5                             |
 | sensor.aqara_cube_linkquality  | missing | customizations/aqara_cube.yaml:8                             |
 | sensor.se_hw_temp_linkquality  | missing | customizations/zigbee/se_hw_temp.yaml:8                      |
+| sensor.bs_of_cb_window_linkqua | missing | customizations/zigbee/bs_of_cb_window.yaml:6                 |
+| lity                           |         |                                                              |
 | sensor.se_lr_temp_linkquality  | missing | customizations/zigbee/se_lr_temp.yaml:8                      |
 | sensor.se_of_pt_temp_linkquali | missing | customizations/zigbee/se_of_pt_temp.yaml:8                   |
 | ty                             |         |                                                              |
+| sensor.bs_of_pt_window_linkqua | missing | customizations/zigbee/bs_of_pt_window.yaml:6                 |
+| lity                           |         |                                                              |
 | sensor.se_br_temp_linkquality  | missing | customizations/zigbee/se_br_temp.yaml:8                      |
 | sensor.se_br_temp_pressure     | missing | customizations/zigbee/se_br_temp.yaml:14                     |
 | sensor.se_mbr_temp_linkquality | missing | customizations/zigbee/se_mbr_temp.yaml:8                     |
@@ -100,12 +132,11 @@
 | y                              |         |                                                              |
 | media_player.xiao_ai           | missing | custom_components/xiaomi_miot_raw/services.yaml:6,23,46      |
 | switch.212a01_abcd             | missing | custom_components/xiaomi_miot_raw/services.yaml:80           |
-| sensor.jellyfin_cloud          | missing | custom_components/jellyfin/services.yaml:10,25,71            |
-| media_player.jellyfin_firefox  | missing | custom_components/jellyfin/services.yaml:48                  |
+| select.trv_livingroom_sensor   | missing | automations/heating/livingroom.yaml:14                       |
 | binary_sensor.bs_ki_window     | missing | automations/heating/kitchen.yaml:6,18                        |
 | media_player.jellyfin_sonytv   | missing | automations/scenes/medialightning.yaml:16,29                 |
 +--------------------------------+---------+--------------------------------------------------------------+
 
--== Report created on 10 Jan 2023 21:47:27
--== Parsed 77 files in 0.10s., ignored 0 files 
--== Generated in: 0.04s. Validated in: 0.00s.
+-== Report created on 10 Jun 2023 23:40:44
+-== Parsed 85 files in 0.10s., ignored 0 files 
+-== Generated in: 0.07s. Validated in: 0.00s.

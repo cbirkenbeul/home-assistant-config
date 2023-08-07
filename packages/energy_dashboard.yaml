@@ -43,6 +43,14 @@ sensor:
         value_template: >
           {{ states('sensor.az_bloom_power')|float(0) + states('sensor.az_pt_decke_power')|float(0)}}
 
+  - platform: template
+    sensors:
+      metered_energy:
+        friendly_name: Stromverbrauch bekannte Geräte
+        unit_of_measurement: W
+        value_template: >
+          {{ states('sensor.all_lights_power')|float(0) + states('sensor.ap_christian_power')|float(0) + states('sensor.plug_fridge_power')|float(0) + states('sensor.serverrack_power')|float(0) + states('sensor.shelly_ap_petra_power')|float(0) + states('sensor.trockner_electricity_power')|float(0) + states('sensor.waschmaschine_electricity_power')|float(0)}}
+
 # Power Cicle
 utility_meter:
   serverrack_energy_daily:

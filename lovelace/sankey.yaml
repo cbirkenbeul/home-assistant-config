@@ -1,6 +1,6 @@
 ---
 type: custom:stack-in-card
-title: Energy Distribution
+title: Stromverbrauch heute
 icon: mdi:chart-sankey
 cards:
   - type: custom:sankey-chart
@@ -37,32 +37,61 @@ cards:
             name: Verbrauch
             color: red
             children:
-              - sensor.serverrack_energy_daily
-              - sensor.all_lights_energy_daily
-              - sensor.ap_christian_energy_daily
-              - sensor.shelly_ap_petra_device_energy_daily
-              - sensor.dryer_energy_daily
-              - sensor.washer_energy_daily
-              - sensor.other_devices_power
+              - sensor.office_energy
+              - sensor.livingroom_energy
+              - sensor.kitchen_energy
+              - sensor.hallway_energy
+              - sensor.basement_energy
               - sensor.teqqcar_charing_daily
               - al_het_andere
       - entities:
-          - entity_id: sensor.serverrack_energy_daily
-            color: grey
-          - entity_id: sensor.all_lights_energy_daily
+          - entity_id: sensor.office_energy
+            color: blue
+            children:
+              - sensor.office_lights_energy_daily
+              - sensor.ap_christian_energy_daily
+              - sensor.shelly_ap_petra_device_energy_daily
+          - entity_id: sensor.livingroom_energy
+            color: green
+            children:
+              - sensor.livingroom_lights_energy_daily
+          - entity_id: sensor.kitchen_energy
+            color: orange
+            children:
+              - sensor.kitchen_lights_energy_daily
+              - sensor.fridge_energy_daily
+          - entity_id: sensor.hallway_energy
+            color: purple
+            children:
+              - sensor.hallway_lights_energy_daily
+          - entity_id: sensor.basement_energy
             color: brown
+            children:
+              - sensor.serverrack_energy_daily
+              - sensor.dryer_energy_daily
+              - sensor.washer_energy_daily
+          - entity_id: sensor.teqqcar_charing_daily
+            color: red
+            name: Tesla Model 3
+          - entity_id: al_het_andere
+            type: remaining_parent_state
+            name: Alle andere
+      - entities:
+          - entity_id: sensor.office_lights_energy_daily
+            color: yellow
           - entity_id: sensor.ap_christian_energy_daily
-            color: blue
           - entity_id: sensor.shelly_ap_petra_device_energy_daily
-            color: blue
+          - entity_id: sensor.livingroom_lights_energy_daily
+            color: yellow
+          - entity_id: sensor.kitchen_lights_energy_daily
+            color: yellow
+          - entity_id: sensor.fridge_energy_daily
+            color: grey
+            name: Kühlschrank
+          - entity_id: sensor.hallway_lights_energy_daily
+            color: yellow
+          - entity_id: sensor.serverrack_energy_daily
           - entity_id: sensor.dryer_energy_daily
             name: Trockner
           - entity_id: sensor.washer_energy_daily
             name: Waschmaschine
-          - entity_id: sensor.other_devices_power
-            color: black
-          - entity_id: sensor.teqqcar_charing_daily
-            color: yellow
-          - entity_id: al_het_andere
-            type: remaining_parent_state
-            name: Alle andere

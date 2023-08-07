@@ -14,3 +14,15 @@ cover.cover_diningroom_position_1:
 cover.cover_pt_office_position_1:
   friendly_name: Rolladen Büro Petra
   icon: mdi:window-shutter
+
+cover.cover_bedroom_position_1:
+  friendly_name: Rolladen Schlafzimmer
+  icon: mdi:window-shutter
+
+cover.cover_guestroom_position_1:
+  friendly_name: Rolladen Gästezimmer
+  icon: mdi:window-shutter
+
+cover.cover_livingroom_position_1:
+  friendly_name: Rolladen Wohnzimmer
+  icon: mdi:window-shutter

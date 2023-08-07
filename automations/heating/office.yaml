@@ -7,7 +7,10 @@
     - platform: state
       entity_id:
         - sensor.temperature_office
-  condition: []
+  condition:
+    condition: state
+    entity_id: climate.trv_cb_office
+    state: 'heat'
   action:
     - device_id: 905b144d25c65bd220d06cfad1ae2846
       domain: select
@@ -32,7 +35,10 @@
     - platform: state
       entity_id:
         - sensor.temperature_office
-  condition: []
+  condition:
+    condition: state
+    entity_id: climate.trv_cb_office
+    state: 'heat'
   action:
     - device_id: 6e6e99fca4e45938abc89f24bc547a97
       domain: select
@@ -94,7 +100,7 @@
     entity_id: climate.trv_pt_office
 
 - id: "kLqR3RyK74fnP4yOR0vgXy3LcHsmgNzaxCJ1NBcyagmo2DgBIux28Iqb1D1uVJIB"
-  alias: Office - Turn on climate if Window open - CB
+  alias: Office - Turn on climate if Window is closed - CB
   trigger:
     - platform: state
       entity_id: binary_sensor.bs_of_cb_window_contact
@@ -116,11 +122,11 @@
       entity_id: climate.trv_cb_office
 
 - id: "KXZYJMpQ1rHFstz9WvvhBoXjsctjlbmp8lbJHvG6LrabpTyX2hCvbUypYzj1f3kI"
-  alias: Office - Turn on climate if Window open - PT
+  alias: Office - Turn on climate if Window is closed - PT
   trigger:
     - platform: state
       entity_id: binary_sensor.bs_of_pt_window_contact
-      to: 'on'
+      to: 'off'
   condition:
     condition: and
     conditions:

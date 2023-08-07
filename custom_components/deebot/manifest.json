@@ -1,11 +1,12 @@
 {
+  "domain": "deebot",
+  "name": "Deebot 4 Home Assistant",
   "codeowners": [
     "@DeebotUniverse",
     "@edenhaus"
   ],
   "config_flow": true,
   "documentation": "https://deebot.readthedocs.io/integrations/home-assistant",
-  "domain": "deebot",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/DeebotUniverse/Deebot-4-Home-Assistant/issues",
   "loggers": [
@@ -13,10 +14,9 @@
     "deebot_client",
     "gmqtt"
   ],
-  "name": "Deebot 4 Home Assistant",
   "requirements": [
-    "deebot-client==1.6.0",
+    "deebot-client==2.0.0",
     "numpy>=1.21.2"
   ],
-  "version": "1.5.0"
+  "version": "1.6.1"
 }

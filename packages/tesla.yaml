@@ -1,7 +1,7 @@
 ---
 ###############################################################################
 #   @author         :   Christian Birkenbeul
-#   @date           :   13.02.2022
+#   @date           :   29.07.2023
 #   @package        :   Tesla
 #   @description    :   Tesla Solar Charging
 ###############################################################################
@@ -24,7 +24,7 @@ sensor:
   - platform: template
     sensors:
       teqqcar_charging_time:
-        friendly_name: 'Dauer bis voll'
+        friendly_name: "Dauer bis voll"
         value_template: >
           {{ (states.sensor.teqqcar_charging_rate.attributes.time_left) }}
         icon_template: mdi:timer-sync-outline
@@ -37,13 +37,75 @@ mqtt:
       unit_of_measurement: kWh
       icon: mdi:battery-charging
 
+    - name: tesla_charger_power
+      state_topic: "teslamate/cars/1/charger_power"
+      device_class: power
+      unit_of_measurement: kW
+      icon: mdi:lightning-bolt
+
+    - state_topic: "house/tesla/charging"
+      name: "Tesla charging"
+
 automation:
-  - id: TAXsk8rAemJQ45aVaIuCfU7qwE70hSAen6xA9wNbstXnw00nytstkDORma02mrzi
-    alias: Tesla - Start charging if pv production over 1500
+  ###############################################################################
+  #   General start/stop
+  ###############################################################################
+  - id: startchargingtibber
+    alias: "Tesla - Start tibber charging"
     trigger:
-    - platform: time_pattern
-      minutes: '/10'
-      seconds: 00
+      - platform: mqtt
+        topic: "house/tesla/charging"
+        payload: "tibber"
+    action:
+      - service: switch.turn_on
+        entity_id: switch.teqqcar_charger
+      - service: number.set_value
+        entity_id: number.teqqcar_charge_limit
+        data:
+          value: 80
+      - service: number.set_value
+        entity_id: number.pv_wr_pc_battery_min_soc
+        data:
+          value: 100
+      - service: number.set_value
+        entity_id: number.teqqcar_charging_amps
+        data:
+          value: 16
+
+  - id: startchargingsolar
+    alias: "Tesla - Start solar charging"
+    trigger:
+      - platform: mqtt
+        topic: "house/tesla/charging"
+        payload: "solar"
+    action:
+      - service: switch.turn_on
+        entity_id: switch.teqqcar_charger
+      - service: number.set_value
+        entity_id: number.teqqcar_charge_limit
+        data:
+          value: 90
+
+  - id: stopcharging
+    alias: "Tesla - Stop charging"
+    trigger:
+      - platform: mqtt
+        topic: "house/tesla/charging"
+        payload: "stop"
+    action:
+      - service: switch.turn_off
+        entity_id: switch.teqqcar_charger
+
+  ###############################################################################
+  #   Solar charging
+  ###############################################################################
+
+  - id: TAXsk8rAemJQ45aVaIuCfU7qwE70hSAen6xA9wNbstXnw00nytstkDORma02mrzi
+    alias: Tesla - Initiate solar charging
+    trigger:
+      - platform: time_pattern
+        minutes: "/2"
+        seconds: 00
     condition:
       - condition: and
         conditions:
@@ -52,83 +114,144 @@ automation:
             state: home
           - condition: state
             entity_id: binary_sensor.teqqcar_charging
-            state: 'off'
+            state: "off"
           - condition: state
             entity_id: switch.teqqcar_charger
-            state: 'off'
+            state: "off"
           - condition: numeric_state
             entity_id: sensor.pv_wr_pc_battery_soc
-            above: '90'
+            above: "90"
           - condition: numeric_state
             entity_id: sensor.pv_prod_ges
-            above: '1500'
+            above: "1500"
     action:
-    - service: switch.turn_on
-      target:
-        entity_id: switch.teqqcar_charger
-    mode: single
-
+      - service: mqtt.publish
+        data:
+          topic: house/tesla/charging
+          payload: solar
+          retain: true
 
   - alias: Adjust charging speed
     trigger:
-    - platform: time_pattern
-      minutes: '/1'
-      seconds: 00
+      - platform: time_pattern
+        minutes: "/1"
+        seconds: 00
     condition:
       - condition: and
         conditions:
           - condition: state
             entity_id: switch.teqqcar_charger
-            state: 'on'
+            state: "on"
           - condition: state
             entity_id: device_tracker.teqqcar_location_tracker
             state: home
+          - condition: state
+            entity_id: sensor.tesla_charging
+            state: "solar"
     action:
       service: script.adjust_tesla_charging
 
   - id: rWAmk5RZbNron9gsZN3GcOXnsr0EppOny5aJQJB0UNgGDN7lSSUvtqqBwLgdGCKP
-    alias: Tesla - Stop charging if solar generation is below 1 kW
-    description: ''
+    alias: Tesla - Initiate Stop solar charging
     trigger:
-    - platform: numeric_state
-      entity_id: sensor.pv_prod_ges
-      below: '1000'
-      for: 00:01:00
+      - platform: time_pattern
+        minutes: "/2"
+        seconds: 00
     condition:
-      - condition: state
-        entity_id: device_tracker.teqqcar_location_tracker
-        state: home
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: device_tracker.teqqcar_location_tracker
+            state: home
+          - condition: state
+            entity_id: sensor.tesla_charging
+            state: "solar"
+      - condition: or
+        conditions:
+          - condition: numeric_state
+            entity_id: sensor.pv_prod_ges
+            below: 1500
+          - condition: numeric_state
+            entity_id: sensor.pv_wr_pc_battery_soc
+            below: 90
     action:
-    - service: switch.turn_off
-      target:
-        entity_id: switch.teqqcar_charger
-    mode: single
+      - service: mqtt.publish
+        data:
+          topic: house/tesla/charging
+          payload: stop
+          retain: true
 
-  - id: p86ivzlxVwSfyWxjnHEPkvKpTuqbw9yPdF7x7aaGFGUhm1uVdG8rjaDa8SpmMEcp
-    alias: Tesla - Stop charging if solar battery is under 90 %
-    description: ''
+  ###############################################################################
+  #   Tibber charging
+  ###############################################################################
+
+  - id: tibbercharing
+    alias: "Tesla - Start charging at low tibber price"
     trigger:
-    - platform: numeric_state
-      entity_id: sensor.pv_wr_pc_battery_soc
-      below: '90'
+      - platform: state
+        entity_id: sensor.electricity_price_helmerichstr_3
+        attribute: price_level
+        to: CHEAP
     condition:
-      - condition: state
-        entity_id: device_tracker.teqqcar_location_tracker
-        state: home
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: device_tracker.teqqcar_location_tracker
+            state: home
+          - condition: state
+            entity_id: sensor.tesla_charging
+            state: "tibber"
+      - condition: not
+        conditions:
+          - condition: state
+            entity_id: sensor.tesla_charging
+            state: "solar"
     action:
-    - service: switch.turn_off
-      target:
-        entity_id: switch.teqqcar_charger
-    mode: single
+      - service: mqtt.publish
+        data:
+          topic: house/tesla/charging
+          payload: tibber
+          retain: true
+
+  - id: tibbercharingstop
+    alias: "Tesla - Stop charging at normal tibber price"
+    trigger:
+      - platform: state
+        entity_id: sensor.electricity_price_helmerichstr_3
+        attribute: price_level
+        to: NORMAL
+    condition:
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: device_tracker.teqqcar_location_tracker
+            state: home
+          - condition: state
+            entity_id: sensor.tesla_charging
+            state: "tibber"
+    action:
+      - service: mqtt.publish
+        data:
+          topic: house/tesla/charging
+          payload: stop
+          retain: true
+      - service: number.set_value
+        entity_id: number.pv_wr_pc_battery_min_soc
+        data:
+          value: 10
+
+  ###############################################################################
+  #   Scripts
+  ###############################################################################
 
 script:
-  'adjust_tesla_charging':
+  "adjust_tesla_charging":
     alias: Charge tesla
     sequence:
-    - service: number.set_value
-      data:
-        value: >-
-          {{ (states('sensor.tesla_max_charge') | float(0) | round(0)) }}
-      target:
-        entity_id: number.teqqcar_charging_amps
+      - service: number.set_value
+        data:
+          value: >-
+            {{ (states('sensor.tesla_max_charge') | float(0) | round(0)) }}
+        target:
+          entity_id: number.teqqcar_charging_amps
     mode: single

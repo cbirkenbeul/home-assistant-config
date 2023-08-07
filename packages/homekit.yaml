@@ -44,13 +44,15 @@ homekit:
       - cover.cover_cb_office_position_1
       - cover.cover_diningroom_position_1
       - cover.cover_pt_office_position_1
+      - cover.cover_bedroom_position_1
+      - cover.cover_livingroom_position_1
 
       # Lights
       - light.az_pt_decke
       - light.bloom
       - light.bodenlampe
-      - light.couch
-      - light.decke
+      - light.li_wz_lightstrip
+      - light.kuche
       - light.leseecke
       - light.wz_decke
 
