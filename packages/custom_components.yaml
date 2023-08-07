@@ -6,11 +6,6 @@
 #   @description    :   Combine Integrations to one file
 ###############################################################################
 
-# Binary Sensors
-binary_sensor:
-  - platform: workday
-    country: DE
-
 # Flux Light Component and Automation
 switch:
   - platform: flux
