@@ -68,6 +68,49 @@ cards:
             secondary_info: last-changed
             name: Fenster
 
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        title: Staubsauger
+      - type: 'custom:vacuum-card'
+        entity: vacuum.robi
+        actions:
+          start:
+            service: xiaomi_miio.vacuum_clean_segment
+            service_data:
+              entity_id: vacuum.robi
+              segments: [16, 20]
+        stats:
+          default:
+            - attribute: filter_left
+              unit: hours
+              subtitle: Filter
+            - attribute: side_brush_left
+              unit: hours
+              subtitle: Side brush
+            - attribute: main_brush_left
+              unit: hours
+              subtitle: Main brush
+            - attribute: sensor_dirty_left
+              unit: hours
+              subtitle: Sensors
+          cleaning:
+            - entity_id: sensor.robi_hauptburste
+              subtitle: Main brush
+              unit: percent
+            - entity_id: sensor.robi_reinigungsdauer
+              unit: minutes
+              subtitle: Cleaning time
+        shortcuts:
+          - name: Clean living room
+            service: script.clean_living_room
+            icon: 'mdi:sofa'
+          - name: Clean bedroom
+            service: script.clean_bedroom
+            icon: 'mdi:bed-empty'
+          - name: Clean kitchen
+            service: script.clean_kitchen
+            icon: 'mdi:silverware-fork-knife'
 
   - type: vertical-stack
     cards:

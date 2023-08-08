@@ -26,8 +26,8 @@ from homeassistant.const import CONF_PASSWORD, CONF_USERNAME, CONF_VERIFY_SSL
 
 ################################
 # Do not change! Will be set by release workflow
-INTEGRATION_VERSION = "1.6.1"
-MIN_REQUIRED_HA_VERSION = "2023.7.0b0"
+INTEGRATION_VERSION = "2.0.0"
+MIN_REQUIRED_HA_VERSION = "2023.8.0b0"
 ################################
 
 # Values below can be changed
@@ -75,17 +75,17 @@ LAST_ERROR = "last_error"
 
 
 REFRESH_STR_TO_EVENT_DTO: Mapping[str, type[Event]] = {
-    "Battery": BatteryEvent,
-    "Clean logs": CleanLogEvent,
-    "Error": ErrorEvent,
-    "Fan speed": FanSpeedEvent,
-    "Life spans": LifeSpanEvent,
-    "Rooms": RoomsEvent,
-    "Stats": StatsEvent,
-    "Status": StateEvent,
-    "Water": WaterInfoEvent,
+    "battery": BatteryEvent,
+    "clean_logs": CleanLogEvent,
+    "error": ErrorEvent,
+    "fan_speed": FanSpeedEvent,
+    "life_spans": LifeSpanEvent,
+    "rooms": RoomsEvent,
+    "stats": StatsEvent,
+    "status": StateEvent,
+    "water": WaterInfoEvent,
 }
-REFRESH_MAP = "Map"
+REFRESH_MAP = "map"
 
 EVENT_CLEANING_JOB = "deebot_cleaning_job"
 EVENT_CUSTOM_COMMAND = "deebot_custom_command"

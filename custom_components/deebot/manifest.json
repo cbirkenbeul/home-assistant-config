@@ -11,12 +11,11 @@
   "issue_tracker": "https://github.com/DeebotUniverse/Deebot-4-Home-Assistant/issues",
   "loggers": [
     "custom_components.deebot",
-    "deebot_client",
-    "gmqtt"
+    "deebot_client"
   ],
   "requirements": [
-    "deebot-client==2.0.0",
-    "numpy>=1.21.2"
+    "deebot-client==3.0.0",
+    "numpy>=1.23.2"
   ],
-  "version": "1.6.1"
+  "version": "2.0.0"
 }

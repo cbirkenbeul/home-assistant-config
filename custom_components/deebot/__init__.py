@@ -1,9 +1,9 @@
 """Support for Deebot Vaccums."""
 import sys
 
-if sys.version_info < (3, 10):
+if sys.version_info < (3, 11):
     raise RuntimeError(
-        f"This component requires at least python 3.10! You are running {sys.version}"
+        f"This component requires at least python 3.11! You are running {sys.version}"
     )
 
 # pylint: disable=wrong-import-position
@@ -35,7 +35,7 @@ _LOGGER = logging.getLogger(__name__)
 PLATFORMS = [
     Platform.BINARY_SENSOR,
     Platform.BUTTON,
-    Platform.CAMERA,
+    Platform.IMAGE,
     Platform.NUMBER,
     Platform.SELECT,
     Platform.SENSOR,

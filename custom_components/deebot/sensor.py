@@ -5,6 +5,7 @@ from math import floor
 from typing import TypeVar
 
 from deebot_client.events import (
+    BatteryEvent,
     CleanLogEvent,
     ErrorEvent,
     Event,
@@ -13,9 +14,9 @@ from deebot_client.events import (
     StatsEvent,
     TotalStatsEvent,
 )
-from deebot_client.events.event_bus import EventListener
 from deebot_client.vacuum_bot import VacuumBot
 from homeassistant.components.sensor import (
+    SensorDeviceClass,
     SensorEntity,
     SensorEntityDescription,
     SensorStateClass,
@@ -23,12 +24,14 @@ from homeassistant.components.sensor import (
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (
     AREA_SQUARE_METERS,
+    ATTR_BATTERY_LEVEL,
     CONF_DESCRIPTION,
+    PERCENTAGE,
     TIME_HOURS,
     TIME_MINUTES,
+    EntityCategory,
 )
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.typing import StateType
 
@@ -61,6 +64,7 @@ async def async_setup_entry(
                     vacbot,
                     SensorEntityDescription(
                         key="stats_area",
+                        translation_key="stats_area",
                         icon="mdi:floor-plan",
                         native_unit_of_measurement=AREA_SQUARE_METERS,
                         entity_registry_enabled_default=False,
@@ -72,6 +76,7 @@ async def async_setup_entry(
                     vacbot,
                     SensorEntityDescription(
                         key="stats_time",
+                        translation_key="stats_time",
                         icon="mdi:timer-outline",
                         native_unit_of_measurement=TIME_MINUTES,
                         entity_registry_enabled_default=False,
@@ -83,6 +88,7 @@ async def async_setup_entry(
                     vacbot,
                     SensorEntityDescription(
                         key="stats_type",
+                        translation_key="stats_type",
                         icon="mdi:cog",
                         entity_registry_enabled_default=False,
                     ),
@@ -94,6 +100,7 @@ async def async_setup_entry(
                     vacbot,
                     SensorEntityDescription(
                         key="stats_total_area",
+                        translation_key="stats_total_area",
                         icon="mdi:floor-plan",
                         native_unit_of_measurement=AREA_SQUARE_METERS,
                         entity_registry_enabled_default=False,
@@ -106,6 +113,7 @@ async def async_setup_entry(
                     vacbot,
                     SensorEntityDescription(
                         key="stats_total_time",
+                        translation_key="stats_total_time",
                         icon="mdi:timer-outline",
                         native_unit_of_measurement=TIME_HOURS,
                         entity_registry_enabled_default=False,
@@ -118,12 +126,25 @@ async def async_setup_entry(
                     vacbot,
                     SensorEntityDescription(
                         key="stats_total_cleanings",
+                        translation_key="stats_total_cleanings",
                         icon="mdi:counter",
                         entity_registry_enabled_default=False,
                         state_class=SensorStateClass.TOTAL_INCREASING,
                     ),
                     TotalStatsEvent,
                     lambda e: e.cleanings,
+                ),
+                DeebotGenericSensor(
+                    vacbot,
+                    SensorEntityDescription(
+                        key=ATTR_BATTERY_LEVEL,
+                        translation_key=ATTR_BATTERY_LEVEL,
+                        native_unit_of_measurement=PERCENTAGE,
+                        device_class=SensorDeviceClass.BATTERY,
+                        entity_category=EntityCategory.DIAGNOSTIC,
+                    ),
+                    BatteryEvent,
+                    lambda b: b.value,
                 ),
             ]
         )
@@ -160,10 +181,9 @@ class DeebotGenericSensor(DeebotEntity, SensorEntity):  # type: ignore
                 self._attr_native_value = value
                 self.async_write_ha_state()
 
-        listener: EventListener = self._vacuum_bot.events.subscribe(
-            self._event_type, on_event
+        self.async_on_remove(
+            self._vacuum_bot.events.subscribe(self._event_type, on_event)
         )
-        self.async_on_remove(listener.unsubscribe)
 
 
 class LastErrorSensor(DeebotEntity, SensorEntity):  # type: ignore
@@ -172,6 +192,7 @@ class LastErrorSensor(DeebotEntity, SensorEntity):  # type: ignore
     _always_available = True
     entity_description = SensorEntityDescription(
         key=LAST_ERROR,
+        translation_key=LAST_ERROR,
         icon="mdi:alert-circle",
         entity_registry_enabled_default=False,
         entity_category=EntityCategory.DIAGNOSTIC,
@@ -186,10 +207,7 @@ class LastErrorSensor(DeebotEntity, SensorEntity):  # type: ignore
             self._attr_extra_state_attributes = {CONF_DESCRIPTION: event.description}
             self.async_write_ha_state()
 
-        listener: EventListener = self._vacuum_bot.events.subscribe(
-            ErrorEvent, on_event
-        )
-        self.async_on_remove(listener.unsubscribe)
+        self.async_on_remove(self._vacuum_bot.events.subscribe(ErrorEvent, on_event))
 
 
 class LifeSpanSensor(DeebotEntity, SensorEntity):  # type: ignore
@@ -197,8 +215,10 @@ class LifeSpanSensor(DeebotEntity, SensorEntity):  # type: ignore
 
     def __init__(self, vacuum_bot: VacuumBot, component: LifeSpan):
         """Initialize the Sensor."""
+        key = f"life_span_{component.name.lower()}"
         entity_description = SensorEntityDescription(
-            key=f"life_span_{component.name.lower()}",
+            key=key,
+            translation_key=key,
             icon="mdi:air-filter" if component == LifeSpan.FILTER else "mdi:broom",
             entity_registry_enabled_default=False,
             native_unit_of_measurement="%",
@@ -219,10 +239,7 @@ class LifeSpanSensor(DeebotEntity, SensorEntity):  # type: ignore
                 }
                 self.async_write_ha_state()
 
-        listener: EventListener = self._vacuum_bot.events.subscribe(
-            LifeSpanEvent, on_event
-        )
-        self.async_on_remove(listener.unsubscribe)
+        self.async_on_remove(self._vacuum_bot.events.subscribe(LifeSpanEvent, on_event))
 
 
 class LastCleaningJobSensor(DeebotEntity, SensorEntity):  # type: ignore
@@ -231,6 +248,7 @@ class LastCleaningJobSensor(DeebotEntity, SensorEntity):  # type: ignore
     _always_available = True
     entity_description = SensorEntityDescription(
         key="last_cleaning",
+        translation_key="last_cleaning",
         icon="mdi:history",
         entity_registry_enabled_default=False,
     )
@@ -252,7 +270,4 @@ class LastCleaningJobSensor(DeebotEntity, SensorEntity):  # type: ignore
                 }
                 self.async_write_ha_state()
 
-        listener: EventListener = self._vacuum_bot.events.subscribe(
-            CleanLogEvent, on_event
-        )
-        self.async_on_remove(listener.unsubscribe)
+        self.async_on_remove(self._vacuum_bot.events.subscribe(CleanLogEvent, on_event))
