@@ -16,27 +16,26 @@ powercalc:
     entities:
       - create_group: livingroom_lights
         entities:
-          - entity_id: light.bodenlampe
-          - entity_id: light.wz_decke
+          - entity_id: light.li_lr_deco
+          - entity_id: light.li_lr_ceiling
 
       - create_group: office_lights
         entities:
-          - entity_id: light.az_bloom
-          - entity_id: light.az_pt_decke
-        #  - entity_id: light.keylight
-          - entity_id: light.leseecke
+          - entity_id: light.li_of_cb_bloom
+          - entity_id: light.li_of_pt_desk
+          - entity_id: light.li_of_pt_reading
           - entity_id: light.rgbicww_floor_lamp
 
       - create_group: hallway_lights
         entities:
           - entity_id: light.bad
-        #  - entity_id: light.flur_haustuer
+          #  - entity_id: light.flur_haustuer
           - entity_id: light.hw_center
           - entity_id: light.hw_top
           - entity_id: light.medizinschrank
-          - entity_id: light.sw_hw_og_deko
+          - entity_id: light.pg_hw_deco
             fixed:
-              power: "{{states('sensor.sw_hw_og_deko_energy')}}"
+              power: "{{states('sensor.pg_hw_deco_energy')}}"
         #  - entity_id: light.entry_outside
 
       - create_group: kitchen_lights

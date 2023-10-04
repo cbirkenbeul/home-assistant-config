@@ -1,6 +1,6 @@
 ---
-title: Flur
-icon: mdi:coat-rack
+title: Gästezimmer
+icon: mdi:bed-outline
 cards:
   - type: vertical-stack
     cards:
@@ -10,28 +10,28 @@ cards:
         mode: horizontal
         cards:
           - type: custom:mushroom-template-card
-            entity: sensor.temperature_hallway
+            entity: sensor.temperature_guestroom
             primary: Temperatur
             secondary: |
-              {{ states('sensor.temperature_hallway')}} °C
+              {{ states('sensor.temperature_guestroom')}} °C
             icon: mdi:thermometer
             icon_color: |
-              {% if states('sensor.temperature_hallway') | float > 26 %}
+              {% if states('sensor.temperature_guestroom') | float > 21 %}
                   #c0392b
-              {% elif states('sensor.temperature_hallway') | float > 24 %}
+              {% elif states('sensor.temperature_guestroom') | float > 29 %}
                   #f1c40f
-              {% elif states('sensor.temperature_hallway') | float > 22 %}
+              {% elif states('sensor.temperature_guestroom') | float > 19 %}
                   #2ecc71
-              {% elif states('sensor.temperature_hallway') | float > 21 %}
+              {% elif states('sensor.temperature_guestroom') | float > 18 %}
                   #f1c40f
-              {% elif states('sensor.temperature_hallway') | float > 20 %}
+              {% elif states('sensor.temperature_guestroom') | float > 17 %}
                   #e67e22
               {% else %}
                   #c0392b
               {% endif %}
           - type: custom:mini-graph-card
             entities:
-              - entity: sensor.temperature_hallway
+              - entity: sensor.temperature_guestroom
             hours_to_show: 24
             points_per_hour: 4
             line_width: 2
@@ -43,15 +43,15 @@ cards:
               legend: false
               fill: fade
             color_thresholds:
-              - value: 19
+              - value: 17
                 color: "#c0392b"
-              - value: 21
+              - value: 18
                 color: "#f1c40f"
-              - value: 22
+              - value: 19
                 color: "#2ecc71"
-              - value: 24
+              - value: 20
                 color: "#f1c40f"
-              - value: 26
+              - value: 21
                 color: "#c0392b"
             card_mod:
               style: |
@@ -65,25 +65,25 @@ cards:
         mode: horizontal
         cards:
           - type: custom:mushroom-template-card
-            entity: sensor.humidity_hallway
+            entity: sensor.humidity_guestroom
             primary: Luftfeuchtigkeit
             secondary: |
-              {{ states('sensor.humidity_hallway')}} %
+              {{ states('sensor.humidity_guestroom')}} %
             icon: mdi:water-percent
             icon_color: |
-              {% if states('sensor.humidity_hallway') | float > 60 %}
+              {% if states('sensor.humidity_guestroom') | float > 60 %}
                   #e74c3c
-              {% elif states('sensor.humidity_hallway') | float > 40 %}
+              {% elif states('sensor.humidity_guestroom') | float > 40 %}
                   #2ecc71
-              {% elif states('sensor.humidity_hallway') | float > 0 %}
+              {% elif states('sensor.humidity_guestroom') | float > 0 %}
                   #e74c3c
               {% else %}
                   #2c3e50
               {% endif %}
           - type: custom:mini-graph-card
             entities:
-              - entity: sensor.humidity_hallway
-            hours_to_show: 8
+              - entity: sensor.humidity_guestroom
+            hours_to_show: 24
             points_per_hour: 4
             line_width: 2
             animate: true
@@ -112,32 +112,23 @@ cards:
                   box-shadow: none;
                   --ha-card-border-width: 0;
                 }
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: binary_sensor.bs_hw_bm_door_contact
-            secondary_info: last-changed
-            name: Kellertür
-          - type: custom:mushroom-entity-card
-            entity: binary_sensor.bs_hw_st_window_contact
-            secondary_info: last-changed
-            name: Fenster (Treppe)
 
   - type: vertical-stack
     cards:
       - type: custom:mushroom-title-card
-        title: Licht
-      - type: custom:mushroom-light-card
-        entity: light.flur
+        title: Heizung
+      - type: custom:mushroom-climate-card
+        entity: climate.trv_guestroom
         layout: horizontal
         icon_type: entity_icon
-        show_brightness_control: true
-      - type: custom:mushroom-light-card
-        entity: light.treppenhaus
+        show_temperature_control: true
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        title: Rolladen
+      - type: custom:mushroom-cover-card
+        entity: cover.cover_guestroom_position_1
         layout: horizontal
         icon_type: entity_icon
-        show_brightness_control: true
-      - type: custom:mushroom-light-card
-        entity: switch.pg_hw_deco
-        layout: horizontal
-        icon_type: entity_icon
+        show_position_control: true

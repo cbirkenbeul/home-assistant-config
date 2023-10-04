@@ -8,7 +8,7 @@ cards:
     unit_prefix: k
     round: 1
     wide: true
-    height: 500
+    height: 800
     sections:
       - entities:
           - entity_id: sensor.pv_ges_energy_daily

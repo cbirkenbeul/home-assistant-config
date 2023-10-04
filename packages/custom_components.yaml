@@ -10,11 +10,11 @@
 switch:
   - platform: flux
     lights:
-      - light.bodenlampe
-      - light.li_wz_lightstrip
-      - light.az_bloom
-    start_time: '21:00'
-    stop_time: '01:00'
+      - light.li_lr_deco
+      - light.li_lr_lightstrip
+      - light.li_of_cb_bloom
+    start_time: "21:00"
+    stop_time: "01:00"
     brightness: 200
     disable_brightness_adjust: true
 
@@ -23,7 +23,7 @@ automation:
     alias: Light - Turn on flux custom component
     trigger:
       - platform: time
-        at: '23:00:00'
+        at: "23:00:00"
     action:
       - service: switch.turn_on
         entity_id: switch.flux

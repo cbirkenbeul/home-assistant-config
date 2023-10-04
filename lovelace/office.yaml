@@ -60,7 +60,7 @@ cards:
                   background: none;
                   box-shadow: none;
                   --ha-card-border-width: 0;
-                }  
+                }
       - type: custom:stack-in-card
         mode: horizontal
         cards:
@@ -128,17 +128,17 @@ cards:
       - type: custom:mushroom-title-card
         title: Licht
       - type: custom:mushroom-light-card
-        entity: light.az_pt_decke
+        entity: light.li_of_pt_desk
         layout: horizontal
         icon_type: entity_icon
         show_brightness_control: true
       - type: custom:mushroom-light-card
-        entity: light.leseecke
+        entity: light.li_of_pt_reading
         layout: horizontal
         icon_type: entity_icon
         show_brightness_control: true
       - type: custom:mushroom-light-card
-        entity: light.az_bloom
+        entity: light.li_of_cb_bloom
         layout: horizontal
         icon_type: entity_icon
         show_brightness_control: true
@@ -178,12 +178,12 @@ cards:
       - type: custom:mushroom-title-card
         title: Heizung
       - type: custom:mushroom-climate-card
-        entity: climate.trv_cb_office
+        entity: climate.trv_of_cb
         layout: horizontal
         icon_type: entity_icon
         show_temperature_control: true
       - type: custom:mushroom-climate-card
-        entity: climate.trv_pt_office
+        entity: climate.trv_of_pt
         layout: horizontal
         icon_type: entity_icon
         show_temperature_control: true

@@ -17,6 +17,9 @@ cards:
         icon: mdi:sun-thermometer-outline
 
   - type: custom:mushroom-entity-card
+    entity: input_select.tesla_charing_mode
+
+  - type: custom:mushroom-entity-card
     entity: update.teqqcar_software_update
 
   - type: custom:mushroom-climate-card

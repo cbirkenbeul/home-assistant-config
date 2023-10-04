@@ -1,0 +1,265 @@
+---
+title: Keller
+icon: mdi:home-floor-b
+cards:
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        title: Etage
+      - type: custom:stack-in-card
+        mode: horizontal
+        cards:
+          - type: custom:mushroom-template-card
+            entity: sensor.temperature_basement
+            primary: Temperatur
+            secondary: |
+              {{ states('sensor.temperature_basement')}} °C
+            icon: mdi:thermometer
+            icon_color: |
+              {% if states('sensor.temperature_basement') | float > 26 %}
+                  #c0392b
+              {% elif states('sensor.temperature_basement') | float > 24 %}
+                  #f1c40f
+              {% elif states('sensor.temperature_basement') | float > 22 %}
+                  #2ecc71
+              {% elif states('sensor.temperature_basement') | float > 21 %}
+                  #f1c40f
+              {% elif states('sensor.temperature_basement') | float > 20 %}
+                  #e67e22
+              {% else %}
+                  #c0392b
+              {% endif %}
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.temperature_basement
+            hours_to_show: 24
+            points_per_hour: 4
+            line_width: 2
+            animate: true
+            show:
+              name: false
+              icon: false
+              state: false
+              legend: false
+              fill: fade
+            color_thresholds:
+              - value: 19
+                color: "#c0392b"
+              - value: 21
+                color: "#f1c40f"
+              - value: 22
+                color: "#2ecc71"
+              - value: 24
+                color: "#f1c40f"
+              - value: 26
+                color: "#c0392b"
+            card_mod:
+              style: |
+                ha-card {
+                  border-radius: 8px;
+                  background: none;
+                  box-shadow: none;
+                  --ha-card-border-width: 0;
+                } 
+      - type: custom:stack-in-card
+        mode: horizontal
+        cards:
+          - type: custom:mushroom-template-card
+            entity: sensor.humidity_basement
+            primary: Luftfeuchtigkeit
+            secondary: |
+              {{ states('sensor.humidity_basement')}} %
+            icon: mdi:water-percent
+            icon_color: |
+              {% if states('sensor.humidity_basement') | float > 60 %}
+                  #e74c3c
+              {% elif states('sensor.humidity_basement') | float > 40 %}
+                  #2ecc71
+              {% elif states('sensor.humidity_basement') | float > 0 %}
+                  #e74c3c
+              {% else %}
+                  #2c3e50
+              {% endif %}
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.humidity_basement
+            hours_to_show: 8
+            points_per_hour: 4
+            line_width: 2
+            animate: true
+            show:
+              name: false
+              icon: false
+              state: false
+              legend: false
+              fill: fade
+            color_thresholds:
+              - value: 30
+                color: "#c0392b"
+              - value: 40
+                color: "#f1c40f"
+              - value: 50
+                color: "#2ecc71"
+              - value: 60
+                color: "#f1c40f"
+              - value: 70
+                color: "#c0392b"
+            card_mod:
+              style: |
+                ha-card {
+                  border-radius: 8px;
+                  background: none;
+                  box-shadow: none;
+                  --ha-card-border-width: 0;
+                }  
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mushroom-title-card
+        title: Serverraum
+      - type: custom:stack-in-card
+        mode: horizontal
+        cards:
+          - type: custom:mushroom-template-card
+            entity: sensor.se_sr_temp_temperature
+            primary: Temperatur
+            secondary: |
+              {{ states('sensor.se_sr_temp_temperature')}} °C
+            icon: mdi:thermometer
+            icon_color: |
+              {% if states('sensor.se_sr_temp_temperature') | float > 26 %}
+                  #c0392b
+              {% elif states('sensor.se_sr_temp_temperature') | float > 24 %}
+                  #f1c40f
+              {% elif states('sensor.se_sr_temp_temperature') | float > 22 %}
+                  #2ecc71
+              {% elif states('sensor.se_sr_temp_temperature') | float > 21 %}
+                  #f1c40f
+              {% elif states('sensor.se_sr_temp_temperature') | float > 20 %}
+                  #e67e22
+              {% else %}
+                  #c0392b
+              {% endif %}
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.se_sr_temp_temperature
+            hours_to_show: 24
+            points_per_hour: 4
+            line_width: 2
+            animate: true
+            show:
+              name: false
+              icon: false
+              state: false
+              legend: false
+              fill: fade
+            color_thresholds:
+              - value: 19
+                color: "#c0392b"
+              - value: 21
+                color: "#f1c40f"
+              - value: 22
+                color: "#2ecc71"
+              - value: 24
+                color: "#f1c40f"
+              - value: 26
+                color: "#c0392b"
+            card_mod:
+              style: |
+                ha-card {
+                  border-radius: 8px;
+                  background: none;
+                  box-shadow: none;
+                  --ha-card-border-width: 0;
+                } 
+      - type: custom:stack-in-card
+        mode: horizontal
+        cards:
+          - type: custom:mushroom-template-card
+            entity: sensor.se_sr_temp_humidity
+            primary: Luftfeuchtigkeit
+            secondary: |
+              {{ states('sensor.se_sr_temp_humidity')}} %
+            icon: mdi:water-percent
+            icon_color: |
+              {% if states('sensor.se_sr_temp_humidity') | float > 60 %}
+                  #e74c3c
+              {% elif states('sensor.se_sr_temp_humidity') | float > 40 %}
+                  #2ecc71
+              {% elif states('sensor.se_sr_temp_humidity') | float > 0 %}
+                  #e74c3c
+              {% else %}
+                  #2c3e50
+              {% endif %}
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.se_sr_temp_humidity
+            hours_to_show: 8
+            points_per_hour: 4
+            line_width: 2
+            animate: true
+            show:
+              name: false
+              icon: false
+              state: false
+              legend: false
+              fill: fade
+            color_thresholds:
+              - value: 30
+                color: "#c0392b"
+              - value: 40
+                color: "#f1c40f"
+              - value: 50
+                color: "#2ecc71"
+              - value: 60
+                color: "#f1c40f"
+              - value: 70
+                color: "#c0392b"
+            card_mod:
+              style: |
+                ha-card {
+                  border-radius: 8px;
+                  background: none;
+                  box-shadow: none;
+                  --ha-card-border-width: 0;
+                }  
+      - type: custom:stack-in-card
+        mode: horizontal
+        cards:
+          - type: custom:mushroom-template-card
+            entity: sensor.serverrack_power
+            primary: Serverrack
+            secondary: |
+              {{ states('sensor.serverrack_power')}} Wh
+            icon: mdi:server
+            icon_color: blue
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.serverrack_power
+            hours_to_show: 8
+            points_per_hour: 4
+            line_width: 2
+            animate: true
+            show:
+              name: false
+              icon: false
+              state: false
+              legend: false
+              fill: fade
+            color_thresholds:
+              - value: 120
+                color: "#27ae60"
+              - value: 150
+                color: "#f1c40f"
+              - value: 170
+                color: "#e67e22"
+              - value: 200
+                color: "#e74c3c"
+            card_mod:
+              style: |
+                ha-card {
+                  border-radius: 8px;
+                  background: none;
+                  box-shadow: none;
+                  --ha-card-border-width: 0;
+                } 

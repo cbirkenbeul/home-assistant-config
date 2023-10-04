@@ -26,7 +26,7 @@ from homeassistant.const import CONF_PASSWORD, CONF_USERNAME, CONF_VERIFY_SSL
 
 ################################
 # Do not change! Will be set by release workflow
-INTEGRATION_VERSION = "2.0.0"
+INTEGRATION_VERSION = "2.1.1"
 MIN_REQUIRED_HA_VERSION = "2023.8.0b0"
 ################################
 

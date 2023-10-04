@@ -20,6 +20,7 @@ homeassistant:
 # Configuration
 ############################################################################
 
+assist_pipeline:
 automation: !include_dir_merge_list automations/
 climate:
 config:
@@ -65,4 +66,6 @@ lovelace:
     - url: /hacsfiles/bar-card/bar-card.js 
       type: module
     - url: /hacsfiles/lovelace-card-mod/card-mod.js 
+      type: module
+    - url: /hacsfiles/lovelace-xiaomi-vacuum-map-card/xiaomi-vacuum-map-card.js
       type: module

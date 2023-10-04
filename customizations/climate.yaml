@@ -1,9 +1,9 @@
 ---
-climate.trv_cb_office:
+climate.trv_of_cb:
   friendly_name: Heizung Christian
   icon: mdi:radiator
 
-climate.trv_pt_office:
+climate.trv_of_pt:
   friendly_name: Heizung Petra
   icon: mdi:radiator
 

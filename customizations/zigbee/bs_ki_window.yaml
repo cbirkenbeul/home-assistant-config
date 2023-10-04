@@ -1,9 +1,0 @@
----
-binary_sensor.bs_ki_window_contact:
-  friendly_name: Fenster Küche
-
-sensor.bs_ki_window_linkquality:
-  friendly_name: Kontakt Fenster Küche
-
-sensor.bs_ki_window_battery:
-  friendly_name: Fenster Küche Batterie

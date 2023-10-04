@@ -1,52 +1,13 @@
 ---
 ###############################################################################
 #   @author         :   Christian Birkenbeul
-#   @date           :   05.06.2022
+#   @date           :   29.09.2023
 #   @package        :   Light
 #   @description    :   All lights automation
 ###############################################################################
 
 automation:
-# Automations for basement
-  - id: "We9s3rderooyvehppbfHhpZ2DKpGq7vUNgnngdtNQsNuLeXuNDEWYNzNorACeaj7"
-    alias: Light - Basement on
-    trigger:
-      platform: state
-      entity_id: binary_sensor.bs_hw_bm_door_contact
-      to: 'on'
-    action:
-      service: light.turn_on
-      entity_id:
-        - light.li_bm_stairs
-        - light.li_bm_hw
-
-  - id: "cFPAsWaQ8bcAvPrP8Agm7BfA6Lxi8bHuR7eRhMhHvmhvKLkr6JNCBPVERDG44PU2"
-    alias: Light - Basement off
-    trigger:
-      platform: state
-      entity_id: binary_sensor.bs_hw_bm_door_contact
-      to: 'off'
-    action:
-      service: light.turn_off
-      entity_id:
-        - light.li_bm_stairs
-        - light.li_bm_hw
-
-# Automations based on sun
-  - id: "DE3BCwN9ArLNbHRggfoDg223FnMApomF7pVtP6pBPWTfXw3fGv3fCfZpEPsjNWMh"
-    alias: Light - Turn on some light before sunset
-    trigger:
-      platform: sun
-      event: sunset
-      offset: "-01:00:00"
-    condition:
-      condition: state
-      entity_id: sensor.house_status
-      state: home
-    action:
-      service: switch.turn_on
-      entity_id: switch.sw_lr_deko
-
+  # Automations based on sun
   - id: "fLeoPM2GZVCbsTeVpGenmbhowfsNmjYxEVbt6tBpzTpbqukpzxHd36JGNFT8cQK6"
     alias: Light - Sunset
     trigger:
@@ -60,26 +21,24 @@ automation:
       - service: homeassistant.turn_on
         entity_id: input_boolean.evening_lightning_default
       - service: switch.turn_on
-        entity_id: switch.sw_hw_og_deko
+        entity_id: switch.pg_hw_deco
       - service: switch.turn_on
-        entity_id: switch.sw_of_cb_deko
+        entity_id: light.li_of_cb_bloom
 
-# Automations based on presence
+  # Automations based on presence
   - id: "LNb9FtPZEdtFzLxz8XEY8yri6PEGFBktBvCbpbJ72DiVciPQK7rp2P2XDrbnktYp"
     alias: Light - Turn off lights if all away
     trigger:
       platform: state
       entity_id: group.devices
-      from: 'home'
-      to: 'not_home'
+      from: "home"
+      to: "not_home"
     action:
       - service: light.turn_off
         entity_id: all
       - service: switch.turn_off
         entity_id:
-          - switch.sw_hw_og_deko
-          - switch.sw_lr_deko
-          - switch.sw_of_cb_deko
+          - switch.pg_hw_deco
           - switch.flux
       - service: input_boolean.turn_off
         entity_id: input_boolean.evening_lightning_default
@@ -89,8 +48,8 @@ automation:
     trigger:
       platform: state
       entity_id: group.devices
-      from: 'not_home'
-      to: 'home'
+      from: "not_home"
+      to: "home"
     condition:
       condition: sun
       after: sunset
@@ -98,61 +57,80 @@ automation:
       - service: input_boolean.turn_on
         entity_id: input_boolean.evening_lightning_default
 
-# Scenes
+###############################################################################
+#   Basement Stairs
+###############################################################################
+
+  - id: "K9VHA5geKa48ZhL9Yhd668H5O2M0uebxv0D2douA3Q8uC43GcVVPY122r35m0W14"
+    alias: Light - Turn basement stairs light on
+    trigger:
+      platform: state
+      entity_id: binary_sensor.bs_hw_bm_door_contact
+      to: 'on'
+    action:
+      - service: switch.turn_on
+        entity_id: switch.bs_bm_stairs
+
+  - id: "42Q1AG67A09k613Vx57egV8nPs91kAjyOr0kL034FRSP3NqSI2iTFyHsIb17dN43"
+    alias: Light - Turn basement stairs light off
+    trigger:
+      platform: state
+      entity_id: binary_sensor.bs_hw_bm_door_contact
+      to: 'off'
+    action:
+      - service: switch.turn_off
+        entity_id: switch.bs_bm_stairs
+
+###############################################################################
+#   Light Scenes
+###############################################################################
+
 scene:
   - name: Movietime
     icon: mdi:movie
     entities:
-      light.li_wz_lightstrip: 
-        state: 'off'
-      light.wz_decke: 
-        state: 'off'
-      light.bodenlampe:
-        state: 'on'
+      light.li_lr_lightstrip:
+        state: "off"
+      light.li_lr_ceiling:
+        state: "off"
+      light.li_lr_deco:
+        state: "on"
         brightness: 80
         rgb_color: [0, 255, 0]
 
   - name: Abendbeleuchtung
     icon: mdi:television-ambient-light
     entities:
-      light.li_wz_lightstrip:
-        state: 'on'
+      light.li_lr_lightstrip:
+        state: "on"
         brightness: 200
         rgb_color: [255, 214, 170]
-      light.wz_decke:
-        state: 'off'
-      light.bodenlampe:
-        state: 'on'
+      light.li_lr_ceiling:
+        state: "off"
+      light.li_lr_deco:
+        state: "on"
         brightness: 200
         rgb_color: [255, 214, 170]
-      light.az_bloom:
-        state: 'on'
+      light.li_of_cb_bloom:
+        state: "on"
         brightness: 200
         rgb_color: [255, 214, 170]
-      switch.sw_hw_og_deko:
-        state: 'on'
+      switch.pg_hw_deco:
+        state: "on"
 
   - name: Youtube
     icon: mdi:youtube
     entities:
-      light.az_bloom:
-        state: 'on'
+      light.li_of_cb_bloom:
+        state: "on"
         brightness: 255
-        rgb_color: [67,134,150]
+        rgb_color: [0, 126, 126]
       light.keylight:
-        state: 'on'
+        state: "on"
       light.rgbicww_floor_lamp:
-        state: 'on'
+        state: "on"
         brightness: 255
-        rgb_color: [222,107,40]
-
-  - name: Büro
-    icon: mdi:office-building
-    entities:
-      light.az_bloom:
-        state: 'on'
-        brightness: 255
-        kelvin: 4400
+        rgb_color: [222, 159, 0]
 
 # Input Booleans
 input_boolean:

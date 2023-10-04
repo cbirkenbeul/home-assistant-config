@@ -3,7 +3,7 @@ switch.sw_of_cb_deko:
   friendly_name: Deko Arbeitszimmer Christian
   icon: mdi:lamp
 
-switch.sw_hw_og_deko:
+switch.pg_hw_deco:
   friendly_name: Steinlampe
   icon: mdi:lava-lamp
 

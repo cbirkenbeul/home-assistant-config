@@ -6,6 +6,25 @@
 #   @description    :   Complete configuration for energy dashboard
 ###############################################################################
 
+# Automation
+automation:
+  - id: "Notify - send sensor values on 1st day of month"
+    trigger:
+      - platform: time
+        at: "00:00:01"
+    condition:
+      condition: template
+      value_template: "{{ now().day == 1 }}"
+    action:
+      - service: notify.telegram_group
+        data:
+          message: >
+            Zählerstände:
+
+            Strom: {{ states("sensor.last_meter_consumption_helmerichstr_3") }}
+
+            Wasser: {{ states("sensor.watermeter_value") }}
+
 # Enable energy dashboard
 energy:
 
@@ -41,7 +60,7 @@ sensor:
         friendly_name: Strom Büro
         unit_of_measurement: W
         value_template: >
-          {{ states('sensor.az_bloom_power')|float(0) + states('sensor.az_pt_decke_power')|float(0)}}
+          {{ states('sensor.li_of_cb_bloom_power')|float(0) + states('sensor.li_of_pt_desk_power')|float(0)}}
 
   - platform: template
     sensors:

@@ -1,45 +1,43 @@
 ---
 ###############################################################################
 #   @author         :   Christian Birkenbeul
-#   @date           :   17.07.2022
+#   @date           :   08.09.2023
 #   @package        :   Windows
 #   @description    :   Window alerts
 ###############################################################################
 
-# Sensors
+###############################################################################
+# Bathroom
+###############################################################################
 automation:
-  - id: "yhe3ux5QGuhJ5PX4s5wdAdS7BXZwJw8PFjwwtqRAtsPcwFH6WF2uevG8MPKz2kya"
-    alias: Set bathroom window to open
+  - id: "yhe3ux5QGuhJ5Po4s5wdAdS7BsZwJw8PFjwwtqRstsPcwFH6WF2uevG8MPKz2kya"
+    alias: Notification if bathroom window is open
+    description: ''
     trigger:
-      platform: state
-      entity_id: binary_sensor.bs_br_window_contact
-      to: "on"
+      - platform: state
+        entity_id: binary_sensor.bs_br_window_contact
+        to: 'on'
+        for:
+          hours: 0
+          minutes: 10
+          seconds: 0
     condition:
       - condition: state
         entity_id: sensor.weather_day
         state: normalday
     action:
-      - service: script.turn_on
-        entity_id: script.bathroom_window_notification_push
-
-script:
-  bathroom_window_notification_push:
-    sequence:
-    - repeat:
-        while:
-          - condition: state
-            entity_id: binary_sensor.bs_br_window_contact
-            state: 'on'
-        sequence:
-        - delay:
-            minutes: 10
-        - service: script.simplified_bathroom_window_push
-
-  simplified_bathroom_window_push:
-    sequence:
-    - condition: state
-      entity_id: group.devices
-      state: 'home'
-    - service: notify.telegram_group
-      data:
-        message: "Badfenster bitte schließen."
+      - repeat:
+          while:
+            - condition: state
+              entity_id: sensor.weather_day
+              state: normalday
+            - condition: state
+              entity_id: binary_sensor.bs_br_window_contact
+              state: 'on'
+          sequence:
+            - service: notify.telegram_group
+              data:
+                message: Das Fenster im Bad ist offen.
+            - delay:
+                minutes: 10
+    mode: single

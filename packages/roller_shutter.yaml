@@ -7,116 +7,106 @@
 ###############################################################################
 
 automation:
-  # General - Sunset and Sunrise
+
+###############################################################################
+#   Rolladensteuerung Tag/Nacht
+###############################################################################
+
   - id: "XGNJ72jbiDJofWQrhaN8XCHDDMyjR3JvMJ74HzXeWdYFgBDDxh42FzCLWBXJpg8X"
-    alias: Roller Shutter - Open RS on sunrise
+    alias: Roller Shutter - Open on sunrise
     trigger:
       platform: sun
       event: sunrise
     action:
-      - service: cover.open_cover
-        entity_id:
-          - cover.jalousie_kueche_position
-          - cover.cover_cb_office_position_1
-          - cover.cover_pt_office_position_1
-          - cover.cover_diningroom_position_1
-          - cover.cover_guestroom_position_1
-          - cover.cover_livingroom_position_1
-
-  - id: "icyVhTiwIRoq9RHu2lMlHrqyWYIsnw3npKG5XEBSPEFJDfElF0VXf438wUQkpfl3"
-    alias: Close east roller shutter on sunrise
-    trigger:
-      platform: numeric_state
-      entity_id: sun.sun
-      attribute: azimuth
-      above: 50
-    action:
-      - service: cover.set_cover_position
+      - service: scene.turn_on
         target:
-          entity_id:
-            - cover.cover_cb_office_position_1
-            - cover.cover_pt_office_position_1
-            - cover.cover_diningroom_position_1
-            - cover.cover_guestroom_position_1
-        data:
-          position: 30
-
-  - id: "MBp5q6goumZHMXfA9Jf2FyMwC2COAGwk1Ot4PGeW1uhYuX6YdQ8FMCv28yP06PFr"
-    alias: Open east roller shutter
-    trigger:
-      platform: numeric_state
-      entity_id: sun.sun
-      attribute: azimuth
-      above: 120
-    action:
-      service: cover.open_cover
-      target:
-        entity_id:
-          - cover.rolladen_osten
-
-  - id: "Lz7KK3UsZYX86eYtIqALJg0ymEkb8kiFVUtop5VREPfvSRA8hothi6Pm7DLC2nXJ"
-    alias: Close south roller shutter on sunrise
-    trigger:
-      platform: numeric_state
-      entity_id: sun.sun
-      attribute: azimuth
-      above: 125
-    condition:
-      - condition: state
-        entity_id: sensor.weather_day
-        state: summerday
-    action:
-      service: cover.set_cover_position
-      target:
-        entity_id:
-          - cover.cover_diningroom_position_1
-      data:
-        position: 30
-
-  - id: "1N1iSsMdfyVb9muoSJ6WtpmDeyQT3KNQN6PK5nigweaCifrvrHwA8sFRwRDForF6"
-    alias: Open south roller shutter on sunrise
-    trigger:
-      platform: numeric_state
-      entity_id: sun.sun
-      attribute: azimuth
-      above: 180
-    action:
-      service: cover.open_cover
-      target:
-        entity_id:
-          - cover.cover_diningroom_position_1
+          entity_id: scene.rolladen_tag
 
   - id: "Voj8X3oVhyucQvmmPusxTTTMAkt2tdBg7eMGNth93kodUFYtRYKgFh6pYMEqR8Kj"
-    alias: Roller Shutter - Close RS on sunset
+    alias: Roller Shutter - Close on sunset
     trigger:
       platform: sun
       event: sunset
     condition:
-      - condition: state
-        entity_id: sensor.weather_day
-        state: normalday
+      - condition: numeric_state
+        entity_id: sensor.housetempdiff
+        above: 0
     action:
-      - service: cover.close_cover
-        entity_id:
-          - cover.jalousie_kueche_position
-          - cover.cover_cb_office_position_1
-          - cover.cover_diningroom_position_1
-          - cover.cover_guestroom_position_1
-      - service: cover.set_cover_position
+      - service: scene.turn_on
         target:
-          entity_id:
-            - cover.cover_pt_office_position_1
-            - cover.cover_bedroom_position_1
-        data:
-          position: 45
-      - service: cover.set_cover_position
-        target:
-          entity_id:
-            - cover.cover_livingroom_position_1
-        data:
-          position: 55
+          entity_id: scene.rolladen_nacht
 
-  # Kitchen - Window Condition
+###############################################################################
+#   Rolladensteuerung Sonnenstand im Sommer
+###############################################################################
+
+  # - id: "icyVhTiwIRoq9RHu2lMlHrqyWYIsnw3npKG5XEBSPEFJDfElF0VXf438wUQkpfl3"
+  #   alias: Close east roller shutter on sunrise
+  #   trigger:
+  #     platform: numeric_state
+  #     entity_id: sun.sun
+  #     attribute: azimuth
+  #     above: 50
+  #   action:
+  #     - service: cover.set_cover_position
+  #       target:
+  #         entity_id:
+  #           - cover.cover_cb_office_position_1
+  #           - cover.cover_pt_office_position_1
+  #           - cover.cover_diningroom_position_1
+  #           - cover.cover_guestroom_position_1
+  #       data:
+  #         position: 30
+
+  # - id: "MBp5q6goumZHMXfA9Jf2FyMwC2COAGwk1Ot4PGeW1uhYuX6YdQ8FMCv28yP06PFr"
+  #   alias: Open east roller shutter
+  #   trigger:
+  #     platform: numeric_state
+  #     entity_id: sun.sun
+  #     attribute: azimuth
+  #     above: 120
+  #   action:
+  #     service: cover.open_cover
+  #     target:
+  #       entity_id:
+  #         - cover.rolladen_osten
+
+  # - id: "Lz7KK3UsZYX86eYtIqALJg0ymEkb8kiFVUtop5VREPfvSRA8hothi6Pm7DLC2nXJ"
+  #   alias: Close south roller shutter on sunrise
+  #   trigger:
+  #     platform: numeric_state
+  #     entity_id: sun.sun
+  #     attribute: azimuth
+  #     above: 125
+  #   condition:
+  #     - condition: state
+  #       entity_id: sensor.weather_day
+  #       state: summerday
+  #   action:
+  #     service: cover.set_cover_position
+  #     target:
+  #       entity_id:
+  #         - cover.cover_diningroom_position_1
+  #     data:
+  #       position: 30
+
+  # - id: "1N1iSsMdfyVb9muoSJ6WtpmDeyQT3KNQN6PK5nigweaCifrvrHwA8sFRwRDForF6"
+  #   alias: Open south roller shutter on sunrise
+  #   trigger:
+  #     platform: numeric_state
+  #     entity_id: sun.sun
+  #     attribute: azimuth
+  #     above: 180
+  #   action:
+  #     service: cover.open_cover
+  #     target:
+  #       entity_id:
+  #         - cover.cover_diningroom_position_1
+
+###############################################################################
+#   Rolladensteuerung Fenster offen/geschlossen
+###############################################################################
+
   - id: "xzQaaQNMiCi8fPmrzXQZkq7TJfFKop9GwZjTsMnpu9NduzZgRFEzbgH8Ld8b3Eys"
     alias: Roller Shutter - Open RS if kitchen window opens
     trigger:
@@ -126,7 +116,7 @@ automation:
     condition:
       - condition: state
         entity_id: cover.jalousie_kueche_position
-        state: "closed"
+        state: "open"
     action:
       - service: cover.open_cover
         entity_id: cover.jalousie_kueche_position
@@ -143,3 +133,45 @@ automation:
     action:
       - service: cover.close_cover
         entity_id: cover.jalousie_kueche_position
+
+###############################################################################
+#   Szenen zur Rolladensteuerung
+###############################################################################
+
+scene:
+  - name: Rolladen Nacht
+    icon: mdi:weather-sunset-down
+    entities:
+      cover.jalousie_kueche_position:
+        state: closed
+      cover.cover_cb_office_position_1:
+        state: closed
+      cover.cover_diningroom_position_1:
+        state: closed
+      cover.cover_guestroom_position_1:
+        state: closed
+      cover.cover_pt_office_position_1:
+        state: open
+        current_position: 45
+      cover.cover_bedroom_position_1:
+        state: open
+        current_position: 45
+      cover.cover_livingroom_position_1:
+        state: open
+        current_position: 55
+
+  - name: Rolladen Tag
+    icon: mdi:weather-sunset-up
+    entities:
+      cover.jalousie_kueche_position:
+        state: open
+      cover.cover_cb_office_position_1:
+        state: open
+      cover.cover_diningroom_position_1:
+        state: open
+      cover.cover_guestroom_position_1:
+        state: open
+      cover.cover_pt_office_position_1:
+        state: open
+      cover.cover_livingroom_position_1:
+        state: open

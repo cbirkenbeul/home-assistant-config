@@ -1,0 +1,200 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   25.08.2023
+#   @package        :   Zigbee customizations
+#   @description    :   Correct Names and Icons for Zigbee Sensors
+###############################################################################
+
+###############################################################################
+# Livingroom
+###############################################################################
+
+sensor.se_dr_temp_battery:
+  friendly_name: Umwelt Esszimmer Batterie
+
+sensor.se_dr_temp_humidity:
+  friendly_name: Esszimmer Luftfeuchtigkeit
+
+sensor.se_dr_temp_linkquality:
+  friendly_name: Umwelt Esszimmer Link Quality
+
+sensor.se_dr_temp_temperature:
+  friendly_name: Esszimmer Temperatur
+
+sensor.se_dr_temp_pressure:
+  friendly_name: Esszimmer Luftdruck
+  hidden: true
+
+sensor.se_lr_temp_battery:
+  friendly_name: Umwelt Wohnzimmer Batterie
+
+sensor.se_lr_temp_humidity:
+  friendly_name: Wohnzimmer Luftfeuchtigkeit
+
+sensor.se_lr_temp_linkquality:
+  friendly_name: Umwelt Wohnzimmer Link Quality
+
+sensor.se_lr_temp_temperature:
+  friendly_name: Wohnzimmer Temperatur
+
+sensor.se_lr_temp_pressure:
+  friendly_name: Wohnzimmer Luftdruck
+  hidden: true
+
+###############################################################################
+# Office
+###############################################################################
+
+binary_sensor.bs_of_cb_window_contact:
+  friendly_name: Fenster Büro Christian
+  icon: mdi:window-closed-variant
+
+sensor.bs_of_cb_window_linkquality:
+  friendly_name: Kontakt Fenster Büro Christian
+
+sensor.bs_of_cb_window_battery:
+  friendly_name: Fenster Büro Christian Batterie
+
+binary_sensor.bs_of_pt_window_contact:
+  friendly_name: Fenster Büro Petra
+  icon: mdi:window-closed-variant
+
+sensor.bs_of_pt_window_linkquality:
+  friendly_name: Kontakt Fenster Büro Petra
+
+sensor.bs_of_pt_window_battery:
+  friendly_name: Fenster Büro Petra Batterie
+
+sensor.se_of_pt_temp_battery:
+  friendly_name: Umwelt Arbeitszimmer Petra Batterie
+
+sensor.se_of_pt_temp_humidity:
+  friendly_name: Arbeitszimmer Petra Luftfeuchtigkeit
+
+sensor.se_of_pt_temp_linkquality:
+  friendly_name: Umwelt Arbeitszimmer Petra Link Quality
+
+sensor.se_of_pt_temp_temperature:
+  friendly_name: Arbeitszimmer Petra Temperatur
+
+sensor.se_of_pt_temp_pressure:
+  friendly_name: Arbeitszimmer Petra Luftdruck
+  hidden: true
+
+###############################################################################
+# Kitchen
+###############################################################################
+
+binary_sensor.bs_ki_window_contact:
+  friendly_name: Fenster Küche
+  icon: mdi:window-closed-variant
+
+sensor.bs_ki_window_linkquality:
+  friendly_name: Kontakt Fenster Küche
+
+sensor.bs_ki_window_battery:
+  friendly_name: Fenster Küche Batterie
+
+###############################################################################
+# Master Bedroom
+###############################################################################
+
+sensor.se_mbr_temp_battery:
+  friendly_name: Umwelt Schlafzimmer Batterie
+
+sensor.se_mbr_temp_humidity:
+  friendly_name: Schlafzimmer Luftfeuchtigkeit
+
+sensor.se_mbr_temp_linkquality:
+  friendly_name: Umwelt Schlafzimmer Link Quality
+
+sensor.se_mbr_temp_temperature:
+  friendly_name: Schlafzimmer Temperatur
+
+sensor.se_mbr_temp_pressure:
+  friendly_name: Schlafzimmer Luftdruck
+  hidden: true
+
+###############################################################################
+# Bathroom
+###############################################################################
+
+binary_sensor.bs_br_window_contact:
+  friendly_name: Fenster Badezimmer
+  icon: mdi:window-closed-variant
+
+sensor.bs_br_window_linkquality:
+  friendly_name: Kontakt Fenster Badezimmer
+
+sensor.bs_br_window_battery:
+  friendly_name: Fenster Badezimmer Batterie
+
+sensor.se_br_temp_battery:
+  friendly_name: Umwelt Badezimmer Batterie
+
+sensor.se_br_temp_humidity:
+  friendly_name: Badezimmer Luftfeuchtigkeit
+
+sensor.se_br_temp_linkquality:
+  friendly_name: Umwelt Badezimmer Link Quality
+
+sensor.se_br_temp_temperature:
+  friendly_name: Badezimmer Temperatur
+
+sensor.se_br_temp_pressure:
+  friendly_name: Badezimmer Luftdruck
+  hidden: true
+
+###############################################################################
+# Hallway
+###############################################################################
+
+binary_sensor.bs_hw_st_window_contact:
+  friendly_name: Fenster Treppe
+  icon: mdi:window-closed-variant
+
+sensor.bs_hw_st_window_linkquality:
+  friendly_name: Kontakt Fenster Treppe
+
+sensor.bs_hw_st_window_battery:
+  friendly_name: Fenster Treppe Batterie
+
+binary_sensor.bs_hw_bm_door_contact:
+  friendly_name: Kellertür
+
+sensor.bs_hw_bm_door_linkquality:
+  friendly_name: Kontakt Kellertür
+
+sensor.bs_hw_bm_door_battery:
+  friendly_name: Kellertür Batterie
+
+sensor.se_hw_temp_battery:
+  friendly_name: Umwelt Flur Batterie
+
+sensor.se_hw_temp_humidity:
+  friendly_name: Flur Luftfeuchtigkeit
+
+sensor.se_hw_temp_linkquality:
+  friendly_name: Umwelt Flur Link Quality
+
+sensor.se_hw_temp_temperature:
+  friendly_name: Flur Temperatur
+
+sensor.se_hw_temp_pressure:
+  friendly_name: Flur Luftdruck
+  hidden: true
+
+###############################################################################
+# Garage
+###############################################################################
+
+binary_sensor.bs_ga_door:
+  friendly_name: Garagentor Sensor
+  icon: mdi:garage
+
+sensor.bs_ga_door_linkquality:
+  friendly_name: Garagentor Sensor LQI
+
+sensor.bs_ga_door_battery:
+  friendly_name: Garagentor Sensor Batterie

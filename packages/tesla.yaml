@@ -6,6 +6,23 @@
 #   @description    :   Tesla Solar Charging
 ###############################################################################
 
+###############################################################################
+#   Input Select
+###############################################################################
+
+input_select:
+  tesla_charing_mode:
+    name: Tesla charging mode
+    options:
+      - none
+      - solar
+      - tibber
+      - adhoc
+
+###############################################################################
+#   Sensors
+###############################################################################
+
 sensor:
   - platform: template
     sensors:
@@ -120,7 +137,7 @@ automation:
             state: "off"
           - condition: numeric_state
             entity_id: sensor.pv_wr_pc_battery_soc
-            above: "90"
+            above: "95"
           - condition: numeric_state
             entity_id: sensor.pv_prod_ges
             above: "1500"

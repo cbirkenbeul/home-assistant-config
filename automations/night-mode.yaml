@@ -2,7 +2,7 @@
 - alias: turn on nightmode
   trigger:
     - platform: time
-      at: '01:00:00'
+      at: "01:00:00"
   action:
     - service: input_boolean.turn_on
       entity_id: input_boolean.nightmode
@@ -10,7 +10,7 @@
       entity_id: input_boolean.evening_lightning_default
     - service: input_boolean.turn_off
       entity_id: input_boolean.media
-    - delay: '00:00:30'
+    - delay: "00:00:30"
     - service: input_boolean.turn_off
       entity_id: input_boolean.nightmode
     - service: mqtt.publish
@@ -33,7 +33,7 @@
       entity_id: all
     - service: switch.turn_off
       entity_id:
-        - switch.sw_hw_og_deko
+        - switch.pg_hw_deco
         - switch.sw_of_cb_deko
         - switch.flux
         - switch.sw_dr_deko

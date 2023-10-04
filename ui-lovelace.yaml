@@ -18,7 +18,8 @@ views:
   - !include lovelace/kitchen.yaml
   - !include lovelace/hallway.yaml
   - !include lovelace/bedroom.yaml
-  # - !include lovelace/vacuum.yaml
+  - !include lovelace/guestroom.yaml
+  - !include lovelace/basement.yaml
   - !include lovelace/car.yaml
   - !include lovelace/energy.yaml
   - !include lovelace/sankey.yaml

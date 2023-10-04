@@ -1,0 +1,51 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   16.08.2023
+#   @package        :   AI on the Edge Water
+#   @description    :   Make dump dryer and washer smarter
+###############################################################################
+
+mqtt:
+  sensor:
+    - state_topic: "homeassistant/watermeter/main/value"
+      name: "Watermeter Value"
+      unique_id: watermeter_value
+      unit_of_measurement: 'm³'
+      state_class: total_increasing
+      device_class: water # Needs Home Assistant 2022.11!
+      icon: 'mdi:water-pump'
+      availability_topic: homeassistant/watermeter/connection
+      payload_available: connected
+      payload_not_available: connection lost
+
+    - state_topic: "homeassistant/watermeter/main/rate"
+      name: "Watermeter Rate"
+      unique_id: watermeter_rate
+      unit_of_measurement: 'm³/min'
+      state_class: measurement
+      device_class: water # Needs Home Assistant 2022.11!
+      icon: 'mdi:water-pump'
+      availability_topic: homeassistant/watermeter/connection
+      payload_available: connected
+      payload_not_available: connection lost
+
+    - state_topic: "homeassistant/watermeter/main/error"
+      name: "Watermeter Error"
+      unique_id: watermeter_error
+      icon: "mdi:water-alert"
+      availability_topic: homeassistant/watermeter/connection
+      payload_available: connected
+      payload_not_available: connection lost    
+
+    - state_topic: "homeassistant/watermeter/uptime"
+      name: "Watermeter Uptime"
+      unique_id: watermeter_uptime
+      unit_of_measurement: 's'
+      state_class: measurement
+      device_class: duration
+      entity_category: diagnostic
+      icon: "mdi:timer-outline"
+      availability_topic: homeassistant/watermeter/connection
+      payload_available: connected
+      payload_not_available: connection lost

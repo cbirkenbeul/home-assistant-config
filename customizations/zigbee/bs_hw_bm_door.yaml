@@ -1,9 +1,0 @@
----
-binary_sensor.bs_hw_bm_door_contact:
-  friendly_name: Fenster Kellertür
-
-sensor.bs_hw_bm_door_linkquality:
-  friendly_name: Kontakt Fenster Kellertür
-
-sensor.bs_hw_bm_door_battery:
-  friendly_name: Fenster Kellertür Batterie

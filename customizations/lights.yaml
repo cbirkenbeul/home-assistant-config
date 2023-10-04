@@ -1,48 +1,32 @@
 ---
-light.az_cb_decke:
-  friendly_name: Licht Arbeitszimmer Christian
-  icon: mdi:desk
-
-light.az_pt_decke:
+light.li_of_pt_desk:
   friendly_name: Schreibtisch Petra
   icon: mdi:desk
 
-light.leseecke:
+light.li_of_pt_reading:
   friendly_name: Leseecke Petra
   icon: mdi:bookshelf
 
-light.az_bloom:
+light.li_of_cb_bloom:
   friendly_name: Bloom
   icon: mdi:car-light-dimmed
 
-light.bodenlampe:
+light.li_lr_deco:
   friendly_name: Bodenlampe
   icon: mdi:lamp
-
-light.couch:
-  friendly_name: Couch
-  icon: mdi:sofa
 
 light.kuche:
   friendly_name: Decke Küche
   icon: mdi:wall-sconce-flat
 
-light.wz_decke:
+light.li_lr_ceiling:
   friendly_name: Decke Wohnzimmer
   icon: mdi:ceiling-light
-
-light.li_bm_hw:
-  friendly_name: Licht Keller Flur
-  icon: mdi:lightbulb
-
-light.li_bm_stairs:
-  friendly_name: Light Kellertreppe
-  icon: mdi:lightbulb
 
 light.rgbicww_floor_lamp:
   friendly_name: Stehlampe Christian
   icon: mdi:floor-lamp
 
-light.li_wz_lightstrip:
+light.li_lr_lightstrip:
   friendly_name: LED Streifen
   icon: mdi:led-strip-variant

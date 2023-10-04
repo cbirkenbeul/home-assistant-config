@@ -14,8 +14,8 @@
     "deebot_client"
   ],
   "requirements": [
-    "deebot-client==3.0.0",
+    "deebot-client==3.0.1",
     "numpy>=1.23.2"
   ],
-  "version": "2.0.0"
+  "version": "2.1.1"
 }

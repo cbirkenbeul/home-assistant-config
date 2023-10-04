@@ -53,7 +53,6 @@ sensor:
 # Combind temperature sensors
   - platform: min_max
     entity_ids:
-      - sensor.bs_li_terrasse_device_temperature
       - sensor.se_dr_temp_temperature
       - sensor.se_lr_temp_temperature
     type: median
@@ -63,15 +62,13 @@ sensor:
     entity_ids:
       - sensor.se_of_pt_temp_temperature
       - sensor.se_of_cb_temp_temperature
-      - sensor.bs_of_cb_window_device_temperature
-      - sensor.bs_of_pt_window_device_temperature
     type: median
     name: temperature_office
 
   - platform: min_max
     entity_ids:
       - sensor.kuche_sensor_temperature
-      - sensor.bs_ki_window_temperature
+      - sensor.se_ki_temp_temperature
     type: median
     name: temperature_kitchen
 
@@ -86,7 +83,6 @@ sensor:
   - platform: min_max
     entity_ids:
       - sensor.se_br_temp_temperature
-      - sensor.bs_br_window_temperature
     type: median
     name: temperature_bathroom
 
@@ -98,12 +94,26 @@ sensor:
 
   - platform: min_max
     entity_ids:
+      - sensor.se_gr_temp_temperature
+    type: median
+    name: temperature_guestroom
+
+  - platform: min_max
+    entity_ids:
+      - sensor.se_bm_temp_temperature
+      - sensor.se_sr_temp_temperature
+    type: median
+    name: temperature_basement
+
+  - platform: min_max
+    entity_ids:
       - sensor.temperature_wohnzimmer
       - sensor.temperature_arbeitszimmer
       - sensor.temperature_kitchen
       - sensor.temperature_bathroom
       - sensor.temperature_hallway
       - sensor.temperature_bedroom
+      - sensor.temperature_guestroom
     type: median
     name: temperature_house
 
@@ -142,10 +152,30 @@ sensor:
 
   - platform: min_max
     entity_ids:
+      - sensor.se_ki_temp_humidity
+    type: median
+    name: humidity_kitchen
+
+  - platform: min_max
+    entity_ids:
+      - sensor.se_gr_temp_humidity
+    type: median
+    name: humidity_guestroom
+
+  - platform: min_max
+    entity_ids:
+      - sensor.se_bm_temp_humidity
+      - sensor.se_sr_temp_humidity
+    type: median
+    name: humidity_basement
+
+  - platform: min_max
+    entity_ids:
       - sensor.wz_hum_mean
       - sensor.az_hum_mean
       - sensor.humidity_hallway
       - sensor.humidity_bedroom
       - sensor.humidity_bathroom
+      - sensor.humidity_guestroom
     type: median
     name: humidity_house

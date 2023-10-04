@@ -7,7 +7,7 @@
 ###############################################################################
 homekit:
   name: Home Assistant
-  filter: 
+  filter:
     exclude_domains:
       - script
       - scene
@@ -48,13 +48,13 @@ homekit:
       - cover.cover_livingroom_position_1
 
       # Lights
-      - light.az_pt_decke
-      - light.bloom
-      - light.bodenlampe
-      - light.li_wz_lightstrip
+      - light.li_of_pt_desk
+      - light.li_of_cb_bloom
+      - light.li_lr_deco
+      - light.li_lr_lightstrip
       - light.kuche
-      - light.leseecke
-      - light.wz_decke
+      - light.li_of_pt_reading
+      - light.li_lr_ceiling
 
       # Input Boolean
       - input_boolean.evening_lightning_default
@@ -62,9 +62,4 @@ homekit:
       - input_boolean.nightmode
 
       # Switch
-      - switch.sw_hw_og_deko
-      - switch.sw_lr_deko
-      - switch.sw_of_cb_deko
-
-      # Scenen
-      - scene.youtube
+      - switch.pg_hw_deco

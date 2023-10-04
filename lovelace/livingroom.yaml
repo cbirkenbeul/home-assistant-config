@@ -60,7 +60,7 @@ cards:
                   background: none;
                   box-shadow: none;
                   --ha-card-border-width: 0;
-                }  
+                }
       - type: custom:stack-in-card
         mode: horizontal
         cards:
@@ -111,11 +111,11 @@ cards:
                   background: none;
                   box-shadow: none;
                   --ha-card-border-width: 0;
-                }  
+                }
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-entity-card
-            entity: binary_sensor.bs_li_terrasse_contact
+            entity: binary_sensor.bs_lr_door_contact
             secondary_info: last-changed
             name: Terrassentür
 
@@ -124,17 +124,17 @@ cards:
       - type: custom:mushroom-title-card
         title: Licht
       - type: custom:mushroom-light-card
-        entity: light.wz_decke
+        entity: light.li_lr_ceiling
         layout: horizontal
         icon_type: entity_icon
         show_brightness_control: true
       - type: custom:mushroom-light-card
-        entity: light.bodenlampe
+        entity: light.li_lr_deco
         layout: horizontal
         icon_type: entity_icon
         show_brightness_control: true
       - type: custom:mushroom-light-card
-        entity: light.li_wz_lightstrip
+        entity: light.li_lr_lightstrip
         layout: horizontal
         icon_type: entity_icon
         show_brightness_control: true
