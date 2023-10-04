@@ -1,0 +1,352 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   04.10.2023
+#   @package        :   Climate & Heating
+#   @description    :   Heating automations
+###############################################################################
+
+automation:
+  ###############################################################################
+  #   General and presense based
+  ###############################################################################
+
+  # Set heating temperature based on presense
+  - id: "ENcmodUi64XqbhVppg4Oyt388DSZfFSxo2rKvMMKzhdPH4SGPleF6aTUrnqmaFQn"
+    alias: Climate - Turn down on leaving home
+    trigger:
+      platform: state
+      entity_id: sensor.house_status
+      to: "away"
+    action:
+      service: climate.set_temperature
+      entity_id: group.climate
+      data:
+        temperature: 21
+
+  - id: "3JUSpN5feEHgNOHhUaQI1PtQ8Rmq9o51jTQh7pm4lOsoktyu4QUZmO3SgCbzdgyY"
+    alias: Climate - Turn up on ariving home
+    trigger:
+      platform: state
+      entity_id: sensor.house_status
+      to: "home"
+    action:
+      service: climate.set_temperature
+      entity_id: group.climate
+      data:
+        temperature: 23
+
+  # Set heating temperature on night
+  - id: "nTTolNuAg26zYOAEaGqYflgOvJ52ICra8F1Mk82LGG8dB32YAh3xuf2FSnN3FVMn"
+    alias: Climate - Turn down for sleeping
+    trigger:
+      platform: state
+      entity_id: sensor.house_status
+      to: "sleep"
+    action:
+      service: climate.set_temperature
+      entity_id: group.climate
+      data:
+        temperature: 21
+
+  - id: "1b0rYlDvUPMzZ9kiGjL8MTtjv9sGOGrIxbON9nDHLh588o85YoeUFlzpEZ9Ax4Ai"
+    alias: Climate - Heat at morning
+    trigger:
+      platform: state
+      entity_id: sensor.house_status
+      to: "wakeup"
+    action:
+      service: climate.set_temperature
+      entity_id: group.climate
+      data:
+        temperature: 23
+
+  ###############################################################################
+  #   Office
+  ###############################################################################
+
+  - id: "068KVYeMUlA5tQSymb9JaT9hQuIqCg3YIpGnA0s37GI1z8sJ9ix3Wc0wSAskwoCx"
+    alias: Climate - Office - Set temperature in Christians Office based on external sensor
+    description: ""
+    trigger:
+      - platform: state
+        entity_id:
+          - sensor.temperature_office
+    condition:
+      condition: state
+      entity_id: climate.trv_of_cb
+      state: "heat"
+    action:
+      - device_id: 905b144d25c65bd220d06cfad1ae2846
+        domain: select
+        entity_id: select.trv_of_cb_sensor
+        type: select_option
+        option: external
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 10
+          milliseconds: 0
+      - service: mqtt.publish
+        data:
+          topic: zigbee2mqtt/trv_of_cb/set/sensor_temp
+          payload_template: >-
+            {{ (states('sensor.temperature_office')|float(0)|round(1))
+            }}
+
+  - id: "eXOQyffvhhpttKvbwBVaWxFB3xGoYtGuuEZziiSzTlJP9LgiLyZMO8ueGEpfqwwD"
+    alias: Climate - Office - Set temperature in Petras Office based on external sensor
+    description: ""
+    trigger:
+      - platform: state
+        entity_id:
+          - sensor.temperature_office
+    condition:
+      condition: state
+      entity_id: climate.trv_of_pt
+      state: "heat"
+    action:
+      - device_id: 6e6e99fca4e45938abc89f24bc547a97
+        domain: select
+        entity_id: select.trv_of_pt_sensor
+        type: select_option
+        option: external
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 10
+          milliseconds: 0
+      - service: mqtt.publish
+        data:
+          topic: zigbee2mqtt/trv_of_pt/set/sensor_temp
+          payload_template: >-
+            {{ (states('sensor.temperature_office')|float(0)|round(1))
+            }}
+
+  - id: "pVLhfOqB6IW6rdFx3ZDctntZvov8A44nlADJZrdkW60iFhLnGrX1BytB2Uo2Y0In"
+    alias: Climate - Office - Set temperature in Christians office if window is open
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.bs_of_cb_window_contact
+        to: "on"
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id:
+            - sensor.weather_day
+          state: "normalday"
+        - condition: state
+          entity_id:
+            - climate.trv_of_cb
+          state: "heat"
+    action:
+      service: climate.turn_off
+      entity_id: climate.trv_of_cb
+
+  - id: "2PnyX9ffE74AxTlL9XNXS9cRn3AviR62eM9wjHeqDalRSOfljyzh41iGCDCdGhDr"
+    alias: Climate - Office - Set temperature in Petra office if window is open
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.bs_of_pt_window_contact
+        to: "on"
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id:
+            - sensor.weather_day
+          state: "normalday"
+        - condition: state
+          entity_id:
+            - climate.trv_of_pt
+          state: "heat"
+    action:
+      service: climate.turn_off
+      entity_id: climate.trv_of_pt
+
+  - id: "kLqR3RyK74fnP4yOR0vgXy3LcHsmgNzaxCJ1NBcyagmo2DgBIux28Iqb1D1uVJIB"
+    alias: Climate - Office - Set temperature in Christians office if window is closed
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.bs_of_cb_window_contact
+        to: "off"
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id:
+            - sensor.weather_day
+          state: "normalday"
+        - condition: state
+          entity_id:
+            - climate.trv_of_cb
+          state: "off"
+    action:
+      service: climate.turn_on
+      target:
+        entity_id: climate.trv_of_cb
+
+  - id: "KXZYJMpQ1rHFstz9WvvhBoXjsctjlbmp8lbJHvG6LrabpTyX2hCvbUypYzj1f3kI"
+    alias: Climate - Office - Set temperature in Petras office if window is closed
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.bs_of_pt_window_contact
+        to: "off"
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id:
+            - sensor.weather_day
+          state: "normalday"
+        - condition: state
+          entity_id:
+            - climate.trv_of_pt
+          state: "off"
+    action:
+      service: climate.turn_on
+      target:
+        entity_id: climate.trv_of_pt
+
+  ###############################################################################
+  #   Livingroom
+  ###############################################################################
+
+  - id: "86jdUbjE0CaCc9BMjBkLLTtwjFDn0DFwB09SpzH1Amhwnn5QxtDI1Qhg9o2FLYOO"
+    alias: Climate - Livingroom -  Set temperature in dining room based on external sensor
+    description: ""
+    trigger:
+      - platform: state
+        entity_id:
+          - sensor.temperature_livingroom
+    condition: []
+    action:
+      - device_id: 4d9ecf46e96ead153e15b7fbb6c61d37
+        domain: select
+        entity_id: select.trv_diningroom_sensor
+        type: select_option
+        option: external
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 10
+          milliseconds: 0
+      - service: mqtt.publish
+        data:
+          topic: zigbee2mqtt/trv_diningroom/set/sensor_temp
+          payload_template: >-
+            {{ (states('sensor.temperature_livingroom')|float(0)|round(1))
+            }}
+
+  ###############################################################################
+  #   Kitchen
+  ###############################################################################
+
+  - id: "ZeT8RzR9pKseKgWKIsRZifYqZi3i1pKGmuHNKWGDeXzX2t1kq6bDLd2qJvp9x657"
+    alias: Climate - Kitchen - Set temperature at open window
+    trigger:
+      platform: state
+      entity_id: binary_sensor.bs_ki_window
+      to: "on"
+    action:
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.trv_kitchen
+          temperature: 5
+
+  - id: "ylb2pmQzKmA5qT8veygF5BHHWPxMeijZnMBJFywzOi7q8zfckeJzkf7EHevgr6bf"
+    alias: Climate - Kitchen - Set temperature at closed window
+    trigger:
+      platform: state
+      entity_id: binary_sensor.bs_ki_window
+      to: "off"
+    action:
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.trv_kitchen
+          temperature: 23
+          hvac_mode: heat
+
+  ###############################################################################
+  #   Bathroom
+  ###############################################################################
+
+  - id: "fvRRHYRVkUueXTX4zVgrxoWKkZmo5fGkSwGlWvKwzykzaB6FcyBgGxBJGMqFLIPG"
+    alias: Climate - Bathroom - Set temperature if window is open
+    trigger:
+      platform: state
+      entity_id: binary_sensor.bs_br_window_contact
+      to: "on"
+    action:
+      service: climate.set_temperature
+      entity_id: climate.trv_bathroom
+      data:
+        temperature: 18
+
+  - id: "SZ8f5XorUTLfg365tX9OQVcQ9sPwOzJWpQ2HWIDiyQKvLnUvhcNLpFp67P2QeIu9"
+    alias: Climate - Bathroom - Set temperature if window is closed
+    trigger:
+      platform: state
+      entity_id: binary_sensor.bs_br_window_contact
+      to: "off"
+    action:
+      service: climate.set_temperature
+      entity_id: climate.trv_bathroom
+      data:
+        temperature: 21
+
+  - id: "jlfW72o0zLLJ2Y8nBj0eBJA2htxGSCS5bk30E6UhiCgKF8HNRFDwPL251jo3xHN9"
+    alias: Climate - Bathroom - Heat up in the morning
+    trigger:
+      platform: state
+      entity_id: sensor.house_status
+      to: "wakeup"
+    action:
+      - delay:
+          minutes: 1
+      - service: climate.set_temperature
+        entity_id: climate.trv_bathroom
+        data:
+          temperature: 28
+
+  - id: "VvxnF2xvNHk2zblwTRBPcjdULyOVExzZLO2elRYTGI82xoaE5YYGkGCQL51riAud"
+    alias: Climate - Bathroom - Disable heat up
+    trigger:
+      platform: state
+      entity_id: sensor.house_status
+      from: "wakeup"
+      to: "home"
+    action:
+      service: climate.set_temperature
+      data:
+        entity_id: climate.trv_bathroom
+        temperature: 21
+
+  ###############################################################################
+  #   Bedroom
+  ###############################################################################
+
+  - id: "hltCpkaKdJl8LUgQYwa7oisHWQOC9vS01ybuoII71RjhPztN6Qy0xuvSg0D8mbRF"
+    alias: Climate - Bedroom - Turn off TRV over 20 C
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.temperature_bedroom
+      above: 20
+    action:
+      service: climate.set_temperature
+      data:
+        entity_id: climate.trv_bedroom
+        temperature: 5
+
+  - id: "aMJbnJ3MwSouNnvKXcj6ReyAcNKQd2PfNNbMooN52ZCjsC23nuVoAvmYeTcAO1sA"
+    alias: Climate - Bedroom - Turn on TRV under 18 C
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.temperature_bedroom
+      below: 18
+    action:
+      service: climate.set_temperature
+      data:
+        entity_id: climate.trv_bedroom
+        temperature: 20
