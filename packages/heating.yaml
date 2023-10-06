@@ -89,7 +89,7 @@ automation:
           milliseconds: 0
       - service: mqtt.publish
         data:
-          topic: zigbee2mqtt/trv_of_cb/set/sensor_temp
+          topic: zigbee-dev/trv_of_cb/set/sensor_temp
           payload_template: >-
             {{ (states('sensor.temperature_office')|float(0)|round(1))
             }}
@@ -118,7 +118,7 @@ automation:
           milliseconds: 0
       - service: mqtt.publish
         data:
-          topic: zigbee2mqtt/trv_of_pt/set/sensor_temp
+          topic: zigbee-dev/trv_of_pt/set/sensor_temp
           payload_template: >-
             {{ (states('sensor.temperature_office')|float(0)|round(1))
             }}
@@ -234,7 +234,7 @@ automation:
           milliseconds: 0
       - service: mqtt.publish
         data:
-          topic: zigbee2mqtt/trv_diningroom/set/sensor_temp
+          topic: zigbee-dev/trv_diningroom/set/sensor_temp
           payload_template: >-
             {{ (states('sensor.temperature_livingroom')|float(0)|round(1))
             }}
