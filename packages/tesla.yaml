@@ -124,10 +124,10 @@ automation:
             state: "off"
           - condition: numeric_state
             entity_id: sensor.pv_wr_pc_battery_soc
-            above: "95"
+            above: 95
           - condition: numeric_state
             entity_id: sensor.pv_prod_ges
-            above: "1500"
+            above: 1500
       - condition: not
         conditions:
           - condition: state
@@ -138,7 +138,7 @@ automation:
         target:
           entity_id: input_select.tesla_charing_mode
         data:
-          option: soloar
+          option: solar
 
   - id: "syy3rAlQjcW5LCspRYUScFjT0c8cpPZmkAVE0pYwtcb1LpGm6T4mf6rrfmGZfgrZ"
     alias: Tesla - Set Charging Mode from Tibber to None
