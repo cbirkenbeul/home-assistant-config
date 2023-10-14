@@ -50,7 +50,7 @@ sensor.pv_prod_ges:
 sensor.pv_wr_pc_solar_kwh:
   friendly_name: PV Hauptdach
 
-sensor.pv_wr_pi_kwh:
+sensor.pv_pi_ac_power_kwh:
   friendly_name: PV Loggia
 
 sensor.pv_wr_pc_battery_soc:
@@ -61,7 +61,7 @@ sensor.pv_wr_pc_solar_w:
   friendly_name: PV Leistung Haus
   icon: mdi:home
 
-sensor.pv_wr_pi:
+sensor.pv_pi_ac_power:
   friendly_name: PV Leistung Loggia
   icon: mdi:greenhouse
 
@@ -108,4 +108,3 @@ sensor.pv_wr_pc_energy_discharge_to_grid_day:
 sensor.pv_ges_energy_daily:
   friendly_name: PV prod heute
   icon: mdi:solar-panel
-  

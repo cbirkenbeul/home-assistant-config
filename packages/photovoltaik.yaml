@@ -2,87 +2,145 @@
 #   @author         :   Christian Birkenbeul
 #   @date           :   14.01.2022
 #   @package        :   Photovoltaik
-#   @description    :   PV Sensors for Lovelace and Energy Dashboard 
+#   @description    :   PV Sensors for Lovelace and Energy Dashboard
 ###############################################################################
 
 # Modbus configuration
 modbus:
-### KMES
+  ### KMES
   - type: tcp
     host: "192.168.50.12"
     port: 502
     name: KSEM
 
     sensors:
-    - name: Netzbezug
-      slave: 1
-      scale: 0.0001 # wegen kWh (0.1/1000)
-      precision: 3
-      address: 512
-      scan_interval: 60 # Defines the update interval of the sensor in seconds.
-      count: 4 # Anzahl zu lesenden Register
-      input_type: holding
-      data_type: uint64
-      device_class: energy
-      state_class: total_increasing
-      unit_of_measurement: kWh
+      - name: Netzbezug
+        slave: 1
+        scale: 0.0001 # wegen kWh (0.1/1000)
+        precision: 3
+        address: 512
+        scan_interval: 60 # Defines the update interval of the sensor in seconds.
+        # count: 4 # Anzahl zu lesenden Register
+        input_type: holding
+        data_type: uint64
+        device_class: energy
+        state_class: total_increasing
+        unit_of_measurement: kWh
 
-    - name: Netzeinspeisung
-      slave: 1
-      scale: 0.0001 # wegen kWh (0.1/1000)
-      precision: 3
-      address: 516
-      scan_interval: 60 # Defines the update interval of the sensor in seconds.
-      count: 4 # Anzahl zu lesenden Register
-      input_type: holding
-      data_type: uint64
-      device_class: energy
-      state_class: total_increasing
-      unit_of_measurement: kWh
+      - name: Netzeinspeisung
+        slave: 1
+        scale: 0.0001 # wegen kWh (0.1/1000)
+        precision: 3
+        address: 516
+        scan_interval: 60 # Defines the update interval of the sensor in seconds.
+        # count: 4 # Anzahl zu lesenden Register
+        input_type: holding
+        data_type: uint64
+        device_class: energy
+        state_class: total_increasing
+        unit_of_measurement: kWh
 
-### Plenticore
-### Wechselrichter 1
+  ### Plenticore
+  ### Wechselrichter 1
   - type: tcp
     host: "192.168.50.10"
     port: 1502
     name: WR1_Modbus
     sensors:
+      # sum of all PV inputs
+      - name: pv_wr_pc_solar_kwh
+        slave: 71
+        scale: 0.001
+        precision: 2
+        address: 1056
+        scan_interval: 60 # Defines the update interval of the sensor in seconds.
+        # count: 2 # Anzahl zu lesenden Register
+        data_type: float32
+        swap: word
+        device_class: energy
+        state_class: total_increasing
+        unit_of_measurement: kWh
 
-    # sum of all PV inputs
-    - name: pv_wr_pc_solar_kwh
-      slave: 71
-      scale: 0.001
-      precision: 2
-      address: 1056
-      scan_interval: 60 # Defines the update interval of the sensor in seconds.
-      count: 2 # Anzahl zu lesenden Register
-      data_type: float32
-      swap: word
-      device_class: energy
-      state_class: total_increasing
-      unit_of_measurement: kWh
+      # Total DC power (sum of all PV inputs)
+      - name: pv_wr_pc_solar_w
+        slave: 71
+        device_class: power
+        state_class: measurement
+        unit_of_measurement: W
+        scale: 1
+        address: 1066
+        scan_interval: 10 # Defines the update interval of the sensor in seconds.
+        # count: 2 # Anzahl zu lesenden Register
+        data_type: float32
+        swap: word
 
-   # Total DC power (sum of all PV inputs)
-    - name: pv_wr_pc_solar_w
-      slave: 71
-      device_class: power
-      state_class: measurement 
-      unit_of_measurement: W
-      scale: 1
-      address: 1066
-      scan_interval: 10 # Defines the update interval of the sensor in seconds.
-      count: 2 # Anzahl zu lesenden Register
-      data_type: float32
-      swap: word
+multiscrape:
+  - resource: http://192.168.50.11/measurements.xml
+    scan_interval: 60
+    parser: lxml
+    sensor:
+      - unique_id: pv_pi_ac_power
+        name: "AC Power"
+        select: "measurement[type='AC_Power']"
+        attribute: "value"
+        unit_of_measurement: "W"
+        on_error:
+          value: "default"
+          default: 0.0
+      - unique_id: pv_pi_ac_voltage
+        name: "AC Voltage"
+        select: "measurement[type='AC_Voltage']"
+        attribute: "value"
+        unit_of_measurement: "V"
+        on_error:
+          value: "default"
+          default: 0.0
+      - unique_id: pv_pi_ac_current
+        name: "AC Current"
+        select: "measurement[type='AC_Current']"
+        attribute: "value"
+        unit_of_measurement: "A"
+        on_error:
+          value: "default"
+          default: 0.0
+      - unique_id: pv_pi_ac_frequency
+        name: "AC Frequency"
+        select: "measurement[type='AC_Frequency']"
+        attribute: "value"
+        unit_of_measurement: "Hz"
+      - unique_id: pv_pi_dc_voltage
+        name: "DC Voltage"
+        select: "measurement[type='DC_Voltage']"
+        attribute: "value"
+        unit_of_measurement: "V"
+        on_error:
+          value: "default"
+          default: 0.0
+      - unique_id: pv_pi_dc_current
+        name: "DC Current"
+        select: "measurement[type='DC_Current']"
+        attribute: "value"
+        unit_of_measurement: "A"
+        on_error:
+          value: "default"
+          default: 0.0
+      - unique_id: pv_pi_link_voltage
+        name: "Link Voltage"
+        select: "measurement[type='LINK_Voltage']"
+        attribute: "value"
+        unit_of_measurement: "V"
+        on_error:
+          value: "default"
+          default: 0.0
+      - unique_id: pv_pi_derating
+        name: "Derating"
+        select: "measurement[type='Derating']"
+        attribute: "value"
+        unit_of_measurement: "%"
 
 # MQTT Sensors
 mqtt:
   sensor:
-    - state_topic: "power/inverter/piko"
-      name: pv_wr_pi
-      value_template: '{{ value | default(0) | round(1) }}'
-      unit_of_measurement: W
-      device_class: power
     - state_topic: "power/production/yesterday"
       name: pv_prod_yesterday
       unit_of_measurement: W
@@ -91,7 +149,7 @@ mqtt:
 # Sensors
 sensor:
   - platform: integration
-    source: sensor.pv_wr_pi
+    source: sensor.pv_pi_ac_power
     name: pv_wr_pi_kwh
     unit_prefix: k
     round: 2
@@ -107,21 +165,14 @@ sensor:
       pv_prod_ges:
         unit_of_measurement: W
         value_template: >-
-          {{ (states('sensor.pv_wr_pc_solar_w') | float(0)) +  (states('sensor.pv_wr_pi') | float(0)) }}
+          {{ (states('sensor.pv_wr_pc_solar_w') | float(0)) +  (states('sensor.pv_pi_ac_power') | float(0)) }}
 
   - platform: template
     sensors:
       energy_house:
         unit_of_measurement: kWh
         value_template: >-
-          {{ (states('sensor.pv_wr_pc_solar_w') | float(0)) +  (states('sensor.pv_wr_pi') | float(0)) + (states('sensor.pv_wr_pc_grid_power') | float(0)) + (states('sensor.pv_wr_pc_home_power_from_battery') | float(0)) - (states('sensor.pv_wr_pc_pv_to_battery_power') | float(0)) }}
-
-  - platform: rest
-    resource: http://192.168.50.11/measurements.xml
-    name: "Piko MP AC Power"
-    value_template: "{{ value_json.root.Device.Measurements.Measurement[2]['_Value']}}"
-    device_class: power
-    unit_of_measurement: W
+          {{ (states('sensor.pv_wr_pc_solar_w') | float(0)) +  (states('sensor.pv_pi_ac_power') | float(0)) + (states('sensor.pv_wr_pc_grid_power') | float(0)) + (states('sensor.pv_wr_pc_home_power_from_battery') | float(0)) - (states('sensor.pv_wr_pc_pv_to_battery_power') | float(0)) }}
 
 automation:
   - id: "XL7Ai2PQLcpF0O3xwFQRipTy0ERozuc6u4kkwLgK2WajDZ281LN3BPiiawAO4q67"
