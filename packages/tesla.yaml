@@ -96,7 +96,7 @@ automation:
             state: "off"
           - condition: state
             entity_id: switch.teqqcar_charger
-            state: "off"
+            state: "on"
     action:
       - service: input_select.select_option
         target:
