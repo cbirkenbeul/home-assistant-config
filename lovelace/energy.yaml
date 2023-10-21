@@ -132,6 +132,10 @@ cards:
             entity: sensor.pv_wr_pc_battery_soc
             primary_info: none
           - type: custom:mushroom-entity-card
+            entity: number.pv_wr_pc_battery_min_soc
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
             entity: sensor.pv_wr_pc_home_power_from_battery
             primary_info: none
           - type: custom:mushroom-entity-card
