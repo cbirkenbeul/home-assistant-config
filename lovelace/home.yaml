@@ -24,6 +24,8 @@ cards:
           - type: custom:mushroom-person-card
             entity: person.petra
             icon_type: entity-picture
+  - type: custom:mushroom-entity-card
+    entity: cover.garage_door
 
   - type: vertical-stack
     cards:

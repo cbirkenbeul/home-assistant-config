@@ -55,7 +55,7 @@ automation:
       - service: number.set_value
         entity_id: number.pv_wr_pc_battery_min_soc
         data:
-          value: 10
+          value: 15
       - service: notify.telegram_group
         data:
           message: 'Aufladen der Hausbatterie über Netzstrom beendet. Batterieladestatus bei {{ states("sensor.pv_wr_pc_battery_soc") }} Prozent.'
