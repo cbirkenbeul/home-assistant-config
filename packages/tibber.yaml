@@ -15,11 +15,11 @@ input_number:
 
 automation:
   - id: '7KgOhZggjiOuMin4yykFK8jo2rW4PqfdfIQ2we4Glht12VeUsCNTVmiDp5JcN9I4'
-    alias: 'Start House Battery charing if Tibber price below 18 cent'
+    alias: 'Start House Battery charing if Tibber price below 20 cent'
     trigger:
       - platform: numeric_state
         entity_id: sensor.electricity_price_helmerichstr_3
-        below: 0.27
+        below: 0.20
     condition:
       condition: and
       conditions:
@@ -48,11 +48,11 @@ automation:
 
 
   - id: 'nAC7KY7Yin4zxxWGHOvmCzk2trSQgqqVkbSdcgSeK838otTAKJdbsfik5UouQ5Iy'
-    alias: 'Stop House Battery charing if Tibber price above 17 cent'
+    alias: 'Stop House Battery charing if Tibber price above 20 cent'
     trigger:
       - platform: numeric_state
         entity_id: sensor.electricity_price_helmerichstr_3
-        above: 0.17
+        above: 0.20
     action:
       - service: number.set_value
         entity_id: number.pv_wr_pc_battery_min_soc
