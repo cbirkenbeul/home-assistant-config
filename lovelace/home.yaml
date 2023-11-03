@@ -264,91 +264,272 @@ cards:
     cards:
       - type: horizontal-stack
         cards:
-          - type: custom:stack-in-card
-            cards:
-              - type: custom:mushroom-template-card
-                primary: Wohnen
-                secondary: "{{ states('sensor.temperature_livingroom') | round(0) }} °C | {{ states('sensor.humidity_livingroom') | round(0) }} %"
-                icon: mdi:sofa
-                entity: group.livingroom_lights
-                tap_action:
-                  action: navigate
-                  navigation_path: "/lovelace/1"
-                hold_action:
-                  action: toggle
-                icon_color: "{{ 'orange' if is_state(entity, 'on') else 'disabled' }}"
-                fill_container: true
-                layout: horizontal
-                multiline_secondary: false
-                card_mod:
-                  style: |
-                    :host([dark-mode]) {
-                      background: rgba(var(--rgb-primary-background-color), 0.2);
-                    } 
-                    :host {
-                      background: rgba(var(--rgb-primary-text-color), 0.025);
-                      --mush-icon-size: 76px;
-                      height: 66px;
-                      margin-left: -18px !important;
-                    }
-              - type: custom:mushroom-chips-card
-                chips:
-                  - type: conditional
-                    conditions:
-                      - entity: binary_sensor.bs_lr_door_contact
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:door-sliding-open
-                  - type: conditional
-                    conditions:
-                      - entity: light.couch
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:sofa
-                  - type: conditional
-                    conditions:
-                      - entity: light.li_lr_deco
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:lamp
-                  - type: conditional
-                    conditions:
-                      - entity: switch.sw_dr_deko
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:desk-lamp
-                  - type: conditional
-                    conditions:
-                      - entity: light.li_lr_ceiling
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:ceiling-light
-                alignment: end
-                card_mod:
-                  style: |
-                    ha-card {
-                      --chip-box-shadow: none;
-                      --chip-background: none;
-                      --chip-spacing: 0;
-                    }
-            card_mod:
-              style: |
-                ha-card {
-                  height: 102px;
-                  {% if is_state('group.livingroom_windows', 'on') %}
-                    background: rgba(56, 27, 68, 0.6);
-                  {% endif %}
-                }
+          - type: custom:button-card
+            entity: sensor.temperature_livingroom
+            icon: mdi:sofa-single
+            name: Wohnen
+            aspect_ratio: 2.2/1
+            tap_action:
+              action: more-info
+              entity: climate.trv_diningroom
+            styles:
+              card:
+                - background-color: var(--yellow)
+                - border-radius: null
+                - padding: 10%
+                - color: black
+                - font-size: 24px
+                - text-transform: capitalize
+              grid:
+                - grid-template-areas: '"i temp" "n hum" "state state" "ram ram" "sd sd"'
+                - grid-template-columns: 1fr 1fr
+                - grid-template-rows: 1fr min-content min-content min-content min-content
+              name:
+                - font-weight: bold
+                - font-size: 12px
+                - align-self: middle
+                - justify-self: start
+                - padding-bottom: 0px
+                - padding-left: 6px
+              img_cell:
+                - justify-content: start
+                - align-items: start
+                - margin-top: '-2%'
+                - margin-left: '-30%'
+                - width: 190%
+              icon:
+                - color: black
+                - width: 100%
+                - margin-top: '-8%'
+                - margin-left: 0%
+              custom_fields:
+                temp:
+                  - align-self: start
+                  - justify-self: end
+                  - entity: sensor.temperature_livingroom
+                  - font-size: 18px
+                hum:
+                  - align-self: start
+                  - justify-self: end
+                  - entity: sensor.humidity_livingroom
+                  - font-size: 12px
+                state:
+                  - padding-bottom: 0px
+                  - align-self: start
+                  - justify-self: start
+                  - padding-left: 6px
+                  - font-size: 10px
+            custom_fields:
+              temp: |
+                [[[
+                  return `<ha-icon
+                    icon="mdi:thermometer"
+                    style="width: 23px; height: 22px; color: black;">
+                    </ha-icon><span><span style="color: var(--text-color-sensor);">${states['sensor.temperature_livingroom'].state}°</span></span>`
+                ]]]
+              state: |
+                [[[
+                  return `<ha-icon
+                    icon="mdi:radiator"
+                    style="width: 1px; height: 1px; color: white;">
+                    </ha-icon><span><span style="color: var(--text-color-sensor);">${states['climate.trv_diningroom'].state}</span></span>`
+                ]]]
+              hum: |
+                [[[
+                  return `<ha-icon
+                    icon="mdi:water"
+                    style="width: 20px; height: 13px; color: black;">
+                    </ha-icon><span><span style="color: var(--text-color-sensor);">${states['sensor.humidity_livingroom'].state}%</span></span>`
+                ]]]    
+            state:
+              - value: 25.75
+                operator: '>'
+                styles:
+                  card:
+                    - background-color: '#ff918a'
+              - value: 25.5
+                operator: '>'
+                styles:
+                  card:
+                    - background-color: '#ff9888'
+              - value: 25.25
+                operator: '>'
+                styles:
+                  card:
+                    - background-color: '#ff9e87'
+              - value: 25
+                operator: '>'
+                styles:
+                  card:
+                    - background-color: '#ffa585'
+              - value: 24.75
+                operator: '>'
+                styles:
+                  card:
+                    - background-color: '#ffac83'
+              - value: 24.5
+                operator: '>'
+                styles:
+                  card:
+                    - background-color: '#ffb282'
+              - value: 24.25
+                operator: '>'
+                styles:
+                  card:
+                    - background-color: '#ffb980'
+              - value: 24
+                operator: '>'
+                styles:
+                  card:
+                    - background-color: '#ffbf7f'
+              - value: 23.75
+                operator: '>'
+                styles:
+                  card:
+                    - background-color: '#ffc67d'
+              - value: 23.5
+                operator: '>'
+                styles:
+                  card:
+                    - background-color: '#ffcd7b'
+              - value: 22.25
+                operator: '>'
+                styles:
+                  card:
+                    - background-color: '#ffd37a'
+              - value: 22
+                operator: '>'
+                styles:
+                  card:
+                    - background-color: '#ffda78'
+              - value: 21.5
+                operator: '>'
+                styles:
+                  card:
+                    - background-color: '#e9d593'
+              - value: 20.5
+                operator: '>'
+                styles:
+                  card:
+                    - background-color: '#d3cfae'
+              - value: 19.5
+                operator: '>'
+                styles:
+                  card:
+                    - background-color: '#bccac9'
+              - value: 18.5
+                operator: '>'
+                styles:
+                  card:
+                    - background-color: '#a6c4e4'
+              - value: 17
+                operator: '>'
+                styles:
+                  card:
+                    - background-color: '#90bfff'
+              - value: 'off'
+                styles:
+                  state:
+                    - color: white
+                  name:
+                    - color: white
+                  icon:
+                    - color: white
+                  temp:
+                    - color: white
+                  card:
+                    - color: white
+                    - filter: opacity(50%)
+                    - background: black
+
+
+
+
+          # - type: custom:stack-in-card
+          #   cards:
+          #     - type: custom:mushroom-template-card
+          #       primary: Wohnen
+          #       secondary: "{{ states('sensor.temperature_livingroom') | round(0) }} °C | {{ states('sensor.humidity_livingroom') | round(0) }} %"
+          #       icon: mdi:sofa
+          #       entity: group.livingroom_lights
+          #       tap_action:
+          #         action: navigate
+          #         navigation_path: "/lovelace/1"
+          #       hold_action:
+          #         action: toggle
+          #       icon_color: "{{ 'orange' if is_state(entity, 'on') else 'disabled' }}"
+          #       fill_container: true
+          #       layout: horizontal
+          #       multiline_secondary: false
+          #       card_mod:
+          #         style: |
+          #           :host([dark-mode]) {
+          #             background: rgba(var(--rgb-primary-background-color), 0.2);
+          #           } 
+          #           :host {
+          #             background: rgba(var(--rgb-primary-text-color), 0.025);
+          #             --mush-icon-size: 76px;
+          #             height: 66px;
+          #             margin-left: -18px !important;
+          #           }
+          #     - type: custom:mushroom-chips-card
+          #       chips:
+          #         - type: conditional
+          #           conditions:
+          #             - entity: binary_sensor.bs_lr_door_contact
+          #               state: "on"
+          #           chip:
+          #             type: template
+          #             icon_color: disabled
+          #             icon: mdi:door-sliding-open
+          #         - type: conditional
+          #           conditions:
+          #             - entity: light.couch
+          #               state: "on"
+          #           chip:
+          #             type: template
+          #             icon_color: disabled
+          #             icon: mdi:sofa
+          #         - type: conditional
+          #           conditions:
+          #             - entity: light.li_lr_deco
+          #               state: "on"
+          #           chip:
+          #             type: template
+          #             icon_color: disabled
+          #             icon: mdi:lamp
+          #         - type: conditional
+          #           conditions:
+          #             - entity: switch.sw_dr_deko
+          #               state: "on"
+          #           chip:
+          #             type: template
+          #             icon_color: disabled
+          #             icon: mdi:desk-lamp
+          #         - type: conditional
+          #           conditions:
+          #             - entity: light.li_lr_ceiling
+          #               state: "on"
+          #           chip:
+          #             type: template
+          #             icon_color: disabled
+          #             icon: mdi:ceiling-light
+          #       alignment: end
+          #       card_mod:
+          #         style: |
+          #           ha-card {
+          #             --chip-box-shadow: none;
+          #             --chip-background: none;
+          #             --chip-spacing: 0;
+          #           }
+          #   card_mod:
+          #     style: |
+          #       ha-card {
+          #         height: 102px;
+          #         {% if is_state('group.livingroom_windows', 'on') %}
+          #           background: rgba(56, 27, 68, 0.6);
+          #         {% endif %}
+          #       }
 
           - type: custom:stack-in-card
             cards:

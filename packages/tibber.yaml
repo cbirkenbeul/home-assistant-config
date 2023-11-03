@@ -19,7 +19,7 @@ automation:
     trigger:
       - platform: numeric_state
         entity_id: sensor.electricity_price_helmerichstr_3
-        below: 0.18
+        below: 0.27
     condition:
       condition: and
       conditions:
@@ -37,9 +37,11 @@ automation:
       - service: modbus.write_register
         data:
           address: 1034
-          slave: 71
+          unit: 71
           hub: WR1_Modbus
-          value: [0xe000, 0xc53b]
+          value:
+            - 0
+            - 50432
       - service: notify.telegram_group
         data:
           message: "Aufladen der Hausbatterie über Netzstrom gestartet."

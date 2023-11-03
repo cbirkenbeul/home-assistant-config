@@ -13,3 +13,5 @@ recorder:
   include:
     domains:
       - sensor
+    entities:
+      - number.pv_wr_pc_battery_min_soc
