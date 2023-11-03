@@ -146,46 +146,28 @@ cards:
     cards:
       - type: custom:mushroom-title-card
         title: Haus
-      - type: custom:stack-in-card
-        mode: horizontal
-        cards:
-          - type: custom:mushroom-template-card
-            entity: sensor.energy_house
-            primary: Verbrauch (KSEM)
-            secondary: |
-              {{ states('sensor.energy_house')}} Wh
-            icon: mdi:home-lightning-bolt
-            icon_color: red
-          - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.energy_house
-            hours_to_show: 8
-            points_per_hour: 4
-            line_width: 2
-            animate: true
-            show:
-              name: false
-              icon: false
-              state: false
-              legend: false
-              fill: fade
-            color_thresholds:
-              - value: 0
-                color: "#27ae60"
-              - value: 500
-                color: "#f1c40f"
-              - value: 1000
-                color: "#e67e22"
-              - value: 1500
-                color: "#e74c3c"
-            card_mod:
-              style: |
-                ha-card {
-                  border-radius: 8px;
-                  background: none;
-                  box-shadow: none;
-                  --ha-card-border-width: 0;
-                }
+      - type: custom:power-flow-card-plus
+        entities:
+          grid:
+            entity:
+              consumption: sensor.pv_wr_pc_home_power_from_grid
+              production: sensor.pv_wr_pc_home_power_to_grid
+          solar:
+            entity: sensor.pv_prod_ges
+          battery:
+            entity:
+              consumption: sensor.pv_wr_pc_home_power_from_battery
+              production: sensor.pv_wr_pc_pv_to_battery_power
+            state_of_charge: sensor.pv_wr_pc_battery_soc
+          home:
+          fossil_fuel_percentage:
+            entity: sensor.electricity_maps_anteil_fossiler_brennstoffe_im_netz
+          individual1:
+            entity: sensor.teqqcar_charger_power
+            secondary_info: 
+              entity: sensor.teqqcar_battery
+              unit_of_measurement: '%'
+            display_zero: true
       - type: custom:stack-in-card
         mode: horizontal
         cards:
