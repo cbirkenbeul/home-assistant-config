@@ -6,6 +6,10 @@
 #   @description    :   Tibber
 ###############################################################################
 
+###############################################################################
+#   Input Number
+###############################################################################
+
 input_number:
   byd_charge_power:
     name: byd_charge_power
@@ -13,9 +17,22 @@ input_number:
     max: 0
     min: -5000
 
+###############################################################################
+#   Input Boolean
+###############################################################################
+
+input_boolean:
+  byd_charging:
+    name: byd charging
+    icon: mdi:battery-charging
+
+###############################################################################
+#   Automations
+###############################################################################
+
 automation:
   - id: '7KgOhZggjiOuMin4yykFK8jo2rW4PqfdfIQ2we4Glht12VeUsCNTVmiDp5JcN9I4'
-    alias: 'Start House Battery charing if Tibber price below 20 cent'
+    alias: 'Tibber - Enable helper entity if Tibber price below 20 cent'
     trigger:
       - platform: numeric_state
         entity_id: sensor.electricity_price_helmerichstr_3
@@ -30,29 +47,38 @@ automation:
           entity_id: sensor.pv_wr_pc_battery_soc
           below: 50
     action:
-      - service: number.set_value
-        entity_id: number.pv_wr_pc_battery_min_soc
-        data:
-          value: 75
-      - service: modbus.write_register
-        data:
-          address: 1034
-          unit: 71
-          hub: WR1_Modbus
-          value:
-            - 0
-            - 50432
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.byd_charging
       - service: notify.telegram_group
         data:
           message: "Aufladen der Hausbatterie über Netzstrom gestartet."
+      - service: number.set_value
+        entity_id: number.pv_wr_pc_battery_min_soc
+        data:
+          value: 90
 
+  - id: 'M3BnGaOGHNznaKRzUy9MQaUAmn7WXiKcn9hoX4fTvVhkKCV8hPzZraRlay0AZHZO'
+    alias: 'Tibber - Start charging home battery'
+    trigger:
+      - platform: time_pattern
+        minutes: "/2"
+        seconds: 00
+    condition:
+      - condition: state
+        entity_id: input_boolean.byd_charging
+        state: 'on'
+    action:
+      service: script.adjust_byd_charging
 
   - id: 'nAC7KY7Yin4zxxWGHOvmCzk2trSQgqqVkbSdcgSeK838otTAKJdbsfik5UouQ5Iy'
-    alias: 'Stop House Battery charing if Tibber price above 20 cent'
+    alias: 'Tibber - Stop House Battery charing if Tibber price above 20 cent'
     trigger:
       - platform: numeric_state
         entity_id: sensor.electricity_price_helmerichstr_3
         above: 0.20
+      - platform: numeric_state
+        entity_id: sensor.pv_wr_pc_battery_soc
+        above: 90
     action:
       - service: number.set_value
         entity_id: number.pv_wr_pc_battery_min_soc
@@ -61,3 +87,23 @@ automation:
       - service: notify.telegram_group
         data:
           message: 'Aufladen der Hausbatterie über Netzstrom beendet. Batterieladestatus bei {{ states("sensor.pv_wr_pc_battery_soc") }} Prozent.'
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.byd_charging
+
+###############################################################################
+#   Scripts
+###############################################################################
+
+script:
+  "adjust_byd_charging":
+    alias: Repeat BYD charging
+    sequence:
+      - service: modbus.write_register
+        data:
+          address: 1034
+          unit: 71
+          hub: WR1_Modbus
+          value:
+            - 0
+            - 50432
+    mode: single
