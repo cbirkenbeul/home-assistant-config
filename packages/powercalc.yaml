@@ -18,6 +18,9 @@ powercalc:
         entities:
           - entity_id: light.li_lr_deco
           - entity_id: light.li_lr_ceiling
+          - entity_id: light.li_lr_lightstrip
+            fixed:
+              power: 2.8
 
       - create_group: office_lights
         entities:

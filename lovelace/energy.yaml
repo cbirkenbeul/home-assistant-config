@@ -168,6 +168,7 @@ cards:
               entity: sensor.teqqcar_battery
               unit_of_measurement: '%'
             display_zero: true
+
       - type: custom:stack-in-card
         mode: horizontal
         cards:
@@ -240,169 +241,28 @@ cards:
     cards:
       - type: custom:mushroom-title-card
         title: Verbraucher
-      - type: custom:stack-in-card
-        mode: horizontal
+      - type: horizontal-stack
         cards:
-          - type: custom:mushroom-template-card
-            entity: sensor.all_lights_power
-            primary: Licht
-            secondary: |
-              {{ states('sensor.all_lights_power')}} Wh
-            icon: mdi:lightbulb
-            icon_color: blue
-          - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.all_lights_power
-            hours_to_show: 8
-            points_per_hour: 4
-            line_width: 2
-            animate: true
-            show:
-              name: false
-              icon: false
-              state: false
-              legend: false
-              fill: fade
-            color_thresholds:
-              - value: 5
-                color: "#27ae60"
-              - value: 10
-                color: "#f1c40f"
-              - value: 15
-                color: "#e67e22"
-              - value: 20
-                color: "#e74c3c"
-            card_mod:
-              style: |
-                ha-card {
-                  border-radius: 8px;
-                  background: none;
-                  box-shadow: none;
-                  --ha-card-border-width: 0;
-                }
-
-      - type: custom:stack-in-card
-        mode: horizontal
-        cards:
-          - type: custom:mushroom-template-card
+          - type: custom:mushroom-entity-card
             entity: sensor.ap_christian_power
-            primary: Arbeitsplatz Christian
-            secondary: |
-              {{ states('sensor.ap_christian_power')}} Wh
-            icon: mdi:desk
-            icon_color: blue
-          - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.ap_christian_power
-            hours_to_show: 8
-            points_per_hour: 4
-            line_width: 2
-            animate: true
-            show:
-              name: false
-              icon: false
-              state: false
-              legend: false
-              fill: fade
-            color_thresholds:
-              - value: 10
-                color: "#27ae60"
-              - value: 100
-                color: "#f1c40f"
-              - value: 150
-                color: "#e67e22"
-              - value: 200
-                color: "#e74c3c"
-            card_mod:
-              style: |
-                ha-card {
-                  border-radius: 8px;
-                  background: none;
-                  box-shadow: none;
-                  --ha-card-border-width: 0;
-                }
-
-      - type: custom:stack-in-card
-        mode: horizontal
-        cards:
-          - type: custom:mushroom-template-card
+          - type: custom:mushroom-entity-card
             entity: sensor.shelly_ap_petra_power
-            primary: Arbeitsplatz Petra
-            secondary: |
-              {{ states('sensor.shelly_ap_petra_power')}} Wh
-            icon: mdi:desk
-            icon_color: blue
-          - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.shelly_ap_petra_power
-            hours_to_show: 8
-            points_per_hour: 4
-            line_width: 2
-            animate: true
-            show:
-              name: false
-              icon: false
-              state: false
-              legend: false
-              fill: fade
-            color_thresholds:
-              - value: 10
-                color: "#27ae60"
-              - value: 100
-                color: "#f1c40f"
-              - value: 150
-                color: "#e67e22"
-              - value: 200
-                color: "#e74c3c"
-            card_mod:
-              style: |
-                ha-card {
-                  border-radius: 8px;
-                  background: none;
-                  box-shadow: none;
-                  --ha-card-border-width: 0;
-                }
-
-      - type: custom:stack-in-card
-        mode: horizontal
+      - type: horizontal-stack
         cards:
-          - type: custom:mushroom-template-card
+          - type: custom:mushroom-entity-card
+            entity: sensor.trockner_electricity_power
+          - type: custom:mushroom-entity-card
+            entity: sensor.waschmaschine_electricity_power
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
             entity: sensor.serverrack_power
-            primary: Serverrack
-            secondary: |
-              {{ states('sensor.serverrack_power')}} Wh
-            icon: mdi:server
-            icon_color: blue
-          - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.serverrack_power
-            hours_to_show: 8
-            points_per_hour: 4
-            line_width: 2
-            animate: true
-            show:
-              name: false
-              icon: false
-              state: false
-              legend: false
-              fill: fade
-            color_thresholds:
-              - value: 120
-                color: "#27ae60"
-              - value: 150
-                color: "#f1c40f"
-              - value: 170
-                color: "#e67e22"
-              - value: 200
-                color: "#e74c3c"
-            card_mod:
-              style: |
-                ha-card {
-                  border-radius: 8px;
-                  background: none;
-                  box-shadow: none;
-                  --ha-card-border-width: 0;
-                }
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: sensor.all_lights_power
+          - type: custom:mushroom-entity-card
+            entity: sensor.plug_fridge_power
 
   - type: vertical-stack
     cards:

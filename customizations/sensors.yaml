@@ -192,3 +192,7 @@ sensor.all_lights_power:
 sensor.other_devices_power:
   friendly_name: Sonstiges
   icon: mdi:power-plug-battery-outline
+
+sensor.plug_fridge_power:
+  friendly_name: Kühlschrank
+  icon: mdi:fridge

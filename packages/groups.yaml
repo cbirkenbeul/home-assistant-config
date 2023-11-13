@@ -42,6 +42,18 @@ group:
       - light.hue_filament_bulb_2
       - light.medizinschrank
 
+  # Windows in hole house
+  house_windows:
+    name: Windows in all rooms
+    entities:
+      - binary_sensor.bs_lr_door_contact
+      - binary_sensor.bs_of_cb_window_contact
+      - binary_sensor.bs_of_pt_window_contact
+      - binary_sensor.bs_hw_bm_door_contact
+      - binary_sensor.bs_hw_st_window_contact
+      - binary_sensor.bs_br_window_contact
+      - binary_sensor.bs_ki_window_contact
+
   # Window / Door Sensor Groups
   livingroom_windows:
     name: Livingroom doors and windows
