@@ -256,6 +256,8 @@ cards:
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-entity-card
+            entity: sensor.tv_switch_0_power
+          - type: custom:mushroom-entity-card
             entity: sensor.serverrack_power
       - type: horizontal-stack
         cards:

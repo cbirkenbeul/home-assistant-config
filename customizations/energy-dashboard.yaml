@@ -108,3 +108,7 @@ sensor.pv_wr_pc_energy_discharge_to_grid_day:
 sensor.pv_ges_energy_daily:
   friendly_name: PV prod heute
   icon: mdi:solar-panel
+
+sensor.tv_switch_0_power:
+  friendly_name: TV
+  icon: mdi:television
