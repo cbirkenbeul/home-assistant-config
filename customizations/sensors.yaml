@@ -111,22 +111,22 @@ sensor.weewx_drewpoint:
 
 sensor.weewx_wind:
   friendly_name: Wind
-  unit_of_measurement: 'kmh'
+  unit_of_measurement: "kmh"
   icon: mdi:weather-windy
 
 sensor.weewx_windgust:
   friendly_name: Windböen
-  unit_of_measurement: 'kmh'
+  unit_of_measurement: "kmh"
   icon: mdi:weather-dust
 
 sensor.weewx_rain:
   friendly_name: Regen
-  unit_of_measurement: 'mm'
+  unit_of_measurement: "mm"
   icon: mdi:weather-pouring
 
 sensor.weewx_outhumidity:
   friendly_name: Luftfeuchtigkeit
-  unit_of_measurement: '%'
+  unit_of_measurement: "%"
   icon: mdi:water-percent
 
 sensor.all_lights_energy_daily:
@@ -137,7 +137,7 @@ sensor.ap_christian_energy_daily:
   friendly_name: AP Christian
   icon: mdi:desk
 
-sensor.shelly_ap_petra_device_energy_daily:
+sensor.ap_petra_energy_daily:
   friendly_name: AP Petra
   icon: mdi:desk
 
@@ -196,3 +196,11 @@ sensor.other_devices_power:
 sensor.plug_fridge_power:
   friendly_name: Kühlschrank
   icon: mdi:fridge
+
+sensor.tv_switch_0_energy:
+  friendly_name: TV
+  icon: mdi:television
+
+sensor.tv_energy_daily:
+  friendly_name: TV
+  icon: mdi:television

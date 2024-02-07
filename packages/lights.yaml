@@ -6,6 +6,14 @@
 #   @description    :   All lights automation
 ###############################################################################
 
+light:
+  - platform: group
+    name: "Stairway Lights"
+    entities:
+      - light.hw_bottom
+      - light.hw_center
+      - light.hw_top  
+
 automation:
   # Automations based on sun
   - id: "fLeoPM2GZVCbsTeVpGenmbhowfsNmjYxEVbt6tBpzTpbqukpzxHd36JGNFT8cQK6"
@@ -57,16 +65,40 @@ automation:
       - service: input_boolean.turn_on
         entity_id: input_boolean.evening_lightning_default
 
-###############################################################################
-#   Basement Stairs
-###############################################################################
+  ###############################################################################
+  #   Stairway Lights
+  ###############################################################################
+
+  - id: "4H2sE7SdUwfjWSKyNIMef4cM0A1KqvIzFArXL1CzT1ywPT6kqIN3JOxhkshfBBbb"
+    alias: Light - Turn on stair lights on motion"
+    trigger:
+      platform: state
+      entity_id: binary_sensor.se_hw_og_motion_occupancy
+      to: "on"
+    condition:
+      condition: numeric_state
+      entity_id: sensor.se_hw_og_motion_illuminance_lux
+      below: "10"
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.stairway_lights
+          brightness: 80
+      - delay:
+          seconds: 20
+      - service: light.turn_off
+        entity_id: light.stairway_lights
+
+  ###############################################################################
+  #   Basement Stairs
+  ###############################################################################
 
   - id: "K9VHA5geKa48ZhL9Yhd668H5O2M0uebxv0D2douA3Q8uC43GcVVPY122r35m0W14"
     alias: Light - Turn basement stairs light on
     trigger:
       platform: state
       entity_id: binary_sensor.bs_hw_bm_door_contact
-      to: 'on'
+      to: "on"
     action:
       - service: switch.turn_on
         entity_id: switch.bs_bm_stairs
@@ -76,10 +108,31 @@ automation:
     trigger:
       platform: state
       entity_id: binary_sensor.bs_hw_bm_door_contact
-      to: 'off'
+      to: "off"
     action:
       - service: switch.turn_off
         entity_id: switch.bs_bm_stairs
+
+  ###############################################################################
+  #   Entrance light
+  ###############################################################################
+
+  - id: "1blq746VvRQTAyquqG8UVXpRSIt2pwfgLtLqOX9z1YmCXfBC8Dn4qkgfSNSzSuTH"
+    alias: Light - Manage entrance light with motion
+    trigger:
+      platform: state
+      entity_id: binary_sensor.se_out_entrance_occupancy
+      to: "on"
+    condition:
+      condition: numeric-state
+      entity_id: sensor.se_out_entrance_illuminance_lux
+      below: 400
+    action:
+      - service: light.turn_on
+        entity_id: light.li_out_entrance
+      - delay: 00:01:00
+      - serivce: light.turn_off
+        entity_id: light.li_out_entrance
 
 ###############################################################################
 #   Light Scenes
@@ -116,6 +169,10 @@ scene:
         brightness: 200
         rgb_color: [255, 214, 170]
       switch.pg_hw_deco:
+        state: "on"
+      switch.stern_schlafzimmer_switch_0:
+        state: "on"
+      switch.stern_gaestezimmer_switch_0:
         state: "on"
 
   - name: Youtube

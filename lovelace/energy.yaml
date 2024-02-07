@@ -282,3 +282,28 @@ cards:
         primary_info: name
         icon_color: blue
         icon: mdi:currency-eur
+
+  - type: custom:battery-state-card
+    secondary_info: "{last_changed}"
+    filter:
+      include:
+        - name: "attributes.device_class"
+          value: "battery"
+      exclude:
+        - name: "entity_id"
+          value: "binary_sensor.*"
+        - name: sensor.teqqcar_battery
+        - name: sensor.pv_wr_pc_battery_soc
+        - name: sensor.ipad_battery_level
+    sort:
+      by: "state"
+    collapse: 8
+    bulk_rename:
+      - from: " Battery"
+      - from: " level"
+    colors:
+      steps:
+        - '#ff0000'
+        - '#ffff00'
+        - '#00ff00'
+      gradient: true

@@ -7,7 +7,7 @@
 ###############################################################################
 
 sensor:
-# Device Tracker
+  # Device Tracker
   - platform: template
     sensors:
       teqqphone:
@@ -50,7 +50,7 @@ sensor:
             mdi:home-export-outline
           {% endif %}
 
-# Combind temperature sensors
+  # Combind temperature sensors
   - platform: min_max
     entity_ids:
       - sensor.se_dr_temp_temperature
@@ -77,6 +77,7 @@ sensor:
       - sensor.bs_hw_bm_door_temperature
       - sensor.hue_motion_sensor_1_temperature_2
       - sensor.hue_motion_sensor_1_temperature
+      - sensor.se_hw_og_motion_temperature
     type: median
     name: temperature_hallway
 
@@ -117,7 +118,7 @@ sensor:
     type: median
     name: temperature_house
 
-# Combind humidity sensors
+  # Combind humidity sensors
   - platform: min_max
     entity_ids:
       - sensor.se_dr_temp_humidity

@@ -33,6 +33,7 @@ http:
   use_x_forwarded_for: true
   trusted_proxies: 
     - 192.168.10.0/24
+    - 172.30.33.0/24
 ios:
 map:
 mobile_app:
@@ -72,4 +73,8 @@ lovelace:
     - url: /hacsfiles/button-card/button-card.js
       type: module
     - url: /hacsfiles/power-flow-card-plus/power-flow-card-plus.js
+      type: module
+    - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
+      type: module
+    - url: /hacsfiles/battery-state-card/battery-state-card.js
       type: module

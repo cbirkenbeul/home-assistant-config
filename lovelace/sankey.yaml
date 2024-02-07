@@ -50,11 +50,12 @@ cards:
             children:
               - sensor.office_lights_energy_daily
               - sensor.ap_christian_energy_daily
-              - sensor.shelly_ap_petra_device_energy_daily
+              - sensor.ap_petra_energy_daily
           - entity_id: sensor.livingroom_energy
             color: green
             children:
               - sensor.livingroom_lights_energy_daily
+              - sensor.tv_energy_daily
           - entity_id: sensor.kitchen_energy
             color: orange
             children:
@@ -80,9 +81,10 @@ cards:
           - entity_id: sensor.office_lights_energy_daily
             color: yellow
           - entity_id: sensor.ap_christian_energy_daily
-          - entity_id: sensor.shelly_ap_petra_device_energy_daily
+          - entity_id: sensor.ap_petra_energy_daily
           - entity_id: sensor.livingroom_lights_energy_daily
             color: yellow
+          - entity_id: sensor.tv_energy_daily
           - entity_id: sensor.kitchen_lights_energy_daily
             color: yellow
           - entity_id: sensor.fridge_energy_daily

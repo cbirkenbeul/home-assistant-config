@@ -308,7 +308,24 @@ automation:
       - service: climate.set_temperature
         entity_id: climate.trv_bathroom
         data:
-          temperature: 28
+          temperature: 30
+
+  - id: "9TQv8l44SXqjBiNMh24SnulADDHRSU06MrFznpxXsoVR6s3cdaBvG4V89lZjmJxm"
+    alias: Climate - Bathroom - Heat up monday morning
+    trigger:
+      platform: time
+      at: "05:30:00"
+    condition:
+      condition: time
+      weekday:
+        - mon
+    action:
+      - delay:
+          minutes: 1
+      - service: climate.set_temperature
+        entity_id: climate.trv_bathroom
+        data:
+          temperature: 30
 
   - id: "VvxnF2xvNHk2zblwTRBPcjdULyOVExzZLO2elRYTGI82xoaE5YYGkGCQL51riAud"
     alias: Climate - Bathroom - Disable heat up

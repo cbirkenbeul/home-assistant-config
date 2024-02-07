@@ -40,7 +40,7 @@ group:
       - light.bad
       - light.hue_filament_bulb_1
       - light.hue_filament_bulb_2
-      - light.medizinschrank
+      - light.medizinschrank   
 
   # Windows in hole house
   house_windows:

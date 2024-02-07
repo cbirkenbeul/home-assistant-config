@@ -1,0 +1,52 @@
+---
+###############################################################################
+#   @author         :   Christian Birkenbeul
+#   @date           :   03.02.2024
+#   @package        :   awtrix
+#   @description    :   Send information to Ulanzi TC001
+###############################################################################
+
+# Automation
+automation:
+  - id: "jdrqaxu2n6i5p8yvle41bgs0wotz9m3k"
+    trigger:
+      - platform: time_pattern
+        seconds: /30
+    action:
+      - service: mqtt.publish
+        data_template:
+          qos: "2"
+          retain: false
+          #an deine ID anpassen!
+          topic: awtrix_f53d30/custom/pvproduction
+          payload_template: >-
+            {% if states('sensor.pv_prod_ges') <= '1500' %}
+              { "text": "{{ states.sensor.pv_prod_ges.state }}", "icon": "91",  "color": "e74c3c"}
+            {% elif states('sensor.pv_prod_ges') <= '4500' %}
+              { "text": "{{ states.sensor.pv_prod_ges.state }}", "icon": "876",  "color": "f1c40f"}
+            {% else %}
+              { "text": "{{ states.sensor.pv_prod_ges.state }}", "icon": "515",  "color": "2ecc71"}
+            {% endif %}
+
+
+  - id: "nt6ef8rpzsj75i01q392xlwdvycugkmb"
+    trigger:
+      - platform: time_pattern
+        seconds: /30
+    action:
+      - service: mqtt.publish
+        data_template:
+          qos: "2"
+          retain: false
+          #an deine ID anpassen!
+          topic: awtrix_f53d30/custom/housebattery
+          payload_template: >-
+            {% if states('sensor.pv_wr_pc_battery_soc') <= '30' %}
+              { "text": "{{ states.sensor.pv_wr_pc_battery_soc.state }} %", "icon": "12123",  "color": "c0392b"}
+            {% elif states('sensor.pv_wr_pc_battery_soc') <= '50' %}
+              { "text": "{{ states.sensor.pv_wr_pc_battery_soc.state }} %", "icon": "12124",  "color": "d35400"}
+            {% elif states('sensor.pv_wr_pc_battery_soc') <= '80' %}
+              { "text": "{{ states.sensor.pv_wr_pc_battery_soc.state }} %", "icon": "389",  "color": "f39c12"}
+            {% else %}
+              { "text": "{{ states.sensor.pv_wr_pc_battery_soc.state }} %", "icon": "3693",  "color": "2ecc71"}
+            {% endif %}

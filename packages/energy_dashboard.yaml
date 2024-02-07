@@ -68,7 +68,14 @@ sensor:
         friendly_name: Stromverbrauch bekannte Geräte
         unit_of_measurement: W
         value_template: >
-          {{ states('sensor.all_lights_power')|float(0) + states('sensor.ap_christian_power')|float(0) + states('sensor.plug_fridge_power')|float(0) + states('sensor.serverrack_power')|float(0) + states('sensor.shelly_ap_petra_power')|float(0) + states('sensor.trockner_electricity_power')|float(0) + states('sensor.waschmaschine_electricity_power')|float(0) + states('sensor.all_lights_power')|float(0) + states('sensor.tv_switch_0_power')|float(0) | round(2)}}
+          {{ states('sensor.ap_christian_power')|float(0) + 
+             states('sensor.plug_fridge_power')|float(0) + 
+             states('sensor.serverrack_power')|float(0) + 
+             states('sensor.shelly_ap_petra_power')|float(0) + 
+             states('sensor.trockner_electricity_power')|float(0) + 
+             states('sensor.waschmaschine_electricity_power')|float(0) + 
+             states('sensor.all_lights_power')|float(0) + 
+             states('sensor.tv_switch_0_power')|float(0) | round(2)}}
 
 # Power Cicle
 utility_meter:
