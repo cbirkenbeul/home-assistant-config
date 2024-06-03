@@ -4,18 +4,6 @@ icon: mdi:home-assistant
 cards:
   - type: vertical-stack
     cards:
-      - type: custom:simple-weather-card
-        entity: weather.casa_lani
-        name: Zuhause
-        backdrop: false
-        primary_info:
-          - wind_bearing
-          - humidity
-        custom:
-          - temp: sensor.weewx_outtemp
-          - precipitation: sensor.weewx_rain
-          - humidity: sensor.weewx_outhumidity
-          - wind_speed: sensor.weewx_wind
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-person-card
@@ -24,239 +12,51 @@ cards:
           - type: custom:mushroom-person-card
             entity: person.petra
             icon_type: entity-picture
+      - type: custom:weather-chart-card
+        entity: weather.casa_lani
+        animated_icons: true
+        icon_style: style1
+        temp: sensor.weewx_outtemp
+        humid: sensor.weewx_outhumidity
+        windspeed: sensor.weewx_wind
+        dew_point: sensor.weewx_drewpoint
 
-  - type: vertical-stack
-    cards:
-      - type: custom:stack-in-card
-        mode: horizontal
-        cards:
-          - type: custom:mushroom-template-card
-            entity: sensor.pv_prod_ges
-            primary: PV
-            tap_action: more-info
-            secondary: |
-              {{ states('sensor.pv_prod_ges')}} Wh
-            icon: mdi:solar-power-variant
-            icon_color: |
-              {% if states('sensor.pv_prod_ges') | float > 6000 %}
-                  #2ecc71
-              {% elif states('sensor.pv_prod_ges') | float > 2000 %}
-                  #f1c40f
-              {% elif states('sensor.pv_prod_ges') | float > 500 %}
-                  #e74c3c
-              {% else %}
-                  #2c3e50
-              {% endif %}
-          - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.pv_prod_ges
-            hours_to_show: 8
-            points_per_hour: 4
-            line_width: 2
-            animate: true
-            show:
-              name: false
-              icon: false
-              state: false
-              legend: false
-              fill: fade
-            color_thresholds:
-              - value: 0
-                color: "#2c3e50"
-              - value: 1000
-                color: "#e74c3c"
-              - value: 3000
-                color: "#f1c40f"
-              - value: 6000
-                color: "#2ecc71"
-            card_mod:
-              style: |
-                ha-card {
-                  border-radius: 8px;
-                  background: none;
-                  box-shadow: none;
-                  --ha-card-border-width: 0;
-                }
-      - type: custom:stack-in-card
-        mode: horizontal
-        cards:
-          - type: custom:mushroom-template-card
-            entity: sensor.pv_wr_pc_battery_soc
-            primary: Haus Batterie
-            secondary: |
-              {{ states('sensor.pv_wr_pc_battery_soc')}} %
-            icon: mdi:home-battery
-            icon_color: |
-              {% if states('sensor.pv_wr_pc_battery_soc') | float > 80 %}
-                  #2ecc71
-              {% elif states('sensor.pv_wr_pc_battery_soc') | float > 50 %}
-                  #f39c12
-              {% elif states('sensor.pv_wr_pc_battery_soc') | float > 30 %}
-                  #d35400
-              {% else %}
-                  #c0392b
-              {% endif %}
-          - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.pv_wr_pc_battery_soc
-            hours_to_show: 8
-            points_per_hour: 4
-            line_width: 2
-            animate: true
-            show:
-              name: false
-              icon: false
-              state: false
-              legend: false
-              fill: fade
-            color_thresholds:
-              - value: 10
-                color: "#2c3e50"
-              - value: 30
-                color: "#e74c3c"
-              - value: 50
-                color: "#f1c40f"
-              - value: 80
-                color: "#2ecc71"
-            card_mod:
-              style: |
-                ha-card {
-                  border-radius: 8px;
-                  background: none;
-                  box-shadow: none;
-                  --ha-card-border-width: 0;
-                }
-      - type: vertical-stack
-        cards:
-          - type: conditional
-            conditions:
-              - entity: binary_sensor.teqqcar_charging
-                state: "on"
-            card:
-              type: custom:stack-in-card
-              mode: vertical
-              cards:
-                - type: custom:mushroom-title-card
-                  title: Tesla Model 3
-                - type: custom:stack-in-card
-                  mode: horizontal
-                  cards:
-                    - type: custom:mushroom-template-card
-                      entity: sensor.tesla_charger_power
-                      primary: Ladung
-                      secondary: |
-                        {{ states('sensor.tesla_charger_power')}} kW
-                      icon: mdi:ev-station
-                      icon_color: |
-                        {% if states('sensor.tesla_charger_power') | float > 13 %}
-                            #2ecc71
-                        {% elif states('sensor.tesla_charger_power') | float > 9 %}
-                            #f1c40f
-                        {% elif states('sensor.tesla_charger_power') | float > 5 %}
-                            #e67e22
-                        {% elif states('sensor.tesla_charger_power') | float > 1 %}
-                            #e74c3c
-                        {% elif states('sensor.tesla_charger_power') | float > 0 %}
-                            #2c3e50
-                        {% else %}
-                            #c0392b
-                        {% endif %}
-                    - type: custom:mini-graph-card
-                      entities:
-                        - entity: sensor.tesla_charger_power
-                      hours_to_show: 6
-                      points_per_hour: 24
-                      line_width: 2
-                      animate: true
-                      show:
-                        name: false
-                        icon: false
-                        state: false
-                        legend: false
-                        fill: fade
-                      color_thresholds:
-                        - value: 0
-                          color: "#2c3e50"
-                        - value: 1
-                          color: "#e74c3c"
-                        - value: 5
-                          color: "#e67e22"
-                        - value: 9
-                          color: "#f1c40f"
-                        - value: 13
-                          color: "#2ecc71"
-                  card_mod:
-                    style: |
-                      ha-card {
-                        border-radius: 8px;
-                        background: none;
-                        box-shadow: none;
-                        --ha-card-border-width: 0;
-                      }
-                - type: horizontal-stack
-                  cards:
-                    - type: vertical-stack
-                      cards:
-                        - type: custom:mushroom-template-card
-                          entity: sensor.teqqcar_battery
-                          secondary: Batterie
-                          primary: |
-                            {{ states('sensor.teqqcar_battery')}} %
-                          icon: mdi:battery
-                          icon_color: |
-                            {% if states('sensor.teqqcar_battery') | float > 80 %}
-                                #2ecc71
-                            {% elif states('sensor.teqqcar_battery') | float > 50 %}
-                                #f39c12
-                            {% elif states('sensor.teqqcar_battery') | float > 30 %}
-                                #d35400
-                            {% else %}
-                                #c0392b
-                            {% endif %}
-                        - type: custom:mini-graph-card
-                          entities:
-                            - entity: sensor.teqqcar_battery
-                          hours_to_show: 6
-                          points_per_hour: 12
-                          line_width: 2
-                          animate: true
-                          show:
-                            name: false
-                            icon: false
-                            state: false
-                            legend: false
-                            fill: fade
-                          color_thresholds:
-                            - value: 0
-                              color: "#e74c3c"
-                            - value: 20
-                              color: "#e67e22"
-                            - value: 40
-                              color: "#d35400"
-                            - value: 50
-                              color: "#f1c40f"
-                            - value: 80
-                              color: "#2ecc71"
-                    - type: vertical-stack
-                      cards:
-                        - type: custom:mushroom-entity-card
-                          entity: sensor.teqqcar_range
-                          primary_info: state
-                          secondary_info: name
-                          name: Reichweite
-                          icon: mdi:car
-                        - type: custom:mini-graph-card
-                          entities:
-                            - entity: sensor.teqqcar_range
-                          hours_to_show: 24
-                          line_width: 2
-                          animate: true
-                          show:
-                            name: false
-                            icon: false
-                            state: false
-                            legend: false
-                            fill: fade
+  - type: custom:power-flow-card-plus
+    entities:
+      grid:
+        entity:
+          consumption: sensor.pv_wr_pc_home_power_from_grid
+          production: sensor.pv_power_export
+      solar:
+        entity: sensor.pv_prod_ges
+        display_zero_state: false
+      battery:
+        entity:
+          consumption: sensor.pv_wr_pc_home_power_from_battery
+          production: sensor.pv_wr_pc_pv_to_battery_power
+        state_of_charge: sensor.pv_wr_pc_battery_soc
+      home:
+      fossil_fuel_percentage:
+        entity: sensor.electricity_maps_anteil_fossiler_brennstoffe_im_netz
+      individual:
+        - entity: sensor.tesla_charger_power
+          icon: mdi:car-electric
+          secondary_info: 
+            entity: sensor.teqqcar_battery
+            unit_of_measurement: "%"
+          color: "#eb4d4b"
+          name: teqqCar
+          color_icon: true
+        - entity: sensor.serverrack_power
+          icon: mdi:server
+          color: "#4834d4"
+          name: Homelab
+          color_icon: true
+        - entity: sensor.metered_energy_without_homelab
+          icon: mdi:power-socket-eu
+          color: "#6ab04c"
+          name: Bekannte Geräte
+          color_icon: true
 
   - type: vertical-stack
     cards:
@@ -356,14 +156,7 @@ cards:
                       type: template
                       icon_color: disabled
                       icon: mdi:door-sliding-open
-                  - type: conditional
-                    conditions:
-                      - entity: light.couch
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:sofa
+
                   - type: conditional
                     conditions:
                       - entity: light.li_lr_deco
@@ -372,14 +165,6 @@ cards:
                       type: template
                       icon_color: disabled
                       icon: mdi:lamp
-                  - type: conditional
-                    conditions:
-                      - entity: switch.sw_dr_deko
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:desk-lamp
                   - type: conditional
                     conditions:
                       - entity: light.li_lr_ceiling
@@ -553,7 +338,7 @@ cards:
                 primary: Küche
                 secondary: "{{ states('sensor.temperature_kitchen') | round(0) }} °C | {{ states('sensor.humidity_bathroom') | round(0) }} %"
                 icon: mdi:countertop
-                entity: light.decke
+                entity: light.kitchen_panel
                 tap_action:
                   action: navigate
                   navigation_path: "/lovelace/4"
@@ -578,7 +363,7 @@ cards:
                 chips:
                   - type: conditional
                     conditions:
-                      - entity: light.decke
+                      - entity: light.kitchen_panel
                         state: "on"
                     chip:
                       type: template

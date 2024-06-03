@@ -20,6 +20,4 @@ views:
   - !include lovelace/bedroom.yaml
   - !include lovelace/guestroom.yaml
   - !include lovelace/basement.yaml
-  - !include lovelace/car.yaml
   - !include lovelace/energy.yaml
-  - !include lovelace/sankey.yaml

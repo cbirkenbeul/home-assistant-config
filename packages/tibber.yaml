@@ -79,11 +79,15 @@ automation:
       - platform: numeric_state
         entity_id: sensor.pv_wr_pc_battery_soc
         above: 90
+    condition:
+      - condition: state
+        entity_id: input_boolean.byd_charging
+        state: 'on'
     action:
       - service: number.set_value
         entity_id: number.pv_wr_pc_battery_min_soc
         data:
-          value: 15
+          value: 5
       - service: notify.telegram_group
         data:
           message: 'Aufladen der Hausbatterie über Netzstrom beendet. Batterieladestatus bei {{ states("sensor.pv_wr_pc_battery_soc") }} Prozent.'

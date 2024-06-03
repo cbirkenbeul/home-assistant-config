@@ -59,7 +59,7 @@ sensor:
         friendly_name: Küche
         unit_of_measurement: kWh
         value_template: >
-          {{ states('sensor.kitchen_lights_energy_daily')|float(0) + states('sensor.fridge_energy_daily')|float(0)}}
+          {{ states('sensor.kitchen_lights_energy_daily')|float(0) + states('sensor.fridge_energy_daily')|float(0) + states('sensor.dishwasher_daily')|float(0)}}
 
 # Daily energy use sensors
 utility_meter:
@@ -85,4 +85,8 @@ utility_meter:
 
   teqqcar_charing_daily:
     source: sensor.tesla_charge_energy_added
+    cycle: daily
+
+  dishwasher_daily:
+    source: sensor.dishwasher_switch_0_energy
     cycle: daily

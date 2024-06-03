@@ -80,14 +80,29 @@ automation:
       entity_id: sensor.se_hw_og_motion_illuminance_lux
       below: "10"
     action:
-      - service: light.turn_on
-        data:
-          entity_id: light.stairway_lights
-          brightness: 80
-      - delay:
-          seconds: 20
-      - service: light.turn_off
-        entity_id: light.stairway_lights
+      - choose:
+          - conditions: 
+              - condition: time
+                after: '22:00:00'
+                before: '06:00:00'
+            sequence:
+              - service: light.turn_on
+                data:
+                  entity_id: light.stairway_lights
+                  brightness: 1
+              - delay:
+                  seconds: 20
+              - service: light.turn_off
+                entity_id: light.stairway_lights
+        default:
+          - service: light.turn_on
+            data:
+              entity_id: light.stairway_lights
+              brightness: 80
+          - delay:
+              seconds: 20
+          - service: light.turn_off
+            entity_id: light.stairway_lights
 
   ###############################################################################
   #   Basement Stairs
@@ -124,15 +139,16 @@ automation:
       entity_id: binary_sensor.se_out_entrance_occupancy
       to: "on"
     condition:
-      condition: numeric-state
+      condition: numeric_state
       entity_id: sensor.se_out_entrance_illuminance_lux
       below: 400
     action:
       - service: light.turn_on
-        entity_id: light.li_out_entrance
-      - delay: 00:01:00
+        entity_id: ight.eingangstur
+      - delay: 
+          minutes: 1
       - serivce: light.turn_off
-        entity_id: light.li_out_entrance
+        entity_id: ight.eingangstur
 
 ###############################################################################
 #   Light Scenes
@@ -170,10 +186,7 @@ scene:
         rgb_color: [255, 214, 170]
       switch.pg_hw_deco:
         state: "on"
-      switch.stern_schlafzimmer_switch_0:
-        state: "on"
-      switch.stern_gaestezimmer_switch_0:
-        state: "on"
+
 
   - name: Youtube
     icon: mdi:youtube

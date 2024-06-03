@@ -34,9 +34,4 @@
     - service: switch.turn_off
       entity_id:
         - switch.pg_hw_deco
-        - switch.sw_of_cb_deko
         - switch.flux
-        - switch.sw_dr_deko
-        - switch.stern_gaestezimmer_switch_0
-        - switch.stern_schlafzimmer_switch_0
-

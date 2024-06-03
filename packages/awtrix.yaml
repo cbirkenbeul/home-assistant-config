@@ -12,6 +12,10 @@ automation:
     trigger:
       - platform: time_pattern
         seconds: /30
+    condition:
+      - condition: numeric_state
+        entity_id: sensor.pv_prod_ges
+        above: 10
     action:
       - service: mqtt.publish
         data_template:
@@ -20,19 +24,34 @@ automation:
           #an deine ID anpassen!
           topic: awtrix_f53d30/custom/pvproduction
           payload_template: >-
-            {% if states('sensor.pv_prod_ges') <= '1500' %}
-              { "text": "{{ states.sensor.pv_prod_ges.state }}", "icon": "91",  "color": "e74c3c"}
-            {% elif states('sensor.pv_prod_ges') <= '4500' %}
+            {% if states('sensor.pv_prod_ges')|float <= 100 %}
+              { "text": "{{ states.sensor.pv_prod_ges.state }}", "icon": "91",  "color": "FFFFFF"}
+            {% elif states('sensor.pv_prod_ges')|float <= 500 %}
+              { "text": "{{ states.sensor.pv_prod_ges.state }}", "icon": "876",  "color": "e74c3c"}
+            {% elif states('sensor.pv_prod_ges')|float <= 2000 %}
               { "text": "{{ states.sensor.pv_prod_ges.state }}", "icon": "876",  "color": "f1c40f"}
+            {% elif states('sensor.pv_prod_ges')|float <= 4000 %}
+              { "text": "{{ states.sensor.pv_prod_ges.state }}", "icon": "876",  "color": "2ecc71"}
             {% else %}
-              { "text": "{{ states.sensor.pv_prod_ges.state }}", "icon": "515",  "color": "2ecc71"}
+              { "text": "{{ states.sensor.pv_prod_ges.state }}", "icon": "515",  "color": "27ae60"}
             {% endif %}
 
+  - id: "febr8q5hz3ogaj26t0pu1li7cmkwv9sx"
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.pv_prod_ges
+      below: 10
+    action:
+      - service: mqtt.publish
+        data:
+          topic: "awtrix_f53d30/custom/pvproduction"
+          payload: ""
+          retain: true
 
   - id: "nt6ef8rpzsj75i01q392xlwdvycugkmb"
     trigger:
       - platform: time_pattern
-        seconds: /30
+        seconds: /30      
     action:
       - service: mqtt.publish
         data_template:
@@ -41,12 +60,55 @@ automation:
           #an deine ID anpassen!
           topic: awtrix_f53d30/custom/housebattery
           payload_template: >-
-            {% if states('sensor.pv_wr_pc_battery_soc') <= '30' %}
-              { "text": "{{ states.sensor.pv_wr_pc_battery_soc.state }} %", "icon": "12123",  "color": "c0392b"}
-            {% elif states('sensor.pv_wr_pc_battery_soc') <= '50' %}
-              { "text": "{{ states.sensor.pv_wr_pc_battery_soc.state }} %", "icon": "12124",  "color": "d35400"}
-            {% elif states('sensor.pv_wr_pc_battery_soc') <= '80' %}
-              { "text": "{{ states.sensor.pv_wr_pc_battery_soc.state }} %", "icon": "389",  "color": "f39c12"}
+            {% if states('sensor.pv_wr_pc_battery_soc')|float <= 15 %}
+              { "text": "{{ states.sensor.pv_wr_pc_battery_soc.state }} %", "icon": "3697",  "color": "FFFFFF"}
+            {% elif states('sensor.pv_wr_pc_battery_soc')|float <= 35 %}
+              { "text": "{{ states.sensor.pv_wr_pc_battery_soc.state }} %", "icon": "3701",  "color": "d35400"}
+            {% elif states('sensor.pv_wr_pc_battery_soc')|float <= 55 %}
+              { "text": "{{ states.sensor.pv_wr_pc_battery_soc.state }} %", "icon": "3699",  "color": "f39c12"}
+            {% elif states('sensor.pv_wr_pc_battery_soc')|float <= 75 %}
+              { "text": "{{ states.sensor.pv_wr_pc_battery_soc.state }} %", "icon": "3703",  "color": "f39c12"}
+            {% elif states('sensor.pv_wr_pc_battery_soc')|float <= 90 %}
+              { "text": "{{ states.sensor.pv_wr_pc_battery_soc.state }} %", "icon": "3695",  "color": "2ecc71"}
             {% else %}
-              { "text": "{{ states.sensor.pv_wr_pc_battery_soc.state }} %", "icon": "3693",  "color": "2ecc71"}
+              { "text": "{{ states.sensor.pv_wr_pc_battery_soc.state }} %", "icon": "3693",  "color": "27ae60"}
             {% endif %}
+
+  - id: "89vtplahf1msz345dxic6qn0k2guejyr"
+    trigger:
+      - platform: time_pattern
+        seconds: /30
+    condition:
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: device_tracker.teqqcar_location_tracker
+            state: home
+          - condition: state
+            entity_id: binary_sensor.teqqcar_charging
+            state: "on"      
+    action:
+      - service: mqtt.publish
+        data_template:
+          qos: "2"
+          retain: true
+          #an deine ID anpassen!
+          topic: awtrix_f53d30/custom/teslacharging
+          payload_template: >-
+              { "text": "{{ states.sensor.teqqcar_charger_power.state }}kw @ {{ states.sensor.teqqcar_battery.state }} %", "icon": "53536",  "color": "FFFFFF"}
+
+  - id: "febr0q5hz3ogaj26e0pu1li7cmkwv9sx"
+    trigger:
+      platform: state
+      entity_id: binary_sensor.teqqcar_charging
+      to: "off"
+    condition:
+      - condition: state
+        entity_id: device_tracker.teqqcar_location_tracker
+        state: "home"      
+    action:
+      - service: mqtt.publish
+        data:
+          topic: "awtrix_f53d30/custom/teslacharging"
+          payload: ""
+          retain: true

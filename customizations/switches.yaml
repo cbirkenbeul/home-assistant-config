@@ -6,7 +6,3 @@ switch.sw_of_cb_deko:
 switch.pg_hw_deco:
   friendly_name: Steinlampe
   icon: mdi:lava-lamp
-
-switch.sw_dr_deko:
-  friendly_name: Deko Sekretär
-  icon: mdi:desk-lamp

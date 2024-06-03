@@ -42,18 +42,6 @@ sensor:
     unit_prefix: k
     round: 2
 
-  - platform: integration
-    source: sensor.shelly_shplg_s_c5080f_current_consumption
-    name: energy_dishwasher_energy
-    unit_prefix: k
-    round: 2
-
-  - platform: integration
-    source: sensor.shelly_shplg_s_436c49_total_consumption
-    name: energy_winecooler_energy
-    unit_prefix: k
-    round: 2
-
   - platform: template
     sensors:
       office_power:
@@ -75,7 +63,18 @@ sensor:
              states('sensor.trockner_electricity_power')|float(0) + 
              states('sensor.waschmaschine_electricity_power')|float(0) + 
              states('sensor.all_lights_power')|float(0) + 
-             states('sensor.tv_switch_0_power')|float(0) | round(2)}}
+             states('sensor.tv_switch_0_power')|float(0) +
+             states('sensor.dishwasher_switch_0_power')|float(0)| round(2)}}
+
+  - platform: template
+    sensors:
+      metered_energy_without_homelab:
+        friendly_name: Stromverbrauch Haushaltsgeräte
+        unit_of_measurement: W
+        value_template: >
+          {{ states('sensor.metered_energy')|float(0) - 
+             states('sensor.serverrack_power')|float(0) | round(2)}}
+
 
 # Power Cicle
 utility_meter:
@@ -85,4 +84,12 @@ utility_meter:
 
   energy_export_daily:
     source: sensor.netzeinspeisung
+    cycle: daily
+
+  pv_prod_ges_daily:
+    source: sensor.pv_prod_ges
+    cycle: daily
+
+  energy_house_daily:
+    source: sensor.energy_house
     cycle: daily

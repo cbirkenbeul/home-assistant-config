@@ -7,6 +7,9 @@
 ###############################################################################
 
 input_boolean:
+  away_cleaning:
+    name: Robi away cleaning
+    initial: off
   robi_clean_kitchen:
     name: Küche
     initial: off
@@ -169,6 +172,8 @@ automation:
   action:
     - service: vacuum.start
       entity_id: vacuum.robi
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.away_cleaning
 
 - id: 'return robi to dock if ppl home'
   trigger:
@@ -176,6 +181,10 @@ automation:
       entity_id:
         - group.devices
       to: "home"
+  condition:
+    - condition: state
+      entity_id: input_boolean.away_cleaning
+      state: on
   action:
     - service: vacuum.stop
       entity_id: vacuum.robi

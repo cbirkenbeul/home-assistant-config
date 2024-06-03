@@ -128,17 +128,17 @@ cards:
         entity: vacuum.robi # change me
         stats:
           default:
-            - entity_id: sensor.robi_hauptburste # change me
+            - entity_id: sensor.robi_lebensdauer_der_hauptburste # change me
               unit: "%"
               subtitle: Hauptbürste
-            - entity_id: sensor.robi_seitenbursten # change me
+            - entity_id: sensor.robi_lebensdauer_der_seitenbursten # change me
               unit: "%"
               subtitle: Seitenbürsten
-            - entity_id: sensor.robi_filter # change me
+            - entity_id: sensor.robi_lebensdauer_des_filters # change me
               unit: "%"
               subtitle: Filter
           cleaning:
-            - entity_id: sensor.robi_reinigungsflache # change me
+            - entity_id: sensor.robi_flache_gereinigt # change me
               unit: m²
               subtitle: Geputzte Fläche
             - entity_id: sensor.robi_reinigungsdauer # change me

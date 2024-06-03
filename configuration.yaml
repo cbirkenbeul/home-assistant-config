@@ -35,8 +35,8 @@ http:
     - 192.168.10.0/24
     - 172.30.33.0/24
 ios:
-map:
 mobile_app:
+my:
 sun:
 system_health:
 webhook:
@@ -77,4 +77,8 @@ lovelace:
     - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
       type: module
     - url: /hacsfiles/battery-state-card/battery-state-card.js
+      type: module
+    - url: /hacsfiles/weather-chart-card/weather-chart-card.js 
+      type: module
+    - url: /hacsfiles/apexcharts-card/apexcharts-card.js 
       type: module

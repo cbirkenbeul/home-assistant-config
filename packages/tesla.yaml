@@ -29,7 +29,7 @@ sensor:
       tesla_max_charge:
         unit_of_measurement: A
         value_template: >-
-          {{ (states('sensor.pv_prod_ges') | float(0) - states('sensor.pv_wr_pc_pv_to_battery_power') | float(0) - 650) * 0.0014 }}
+          {{ (states('sensor.pv_prod_ges') | float(0) - states('sensor.pv_wr_pc_pv_to_battery_power') | float(0) - states('sensor.metered_energy') | float(0) - 250) * 0.0014 }}
 
   - platform: template
     sensors:
@@ -235,8 +235,7 @@ automation:
     alias: Tesla - Solar - Adjust charging speed
     trigger:
       - platform: time_pattern
-        minutes: "/1"
-        seconds: 00
+        seconds: "/10"
     condition:
       - condition: and
         conditions:

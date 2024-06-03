@@ -1,0 +1,12 @@
+- id: '1711789187003'
+  alias: Dishwasher automation
+  description: ''
+  use_blueprint:
+    path: leofabri/appliance-status-monitor.yaml
+    input:
+      automation_self_trigger: input_boolean.dishwasher_automation_self_trigger
+      appliance_socket: switch.dishwasher_switch_0
+      appliance_power_sensor: sensor.dishwasher_switch_0_power
+      appliance_state_machine: input_select.dishwasher_state_machine
+      appliance_job_cycle: input_boolean.dishwasher_job_cycle
+      delayed_job_completion_timer: timer.dishwasher_delayed_job_completion_timer

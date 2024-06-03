@@ -16,6 +16,7 @@ from homeassistant.const import (
     UnitOfPressure,
     UnitOfSpeed,
     UnitOfTemperature,
+    UnitOfTime,
 )
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity import EntityCategory
@@ -73,6 +74,7 @@ async def async_setup_entry(hass: HomeAssistant, config_entry, async_add_entitie
         entities.append(TeslaCarArrivalTime(car, coordinator))
         entities.append(TeslaCarDistanceToArrival(car, coordinator))
         entities.append(TeslaCarDataUpdateTime(car, coordinator))
+        entities.append(TeslaCarPollingInterval(car, coordinator))
 
     for energy_site_id, energysite in energysites.items():
         coordinator = coordinators[energy_site_id]
@@ -186,9 +188,13 @@ class TeslaCarChargerPower(TeslaCarEntity, SensorEntity):
     _attr_native_unit_of_measurement = UnitOfPower.KILO_WATT
 
     @property
-    def native_value(self) -> int:
+    def native_value(self) -> float:
         """Return the charger power."""
-        return self._car.charger_power
+        return (
+            float(self._car.charger_power)
+            if self._car.charger_power is not None
+            else self._car.charger_power
+        )
 
     @property
     def extra_state_attributes(self):
@@ -603,9 +609,11 @@ class TeslaCarArrivalTime(TeslaCarEntity, SensorEntity):
             "Energy at arrival": car.active_route_energy_at_arrival,
             "Minutes traffic delay": minutes,
             "Destination": car.active_route_destination,
-            "Minutes to arrival": None
-            if car.active_route_minutes_to_arrival is None
-            else round(float(car.active_route_minutes_to_arrival), 2),
+            "Minutes to arrival": (
+                None
+                if car.active_route_minutes_to_arrival is None
+                else round(float(car.active_route_minutes_to_arrival), 2)
+            ),
         }
 
 
@@ -643,3 +651,19 @@ class TeslaCarDataUpdateTime(TeslaCarEntity, SensorEntity):
         else:
             date_obj = last_time.replace(tzinfo=dt.UTC)
         return date_obj
+
+
+class TeslaCarPollingInterval(TeslaCarEntity, SensorEntity):
+    """Representation of a Tesla car polling interval."""
+
+    type = "polling interval"
+    _attr_device_class = SensorDeviceClass.DURATION
+    _attr_state_class = SensorStateClass.MEASUREMENT
+    _attr_native_unit_of_measurement = UnitOfTime.SECONDS
+    _attr_entity_category = EntityCategory.DIAGNOSTIC
+    _attr_icon = "mdi:timer-sync"
+
+    @property
+    def native_value(self) -> int:
+        """Return the update time interval."""
+        return self.coordinator.controller.get_update_interval_vin(vin=self._car.vin)

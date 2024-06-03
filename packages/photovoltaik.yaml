@@ -165,14 +165,25 @@ sensor:
       pv_prod_ges:
         unit_of_measurement: W
         value_template: >-
-          {{ (states('sensor.pv_wr_pc_solar_w') | float(0)) +  (states('sensor.pv_pi_ac_power') | float(0)) }}
+          {{ (states('sensor.pv_wr_pc_solar_w') | float(0) | round(0)) +  (states('sensor.pv_pi_ac_power') | float(0) | round(0)) }}
 
   - platform: template
     sensors:
       energy_house:
         unit_of_measurement: W
         value_template: >-
-          {{ (states('sensor.pv_wr_pc_solar_w') | float(0)) +  (states('sensor.pv_pi_ac_power') | float(0)) + (states('sensor.pv_wr_pc_grid_power') | float(0)) + (states('sensor.pv_wr_pc_home_power_from_battery') | float(0)) - (states('sensor.pv_wr_pc_pv_to_battery_power') | float(0)) }}
+          {{ (states('sensor.pv_wr_pc_solar_w') | float(0)) + 
+             (states('sensor.pv_pi_ac_power') | float(0)) - 
+             (states('sensor.pv_power_export') | float(0)) + 
+             (states('sensor.pv_wr_pc_home_power_from_battery') | float(0)) - 
+             (states('sensor.pv_wr_pc_pv_to_battery_power') | float(0)) }}
+
+  - platform: template
+    sensors:
+      pv_power_export:
+        unit_of_measurement: W
+        value_template: >-
+          {{ [states ('sensor.pv_wr_pc_grid_power') | int *-1|float(0),0]|max}}
 
 automation:
   - id: "XL7Ai2PQLcpF0O3xwFQRipTy0ERozuc6u4kkwLgK2WajDZ281LN3BPiiawAO4q67"

@@ -204,3 +204,11 @@ sensor.tv_switch_0_energy:
 sensor.tv_energy_daily:
   friendly_name: TV
   icon: mdi:television
+
+sensor.dishwasher_switch_0_power:
+  friendly_name: Spülmaschine
+  icon: mdi:dishwasher
+
+sensor.dishwasher_switch_0_energy:
+  friendly_name: Spülmaschine
+  icon: mdi:dishwasher

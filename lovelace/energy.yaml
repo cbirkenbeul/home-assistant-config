@@ -1,309 +1,360 @@
 ---
 title: Home Engery
+type: sidebar
 icon: mdi:lightning-bolt
 cards:
-  - type: vertical-stack
+  - type: horizontal-stack
     cards:
-      - type: custom:mushroom-title-card
-        title: Photovoltaik
-      - type: custom:stack-in-card
-        mode: horizontal
-        cards:
-          - type: custom:mushroom-template-card
-            entity: sensor.pv_wr_pc_solar_w
-            primary: Haus
-            secondary: |
-              {{ states('sensor.pv_wr_pc_solar_w')}} Wh
-            icon: mdi:solar-power-variant
-            icon_color: green
-          - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.pv_wr_pc_solar_w
-            hours_to_show: 8
-            points_per_hour: 4
-            line_width: 2
-            animate: true
-            show:
-              name: false
-              icon: false
-              state: false
-              legend: false
-              fill: fade
-            color_thresholds:
-              - value: 0
-                color: "#2c3e50"
-              - value: 500
-                color: "#e74c3c"
-              - value: 2000
-                color: "#f1c40f"
-              - value: 4000
-                color: "#2ecc71"
-            card_mod:
-              style: |
-                ha-card {
-                  border-radius: 8px;
-                  background: none;
-                  box-shadow: none;
-                  --ha-card-border-width: 0;
-                }
-      - type: custom:stack-in-card
-        mode: horizontal
-        cards:
-          - type: custom:mushroom-template-card
-            entity: sensor.pv_pi_ac_power
-            primary: Loggia
-            secondary: |
-              {{ states('sensor.pv_pi_ac_power')}} Wh
-            icon: mdi:solar-power-variant
-            icon_color: green
-          - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.pv_pi_ac_power
-            hours_to_show: 8
-            points_per_hour: 4
-            line_width: 2
-            animate: true
-            show:
-              name: false
-              icon: false
-              state: false
-              legend: false
-              fill: fade
-            color_thresholds:
-              - value: 0
-                color: "#2c3e50"
-              - value: 400
-                color: "#e74c3c"
-              - value: 1000
-                color: "#f1c40f"
-              - value: 1500
-                color: "#2ecc71"
-            card_mod:
-              style: |
-                ha-card {
-                  border-radius: 8px;
-                  background: none;
-                  box-shadow: none;
-                  --ha-card-border-width: 0;
-                }
-      - type: custom:stack-in-card
-        mode: horizontal
-        cards:
-          - type: custom:mushroom-template-card
-            entity: sensor.pv_prod_ges
-            primary: PV Gesamt
-            secondary: |
-              {{ states('sensor.pv_prod_ges')}} Wh
-            icon: mdi:solar-power-variant
-            icon_color: green
-          - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.pv_prod_ges
-            hours_to_show: 8
-            points_per_hour: 4
-            line_width: 2
-            animate: true
-            show:
-              name: false
-              icon: false
-              state: false
-              legend: false
-              fill: fade
-            color_thresholds:
-              - value: 0
-                color: "#2c3e50"
-              - value: 1000
-                color: "#e74c3c"
-              - value: 3000
-                color: "#f1c40f"
-              - value: 6000
-                color: "#2ecc71"
-            card_mod:
-              style: |
-                ha-card {
-                  border-radius: 8px;
-                  background: none;
-                  box-shadow: none;
-                  --ha-card-border-width: 0;
-                }
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: sensor.pv_wr_pc_battery_soc
-            primary_info: none
-          - type: custom:mushroom-entity-card
-            entity: number.pv_wr_pc_battery_min_soc
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: sensor.pv_wr_pc_home_power_from_battery
-            primary_info: none
-          - type: custom:mushroom-entity-card
-            entity: sensor.pv_wr_pc_pv_to_battery_power
-            primary_info: none
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        title: Haus
-      - type: custom:power-flow-card-plus
-        entities:
-          grid:
-            entity:
-              consumption: sensor.pv_wr_pc_home_power_from_grid
-              production: sensor.pv_wr_pc_home_power_to_grid
-          solar:
-            entity: sensor.pv_prod_ges
-          battery:
-            entity:
-              consumption: sensor.pv_wr_pc_home_power_from_battery
-              production: sensor.pv_wr_pc_pv_to_battery_power
-            state_of_charge: sensor.pv_wr_pc_battery_soc
-          home:
-          fossil_fuel_percentage:
-            entity: sensor.electricity_maps_anteil_fossiler_brennstoffe_im_netz
-          individual1:
-            entity: sensor.teqqcar_charger_power
-            secondary_info: 
-              entity: sensor.teqqcar_battery
-              unit_of_measurement: '%'
-            display_zero: true
-
-      - type: custom:stack-in-card
-        mode: horizontal
-        cards:
-          - type: custom:mushroom-template-card
-            entity: sensor.metered_energy
-            primary: Verbrauch (Bekannte Geräte)
-            secondary: |
-              {{ states('sensor.metered_energy')}} Wh
-            icon: mdi:home-lightning-bolt
-            icon_color: red
-          - type: custom:mini-graph-card
-            entities:
-              - entity: sensor.metered_energy
-            hours_to_show: 8
-            points_per_hour: 4
-            line_width: 2
-            animate: true
-            show:
-              name: false
-              icon: false
-              state: false
-              legend: false
-              fill: fade
-            color_thresholds:
-              - value: 0
-                color: "#27ae60"
-              - value: 500
-                color: "#f1c40f"
-              - value: 1000
-                color: "#e67e22"
-              - value: 1500
-                color: "#e74c3c"
-            card_mod:
-              style: |
-                ha-card {
-                  border-radius: 8px;
-                  background: none;
-                  box-shadow: none;
-                  --ha-card-border-width: 0;
-                }
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: sensor.pv_wr_pc_home_consumption_from_grid_day
-            primary_info: none
-            icon_color: red
-          - type: custom:mushroom-entity-card
-            entity: sensor.pv_wr_pc_home_consumption_from_battery_day
-            primary_info: none
-          - type: custom:mushroom-entity-card
-            entity: sensor.pv_wr_pc_home_consumption_from_pv_day
-            primary_info: none
-            icon_color: green
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: sensor.pv_wr_pc_autarky_day
-            name: Autarkie (heute)
-            primary_info: name
-            icon_color: blue
-            icon: mdi:home-analytics
-          - type: custom:mushroom-entity-card
-            entity: sensor.pv_wr_pc_autarky_month
-            name: Autarkie (Monat)
-            primary_info: name
-            icon_color: blue
-            icon: mdi:home-analytics
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        title: Verbraucher
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: sensor.ap_christian_power
-          - type: custom:mushroom-entity-card
-            entity: sensor.shelly_ap_petra_power
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: sensor.trockner_electricity_power
-          - type: custom:mushroom-entity-card
-            entity: sensor.waschmaschine_electricity_power
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: sensor.tv_switch_0_power
-          - type: custom:mushroom-entity-card
-            entity: sensor.serverrack_power
-      - type: horizontal-stack
-        cards:
-          - type: custom:mushroom-entity-card
-            entity: sensor.all_lights_power
-          - type: custom:mushroom-entity-card
-            entity: sensor.plug_fridge_power
-
-  - type: vertical-stack
-    cards:
-      - type: custom:mushroom-title-card
-        title: Tibber
       - type: custom:mushroom-entity-card
-        entity: sensor.electricity_price_helmerichstr_3
-        name: Strompreis
-        primary_info: name
-        icon_color: blue
-        icon: mdi:currency-eur
+        entity: sensor.pv_wr_pc_autarky_day
+        name: Autarkie
       - type: custom:mushroom-entity-card
-        entity: sensor.monthly_cost_helmerichstr_3
-        name: Stromkosten
-        primary_info: name
-        icon_color: blue
-        icon: mdi:currency-eur
+        entity: sensor.pv_wr_pc_home_consumption_from_grid_day
+        name: Import
+      - type: custom:mushroom-entity-card
+        entity: sensor.pv_wr_pc_energy_to_grid_day
+        name: Export
+  - type: custom:mini-graph-card
+    entities:
+      - entity: sensor.pv_prod_ges
+        show_fill: false
+        show_extrema: true
+      - entity: sensor.energy_house
+        name: Verbrauch
+      - entity: sensor.pv_wr_pc_battery_soc
+        show_fill: false
+        y_axis: secondary
+    line_width: 0.5
+    hours_to_show: 24
+    points_per_hour: 12
 
-  - type: custom:battery-state-card
-    secondary_info: "{last_changed}"
-    filter:
-      include:
-        - name: "attributes.device_class"
-          value: "battery"
-      exclude:
-        - name: "entity_id"
-          value: "binary_sensor.*"
-        - name: sensor.teqqcar_battery
-        - name: sensor.pv_wr_pc_battery_soc
-        - name: sensor.ipad_battery_level
-    sort:
-      by: "state"
-    collapse: 8
-    bulk_rename:
-      - from: " Battery"
-      - from: " level"
-    colors:
-      steps:
-        - '#ff0000'
-        - '#ffff00'
-        - '#00ff00'
-      gradient: true
+  - type: entities
+    entities:
+      - entity: sensor.serverrack_power
+      - entity: sensor.trockner_electricity_power
+      - entity: sensor.waschmaschine_electricity_power
+      - entity: sensor.ap_christian_power
+      - entity: sensor.shelly_ap_petra_power
+      - entity: sensor.plug_fridge_power
+      - entity: sensor.dishwasher_switch_0_power
+      - entity: sensor.tv_switch_0_power
+    view_layout:
+      position: sidebar
+
+  # - type: vertical-stack
+  #   cards:
+  #     - type: custom:mushroom-title-card
+  #       title: Photovoltaik
+  #     - type: custom:stack-in-card
+  #       mode: horizontal
+  #       cards:
+  #         - type: custom:mushroom-template-card
+  #           entity: sensor.pv_wr_pc_solar_w
+  #           primary: Haus
+  #           secondary: |
+  #             {{ states('sensor.pv_wr_pc_solar_w')}} Wh
+  #           icon: mdi:solar-power-variant
+  #           icon_color: green
+  #         - type: custom:mini-graph-card
+  #           entities:
+  #             - entity: sensor.pv_wr_pc_solar_w
+  #           hours_to_show: 8
+  #           points_per_hour: 4
+  #           line_width: 2
+  #           animate: true
+  #           show:
+  #             name: false
+  #             icon: false
+  #             state: false
+  #             legend: false
+  #             fill: fade
+  #           color_thresholds:
+  #             - value: 0
+  #               color: "#2c3e50"
+  #             - value: 500
+  #               color: "#e74c3c"
+  #             - value: 2000
+  #               color: "#f1c40f"
+  #             - value: 4000
+  #               color: "#2ecc71"
+  #           card_mod:
+  #             style: |
+  #               ha-card {
+  #                 border-radius: 8px;
+  #                 background: none;
+  #                 box-shadow: none;
+  #                 --ha-card-border-width: 0;
+  #               }
+  #     - type: custom:stack-in-card
+  #       mode: horizontal
+  #       cards:
+  #         - type: custom:mushroom-template-card
+  #           entity: sensor.pv_pi_ac_power
+  #           primary: Loggia
+  #           secondary: |
+  #             {{ states('sensor.pv_pi_ac_power')}} Wh
+  #           icon: mdi:solar-power-variant
+  #           icon_color: green
+  #         - type: custom:mini-graph-card
+  #           entities:
+  #             - entity: sensor.pv_pi_ac_power
+  #           hours_to_show: 8
+  #           points_per_hour: 4
+  #           line_width: 2
+  #           animate: true
+  #           show:
+  #             name: false
+  #             icon: false
+  #             state: false
+  #             legend: false
+  #             fill: fade
+  #           color_thresholds:
+  #             - value: 0
+  #               color: "#2c3e50"
+  #             - value: 400
+  #               color: "#e74c3c"
+  #             - value: 1000
+  #               color: "#f1c40f"
+  #             - value: 1500
+  #               color: "#2ecc71"
+  #           card_mod:
+  #             style: |
+  #               ha-card {
+  #                 border-radius: 8px;
+  #                 background: none;
+  #                 box-shadow: none;
+  #                 --ha-card-border-width: 0;
+  #               }
+  #     - type: custom:stack-in-card
+  #       mode: horizontal
+  #       cards:
+  #         - type: custom:mushroom-template-card
+  #           entity: sensor.pv_prod_ges
+  #           primary: PV Gesamt
+  #           secondary: |
+  #             {{ states('sensor.pv_prod_ges')}} Wh
+  #           icon: mdi:solar-power-variant
+  #           icon_color: green
+  #         - type: custom:mini-graph-card
+  #           entities:
+  #             - entity: sensor.pv_prod_ges
+  #           hours_to_show: 8
+  #           points_per_hour: 4
+  #           line_width: 2
+  #           animate: true
+  #           show:
+  #             name: false
+  #             icon: false
+  #             state: false
+  #             legend: false
+  #             fill: fade
+  #           color_thresholds:
+  #             - value: 0
+  #               color: "#2c3e50"
+  #             - value: 1000
+  #               color: "#e74c3c"
+  #             - value: 3000
+  #               color: "#f1c40f"
+  #             - value: 6000
+  #               color: "#2ecc71"
+  #           card_mod:
+  #             style: |
+  #               ha-card {
+  #                 border-radius: 8px;
+  #                 background: none;
+  #                 box-shadow: none;
+  #                 --ha-card-border-width: 0;
+  #               }
+  #     - type: horizontal-stack
+  #       cards:
+  #         - type: custom:mushroom-entity-card
+  #           entity: sensor.pv_wr_pc_battery_soc
+  #           primary_info: none
+  #         - type: custom:mushroom-entity-card
+  #           entity: number.pv_wr_pc_battery_min_soc
+  #     - type: horizontal-stack
+  #       cards:
+  #         - type: custom:mushroom-entity-card
+  #           entity: sensor.pv_wr_pc_home_power_from_battery
+  #           primary_info: none
+  #         - type: custom:mushroom-entity-card
+  #           entity: sensor.pv_wr_pc_pv_to_battery_power
+  #           primary_info: none
+
+  # - type: vertical-stack
+  #   cards:
+  #     - type: custom:mushroom-title-card
+  #       title: Haus
+  #     - type: custom:power-flow-card-plus
+  #       entities:
+  #         grid:
+  #           entity:
+  #             consumption: sensor.pv_wr_pc_home_power_from_grid
+  #             production: sensor.pv_wr_pc_home_power_to_grid
+  #         solar:
+  #           entity: sensor.pv_prod_ges
+  #         battery:
+  #           entity:
+  #             consumption: sensor.pv_wr_pc_home_power_from_battery
+  #             production: sensor.pv_wr_pc_pv_to_battery_power
+  #           state_of_charge: sensor.pv_wr_pc_battery_soc
+  #         home:
+  #         fossil_fuel_percentage:
+  #           entity: sensor.electricity_maps_anteil_fossiler_brennstoffe_im_netz
+  #         individual:
+  #           - entity: sensor.tesla_charger_power
+  #             icon: mdi:car-electric
+  #             color: "#eb4d4b"
+  #             name: teqqCar
+  #             color_icon: true
+  #           - entity: sensor.serverrack_power
+  #             icon: mdi:server
+  #             color: "#4834d4"
+  #             name: Homelab
+  #             color_icon: true
+  #           - entity: sensor.metered_energy_without_homelab
+  #             icon: mdi:power-socket-eu
+  #             color: "#6ab04c"
+  #             name: Bekannte Geräte
+  #             color_icon: true
+
+  #     - type: custom:stack-in-card
+  #       mode: horizontal
+  #       cards:
+  #         - type: custom:mushroom-template-card
+  #           entity: sensor.metered_energy
+  #           primary: Verbrauch (Bekannte Geräte)
+  #           secondary: |
+  #             {{ states('sensor.metered_energy')}} Wh
+  #           icon: mdi:home-lightning-bolt
+  #           icon_color: red
+  #         - type: custom:mini-graph-card
+  #           entities:
+  #             - entity: sensor.metered_energy
+  #           hours_to_show: 8
+  #           points_per_hour: 4
+  #           line_width: 2
+  #           animate: true
+  #           show:
+  #             name: false
+  #             icon: false
+  #             state: false
+  #             legend: false
+  #             fill: fade
+  #           color_thresholds:
+  #             - value: 0
+  #               color: "#27ae60"
+  #             - value: 500
+  #               color: "#f1c40f"
+  #             - value: 1000
+  #               color: "#e67e22"
+  #             - value: 1500
+  #               color: "#e74c3c"
+  #           card_mod:
+  #             style: |
+  #               ha-card {
+  #                 border-radius: 8px;
+  #                 background: none;
+  #                 box-shadow: none;
+  #                 --ha-card-border-width: 0;
+  #               }
+  #     - type: horizontal-stack
+  #       cards:
+  #         - type: custom:mushroom-entity-card
+  #           entity: sensor.pv_wr_pc_home_consumption_from_grid_day
+  #           primary_info: none
+  #           icon_color: red
+  #         - type: custom:mushroom-entity-card
+  #           entity: sensor.pv_wr_pc_home_consumption_from_battery_day
+  #           primary_info: none
+  #         - type: custom:mushroom-entity-card
+  #           entity: sensor.pv_wr_pc_home_consumption_from_pv_day
+  #           primary_info: none
+  #           icon_color: green
+  #     - type: horizontal-stack
+  #       cards:
+  #         - type: custom:mushroom-entity-card
+  #           entity: sensor.pv_wr_pc_autarky_day
+  #           name: Autarkie (heute)
+  #           primary_info: name
+  #           icon_color: blue
+  #           icon: mdi:home-analytics
+  #         - type: custom:mushroom-entity-card
+  #           entity: sensor.pv_wr_pc_autarky_month
+  #           name: Autarkie (Monat)
+  #           primary_info: name
+  #           icon_color: blue
+  #           icon: mdi:home-analytics
+
+  # - type: vertical-stack
+  #   cards:
+  #     - type: custom:mushroom-title-card
+  #       title: Verbraucher
+  #     - type: entities
+  #       entities:
+  #         - entity: sensor.ap_christian_power
+  #         - entity: sensor.shelly_ap_petra_power
+  #     - type: entities
+  #       entities:
+  #         - entity: sensor.plug_fridge_power
+  #         - entity: sensor.dishwasher_switch_0_power
+  #     - type: entities
+  #       entities:
+  #         - entity: sensor.tv_switch_0_power
+  #     - type: entities
+  #       entities:
+  #         - entity: sensor.trockner_electricity_power
+  #         - entity: sensor.waschmaschine_electricity_power
+  #         - entity: sensor.serverrack_power
+  #     - type: entities
+  #       entities:
+  #         - entity: sensor.all_lights_power
+
+  # - type: vertical-stack
+  #   cards:
+  #     - type: custom:mushroom-title-card
+  #       title: Tibber
+  #     - type: custom:mushroom-entity-card
+  #       entity: sensor.electricity_price_helmerichstr_3
+  #       name: Strompreis
+  #       primary_info: name
+  #       icon_color: blue
+  #       icon: mdi:currency-eur
+  #     - type: custom:mushroom-entity-card
+  #       entity: sensor.monthly_cost_helmerichstr_3
+  #       name: Stromkosten
+  #       primary_info: name
+  #       icon_color: blue
+  #       icon: mdi:currency-eur
+
+  # - type: custom:battery-state-card
+  #   secondary_info: "{last_changed}"
+  #   filter:
+  #     include:
+  #       - name: "attributes.device_class"
+  #         value: "battery"
+  #     exclude:
+  #       - name: "entity_id"
+  #         value: "binary_sensor.*"
+  #       - name: sensor.teqqcar_battery
+  #       - name: sensor.pv_wr_pc_battery_soc
+  #       - name: sensor.ipad_battery_level
+  #   sort:
+  #     by: "state"
+  #   collapse: 8
+  #   bulk_rename:
+  #     - from: " Battery"
+  #     - from: " level"
+  #   colors:
+  #     steps:
+  #       - "#ff0000"
+  #       - "#ffff00"
+  #       - "#00ff00"
+  #     gradient: true
+
+  # - type: vertical-stack
+  #   cards:
+  #     - type: custom:mushroom-title-card
+  #       title: Tesla
+  #     - type: custom:mushroom-entity-card
+  #       entity: input_select.tesla_charing_mode

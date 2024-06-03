@@ -21,10 +21,8 @@ group:
   livingroom_lights:
     name: Livingroom Lights
     entities:
-      - light.couch
       - light.li_lr_deco
       - light.li_lr_ceiling
-      - switch.sw_dr_deko
 
   office_lights:
     name: Office Lights
@@ -38,8 +36,6 @@ group:
     entities:
       - switch.pg_hw_deco
       - light.bad
-      - light.hue_filament_bulb_1
-      - light.hue_filament_bulb_2
       - light.medizinschrank   
 
   # Windows in hole house
