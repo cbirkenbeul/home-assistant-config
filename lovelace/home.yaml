@@ -6,588 +6,202 @@ cards:
     cards:
       - type: horizontal-stack
         cards:
-          - type: custom:mushroom-person-card
+          - type: custom:bubble-card
+            card_type: button
+            button_type: state
             entity: person.teqqy
-            icon_type: entity-picture
-          - type: custom:mushroom-person-card
+            name: Christian
+            styles: | 
+              .bubble-button-card-container {
+                background: #4bcffa !important;
+              }
+          - type: custom:bubble-card
+            card_type: button
+            button_type: state
             entity: person.petra
-            icon_type: entity-picture
-      - type: custom:weather-chart-card
-        entity: weather.casa_lani
-        animated_icons: true
-        icon_style: style1
-        temp: sensor.weewx_outtemp
-        humid: sensor.weewx_outhumidity
-        windspeed: sensor.weewx_wind
-        dew_point: sensor.weewx_drewpoint
+            name: Petra
+            styles: | 
+              .bubble-button-card-container {
+                background: #4bcffa !important;
+              }
 
-  - type: custom:power-flow-card-plus
-    entities:
-      grid:
-        entity:
-          consumption: sensor.pv_wr_pc_home_power_from_grid
-          production: sensor.pv_power_export
-      solar:
-        entity: sensor.pv_prod_ges
-        display_zero_state: false
-      battery:
-        entity:
-          consumption: sensor.pv_wr_pc_home_power_from_battery
-          production: sensor.pv_wr_pc_pv_to_battery_power
-        state_of_charge: sensor.pv_wr_pc_battery_soc
-      home:
-      fossil_fuel_percentage:
-        entity: sensor.electricity_maps_anteil_fossiler_brennstoffe_im_netz
-      individual:
-        - entity: sensor.tesla_charger_power
-          icon: mdi:car-electric
-          secondary_info: 
-            entity: sensor.teqqcar_battery
-            unit_of_measurement: "%"
-          color: "#eb4d4b"
-          name: teqqCar
-          color_icon: true
-        - entity: sensor.serverrack_power
-          icon: mdi:server
-          color: "#4834d4"
-          name: Homelab
-          color_icon: true
-        - entity: sensor.metered_energy_without_homelab
-          icon: mdi:power-socket-eu
-          color: "#6ab04c"
-          name: Bekannte Geräte
-          color_icon: true
+  - type: custom:bubble-card
+    card_type: button
+    button_type: state
+    card_layout: large-2-rows
+    name: Energy
+    entity: sensor.pv_prod_ges
+    icon: mdi:home-lightning-bolt-outline
+    show_state: true
+    styles: | 
+      .bubble-button-card-container {
+        background: #ffdd59 !important;
+      }
+    button_action:
+      tap_action:
+        action: navigate
+        navigation_path: '#energy'
+    sub_button:
+      - entity: sensor.pv_wr_pc_battery_soc
+        icon: mdi:battery
+        show_background: false
+        show_state: true
+        tap_action:
+          action: more-info
+      - entity: sensor.energy_export_daily
+        icon: mdi:home-export-outline
+        show_state: true
+        show_background: false
+      - entity: sensor.pv_wr_pc_autarky_day
+        icon: mdi:home-percent-outline
+        show_background: false
+        show_state: true
+
+  - type: custom:bubble-card
+    card_type: button
+    button_type: state
+    entity: weather.casa_lani
+    name: Wetter
+    show_state: true
+    card_layout: large-2-rows
+    sub_button:
+      - name: Home temperature
+        icon: mdi:home-thermometer-outline
+        entity: sensor.temperature_house
+        show_state: true
+        show_icon: true
+        show_background: false
+      - name: Outside temperature
+        entity: sensor.weewx_outtemp
+        show_state: true
+        show_background: false
+      - name: Taupunkt
+        entity: sensor.weewx_drewpoint
+        show_state: true
+        show_background: false
+      - name: Regen
+        entity: sensor.weewx_rain
+        show_state: true
+        show_background: false
+      - name: Wind
+        entity: sensor.weewx_wind
+        show_state: true
+        show_background: false
+    styles: |
+      .bubble-button-card-container {
+        background: #ffdd59 !important;
+      }
+  - type: vertical-stack
+    cards:
+      - type: custom:bubble-card
+        card_type: button
+        button_type: state
+        entity: sensor.livingroom_power
+        name: Wohnzimmer
+        icon: mdi:sofa
+        show_state: true
+        card_layout: large-2-rows
+        styles: | 
+          .bubble-button-card-container {
+            background: #d2dae2 !important;
+          }
+        sub_button:
+          - name: Temperatur
+            icon: mdi:home-thermometer-outline
+            entity: sensor.temperature_livingroom
+            show_state: true
+            show_icon: true
+            show_background: false
+          - name: Luftfeuchtigkeit
+            entity: sensor.humidity_livingroom
+            show_state: true
+            show_icon: true
+            show_background: false
+      - type: custom:bubble-card
+        card_type: button
+        button_type: slider
+        entity: light.li_lr_ceiling
+        name: Decke
+      - type: horizontal-stack
+        cards: 
+          - type: custom:bubble-card
+            card_type: button
+            entity: scene.abendbeleuchtung
+            name: Abendbeleuchtung
+            styles: | 
+              .bubble-button-card-container {
+                background: #ffa801 !important;
+              }
+          - type: custom:bubble-card
+            card_type: button
+            entity: scene.movietime
+            name: Filmbeleuchtung
+            styles: | 
+              .bubble-button-card-container {
+                background: #0be881 !important;
+              }
 
   - type: vertical-stack
     cards:
-      - type: custom:stack-in-card
+      - type: custom:bubble-card
+        card_type: button
+        button_type: state
+        entity: sensor.office_power
+        name: Büro
+        icon: mdi:desk
+        show_state: true
+        card_layout: large-2-rows
+        styles: | 
+          .bubble-button-card-container {
+            background: #d2dae2 !important;
+          }
+        sub_button:
+          - name: Temperatur
+            icon: mdi:home-thermometer-outline
+            entity: sensor.temperature_office
+            show_state: true
+            show_icon: true
+            show_background: false
+          - name: Luftfeuchtigkeit
+            entity: sensor.humidity_office
+            show_state: true
+            show_icon: true
+            show_background: false
+      - type: vertical-stack
         cards:
-          - type: custom:mushroom-template-card
-            primary: Haus
-            secondary: "{{ states('sensor.temperature_house') | round(0) }} °C | {{ states('sensor.humidity_house') | round(0) }} %"
-            icon: mdi:home
-            entity: group.livingroom_lights
-            icon_color: "{{ 'orange' if is_state(entity, 'on') else 'disabled' }}"
-            fill_container: true
-            layout: horizontal
-            multiline_secondary: false
-            card_mod:
-              style: |
-                :host([dark-mode]) {
-                  background: rgba(var(--rgb-primary-background-color), 0.2);
-                } 
-                :host {
-                  background: rgba(var(--rgb-primary-text-color), 0.025);
-                  --mush-icon-size: 76px;
-                  height: 66px;
-                  margin-left: -18px !important;
-                }
-          - type: custom:mushroom-chips-card
-            chips:
-              - type: conditional
-                conditions:
-                  - entity: cover.garage_door
-                    state: "open"
-                chip:
-                  type: template
-                  icon_color: disabled
-                  icon: mdi:garage-open
-              - type: conditional
-                conditions:
-                  - entity: switch.teqqcar_charger
-                    state: "on"
-                chip:
-                  type: template
-                  icon_color: disabled
-                  icon: mdi:car-electric
-            alignment: end
-            card_mod:
-              style: |
-                ha-card {
-                  --chip-box-shadow: none;
-                  --chip-background: none;
-                  --chip-spacing: 0;
-                }
-        card_mod:
-          style: |
-            ha-card {
-              height: 102px;
-              {% if is_state('group.house_windows', 'on') %}
-                background: rgba(56, 27, 68, 0.6);
-              {% endif %}
-            }
-
-      - type: horizontal-stack
+          - type: custom:bubble-card
+            card_type: separator
+            name: Petra
+            icon: mdi:face-woman-outline
+          - type: horizontal-stack
+            cards: 
+              - type: custom:bubble-card
+                card_type: button
+                button_type: slider
+                entity: light.li_of_pt_desk
+                name: Schreibtisch
+              - type: custom:bubble-card
+                card_type: button
+                button_type: slider
+                entity: light.li_of_pt_reading
+                name: Leseecke
+      - type: vertical-stack
         cards:
-          - type: custom:stack-in-card
-            cards:
-              - type: custom:mushroom-template-card
-                primary: Wohnen
-                secondary: "{{ states('sensor.temperature_livingroom') | round(0) }} °C | {{ states('sensor.humidity_livingroom') | round(0) }} %"
-                icon: mdi:sofa
-                entity: group.livingroom_lights
-                tap_action:
-                  action: navigate
-                  navigation_path: "/lovelace/1"
-                hold_action:
-                  action: toggle
-                icon_color: "{{ 'orange' if is_state(entity, 'on') else 'disabled' }}"
-                fill_container: true
-                layout: horizontal
-                multiline_secondary: false
-                card_mod:
-                  style: |
-                    :host([dark-mode]) {
-                      background: rgba(var(--rgb-primary-background-color), 0.2);
-                    } 
-                    :host {
-                      background: rgba(var(--rgb-primary-text-color), 0.025);
-                      --mush-icon-size: 76px;
-                      height: 66px;
-                      margin-left: -18px !important;
-                    }
-              - type: custom:mushroom-chips-card
-                chips:
-                  - type: conditional
-                    conditions:
-                      - entity: binary_sensor.bs_lr_door_contact
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:door-sliding-open
-
-                  - type: conditional
-                    conditions:
-                      - entity: light.li_lr_deco
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:lamp
-                  - type: conditional
-                    conditions:
-                      - entity: light.li_lr_ceiling
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:ceiling-light
-                alignment: end
-                card_mod:
-                  style: |
-                    ha-card {
-                      --chip-box-shadow: none;
-                      --chip-background: none;
-                      --chip-spacing: 0;
-                    }
-            card_mod:
-              style: |
-                ha-card {
-                  height: 102px;
-                  {% if is_state('group.livingroom_windows', 'on') %}
-                    background: rgba(56, 27, 68, 0.6);
-                  {% endif %}
-                }
-
-          - type: custom:stack-in-card
-            cards:
-              - type: custom:mushroom-template-card
-                primary: Büro
-                secondary: "{{ states('sensor.temperature_office') | round(0) }} °C | {{ states('sensor.humidity_office') | round(0) }} %"
-                icon: mdi:desk
-                entity: group.office_lights
-                tap_action:
-                  action: navigate
-                  navigation_path: "/lovelace/2"
-                hold_action:
-                  action: toggle
-                icon_color: "{{ 'orange' if is_state(entity, 'on') else 'disabled' }}"
-                fill_container: true
-                layout: horizontal
-                multiline_secondary: false
-                card_mod:
-                  style: |
-                    :host([dark-mode]) {
-                      background: rgba(var(--rgb-primary-background-color), 0.2);
-                    } 
-                    :host {
-                      background: rgba(var(--rgb-primary-text-color), 0.025);
-                      --mush-icon-size: 76px;
-                      height: 66px;
-                      margin-left: -18px !important;
-                    }
-              - type: custom:mushroom-chips-card
-                chips:
-                  - type: conditional
-                    conditions:
-                      - entity: binary_sensor.bs_of_cb_window_contact
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:window-open
-                  - type: conditional
-                    conditions:
-                      - entity: binary_sensor.bs_of_pt_window_contact
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:window-open
-                  - type: conditional
-                    conditions:
-                      - entity: light.li_of_cb_bloom
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:wall-sconce-round-variant
-                  - type: conditional
-                    conditions:
-                      - entity: light.li_of_pt_desk
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:desk
-                  - type: conditional
-                    conditions:
-                      - entity: light.li_of_pt_reading
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:ceiling-light
-                alignment: end
-                card_mod:
-                  style: |
-                    ha-card {
-                      --chip-box-shadow: none;
-                      --chip-background: none;
-                      --chip-spacing: 0;
-                    }
-            card_mod:
-              style: |
-                ha-card {
-                  height: 102px;
-                  {% if is_state('group.office_windows', 'on') %}
-                    background: rgba(56, 27, 68, 0.6);
-                  {% endif %}
-                }
-
-      - type: horizontal-stack
-        cards:
-          - type: custom:stack-in-card
-            cards:
-              - type: custom:mushroom-template-card
-                primary: Bad
-                secondary: "{{ states('sensor.temperature_bathroom') | round(0) }} °C | {{ states('sensor.humidity_bathroom') | round(0) }} %"
-                icon: mdi:shower
-                entity: group.bathroom_lights
-                tap_action:
-                  action: navigate
-                  navigation_path: "/lovelace/3"
-                hold_action:
-                  action: toggle
-                # icon_color: '{{ ''orange'' if is_state(entity, ''on'') else ''disabled'' }}'
-                fill_container: true
-                layout: horizontal
-                multiline_secondary: false
-                card_mod:
-                  style: |
-                    :host([dark-mode]) {
-                      background: rgba(var(--rgb-primary-background-color), 0.2);
-                    } 
-                    :host {
-                      background: rgba(var(--rgb-primary-text-color), 0.025);
-                      --mush-icon-size: 76px;
-                      height: 66px;
-                      margin-left: -18px !important;
-                    }
-              - type: custom:mushroom-chips-card
-                chips:
-                  - type: conditional
-                    conditions:
-                      - entity: binary_sensor.bs_br_window_contact
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:window-open
-                alignment: end
-                card_mod:
-                  style: |
-                    ha-card {
-                      --chip-box-shadow: none;
-                      --chip-background: none;
-                      --chip-spacing: 0;
-                    }
-            card_mod:
-              style: |
-                ha-card {
-                  height: 102px;
-                  {% if is_state('group.bathroom_windows', 'on') %}
-                    background: rgba(56, 27, 68, 0.6);
-                  {% endif %}
-                }
-
-          - type: custom:stack-in-card
-            cards:
-              - type: custom:mushroom-template-card
-                primary: Küche
-                secondary: "{{ states('sensor.temperature_kitchen') | round(0) }} °C | {{ states('sensor.humidity_bathroom') | round(0) }} %"
-                icon: mdi:countertop
-                entity: light.kitchen_panel
-                tap_action:
-                  action: navigate
-                  navigation_path: "/lovelace/4"
-                hold_action:
-                  action: toggle
-                icon_color: "{{ 'orange' if is_state(entity, 'on') else 'disabled' }}"
-                fill_container: true
-                layout: horizontal
-                multiline_secondary: false
-                card_mod:
-                  style: |
-                    :host([dark-mode]) {
-                      background: rgba(var(--rgb-primary-background-color), 0.2);
-                    } 
-                    :host {
-                      background: rgba(var(--rgb-primary-text-color), 0.025);
-                      --mush-icon-size: 76px;
-                      height: 66px;
-                      margin-left: -18px !important;
-                    }
-              - type: custom:mushroom-chips-card
-                chips:
-                  - type: conditional
-                    conditions:
-                      - entity: light.kitchen_panel
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:wall-sconce-flat
-                  - type: conditional
-                    conditions:
-                      - entity: binary_sensor.bs_ki_window_contact
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:window-open-variant
-                alignment: end
-                card_mod:
-                  style: |
-                    ha-card {
-                      --chip-box-shadow: none;
-                      --chip-background: none;
-                      --chip-spacing: 0;
-                    }
-            card_mod:
-              style: |
-                ha-card {
-                  height: 102px;
-                  {% if is_state('group.kitchen_windows', 'on') %}
-                    background: rgba(56, 27, 68, 0.6);
-                  {% endif %}
-                }
-
-      - type: horizontal-stack
-        cards:
-          - type: custom:stack-in-card
-            cards:
-              - type: custom:mushroom-template-card
-                primary: Flur
-                secondary: "{{ states('sensor.temperature_hallway') | round(0) }} °C | {{ states('sensor.humidity_hallway') | round(0) }} %"
-                icon: mdi:coat-rack
-                entity: group.hallway_lights
-                tap_action:
-                  action: navigate
-                  navigation_path: "/lovelace/5"
-                hold_action:
-                  action: toggle
-                icon_color: "{{ 'orange' if is_state(entity, 'on') else 'disabled' }}"
-                fill_container: true
-                layout: horizontal
-                multiline_secondary: false
-                card_mod:
-                  style: |
-                    :host([dark-mode]) {
-                      background: rgba(var(--rgb-primary-background-color), 0.2);
-                    } 
-                    :host {
-                      background: rgba(var(--rgb-primary-text-color), 0.025);
-                      --mush-icon-size: 76px;
-                      height: 66px;
-                      margin-left: -18px !important;
-                    }
-              - type: custom:mushroom-chips-card
-                chips:
-                  - type: conditional
-                    conditions:
-                      - entity: binary_sensor.bs_hw_bm_door_contact
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:door-open
-                  - type: conditional
-                    conditions:
-                      - entity: binary_sensor.bs_hw_st_window_contact
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:window-open-variant
-                  - type: conditional
-                    conditions:
-                      - entity: light.flur
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:spotlight-beam
-                  - type: conditional
-                    conditions:
-                      - entity: light.treppenhaus
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:stairs
-                  - type: conditional
-                    conditions:
-                      - entity: switch.pg_hw_deco
-                        state: "on"
-                    chip:
-                      type: template
-                      icon_color: disabled
-                      icon: mdi:lamp
-                alignment: end
-                card_mod:
-                  style: |
-                    ha-card {
-                      --chip-box-shadow: none;
-                      --chip-background: none;
-                      --chip-spacing: 0;
-                    }
-            card_mod:
-              style: |
-                ha-card {
-                  height: 102px;
-                  {% if is_state('group.hallway_windows', 'on') %}
-                    background: rgba(56, 27, 68, 0.6);
-                  {% endif %}
-                }
-
-          - type: custom:stack-in-card
-            cards:
-              - type: custom:mushroom-template-card
-                primary: Schlafen
-                secondary: "{{ states('sensor.temperature_bedroom') | round(0) }} °C | {{ states('sensor.humidity_bedroom') | round(0) }} %"
-                icon: mdi:bed
-                entity: group.bedroom_lights
-                tap_action:
-                  action: navigate
-                  navigation_path: "/lovelace/6"
-                hold_action:
-                  action: toggle
-                icon_color: "{{ 'orange' if is_state(entity, 'on') else 'disabled' }}"
-                fill_container: true
-                layout: horizontal
-                multiline_secondary: false
-                card_mod:
-                  style: |
-                    :host([dark-mode]) {
-                      background: rgba(var(--rgb-primary-background-color), 0.2);
-                    } 
-                    :host {
-                      background: rgba(var(--rgb-primary-text-color), 0.025);
-                      --mush-icon-size: 76px;
-                      height: 66px;
-                      margin-left: -18px !important;
-                    }
-            card_mod:
-              style: |
-                ha-card {
-                  height: 102px;
-                  # {% if is_state('light.couch', 'on') %}
-                  #   background: rgba(255, 152, 0, 0.1);
-                  # {% endif %}
-                }
-
-      - type: horizontal-stack
-        cards:
-          - type: custom:stack-in-card
-            cards:
-              - type: custom:mushroom-template-card
-                primary: Gäste
-                secondary: "{{ states('sensor.temperature_guestroom') | round(0) }} °C | {{ states('sensor.humidity_guestroom') | round(0) }} %"
-                icon: mdi:bed-outline
-                entity: group.guestroom_lights
-                tap_action:
-                  action: navigate
-                  navigation_path: "/lovelace/6"
-                hold_action:
-                  action: toggle
-                icon_color: "{{ 'orange' if is_state(entity, 'on') else 'disabled' }}"
-                fill_container: true
-                layout: horizontal
-                multiline_secondary: false
-                card_mod:
-                  style: |
-                    :host([dark-mode]) {
-                      background: rgba(var(--rgb-primary-background-color), 0.2);
-                    } 
-                    :host {
-                      background: rgba(var(--rgb-primary-text-color), 0.025);
-                      --mush-icon-size: 76px;
-                      height: 66px;
-                      margin-left: -18px !important;
-                    }
-            card_mod:
-              style: |
-                ha-card {
-                  height: 102px;
-                  # {% if is_state('light.couch', 'on') %}
-                  #   background: rgba(255, 152, 0, 0.1);
-                  # {% endif %}
-                }
-
-          - type: custom:stack-in-card
-            cards:
-              - type: custom:mushroom-template-card
-                primary: Keller
-                secondary: "{{ states('sensor.temperature_basement') | round(0) }} °C | {{ states('sensor.humidity_basement') | round(0) }} %"
-                icon: mdi:home-floor-b
-                entity: group.basement_lights
-                tap_action:
-                  action: navigate
-                  navigation_path: "/lovelace/6"
-                hold_action:
-                  action: toggle
-                icon_color: "{{ 'orange' if is_state(entity, 'on') else 'disabled' }}"
-                fill_container: true
-                layout: horizontal
-                multiline_secondary: false
-                card_mod:
-                  style: |
-                    :host([dark-mode]) {
-                      background: rgba(var(--rgb-primary-background-color), 0.2);
-                    } 
-                    :host {
-                      background: rgba(var(--rgb-primary-text-color), 0.025);
-                      --mush-icon-size: 76px;
-                      height: 66px;
-                      margin-left: -18px !important;
-                    }
-            card_mod:
-              style: |
-                ha-card {
-                  height: 102px;
-                  # {% if is_state('light.couch', 'on') %}
-                  #   background: rgba(255, 152, 0, 0.1);
-                  # {% endif %}
-                }
+          - type: custom:bubble-card
+            card_type: separator
+            name: Christian
+            icon: mdi:face-man-outline
+          - type: horizontal-stack
+            cards: 
+              - type: custom:bubble-card
+                card_type: button
+                button_type: slider
+                entity: light.li_of_cb_bloom
+                name: Bloom
+                tap_action: toggle
+              - type: custom:bubble-card
+                card_type: button
+                button_type: slider
+                entity: light.rgbicww_floor_lamp
+                name: Stehlampe
+                tap_action: toggle

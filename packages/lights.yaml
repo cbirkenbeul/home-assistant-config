@@ -188,7 +188,7 @@ scene:
         state: "on"
 
 
-  - name: Youtube
+  - name: YoutubeOn
     icon: mdi:youtube
     entities:
       light.li_of_cb_bloom:
@@ -201,6 +201,16 @@ scene:
         state: "on"
         brightness: 255
         rgb_color: [222, 159, 0]
+
+  - name: YoutubeOff
+    icon: mdi:youtube
+    entities:
+      light.li_of_cb_bloom:
+        state: "off"
+      light.keylight:
+        state: "off"
+      light.rgbicww_floor_lamp:
+        state: "off"
 
 # Input Booleans
 input_boolean:

@@ -48,7 +48,20 @@ sensor:
         friendly_name: Strom Büro
         unit_of_measurement: W
         value_template: >
-          {{ states('sensor.li_of_cb_bloom_power')|float(0) + states('sensor.li_of_pt_desk_power')|float(0)}}
+          {{ states('sensor.li_of_cb_bloom_power')|float(0) + 
+            states('sensor.li_of_pt_desk_power')|float(0) +
+            states('sensor.ap_christian_power')|float(0) +
+            states('sensor.shelly_ap_petra_power')|float(0) | round(2) }}
+
+  - platform: template
+    sensors:
+      livingroom_power:
+        friendly_name: Strom Wohnzimmer
+        unit_of_measurement: W
+        value_template: >
+          {{ states('sensor.tv_switch_0_power')|float(0) + 
+             states('sensor.livingroom_lights')|float(0) | round(2) }}
+
 
   - platform: template
     sensors:
